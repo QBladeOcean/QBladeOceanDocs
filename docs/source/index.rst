@@ -1,0 +1,23 @@
+.. QBladeOcean Documentation documentation master file, created by
+   sphinx-quickstart on Thu Jul 15 12:34:20 2021.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+QBladeOcean
+===========
+.. image:: images/logo_1000.png
+   :width: 200
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   theory
+   aerodynamics
+   hydrodynamics
+   structural
+   control
+   environment
+   bibliography
+
+
