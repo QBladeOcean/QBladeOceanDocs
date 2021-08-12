@@ -12,7 +12,7 @@ QBladeOcean
    :maxdepth: 1
    :caption: Contents:
 
-   theory
+   guide
    aerodynamics
    hydrodynamics
    structural
