@@ -1,17 +1,20 @@
 Theory Guide
 ============
 
-aerodynamics
+Aerodynamics
 ~~~~~~~~~~~~
 
-hydrodynamics
+Airfoil Analysis
+----------------
+
+Hydrodynamics
 ~~~~~~~~~~~~~
 
-structural
+Structural
 ~~~~~~~~~~
 
-control
+Control
 ~~~~~~~
 
-environment
+Environment
 ~~~~~~~~~~~
