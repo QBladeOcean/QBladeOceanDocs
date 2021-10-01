@@ -9,7 +9,7 @@ QBladeOcean
    :width: 200
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
 
    theory_guide
