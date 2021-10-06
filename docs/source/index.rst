@@ -3,17 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+============
 QBladeOcean
-===========
+============
+
 .. image:: images/logo_1000.png
    :width: 200
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
+   :caption: Documentation
 
-   theory_guide
-   user_guide
+   src/theory/index_th
+   src/user/index_ue
+
+
+Bibliography
+============
+.. toctree::
+   :maxdepth: 1
+
    bibliography
-
 
