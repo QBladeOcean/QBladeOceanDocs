@@ -4,7 +4,7 @@ Theory Guide
 Aerodynamics
 ************
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 1
 
    aerodynamics/bem/bem
    aerodynamics/lifting_line/lifting_line
@@ -12,7 +12,7 @@ Aerodynamics
 Hydrodynamics
 *************
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 1
 
    hydrodynamics/lpft/lpft
    hydrodynamics/me/me
@@ -20,7 +20,7 @@ Hydrodynamics
 Environment
 ***********
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 1
 
    environment/soil/soil
    environment/oceanography/linear_waves
@@ -28,6 +28,6 @@ Environment
 Structure
 *********
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 1
 
    structure/chrono/chrono
