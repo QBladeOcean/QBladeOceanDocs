@@ -40,7 +40,7 @@ Axial forces can also be applied to the ends of a cylindrical element. In QBlade
 .. math::
     \begin{align}
     F_M^{ax} &= \rho \frac{2\pi}{3} \left(\frac{D}{2}+R_{MG}\right)^3 C_a^{ax} (\dot{u}^{ax} - \ddot{X}^{ax}) + C_p^{ax} p_{dyn}^{ax} \pi \left(\frac{D}{2}+R_{MG}\right)^2  \\
-             &+ \frac{1}{2} \rho \pi \left(D+R_{MG}\right)^2 C_d^{ax} \left(u^{ax} - \dot{X}^{ax}\right)\left|u^{ax} - \dot{X}^{ax}\right|.
+             &+ \frac{1}{2} \rho \pi \left(D+R_{MG}\right)^2 C_d^{ax} \left(u^{ax} - \dot{X}^{ax}\right)\left|u^{ax} - \dot{X}^{ax}\right| .
     \end{align}
 
 In this equation,
@@ -59,10 +59,21 @@ In this equation,
 As with :math:`F_M^n`, the structural model in QBlade always applies the axial loads in the local frame of reference considering the orientation of the cylinder. 
 
 The axial force calculation is only performed at the ends of cylindrical elements that are not obstructed, or overlapped, by the ends of other cylindrical elements which share the same node.
-Example: If a 'thinner' cylindrical element :math:`D_{thin}` is connected to a 'thicker' element :math:`D_{thick}` via a common node the axial force is evaluated at the end of the 'thick' element only, and the effective volume and area at this end are calculated in the following way:
+Example: If a 'thinner' cylindrical element :math:`D_{thin}` is connected to a 'thicker' element :math:`D_{thick}` via a common node the axial force is evaluated at the end of the 'thick' element only. 
 
-- :math:`V = \frac{2\pi}{3}\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^3-\left(\frac{D_{thin}}{2}+R_{MG}\right)^3\right)` is the effective volume 
-- :math:`A = \pi\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^2-\left(\frac{D_{thin}}{2}+R_{MG}\right)^2\right)` is the effective area
+In such a case the effective volume at the 'thicker' element would be calculated as:
+
+.. math::
+    \begin{align}
+    V = \frac{2\pi}{3}\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^3-\left(\frac{D_{thin}}{2}+R_{MG}\right)^3\right) ,
+    \end{align}
+
+and the effective area would be calculated as:
+
+.. math::
+    \begin{align}
+    A = \pi\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^2-\left(\frac{D_{thin}}{2}+R_{MG}\right)^2\right) .
+    \end{align}
 
 .. _modeling-considerations:
 
