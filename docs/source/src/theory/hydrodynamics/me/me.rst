@@ -79,7 +79,7 @@ and the effective area would be calculated as:
 
 Modeling Considerations
 -----------------------
-In QBlade, each cylindrical element can be divided into sub-elements for each of which the (spatially constant) Morison forces are applied at each time step. 
+In QBlade, each cylindrical element can be divided into sub-elements to each of which the Morison forces are evaluated and applied at each time step. 
 Setting the hydrodynamic coefficients to 0 effectively disables their contribution in the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only. 
 To determine if a sub-element is partially or fully submerged, the wave elevation is required. 
 Wave kinematics are also required to calculate :math:`u` and :math:`\dot{u}` in the equations above. There are three posibilities in QBlade to do this. 
