@@ -79,6 +79,6 @@ The first option shown in :numref:`fig-me-kin-opt` (a) is the wave kinematics an
 sub-elements. The lower two are fully submerged and one sub-element is partially submerged. The second option in :numref:`fig-me-kin-opt` (b) 
 is using the wave elevation and kinematics at the inital position of the sub-element. This option allows a coherent theoretical assumption of small oscillations around a steady positon when Morison forces are used in conjuction with a linear potential
 flow model (see :doc:`../lpft/lpft`). The third option is using the wave elevation and kinematics at a low-passed position of the sub-element (:numref:`fig-me-kin-opt` (c)). This allows for an assumption of 
-small oscillations around a steady state for an element that as drifted from its initial position due to e.g. an aerodynamic thurst or sea current forces.
+small oscillations around a steady state for an element that as drifted from its initial position due to e.g. an aerodynamic thrust or sea current forces.
 
 .. footbibliography::
