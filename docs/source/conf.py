@@ -44,6 +44,8 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+# Include the option to number the figures
+numfig = True
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -1,8 +1,0 @@
-
-Aerodynamic Models
-======================
-.. toctree::
-   :maxdepth: 1
-
-   bem/bem
-   lifting_line/lifting_line

@@ -1,9 +1,0 @@
-
-Environment
-============
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents
-
-   oceanography/oceanography
-   soil/soil
