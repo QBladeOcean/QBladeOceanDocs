@@ -27,10 +27,10 @@ In this equation,
 - :math:`u^n` is the resulting normal flow velocity,
 - :math:`\dot{X}^n` is the resulting normal velocity of the center of the cylinder element.
 
-In the structural model of QBlade naturally handles the vector direction of the local normal force components depending on the element position and rotation (see :doc:`../../structure/chrono/chrono`). 
-The normal force always acts at the center of the submerged part of the cylinder. Note that this position can vary if the cylinder element is close to the water surface and only parts of the cylinder are submerged. 
-The local instantaneous wave elevation is taken into account every timestep to calculate submerged fraction of the cylinder and hence the position where the force vector acts. 
-It is therefore recommended to subdivide cylinder elements that are close to the water surfeace into smaller sub-elements to increase model accuracy (see :ref:`modeling-considerations`)
+The structural model of QBlade naturally handles the vector direction of the local normal force components depending on the element location and orientation (see :doc:`../../structure/chrono/chrono`). 
+The normal force is assumed to be constant over the submerged part of the cylinder, and only integrated along the submerged length. 
+For this evaluation the local instantaneous wave elevation is obtained at every timestep to calculate the current submerged fraction of the cylinder. 
+It is recommended to subdivide cylindrical elements that are close to the water surface into smaller sub-elements to increase the model accuracy (see :ref:`modeling-considerations`)
 
 
 Axial Morison Force on a Cylindrical Element
@@ -79,11 +79,11 @@ and the effective area would be calculated as:
 
 Modeling Considerations
 -----------------------
-In QBlade, each cylindrical element is divided into sub-elements for which the Morison equations is applied. 
-Setting the hydrodynamic coefficients to 0 effectively disables the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only. 
+In QBlade, each cylindrical element can be divided into sub-elements for each of which the (spatially constant) Morison forces are applied at each time step. 
+Setting the hydrodynamic coefficients to 0 effectively disables their contribution in the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only. 
 To determine if a sub-element is partially or fully submerged, the wave elevation is required. 
-Wave kinematics are also required to calculate :math:`u^n` and :math:`u^{ax}` in the equations above. There are three posibilities in QBlade to do this. 
-These options are shown in the following figure.
+Wave kinematics are also required to calculate :math:`u` and :math:`\dot{u}` in the equations above. There are three posibilities in QBlade to do this. 
+These options are presented in the following figure.
 
 .. _fig-me-kin-opt:
 .. figure:: me_considerations.PNG
