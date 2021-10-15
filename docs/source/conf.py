@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'QBladeOcean'
+project = 'QBlade'
 copyright = '2021, David Marten'
 author = 'David Marten'
 
