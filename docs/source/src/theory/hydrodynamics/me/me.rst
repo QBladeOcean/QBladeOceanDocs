@@ -1,8 +1,8 @@
 Morison Equation
 ================
-QBladeOcean also offers the possibility to model hydrodynamic loads on slender cylindrical bodies via the Morison equation.
+QBlade also offers the possibility to model hydrodynamic loads on slender cylindrical bodies via the Morison equation.
 This is especially useful for calculating distributed hydrodynamic loads on the members and allow substructure flexibility.
-QBladeOcean considers two types of Morison forces on cylindrical elements: normal forces that act at the center of the element and axial forces that
+QBlade considers two types of Morison forces on cylindrical elements: normal forces that act at the center of the element and axial forces that
 act at the ends of the element.
 
 Normal Morison Force on a Cylindrical Element
@@ -27,7 +27,7 @@ In this equation,
 - :math:`u^n` is the resulting normal flow velocity,
 - :math:`\dot{X}^n` is the resulting normal velocity of the center of the cylinder element.
 
-In the structural model of QBladeOcean naturally handles the vector direction of the local normal force components depending on the element position and rotation (see :doc:`../../structure/chrono/chrono`). 
+In the structural model of QBlade naturally handles the vector direction of the local normal force components depending on the element position and rotation (see :doc:`../../structure/chrono/chrono`). 
 The normal force always acts at the center of the submerged part of the cylinder. Note that this position can vary if the cylinder element is close to the water surface and only parts of the cylinder are submerged. 
 The local instantaneous wave elevation is taken into account every timestep to calculate submerged fraction of the cylinder and hence the position where the force vector acts. 
 It is therefore recommended to subdivide cylinder elements that are close to the water surfeace into smaller sub-elements to increase model accuracy (see :ref:`modeling-considerations`)
@@ -35,7 +35,7 @@ It is therefore recommended to subdivide cylinder elements that are close to the
 
 Axial Morison Force on a Cylindrical Element
 ---------------------------------------------
-Axial forces can also be applied to the ends of a cylindrical element. In QBladeOcean, the hydrodynamic forces are calculated using following equation:
+Axial forces can also be applied to the ends of a cylindrical element. In QBlade, the hydrodynamic forces are calculated using following equation:
 
 .. math::
     \begin{align}
@@ -56,16 +56,16 @@ In this equation,
 - :math:`u^{ax}` is the resulting axial flow velocity,
 - :math:`\dot{X}^{ax}` is the resulting axial velocity of the center of the cylinder end.
 
-As with :math:`F_M^n`, the structural model in QBladeOcean always applies the axial loads in the local frame of reference considering the orientation of the cylinder.
+As with :math:`F_M^n`, the structural model in QBlade always applies the axial loads in the local frame of reference considering the orientation of the cylinder.
 
 .. _modeling-considerations:
 
 Modeling Considerations
 -----------------------
-In QBladeOcean, each cylindrical element is divided into sub-elements for which the Morison equations is applied. 
+In QBlade, each cylindrical element is divided into sub-elements for which the Morison equations is applied. 
 Setting the hydrodynamic coefficients to 0 effectively disables the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only. 
 To determine if a sub-element is partially or fully submerged, the wave elevation is required. 
-Wave kinematics are also required to calculate :math:`u^n` and :math:`u^{ax}` in the equations above. There are three posibilities in QBladeOcean to do this. 
+Wave kinematics are also required to calculate :math:`u^n` and :math:`u^{ax}` in the equations above. There are three posibilities in QBlade to do this. 
 These options are shown in the following figure.
 
 .. _fig-me-kin-opt:
@@ -73,7 +73,7 @@ These options are shown in the following figure.
     :align: center
     :alt: Morison wave kinematic options
 
-    Options in QBladeOcean to consider the wave elevation and kinematics. (a) local intantaneous values; (b) values at the inital undisplaced position; (c) values at a low-passed position of the element.
+    Options in QBlade to consider the wave elevation and kinematics. (a) local intantaneous values; (b) values at the inital undisplaced position; (c) values at a low-passed position of the element.
 
 The first option shown in :numref:`fig-me-kin-opt` (a) is the wave kinematics and elevation in the local instantaneous position of the cylinder. In this example, the cylinder has been divided into four
 sub-elements. The lower two are fully submerged and one sub-element is partially submerged. The second option in :numref:`fig-me-kin-opt` (b) 
