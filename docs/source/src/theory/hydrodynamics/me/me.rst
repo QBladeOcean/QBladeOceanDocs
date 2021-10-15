@@ -62,7 +62,7 @@ The axial force calculation is only performed at the ends of cylindrical element
 Example: If a 'thinner' cylindrical element :math:`D_{thin}` would be connected to a 'thicker' element :math:`D_{thick}` the axial force would be evaluated at the end of the 'thick' element only, and the effective volume and area are calculated in the following way:
 
 - :math:`V = \frac{2\pi}{3}\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^3-\left(\frac{D_{thin}}{2}+R_{MG}\right)^3\right)` is the effective volume 
-- :math:`A = \pi}\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^2-\left(\frac{D_{thin}}{2}+R_{MG}\right)^2\right)` is the effective area
+- :math:`A = \pi\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^2-\left(\frac{D_{thin}}{2}+R_{MG}\right)^2\right)` is the effective area
 
 .. _modeling-considerations:
 
