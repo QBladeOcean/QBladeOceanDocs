@@ -17,17 +17,18 @@ Hydrodynamics
    hydrodynamics/lpft/lpft
    hydrodynamics/me/me
 
-Environment
-***********
+Structural Dynamics
+*******************
+.. toctree::
+   :maxdepth: 1
+
+   structure/chrono/chrono
+   
+Environmental Conditions
+************************
 .. toctree::
    :maxdepth: 1
 
    environment/soil/soil
    environment/oceanography/linear_waves
-
-Structure
-*********
-.. toctree::
-   :maxdepth: 1
-
-   structure/chrono/chrono
+   environment/wind/wind
