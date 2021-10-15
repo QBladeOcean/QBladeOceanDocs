@@ -6,9 +6,6 @@
 ======
 QBlade
 ======
-
-QBlade website:
-
 .. image:: images/logo_1000.png
    :width: 150
    :target: https://qblade.org
