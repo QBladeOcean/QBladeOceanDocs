@@ -1,33 +1,3 @@
-Tower Influence
-===============
-
-.. _fig-towershadow:
-.. figure:: towershadow.PNG
-    :align: center
-    :alt: towershadow
-
-    Visualization of the tower shadow model; showing velocity magnitude.
-
-A tower shadow model, based on the work of Bak (:footcite:t:`Moriarty2005`) is implemented in QBlade. This model is based on a superposition of the analytical solution for potential flow around a cylinder and a model for the downwind wake behind a cylinder, based on a tower drag coefficient. 
-The tower shadow model only affects velocity components that are normal to the tower centerline; the z-component of the velocity, parallel to the tower centerline, remains unaffected. 
-The tower shadow model is only used when the z-component of the evaluation point is smaller or equal to the tower height. 
-An application of the tower model, including a comparison to CFD simulations and experimental data is found in the work of :footcite:t:`Klein2018`.
-
-
-Ground Effect
-=============
-
-Ground effects can be modelled with the :doc:`../lifting_line/lifting_line` method by mirroring all vortex elements, bound and free, at the ground plane (:footcite:t:`Leishman2000`). 
-A mirror image (see Figure \ref{fig:ground}) of all bound and free vortices is created at every time step using the ground as a symmetry plane. 
-Such a treatment doubles the number of times that the Biot-Savart equation is calculated and thereby doubles the computational time needed for the evaluation of the convection step. 
-
-.. _fig-groundeffect:
-.. figure:: ground.PNG
-    :align: center
-    :alt: groundeffect
-
-    Modeling of ground effect through mirroring of the wake.
-
 Himmelskamp Effect
 ==================
 
@@ -46,6 +16,5 @@ According to Snel, only the lift but not the drag coefficient, needs to be modif
 
 Where :math:`g` is a blending factor: :math:`g=1` for :math:`0<\alpha<30`; :math:`g=0.5(1+\cos(6\alpha-180))` for :math:`30<\alpha<60` and :math:`g=0` for :math:`60<\alpha<360`.
 If this correction is activated for a simulation it is applied on the unmodified, tabulated 2D airfoil data at every timestep.
-
 
 .. footbibliography::

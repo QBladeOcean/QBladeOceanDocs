@@ -9,7 +9,9 @@ Aerodynamics
    aerodynamics/bem/bem
    aerodynamics/lifting_line/lifting_line
    aerodynamics/dynamic_stall/dynamic_stall
-   aerodynamics/secondary_effects/secondary_effects
+   aerodynamics/secondary_effects/towershadow
+   aerodynamics/secondary_effects/ground_effect
+   aerodynamics/secondary_effects/himmelskamp
 
 Hydrodynamics
 *************
