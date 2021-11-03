@@ -134,5 +134,4 @@ The desingularized Biot-Savart equation then becomes:
 
 .. footbibliography::
 
-.. rubric:: Footnotes
 
