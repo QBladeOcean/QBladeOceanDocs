@@ -6,7 +6,7 @@ A mirror image (see Figure \ref{fig:ground}) of all bound and free vortices is c
 Such a treatment doubles the number of times that the Biot-Savart equation is calculated and thereby doubles the computational time needed for the evaluation of the convection step. 
 
 .. _fig-groundeffect:
-.. figure:: ground.PNG
+.. figure:: ground.JPG
     :align: center
     :alt: groundeffect
 

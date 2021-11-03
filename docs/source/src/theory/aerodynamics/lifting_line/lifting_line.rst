@@ -41,7 +41,7 @@ the blade motion :math:`V_{mot}` and the induced velocity :math:`V_{ind}`, which
 
 
 .. _fig-aeroflow:
-.. figure:: aerodynamic_flowchart.PNG
+.. figure:: aerodynamic_flowchart.JPG
     :align: center
     :alt: Aerodynamic Flowchart
 
