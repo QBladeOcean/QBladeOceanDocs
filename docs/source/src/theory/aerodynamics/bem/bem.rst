@@ -1,5 +1,5 @@
-Blade Element Momentum
-======================
+Blade Element Momentum Method
+=============================
 
 This is a citation example :cite:`Marten19`.
 
