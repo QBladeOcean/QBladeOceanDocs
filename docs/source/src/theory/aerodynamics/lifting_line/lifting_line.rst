@@ -82,7 +82,7 @@ Consequently, the Biot-Savart equation has to be evaluated around:
 
 .. math::
 	\begin{align}
-	N_{nodes}\ast N_{vortices} \approx \frac{N^2_{vortices}}{2} :label: nodes
+	N_{nodes}\ast N_{vortices} \approx \frac{N^2_{vortices}}{2} .
 	\end{align}
 
 times for a fully populated (assuming that no vortex elements have been removed) infinite wake lattice. 
@@ -113,7 +113,7 @@ The core-size is updated every time step according to:
 
 .. math::	
 	\begin{align}
-	r_c = r_0+\sqrt{\frac{4a\delta_v \nu \Delta t}{1+\epsilon}} 
+	r_c = r_0+\sqrt{\frac{4a\delta_v \nu \Delta t}{1+\epsilon}} .
 	\end{align}
 
 where :math:`a = 1.25643` is a constant, :math:`\delta_v` is the turbulent viscosity coefficient (a value depending on rotor size, see :footcite:t:`Sant2007`), 
@@ -121,7 +121,7 @@ where :math:`a = 1.25643` is a constant, :math:`\delta_v` is the turbulent visco
 
 .. math::
 	\begin{align}
-	\epsilon = \frac{\Delta l}{l}. 
+	\epsilon = \frac{\Delta l}{l} . 
 	\end{align}
 
 The desingularized Biot-Savart equation then becomes:
