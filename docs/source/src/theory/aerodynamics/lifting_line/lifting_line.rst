@@ -12,7 +12,7 @@ Overview of LLFVW Theory
 ------------------------
 
 .. _fig-bladewake:
-.. figure:: blade_wake.PNG
+.. figure:: blade_wake.png
     :align: center
     :alt: Blade and wake elements
 
@@ -41,7 +41,7 @@ the blade motion :math:`V_{mot}` and the induced velocity :math:`V_{ind}`, which
 
 
 .. _fig-aeroflow:
-.. figure:: aerodynamic_flowchart.JPG
+.. figure:: aerodynamic_flowchart.jpg
     :align: center
     :alt: Aerodynamic Flowchart
 
@@ -68,7 +68,7 @@ Wake Lattice and Connectivity
 -----------------------------
 
 .. _fig-wakelattice:
-.. figure:: wake_lattice.PNG
+.. figure:: wake_lattice.png
     :align: center
     :alt: Wake Lattice
 
@@ -95,7 +95,7 @@ Vortex Core Desingularization
 -----------------------------
 
 .. _fig-core:
-.. figure:: core.PNG
+.. figure:: core.png
     :align: center
     :alt: core
 

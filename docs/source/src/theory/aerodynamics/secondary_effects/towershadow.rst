@@ -2,7 +2,7 @@ Tower Influence
 ===============
 
 .. _fig-towershadow:
-.. figure:: towershadow.JPG
+.. figure:: towershadow.jpg
     :align: center
     :alt: towershadow
 
