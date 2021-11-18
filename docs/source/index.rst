@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 
-`QBlade.org Website <https://qblade.org>`_
+`...back to QBlade.org website <https://qblade.org>`_
 
 
 ====================
