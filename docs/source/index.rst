@@ -11,10 +11,10 @@
 QBlade Documentation
 ====================
 
-QBlade is a state of the art multi-physics code, covering the complete range of aspects required for the aero-servo-hydro-elastic simulation of horizontal, or vertical axis wind turbines. 
+QBlade :footcite:p:`Marten19` is a state of the art multi-physics code, covering the complete range of aspects required for the aero-servo-hydro-elastic simulation of horizontal, or vertical axis wind turbines. 
 QBlade is being developed since 2010 at the Technical University of Berlin, and is realized as a modular implementation of highly efficient multi-fidelity aerodynamic, structural dynamic and hydrodynamic solvers in a modern, object oriented C++ framework.  
 
-QBlade (see :footcite:t:`Marten19`) leverages the current computer architecture by thoroughly utilizing CPU (via OpenMP) and GPU (via OpenCL) parallelization techniques for a high numerical performance. 
+QBlade leverages the current computer architecture by thoroughly utilizing CPU (via OpenMP) and GPU (via OpenCL) parallelization techniques for a high numerical performance. 
 QBlade is a platform independent software, and can be deployed on workstations or clusters running Windows, Unix or MacOS based operating systems. 
 The software is equipped with an intuitive graphical user interface that aids the user during the whole wind turbine design process. 
 All turbine and simulation details are readily available to be accessed and modified in a logical well-structured and tested interface. 
