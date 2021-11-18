@@ -33,9 +33,10 @@ The second enforces the boundary condition on the sea bottom:
 	
 Finally, the Sommerfeld condition states that wave energy associated with disturbance due to the body is radiated in all directions. 
 A few assumptions are outlined here for the following discussion:
-* The floater undergoes negligibly small motions away from the equilibrium position.    
-* Solutions are assumed to be harmonic  :math:`\hat{\phi} = \phi\,e^{i\omega t}`.    
-* The floater is submerged in a fluid with density :math:`\rho` :math:`\textrm{kg}\,\textrm{m}^{-3}`.    
+
+- The floater undergoes negligibly small motions away from the equilibrium position.    
+- Solutions are assumed to be harmonic  :math:`\hat{\phi} = \phi\,e^{i\omega t}`.    
+- The floater is submerged in a fluid with density :math:`\rho` :math:`\textrm{kg}\,\textrm{m}^{-3}`.    
 
 Equations of Motion
 ---------------------------------------------
@@ -68,7 +69,7 @@ Newton's third law dictates that the force required to set this disturbance in m
 An example of this is shown in the following figure for a motion in the surge direction.
 
 .. _fig-lpft-srge:
-.. figure:: OC4.PNG
+.. figure:: OC4.png
     :align: center
     :alt: Surge radiation potential
 	
