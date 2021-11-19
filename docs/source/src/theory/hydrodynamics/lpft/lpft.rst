@@ -68,7 +68,7 @@ Newton's third law dictates that the force required to set this disturbance in m
 An example of this is shown in the following figure for a motion in the surge direction.
 
 .. _fig-lpft-srge:
-.. figure:: OC4.PNG
+.. figure:: OC4.png
     :align: center
     :alt: Surge radiation potential
 	
@@ -166,7 +166,7 @@ As with the radiation forces, the time-domain excitation forces are calculated w
 	\end{equation}
 	\textrm{  .}
 	
-This implies that the wave history must be known *ahead* of time, as upwind incoming waves induce an excitation force on the floater. 
+This implies that incoming wave information is required as *upstream* waves induce an excitation force on the floater. 
 This integral is again calculated numerically over a truncated time period :math:`T`, specified in the input file with the parameter TRUNC_TIME_DIFF, in an equivalent fashion to that done for the radiation forces.
 	
 .. footbibliography::
