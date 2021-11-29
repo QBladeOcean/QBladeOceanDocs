@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'QBlade'
-copyright = '2021, David Marten'
-author = 'David Marten'
+copyright = '2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker'
+author = 'David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker'
 
 # The full version, including alpha/beta/rc tags
 release = '0.XX'
