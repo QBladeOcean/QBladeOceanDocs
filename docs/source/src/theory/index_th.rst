@@ -34,5 +34,5 @@ Environmental Conditions
    :maxdepth: 1
 
    environment/soil/soil
-   environment/oceanography/linear_waves
+   environment/sea/index_sea
    environment/wind/wind

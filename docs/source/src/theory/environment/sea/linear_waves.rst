@@ -59,8 +59,8 @@ where,
 
     Regular wave field created in QBlade
 
-Irregular Waves - Unidirectional
---------------------------------
+Unidirectional Irregular Waves 
+------------------------------
 Irregular wave fields in QBlade belong to a short-term description of the sea, meaning that the significant wave height and the mean wave period are assumed
 to be constant over the considered time :footcite:t:`Faltinsen1993`. The irregular wave field is created through a linear superposition of N different linear
 waves trains. Each one of these wave trains is described by an amplitude :math:`A_j`, a circular frequency :math:`\omega_j` and a phase :math:`\epsilon_j` (:math:`0 - 2\pi`).
@@ -124,8 +124,8 @@ and :math:`\sigma` the spectra width parameter :footcite:t:`Branlard2010`.
 
     Irregular wave field created in QBlade
 
-Irregular Waves - Multidirectional
-----------------------------------
+Multidirectional Irregular Waves
+--------------------------------
 
 A uni-directional wave spectrum :math:`S(\omega)` may be augmented through a directional function :math:`D(\Theta)` in order to create a multi-directional wave field :footcite:t:`Faltinsen1993`
 
@@ -172,62 +172,5 @@ extended by the wave direction
     :alt: Irregular, multi-directional wave field
 
     Irregular, multi-directional wave field created in QBlade
-
-
-Wave Kinematics
----------------
-
-The velocity and acceleration profile over the water depth may be derived from the velocity potentials (finite and infinite depth). For simplicity, the distinction between
-uni- and multi-directional wave fields is neglected in this section. In the case of a uni-directional wave field, the first summation term becomes redundant. In the case of infinite
-depth (for most waves of interest this represents a depth greater than 100m), the velocity profiles are defined by:
-
-.. math::
-   \begin{align}
-   V_x = \sum_{i}^{N_i}\sum_{j}^{N_j} A_{ij}\omega_i cos(\Theta_j)E_m(z)sin(k_i X_j - \omega_i t+\epsilon_{ij},
-   \end{align}
-
-.. math::
-   \begin{align}
-   V_y = \sum_{i}^{N_i}\sum_{j}^{N_j} A_{ij}\omega_i sin(\Theta_j)E_m(z)sin(k_i X_j - \omega_i t+\epsilon_{ij},
-   \end{align}
-
-.. math::
-   \begin{align}
-   V_z = \sum_{i}^{N_i}\sum_{j}^{N_j} -A_{ij}\omega_i E_m(z)cos(k_i X_j - \omega_i t+\epsilon_{ij}.
-   \end{align}
-
-Hence, the acceleration may be derived:
-
-.. math::
-   \begin{align}
-   a_x = \sum_{i}^{N_i}\sum_{j}^{N_j} -A_{ij}\omega_i^2 cos(\Theta_j)E_m(z)cos(k_i X_j - \omega_i t+\epsilon_{ij},
-   \end{align}
-
-.. math::
-   \begin{align}
-   a_y = \sum_{i}^{N_i}\sum_{j}^{N_j} -A_{ij}\omega_i^2 sin(\Theta_j)E_m(z)cos(k_i X_j - \omega_i t+\epsilon_{ij},
-   \end{align}
-
-.. math::
-   \begin{align}
-   a_z = \sum_{i}^{N_i}\sum_{j}^{N_j} A_{ij}\omega_i^2 E_m(z)sin(k_i X_j - \omega_i t+\epsilon_{ij}.
-   \end{align}
-
-:math:`E_m` is a scaling factor that depending on the case is defined as:
-
-.. math::
-   \begin{align}
-   E_m(z) = \frac{cosh(k_i(z+h))}{sinh(k_ih)}
-   \end{align}
-
-for finite depth and
-
-.. math::
-   \begin{align}
-   E_m(z) = e^{k_iz}
-   \end{align}
-
-for infinite depth.
-
 
 .. footbibliography::
