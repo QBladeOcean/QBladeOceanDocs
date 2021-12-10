@@ -1,3 +1,0 @@
-.. _structural_model:
-Chrono
-======

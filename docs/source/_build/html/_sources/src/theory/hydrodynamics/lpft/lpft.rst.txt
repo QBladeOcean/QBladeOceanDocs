@@ -1,3 +1,0 @@
-.. _lpft:
-Linear Potential Flow Theory
-============================

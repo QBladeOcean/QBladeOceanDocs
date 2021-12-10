@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'QBlade'
-copyright = '2021, David Marten'
-author = 'David Marten'
+copyright = '2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker'
+author = 'David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker'
 
 # The full version, including alpha/beta/rc tags
 release = '0.XX'
@@ -30,7 +30,7 @@ release = '0.XX'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [ 'sphinxcontrib.bibtex']
+extensions = [ 'sphinxcontrib.bibtex','sphinx.ext.autosectionlabel']
 
 # bibliography
 bibtex_bibfiles = ['refs.bib']

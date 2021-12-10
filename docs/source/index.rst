@@ -49,5 +49,6 @@ The integrated potential flow approach also includes the higher order slow drift
 
    src/theory/index_th
    src/user/index_ue
+   src/validation/index_val
 
 .. footbibliography::

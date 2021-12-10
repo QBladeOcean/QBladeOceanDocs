@@ -1,7 +1,6 @@
 Blade Element Momentum Method
 =============================
 
-This is an examplory figure:
 
 .. figure:: bem_example.png
    :scale: 50 %
