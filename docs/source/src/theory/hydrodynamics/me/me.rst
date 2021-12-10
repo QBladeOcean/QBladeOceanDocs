@@ -30,7 +30,7 @@ In this equation,
 The structural model of QBlade naturally handles the vector direction of the local normal force components depending on the element location and orientation (see :doc:`../../structure/chrono/chrono`). 
 The normal force is assumed to be constant over the submerged part of the cylinder, and only integrated along the submerged length. 
 For this evaluation the local instantaneous wave elevation is obtained at every timestep to calculate the current submerged fraction of the cylinder. 
-It is recommended to subdivide cylindrical elements that are close to the water surface into smaller sub-elements to increase the model accuracy (see :ref:`modeling-considerations`)
+It is recommended to subdivide cylindrical elements that are close to the water surface into smaller sub-elements to increase the model accuracy (see :ref:`ME_modeling-considerations`)
 
 
 Axial Morison Force on a Cylindrical Element
@@ -75,10 +75,10 @@ and the effective area would be calculated as:
     A = \pi\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^2-\left(\frac{D_{thin}}{2}+R_{MG}\right)^2\right) .
     \end{align}
 
-.. _modeling-considerations:
+.. _ME_modeling-considerations:
 
-Modeling Considerations
------------------------
+Modeling Considerations for Morsion Elements
+--------------------------------------------
 In QBlade, each cylindrical element can be divided into sub-elements to each of which the Morison forces are evaluated and applied at each time step. 
 Setting the hydrodynamic coefficients to 0 effectively disables their contribution in the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only. 
 To determine if a sub-element is partially or fully submerged, the wave elevation is required. 

@@ -1,5 +1,5 @@
-Validation Cases
-=================
+Validation Cases and Examples
+==============================
 
 Aerodynamic Validation Tests
 *****************************

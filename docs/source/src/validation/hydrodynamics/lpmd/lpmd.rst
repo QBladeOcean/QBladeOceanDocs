@@ -11,8 +11,8 @@ These modifications are mentioned in the appropriate load cases below.
 
 In the following sections, the results for each model are presented.
 
-OC3 Spar Buoy Model
-----------------------
+OC3 Spar Buoy LPMD Model
+-------------------------
 The first model, named OC3 model in this document, is the floating 5 MW wind turbine mounted on a spar buoy from the OC3 Report :footcite:`OC3_Model`. This
 model was considered so that we have a simple geometry to test the different hydrodynamic models. :numref:`fig-OC3-QB` shows the OC3 LMPD model within the QB GUI. The substructure was considered rigid in this
 model to evaluate only the hydrodynamic modules. For this model, the mooring system was modeled explicitly and the localized buoyancy model was used.
@@ -25,14 +25,14 @@ model to evaluate only the hydrodynamic modules. For this model, the mooring sys
     The OC3 model displayed in the QB GUI featuring a spar buoy substructure.
 
 
-No Wave Tests
-^^^^^^^^^^^^^^
+OC3 LPMD No Wave Tests
+^^^^^^^^^^^^^^^^^^^^^^^
 The no wave tests are split into two parts, the first and main part consists in free decay tests in still water. The second part considers the turbine reaction to no wave and constant current conditions. We will
 describe first the results from the decay tests and later present the results for the constant current tests. 
 
 
-Free Decay Tests
-""""""""""""""""""
+OC3 LPMD Free Decay Tests
+""""""""""""""""""""""""""
 
 The free decay tests simulate the turbine model in free decay from an initial position in still water condition. No aerodynamic loads were considered in the decay tests. All the 6 degrees of freedom (DOFs)
 are considered for in the decay tests. The evaluation of the results is done 1) visually, by inspecting the time series of all isochronic DOFs and 2) quantitatively, by analyzing the eigenfrequency and damping of
@@ -123,8 +123,8 @@ simulations is the correct one.
 
     Normalized eigenfrequencies and damping behaviour of the OC3 model with linear mooring for the considered decay tests.
 
-Current-Only Tests
-""""""""""""""""""
+OC3 LPMD Current-Only Tests
+""""""""""""""""""""""""""""
 
 The second part of the no wave tests comprised constant current tests. For these tests, two current
 profiles were selected according to :footcite:`DNV-RP-C205`: a power-law profile – representing a tidal current velocity – and a
@@ -151,8 +151,8 @@ member location and the velocity output location was slightly different.
 
     Displacements and water velocities for the OC3 model in a wind-generated current test case.
 
-Regular Wave Cases
-^^^^^^^^^^^^^^^^^^^^^^
+OC3 LPMD Regular Wave Cases
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The regular wave cases aim to validate the implementation of the first-order wave excitation forces in
 QB. This done in load cases where a single wave train with varying amplitude, period and direction is used
 to model the sea state. In order single out the effect of the excitation force
@@ -202,8 +202,8 @@ differences in the interpolation algorithms.
 
     Time series of all DOFs for regular waves with a wave height of 6 m and a period of 10 s (45° incoming angle).
 
-Irregular Wave Cases
-^^^^^^^^^^^^^^^^^^^^^^
+OC3 LPMD Irregular Wave Cases
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The validation of the first-order excitation loads in irregular waves was performed in a similar fashion to
 the regular wave cases. Accordingly, the mooring system and buoyancy are modelled via linearized
@@ -268,8 +268,8 @@ presumably increase the agreement between the compared codes.
 
     Comparison of mean, standard deviation and extreme values of all 6 DOFs for multi-direction irregular waves     
 
-Irregular Waves with Current
-""""""""""""""""""""""""""""""
+OC3 LPMD Irregular Waves with Current
+""""""""""""""""""""""""""""""""""""""
 
 For the irregular wave test cases, a combination of wave and currents was also considered. For this case, a
 JONSWAP spectrum with a significant wave height of :math:`H_s` = 6 m, a peak spectral period of :math:`T_p` = 10 s and a
@@ -306,7 +306,7 @@ modelling that is present in QB and OF.
 
 
 
-OC4 Semisubmersible Model
+OC4 Semisubmersible LPMD Model
 ------------------------------
 
 The second model considered in this validation -- named OC4 model in this document -- is the floating 5 MW wind
@@ -324,7 +324,9 @@ system was modeled explicitly and the localized buoyancy model was used for this
 
     The OC4 model displayed in the QB GUI featuring a semisubmersible substructure.
 
-OC4 Model Free Decay Tests
+.. _OC4LPMD_FreeDecay:
+
+OC4 LPMD Free Decay Tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For this model, decay tests were again performed in still water for four DOFs and compared to the same
@@ -389,8 +391,10 @@ the differences can be traced back to the different mooring system modeling used
 
     Normalized eigenfrequencies and damping behaviour of the OC4 model for the considered decay tests.
 
-Regular Wave Tests
-^^^^^^^^^^^^^^^^^^^
+.. _OC4LPMD_RegularWaves:
+
+OC4 LPMD Regular Wave Tests
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The regular wave tests were performed with linear Airy waves for two selected cases. One case had a
 wave height of :math:`H` = 6 m and a period of :math:`T` = 10 s. The second case had a wave height of :math:`H` = 8 m and a period
@@ -482,8 +486,8 @@ The effects on the mooring line tensions can be seen in :numref:`fig-OC4-RegWave
 the tension of the mooring line 2 is significantly affected for this test case. The amplitude of the oscillation
 is more than doubled in the QB Loc simulations compared to the QB Lin simulations.
 
-Irregular Wave Tests
-^^^^^^^^^^^^^^^^^^^^^^^
+OC4 LPMD Irregular Wave Tests
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The OC4 LPMD model was also validated for irregular wave sea states. Six random sea states with a
 JONSWAP spectrum with :math:`H_s` = 6 m, :math:`T_p` = 10 s and :math:`\gamma` = 3.3 were used. The simulation length was 1200 s and
@@ -508,7 +512,7 @@ Morison element are wetted up to the mean sea level. This effectively neglects t
 when calculating the wetted surface of the substructure that will be considered for the Morison drag
 calculations. This approach is the one implemented in OF. In contrast, QB considers the local wave
 elevation (incl. wave stretching) to determine the wetted surface of the elements and apply the Morison
-forces. See :doc:`../../../theory/hydrodynamics/me/me` for more details. The setup QB MSL was thus chosen to have a simulation setup
+forces. See modelin considerations in :doc:`../../../theory/hydrodynamics/me/me` for more details. The setup QB MSL was thus chosen to have a simulation setup
 that matches the OF modelling.
 
 .. _fig-OC4-IrrWaves-DOFs:
@@ -535,8 +539,8 @@ mean surge forces. The restoring forces from the linear mooring system will ther
 oscillate at its surge eigenfrequency when the average surge force is temporarily small. This non-linear
 phenomenon cannot happen it the wetted surface is considered constant at all times.
 
-Second-Order Wave Excitation Forces
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OC4 LPMD Second-Order Wave Excitation Forces
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Second-order hydrodynamic loads play an increasing role for semi-submersible offshore structures such
 as the OC4 model. Duarte et al.:footcite:`Duarte2014` even state that the floater response is dominated or at
 least in impacted in the same order of magnitude by the second order hydrodynamic loads as by their
