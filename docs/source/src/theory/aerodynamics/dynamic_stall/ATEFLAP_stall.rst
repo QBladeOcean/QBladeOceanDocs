@@ -3,7 +3,7 @@
 ATEFlap Dynamic Stall Model
 =====================================================
 
-To account for dynamic stall and unsteady aerodynamics the ATEFLap :footcite:`Bergami2012` model for 2D airfoil behavior has been integrated :footcite:`Wendler2016` to be used with :doc:`../lifting_line/lifting_line` simulations. The unsteady aerodynamics model consists of mainly two parts; an attached or potential flow model, as proposed by Bergami and Gaunaa in :footcite:`Bergami2012`, and the classical Beddoes-Leishman dynamic stall model with a custom formulation for vortex lift, as presented by Hansen and Gaunaa in :footcite:`Hansen2004b`. The implemented ATEFlap model also accounts for unsteady lift contribution of trailing edge flaps. 
+To account for dynamic stall and unsteady aerodynamics the ATEFLap :footcite:`Bergami2012` model for 2D airfoil behavior has been integrated :footcite:`Wendler2016` to be used with :doc:`../lifting_line/lifting_line` simulations (note that the ATEFlap model has been specifically modified to be used with :doc:`../lifting_line/lifting_line` simulations, it is not advised to use the ATEFlap model with :doc:`../bem/bem` simulations). The unsteady aerodynamics model consists of mainly two parts; an attached or potential flow model, as proposed by Bergami and Gaunaa in :footcite:`Bergami2012`, and the classical Beddoes-Leishman dynamic stall model with a custom formulation for vortex lift, as presented by Hansen and Gaunaa in :footcite:`Hansen2004b`. The implemented ATEFlap model also accounts for unsteady lift contribution of trailing edge flaps. 
 
 Polar Decomposition
 -------------------
@@ -20,7 +20,7 @@ The unsteady aerodynamics model is based on a decomposition of the static, two d
 .. _decompose:
 .. math::
 	\begin{align}
-	Cl_{st} = f \ast Cl_{att} + (1-f) \ast Cl_{sep} . 
+	Cl_{st} = f   Cl_{att} + (1-f)   Cl_{sep} . 
 	\end{align}
 	
 A module to perform the decomposition of polar data has been integrated with QBlades airfoil data pre-processor. To generate the decomposed data, the angle of 
