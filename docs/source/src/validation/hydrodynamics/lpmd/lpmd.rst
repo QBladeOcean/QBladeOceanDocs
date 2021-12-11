@@ -542,7 +542,7 @@ phenomenon cannot happen it the wetted surface is considered constant at all tim
 OC4 LPMD Second-Order Wave Excitation Forces
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Second-order hydrodynamic loads play an increasing role for semi-submersible offshore structures such
-as the OC4 model. Duarte et al.:footcite:`Duarte2014` even state that the floater response is dominated or at
+as the OC4 model. Duarte et al. :footcite:`Duarte2014` even state that the floater response is dominated or at
 least in impacted in the same order of magnitude by the second order hydrodynamic loads as by their
 first order relatives. Bearing this in mind, a first evaluation of the implementation of the second-order
 wave load module, described in :doc:`../../../theory/hydrodynamics/lpft/lpft` seems reasonable on the OC4 platform. In the following,
