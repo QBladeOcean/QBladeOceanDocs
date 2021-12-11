@@ -12,6 +12,9 @@ Hydrodynamics Validation Tests
 .. toctree::
    :maxdepth: 1
 
+   hydrodynamics/lpmd/lpmd
+   hydrodynamics/me/me
+
 
 
 
