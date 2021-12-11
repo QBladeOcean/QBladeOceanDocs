@@ -13,7 +13,7 @@ Hydrodynamics Validation Tests
    :maxdepth: 1
 
    hydrodynamics/lpmd/lpmd
-   hydrodynamics/me/me
+
    hydrodynamics/hydroelastics/hydroelastics
 
 

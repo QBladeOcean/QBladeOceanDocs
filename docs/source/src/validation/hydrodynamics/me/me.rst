@@ -15,7 +15,7 @@ These modifications are mentioned in the appropriate load cases below.
 OC4 Semisubmersible ME Model 
 ------------------------------
 
-The OC4 model was also modelled using the Morison equation only. The geometry of the model is the
+The OC4 model was also modelled using the Morison equation only. The geometry of the model is 
 shown in :numref:`fig-OC4ME-QB`. The Morison equation modelling has
 the advantage of allowing distributed loading during the simulations and hence enable hydroelastic
 simulations (see :doc:`../hydroelastics/hydroelastics`). As a drawback, the hydrodynamic coefficients for the Morison equation are obtained
