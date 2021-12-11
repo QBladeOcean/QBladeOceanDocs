@@ -96,3 +96,6 @@ modelling capabilities of the tool.
     :alt: TetraSpar Example
 
     Hydroelastic model of a 10MW turbine on an up-scaled TetraSpar substructure.
+
+
+.. footbibliography::

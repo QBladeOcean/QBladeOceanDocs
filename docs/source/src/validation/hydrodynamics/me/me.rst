@@ -184,3 +184,6 @@ do not. This nonlinear response in pitch disappears for the QB Filter and QB Fix
 therefore be attributed to the local instantaneous approach when calculating the water kinematics. The
 surge DOF still shows a peak in the surge eigenfrequency even when filtered or fixed approach is used for
 calculating the water kinematics. Further investigation is required to fully understand this phenomenon.
+
+
+.. footbibliography::
