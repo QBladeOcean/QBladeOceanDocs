@@ -1,7 +1,6 @@
-
-
 ATEFlap Dynamic Stall Model
-=====================================================
+===========================
+
 
 To account for dynamic stall and unsteady aerodynamics the ATEFLap :footcite:`Bergami2012` model for 2D airfoil behavior has been integrated :footcite:`Wendler2016` to be used with :doc:`../lifting_line/lifting_line` simulations (note that the ATEFlap model has been specifically modified to be used with :doc:`../lifting_line/lifting_line` simulations, it is not advised to use the ATEFlap model with :doc:`../bem/bem` simulations). The unsteady aerodynamics model consists of mainly two parts; an attached or potential flow model, as proposed by Bergami and Gaunaa in :footcite:`Bergami2012`, and the classical Beddoes-Leishman dynamic stall model with a custom formulation for vortex lift, as presented by Hansen and Gaunaa in :footcite:`Hansen2004b`. The implemented ATEFlap model also accounts for unsteady lift contribution of trailing edge flaps. 
 
@@ -44,14 +43,14 @@ before the onset of stall. The added mass term models the forces due to the reac
 			Cl^{qs} = Cl^{att}(\alpha_{qs},\beta_{qs}).
 	\end{align}
 	
-Wake memory effects account for the influence of span wise or shed vorticity in the wake on the quasi-steady angle of attack. As the ATEFlap model has been formulated for BEM codes, the downwash of the wake(which is the wake memory effect) is modeled with an effective angle of attack that is computed via step responses that are described by exponential indicial response functions. In QBlade's implementation, the effective angle of attack is directly obtained as the induction from the free vortex wake formulation is already considered in the evaluation of the on-blade velocities. 
+Wake memory effects account for the influence of span wise or shed vorticity in the wake on the quasi-steady angle of attack. As the ATEFlap model has been formulated for BEM codes, the downwash of the wake (which also causes the wake memory effect) is modeled with an effective angle of attack that is computed via step responses that are described by exponential indicial response functions. In QBlade's implementation, the effective angle of attack is directly obtained as the induction from the free vortex wake formulation is already considered in the evaluation of the on-blade velocities. 
 
 .. math::
 	\begin{align}
 			Cl^{circ}=Cl^{att}(\alpha{eff}).
 	\end{align}
 	
-However, the quasi steady angle of attack, which does not include the effect of wake vorticity, is not known in the free vortex wake formulation of QBlade. As the quasi steady angle :math:`\alpha_{qs}` is needed for a later evaluation of the induced drag contribution it is computed by calculating the isolated contribution of the wake vorticity on the angle of attack, denoted as :math:`\alpha_{shed}`, separately. :math:`\alpha_{shed}` is computed via the induction of the total shed vorticity in the vicinity of the blade, up to :math:`8` chord lengths away from the trailing edge. As the dynamic stall model is formulated for an isolated two-dimensional airfoil, it is necessary to limit the vortices that are involved in the evaluation of :math:`\alpha_{shed}` to those in the vicinity of the blade to exclude the significant influence of the total shed vorticity from all previous time steps on the global flow field\footnote{This is especially important for VAWT simulations where the shed vorticity has a major contribution to the total induction field around the rotor}. :math:`\alpha_{shed}` is then used to calculate the quasi steady angle of attack from the effective angle of attack. 
+However, the quasi steady angle of attack, which does not include the effect of wake vorticity, is not known in the free vortex wake formulation of QBlade. As the quasi steady angle :math:`\alpha_{qs}` is needed for a later evaluation of the induced drag contribution it is computed by calculating the isolated contribution of the wake vorticity on the angle of attack, denoted as :math:`\alpha_{shed}`, separately. :math:`\alpha_{shed}` is computed via the induction of the total shed vorticity in the vicinity of the blade, up to :math:`8` chord lengths away from the trailing edge. As the dynamic stall model is formulated for an isolated two-dimensional airfoil, it is necessary to limit the vortices that are involved in the evaluation of :math:`\alpha_{shed}` to those in the vicinity of the blade to exclude the significant influence of the total shed vorticity from all previous time steps on the global flow field (this is especially important for VAWT simulations where the shed vorticity has a major contribution to the total induction field around the rotor). :math:`\alpha_{shed}` is then used to calculate the quasi steady angle of attack from the effective angle of attack. 
 	
 .. math::
 	\begin{align}
@@ -110,7 +109,7 @@ However, it was found, especially when simulating VAWT with large fluctuations i
 			Cl^{dyn} = Cl^{circ,dyn}+Cl^{nc}.
 	\end{align}
 	
-The dynamic drag is evaluated from three contributions. The steady drag at the effective angle of attack:
+The dynamic drag is evaluated from four contributions. The steady drag at the effective angle of attack:
 
 .. math::
 	\begin{align}
@@ -145,7 +144,7 @@ The total drag is then computed as the sum of these contributions:
 			Cd = Cd^{eff}+Cd_{ind}+Cd_{ind}^\beta+Cd_{ind}^f.
 	\end{align}
 	
-More details about the implementation and validation of the unsteady aerodynamics model can be found in the publication of Wendler :footcite:`Wendler2016`. Two exemplary validation graphs from this publication are shown in :numref:`fig-vali1`, where the general sensitivity of the dynamic stall hysteresis loop to the reduced frequency and amplitude is well reproduced.
+More details about the implementation and validation of the unsteady aerodynamics model can be found in the publication of Wendler et al. :footcite:`Wendler2016`. Two exemplary validation graphs from this publication are shown in :numref:`fig-vali1`, where the general sensitivity of the dynamic stall hysteresis loop to the reduced frequency and amplitude is well reproduced.
 
 .. _fig-vali1:
 .. figure:: vali1.jpg

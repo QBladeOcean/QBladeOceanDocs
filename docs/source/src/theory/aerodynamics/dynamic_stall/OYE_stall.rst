@@ -36,7 +36,7 @@ The value of :math:`f^{st}` is limited to be between 0 and 1. Now :math:`f` is a
 	\tau = \frac{A \frac{c}{2}}{V_{rel}} , 
 	\end{align}
 	
-where :math:`A` is a parameter (typically around 8), :math:`c` is the airfoil chord and :math:`V_{rel}` the relative velocity at the airfoil section. After :math:`f` has been evaluated :math:`Cl_{sep}` can be obtained from:
+where :math:`A` is a parameter (typically around 8), :math:`c` is the airfoil chord and :math:`V_{rel}` the relative velocity at the airfoil section. After :math:`f` has been evaluated, :math:`Cl_{sep}` can be obtained from:
 
 .. math::
 	\begin{align}

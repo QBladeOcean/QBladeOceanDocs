@@ -14,3 +14,4 @@ The tower shadow model is only used when the z-component of the evaluation point
 An application of the tower model, including a comparison to CFD simulations and experimental data is found in the work of :footcite:t:`Klein2018`.
 
 .. footbibliography::
+

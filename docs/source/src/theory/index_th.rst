@@ -8,11 +8,8 @@ Aerodynamics
 
    aerodynamics/bem/bem
    aerodynamics/lifting_line/lifting_line
-   aerodynamics/dynamic_stall/ATEFLAP_stall
-   aerodynamics/dynamic_stall/OYE_stall
-   aerodynamics/secondary_effects/towershadow
-   aerodynamics/secondary_effects/ground_effect
-   aerodynamics/secondary_effects/himmelskamp
+   aerodynamics/dynamic_stall/index_dynamicstall	
+   aerodynamics/secondary_effects/index_secondary
 
 Hydrodynamics
 *************

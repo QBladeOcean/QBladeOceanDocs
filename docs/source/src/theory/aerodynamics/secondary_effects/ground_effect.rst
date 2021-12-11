@@ -13,3 +13,4 @@ Such a treatment doubles the number of times that the Biot-Savart equation is ca
     Modeling of ground effect through mirroring of the wake.
 
 .. footbibliography::
+
