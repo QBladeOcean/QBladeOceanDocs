@@ -14,7 +14,7 @@ Hydrodynamics Validation Tests
 
    hydrodynamics/lpmd/lpmd
    hydrodynamics/me/me
-   
+   hydrodynamics/hydroelastics/hydroelastics
 
 
 
