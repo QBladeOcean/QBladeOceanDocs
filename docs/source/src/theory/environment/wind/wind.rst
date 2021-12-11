@@ -146,8 +146,8 @@ The second is the von Karman spectrum:
 
 With these models it is possible to generate a synthetic turbulence field which has representative statistical properties. Two methods are commonly applied to cases of wind turbine simulation.
 These methods, based upon Taylor's hypothesis :footcite:`BatchelorBook`, generate a *block* grid which is convected with the mean free stream velocity through the computational domain. 
-The first method, commonly known as Veer's method:footcite:`Veers_1988` takes as input the power spectral density type and coherence function. 
-A turbulent windfield generated with this method is illustrated in :numref:`fig-Wind-Turb`. The second method, referred to as Mann's method:footcite:`Mann_1998` relies on a model of the spectral tensor. 
+The first method, commonly known as Veer's method :footcite:`Veers_1988` takes as input the power spectral density type and coherence function. 
+A turbulent windfield generated with this method is illustrated in :numref:`fig-Wind-Turb`. The second method, referred to as Mann's method :footcite:`Mann_1998` relies on a model of the spectral tensor. 
 
 .. _fig-Wind-Turb:
 .. figure:: Turb.png
