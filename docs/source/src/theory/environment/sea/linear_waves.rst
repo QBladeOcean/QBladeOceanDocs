@@ -9,7 +9,7 @@ may be expressed as
 
 .. math::
    \begin{align}
-   \Theta(x,y,z,t) = \frac{gA}{\omega} \frac{cosh(k(z+h))}{cosh(kh)}cos(\omega t - kx)
+   \Theta(x,y,z,t) = -\frac{gA}{\omega} \frac{cosh(k(z+h))}{cosh(kh)}cos(\omega t - kx)
    \end{align}
 
 where,
@@ -34,7 +34,7 @@ For infinite water depth the velocity potential is defined as:
 
 .. math::
    \begin{align}
-   \Theta(x,y,z,t) = \frac{gA}{\omega} e^{kz} cos(\omega t - kx).
+   \Theta(x,y,z,t) = -\frac{gA}{\omega} e^{kz} cos(\omega t - kx).
    \end{align}
 
 
