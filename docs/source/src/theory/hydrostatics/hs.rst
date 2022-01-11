@@ -46,6 +46,12 @@ Discrete Volume Buoyancy Calculation
 In this approach the displaced volume :math:`V_d` is discretised into non-overlapping volume elements. The buoyancy force acting at the centre of buoyancy of each element are then integrated to get :math:`\vec{F}_b`. 
 This is practically equivalent to the discrete surface approach, however integration is carried out over volume elements. 
 
+In QBlade the volume buoyancy calculation approach is used. In general the offshore substructures in QBlade are composed of cylindrical bodies. There are two methods implemented how the buoancy of a cylinder is calculated in QBlade. 
+
+In the simple approach the intersection between the cylinder centerline and the local sea elevation is evaluated. Based on this intersection and the cylinder endpoints it is estimated wether the cylinder is fully or only partially submerged. The partially submerged part of the cylinder is estimated by the submerged part of the centerline. The buoancy force then acts on the midpoint of the submerged part of the centerline. 
+
+In the advanced buoancy approach in QBlade each cylinder is discretized into multiple prismatic elements (the element number is a user input, 100 is the default value). For each of these elements the centerline approximation is carried out and then all forces are summed up and an equivalent force acting point is evaluated.
+
 Hydrostatic Stiffness Matrix
 ---------------------------------------------
 It shall be assumed that the surface elevation is everywhere approximately constant. This can be valid if the wavelength of the sea state is much larger than the dimension of the body. 
