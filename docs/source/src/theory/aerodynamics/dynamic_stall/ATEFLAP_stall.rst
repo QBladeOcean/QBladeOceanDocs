@@ -19,7 +19,7 @@ The unsteady aerodynamics model is based on a decomposition of the static, two d
 .. _decompose:
 .. math::
 	\begin{align}
-	Cl_{st} = f   Cl_{att} + (1-f)   Cl_{sep} . 
+	Cl_{st} = f   Cl	 + (1-f)   Cl_{sep} . 
 	\end{align}
 	
 A module to perform the decomposition of polar data has been integrated with QBlades airfoil data pre-processor. To generate the decomposed data, the angle of 
@@ -47,7 +47,7 @@ Wake memory effects account for the influence of span wise or shed vorticity in 
 
 .. math::
 	\begin{align}
-			Cl^{circ}=Cl^{att}(\alpha{eff}).
+			Cl^{circ}=Cl^{att}(\alpha_{eff}).
 	\end{align}
 	
 However, the quasi steady angle of attack, which does not include the effect of wake vorticity, is not known in the free vortex wake formulation of QBlade. As the quasi steady angle :math:`\alpha_{qs}` is needed for a later evaluation of the induced drag contribution it is computed by calculating the isolated contribution of the wake vorticity on the angle of attack, denoted as :math:`\alpha_{shed}`, separately. :math:`\alpha_{shed}` is computed via the induction of the total shed vorticity in the vicinity of the blade, up to :math:`8` chord lengths away from the trailing edge. As the dynamic stall model is formulated for an isolated two-dimensional airfoil, it is necessary to limit the vortices that are involved in the evaluation of :math:`\alpha_{shed}` to those in the vicinity of the blade to exclude the significant influence of the total shed vorticity from all previous time steps on the global flow field (this is especially important for VAWT simulations where the shed vorticity has a major contribution to the total induction field around the rotor). :math:`\alpha_{shed}` is then used to calculate the quasi steady angle of attack from the effective angle of attack. 
