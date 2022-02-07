@@ -10,13 +10,7 @@ Aerodynamics
    aerodynamics/lifting_line/lifting_line
    aerodynamics/dynamic_stall/index_dynamicstall	
    aerodynamics/secondary_effects/index_secondary
-   
-Hydrostatics
-*************
-.. toctree::
-   :maxdepth: 1
-   
-   hydrostatics/hs
+
 
 Hydrodynamics
 *************
@@ -25,6 +19,7 @@ Hydrodynamics
 
    hydrodynamics/lpft/lpft
    hydrodynamics/me/me
+   hydrodynamics/hydrostatics/hs
 
 Structural Dynamics
 *******************
