@@ -8,7 +8,7 @@ In QBlade dynamic stall may be modeled in unsteady :doc:`../lifting_line/lifting
 	Cl_{dyn} = f  Cl_{att} + (1-f)  Cl_{sep} . 
 	\end{align}
 	
-Where :math:`Cl_{att}` is the fully attached inviscid lift contribution and Cl_{sep} the fully separated lift contribution. To solve the equation above is is applied to static consitions, such that:
+Where :math:`Cl_{att}` is the fully attached inviscid lift contribution and :math:`Cl_{sep}` the fully separated lift contribution. To solve the equation above it is applied to static consitions, such that:
 
 .. math::
 	\begin{align}
@@ -51,6 +51,6 @@ After Bergami the dynamic drag :math:`Cd_{dyn}` is evaluated as:
 	Cd_{dyn} = Cd^{st} +  (Cd^{st}-Cd^{st}_0) (0.5(\sqrt{f^{st}}-\sqrt{f}))-0.25(f-f^{st}).
 	\end{align}
 
-In this equation :math:`Cd^{st}_{0}` is the drag and 0 degree angle of attack.
+In this equation :math:`Cd^{st}_{0}` is the drag at 0 degree angle of attack.
 	
 .. footbibliography::
