@@ -75,6 +75,35 @@ and the effective area would be calculated as:
     A = \pi\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^2-\left(\frac{D_{thin}}{2}+R_{MG}\right)^2\right) .
     \end{align}
 
+.. _ME_McCamyFuchs:
+
+McCamy-Fuchs Correction
+-----------------------
+For cylindrical elements that have a diameter to wavelength ratio larger than
+0.2, the diffraction forces become relevant and the pure Morison equation is no longer accurate, see :footcite:t:`Faltinsen1993`. The
+diffraction effects can be accounted for with the ME formulation by introducing the MacCamy-Fuchs
+Correction (MCFC). The original MCFC is formulated in terms of the normal force per unit length on the
+cylinder. It can be recast so that the inertia part of the Morison equation is affected, see :footcite:t:`IEC61400-3-1` for reference. Following an
+approach presented in :footcite:t:`USFOS`, QBlade changes the local water particle acceleration's magnitude and phase that
+affect the Morison element. The original modifications include the calculation of Bessel functions. To
+speed up calculations, an approximation based on easier functions proposed in :footcite:t:`USFOS` is used for the
+modification of the particle acceleration's magnitude and phase. The equivalent particle acceleration
+amplitude is given by:
+
+.. math::
+    \dot{u}_{eq} = \dot{u} \cdot \mathrm{min}\left( \frac{1.05\tanh \left( 2\pi \frac{d}{\lambda} \right) }{\left(\mathrm{abs}\left(\pi \frac{D}{\lambda}-0.2\right)^{2.2} + 1 \right)^{0.85}},1 \right).
+
+In this equation, :math:`\dot{u}` is the water particle acceleration amplitude, :math:`d` is the water depth, :math:`D` is the diameter of the element and :math:`\lambda` is the wavelength.
+The phase shift of the acceleration is given by:
+
+.. math::
+    \alpha^{\mathrm{phase}} = \frac{\pi}{180}\left( -\frac{450}{8}\left(\pi\frac{D}{\lambda} -2\right) - \frac{75}{\left( \pi \frac{D}{\lambda} + 0.5 \right)^2} \right).
+
+Since it affects the incoming water particle acceleration and phase, this implementation of the MCFC can
+be easily extended to irregular wave spectra. In this case, the correction is done on each wave train that
+makes up the wave spectrum and avoids using frequency dependent added mass coefficients in the ME
+formulation.
+
 .. _ME_modeling-considerations:
 
 Modeling Considerations for Morsion Elements
