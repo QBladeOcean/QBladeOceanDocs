@@ -7,57 +7,68 @@ Overview
    :maxdepth: 1
 
 
-GUI and Graphs Functionality
-*****************************
+General GUI Functionality
+*************************
 .. toctree::
    :maxdepth: 1
 
-Airfoil Module
-*******************
-.. toctree::
-   :maxdepth: 1
+   guigraph/guigraph
 
-
-Airfoil Analysis Module
-************************
-.. toctree::
-   :maxdepth: 1
-
-Polar Extrapolation Module
+Create and Modify Airfoils
 **************************
 .. toctree::
    :maxdepth: 1
 
-Blade Design Module
+   airfoil/airfoil
+
+Analyze Airfoils 
+****************
+.. toctree::
+   :maxdepth: 1
+   
+   airfoil/airfoil_analysis
+
+Extrapolate and Tune Polar Data
+*******************************
+.. toctree::
+   :maxdepth: 1
+
+   airfoil/polar_extrapolation
+
+Design a Blade
+**************
+.. toctree::
+   :maxdepth: 1
+
+   blade/blade
+
+
+Perform Steady Blade Element Momentum Simulations
+*************************************************
+.. toctree::
+   :maxdepth: 1
+
+
+Generate Wave Fields
 ********************
 .. toctree::
    :maxdepth: 1
 
 
-Steady Blade Element Momentum Simulation Module
-************************************************
+Generate Wind Fields
+********************
+.. toctree::
+   :maxdepth: 1
+
+Define Wind Turbines
+********************
 .. toctree::
    :maxdepth: 1
 
 
-Wave Field Generation Module
-*****************************
+Define Complete Turbine Simulation
+**********************************
 .. toctree::
    :maxdepth: 1
 
-
-Wind Field Generation Module
-*****************************
-.. toctree::
-   :maxdepth: 1
-
-Turbine Definition Module
-**************************
-.. toctree::
-   :maxdepth: 1
-
-
-Simulation Definition Module
-*****************************
-.. toctree::
-   :maxdepth: 1
+   turbine/structure
