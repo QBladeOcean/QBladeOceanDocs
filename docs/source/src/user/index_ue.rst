@@ -65,10 +65,11 @@ Define Wind Turbines
 .. toctree::
    :maxdepth: 1
 
+   turbine/structure
+   
 
-Define Complete Turbine Simulation
-**********************************
+Define a Complete Turbine Simulation
+************************************
 .. toctree::
    :maxdepth: 1
 
-   turbine/structure
