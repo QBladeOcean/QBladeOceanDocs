@@ -65,6 +65,7 @@ Define Wind Turbines
 .. toctree::
    :maxdepth: 1
 
+   turbine/controller
    turbine/structure
    
 

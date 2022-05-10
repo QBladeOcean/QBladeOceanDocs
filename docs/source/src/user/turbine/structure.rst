@@ -1,6 +1,12 @@
 Turbine Structural Definition
 =============================
 
+.. _StrDef_MainFile:
+
+Main Definition File
+---------------------
+
+
 .. _StrDef_BladeTower:
 
 Blade and Tower Definition

@@ -1,19 +1,20 @@
 Blade Design Module
 ===================
 Once the airfoil polars have been created or imported (see :doc:`../airfoil/airfoil_analysis` and :doc:`../airfoil/polar_extrapolation`), 
-they can be used in an aerodynamic blade design. In QBlade, the blade definition is done by splitting the blade into sections. This is shown
-in :numref:`fig-blade-sections`. The aerodynamic parameters are defined by the user for each section and QBlade interpolates the values between sections (i.e. over the element). 
+they can be used in an aerodynamic blade design. To access the aerodynamic blade design module in QBlade, the user has to click on the blade symbol in the main tool bar.
+This is shown in :numref:`fig-blade-module`.
 
-.. _fig-blade-sections:
-.. figure:: blade_sections.png
+.. _fig-blade-module:
+.. figure:: blade_module.png
     :align: center
-    :alt: Aerodynamic Blade Definition in QBlade is done in Sections.
+    :alt: Blade design module in QBlade.
 
-    Aerodynamic blade definition in QBlade is done in sections. Values are interpolated in the elements between the sections.
+    The aerodynamic blade design module is represented by the blade symbol in the QBlade main tool bar.
+
 
 An overview of the blade design module is shown in :numref:`fig-blade-overview`. The module is split into three main parts. 
 On the left side, the controls dock allows the user to define the blade sections and to control the 3D view section. 
-The latter is located in the middle of he module and allows the user have a interactive 3D representation of the current blade design.
+The latter is located in the middle of the module and allows the user have a interactive 3D representation of the current blade design.
 The right side of the module presents a graphical representation of the aerodynamic quantities along the blade. 
 The user can interact with these graphs in the same manner as with all the other graphs within QBlade (see :doc:`../guigraph/guigraph`).
 
@@ -26,8 +27,21 @@ The user can interact with these graphs in the same manner as with all the other
 
 Blade Definition
 -----------------
-In QBlade, each blade section is defined by a series of aerodynamic properties. These are split into basic and advanced aerodynamic blade properties.
-The global blade/rotor parameters are the number of blades and the hub radius. The columns of the basic blade properties are:
+
+In QBlade, the blade definition is done by splitting the blade into sections. This is shown
+in :numref:`fig-blade-sections`. The aerodynamic parameters are defined by the user for each section and QBlade interpolates the values between sections (i.e. over the element). 
+
+.. _fig-blade-sections:
+.. figure:: blade_sections.png
+    :align: center
+    :alt: Aerodynamic Blade Definition in QBlade is done in Sections.
+
+    Aerodynamic blade definition in QBlade is done in sections. Values are interpolated in the elements between the sections.
+
+
+Each blade section is defined by a series of aerodynamic properties. The global blade/rotor parameters are the number of blades and the hub radius. 
+The distributed blade properties are split into basic and advanced aerodynamic blade properties.
+The columns of the basic blade properties are:
 
 - **Pos [m]** is the position of the section along the blade pitch axes (in m). It can be given in blade root coordinates or in hub coordinates. 
 - **Chord [m]** is the local chord length of the blade section (in m).
