@@ -60,9 +60,9 @@ To add custom sensors to the exchange array, following keywords need to be added
 
 - [<ArrayEntry>] "<Sensor Name>"
 
-The <ArrayEntry> specifies the location of the array in which the sensor input should be written (QBlade assumes the first entry is located at the 0th position). 
+The <ArrayEntry> specifies the location of the array in which the sensor input should be written (the first index starts at the array[0] position). 
 The <Sensor Name> is the name of the sensor that is written in the simulation output graphs. Using these commands, multiple custom sensors can be added to the interface array. 
-For example, if the local tip acceleration in the x direction of blade 1 should be passed to the controller in the 300th entry of the exchange array, the user can add following line anywhere in the
+For example, if the local tip acceleration in the x direction of blade 1 should be passed to the controller in the 300th entry (at position array[299]) of the exchange array, the user can add following line anywhere in the
 controller parameter file.
 
 [299] "X_l Acc. BLD_1 pos 1.000"

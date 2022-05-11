@@ -30,7 +30,7 @@ As this generates only a drag force, the user is required to enter a numerical v
 
     Creating a circular airfoil section from the Airfoil menu.
 	
-In addition, the entire range of 4-digit NACA profiles:footcite:`Anderson_Book` can be automatically generate in QBlade by selecting the menu option *NACA Airfoil Generator*.
+In addition, the entire range of 4-digit NACA profiles :footcite:`Anderson_Book` can be automatically generate in QBlade by selecting the menu option *NACA Airfoil Generator*.
 The user must then enter the 4-digit code of the desired airfoil profile and the number of panels used to discretise the surface. The result of generating a NACA 4412 profile with 100 panels is shown in :numref:`fig-naca-airfoil`.
 
 .. _fig-naca-airfoil:
@@ -48,7 +48,7 @@ The scaling and orientation of the imported airfoil is described in the followin
 Airfoil Editing Options
 -----------------------
 Whether the airfoil is generated within QBlade or imported, it may be necessary to edit the airfoil coordinates. This can be achieved in QBlade by using the editing options. 
-These can be called either by right-clicking on the airfoil in the foil list or by selecting the option from  the drop-down Airfoil menu. The editing options are as follows:
+These can be called either by right-clicking on the airfoil in the foil list or by selecting the option from  the drop-down *Airfoil* menu. The editing options are as follows:
 
 * **Normalize Airfoil:** The coordinates are scaled proportionally such that the leading edge has position :math:`x=0.0` and the trailing edge has position :math:`x=1.0`.
 * **Duplicate Airfoil:** The panel coordinates are duplicated and an additional airfoil object is created with these coordinates.
@@ -72,7 +72,7 @@ To illustrate two of these features, the NACA 4412 profile generated above has b
     :align: center
     :alt: NACA Airfoil with gap and flap.
 
-    The NACA4412 airfoil generated previously however trasformed to have a trailing edge gap (dashed line) and to have a trailing edge flap (dash-dot line).
+    The NACA4412 airfoil generated previously is transformed to have a trailing edge gap (dashed line) and a trailing edge flap (dash-dot line).
 
 
 .. footbibliography::

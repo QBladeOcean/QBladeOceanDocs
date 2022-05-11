@@ -1,2 +1,2 @@
-GUI and Graphs Functionality
-============================
+GUI and Graph Functionality
+===========================

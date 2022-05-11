@@ -80,18 +80,20 @@ Substructure Definition
 As with the other structural definition files, the substructure is defined by a series of keywords that are recognized by QBlade when creating the turbine. The format is the same as with the other structural file definitions: 
 
  - *<Value>* **<Keyword>**, for parameters defined by a single values.
- - **<Keyword>** <new line> *<Header>* <new line> *<Values>* for parameters defined by a table. 
+ - **<Keyword>** <new line> *<Header>* <new line> *<Values>* for parameters defined by a table. The *<Header>* <new line> part is only optional and can be omitted.
+ 
+A table is identified by its *Keyword* and the row and column count of the subsequent ASCII values, which need to separated by *space(s)* or *tab(s)*.
+An example of a table with two rows and tree columns is shown below.
 
-An example of a parameter that is defined by a table with tree columns is shown below.
-
-=========== ========== ===========
+=========== =========== ===========
 **<Keyword>**
-----------------------------------
-<Header 1>  <Header 2> <Header 3> 
-=========== ========== ===========
-<Value 1>   <Value 2>  <Value 3>
-=========== ========== ===========
-
+-----------------------------------
+<Header 1>  <Header 2>  <Header 3> 
+=========== =========== ===========
+<Value 1,1> <Value 1,2> <Value 1,3>
+----------- ----------- -----------
+<Value 2,1> <Value 2,2> <Value 2,3>
+=========== =========== ===========
 
 There is no particular oder in which these keywords should be placed. The only exception is when defining tables. When a table is defined by a keyword, it should be immediately followed by the 
 table header (optional) and the table content.
@@ -114,14 +116,15 @@ Following keywords can be used to define the substructure.
 General Substructure Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- **ISFLOATING** is a flag that determines if the substructure is floating of bottom-fixed. If the structure is bottom-fixed the joint coordinates (see **SUBJOINTS** below) are assigned in a coordinate system with its origin placed at the mudline. For floaters, the origin is placed at the mean see level (MSL) and marks the floaters's neutral point (NP)
-- **WATERDEPTH** sets the design water depth of substructure.
+- **ISFLOATING** is a flag that determines if the substructure is floating of bottom-fixed. If the structure is bottom-fixed the joint coordinates (see **SUBJOINTS** below) are assigned in a coordinate system with its origin placed at the seabed. For floaters, the origin is placed at the mean see level (MSL) and marks the floaters's neutral point (NP)
+- **WATERDEPTH** sets the design water depth of the substructure, this value is only used for visualization of the turbine and the identification of flooded members. Note that this water depth is only for the turbine setup and is not used for offshore calculations.
 - **WATERDENSITY**: sets the water density to calculate the mass of the flooded members. Note that this water density is only for the turbine setup and is not used for offshore calculations.
 - **STIFFTUNER** is a multiplication factor that affects the stiffness of the flexible elements defined in **SUBELEMENTS**.
-- **MASSTUNER** is a multiplication factor that affects the mass density of the elements defined in **SUBELEMENTS**.
-- **BUOYANCYTUNER** is a multiplication factor that affects the calculation of the buoyancy forces.
-- **ADVANCEDBUOYANCY** is an option to use an advanced discretization technique to calculate buoyancy of partially submerged members, especially useful if non-vertical substructure members are located close to the mean sea level. The value used must be a square integer number.
-- **STATICBUOYANCY** is an optional flag that controls the way the buoyancy is calculated in QBlade. If set to true, it calculates the buoyancy considering only the mean sea level. If set to false (default), the local wave elevation is used to calculate the buoyancy.
+- **MASSTUNER** is a multiplication factor that affects the mass density of ALL elements defined in **SUBELEMENTS**.
+- **BUOYANCYTUNER** is a multiplication factor that affects the calculation of the explicit buoyancy forces. Buoyancy caused by the linear hydrodynamic stiffness matrix is not affected by this factor.
+- **ADVANCEDBUOYANCY** is an option to use an advanced discretization technique to calculate the explicit buoyancy of partially submerged members, especially useful if non-vertical substructure members are located close to the mean sea level. The value used must be a square integer number (a value of 100 is suggested).
+- **STATICBUOYANCY** is an optional flag that controls the way the buoyancy arising from the linear hydrodynamic stiffness matrix is calculated in QBlade. If set to true, the buoyancy (vertical hydrodynamic stiffness along the global z-axis) is considering only the mean sea level. If set to false (default), the local wave elevation, at the **REF_HYDRO_POS**, is used to calculate the buoyancy.
+
 - **TRANSITIONBLOCK** adds a rectangle between the substructure and the tower base. It is used just for visualization purposes.
   
   ========= ========= =========
@@ -138,7 +141,7 @@ General Substructure Parameters
   <Value 1> <Value 2>
   ========= =========  
 
-- **RGBCOLOR** defines the color of the **TRANSITIONBLOCK** or **TRANSITIONCYLINDER**. It is used just for visualization purposes.
+- **RGBCOLOR** defines the color of the complete substructure. It is used just for visualization purposes.
   
   ========= ========= =========
   Red       Green     Blue 
@@ -151,7 +154,7 @@ Substructure Geometry and Elements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - **SUBJOINTS** is a table that is used to place spatial points that help define the members of the substructure. 
-  Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the cartesian coordinates of the joint (in m). The origin is the mudline if **ISFLOATING** is false and the MSL if **ISFLOATING** is true.
+  Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the cartesian coordinates of the joint (in m). The origin is the seabed if **ISFLOATING** is false and the MSL if **ISFLOATING** is true.
   The table is structured as follows:
 
   ======= ========= ========= =========
@@ -162,7 +165,7 @@ Substructure Geometry and Elements
   ...     ...       ...       ...
   ======= ========= ========= ========= 
 
-- **JOINTOFFSET** is a table that can be used to apply a global offset to the positions of **SUBJOINTS**. Note that the offset is only applied to the joints and not the mass and hydro reference points defined in :ref:`StrDef_LPFT`.
+- **JOINTOFFSET** is a table that can be used to apply a global offset to the positions of ALL **SUBJOINTS**. Note that the offset is only applied to the joints and not the mass and hydro reference points defined in :ref:`StrDef_LPFT`.
   The table is structured as follows:
 
   ========= ========= =========
@@ -191,8 +194,7 @@ Substructure Geometry and Elements
 
 - **SUBMEMBERS** is a table that contains the members that make up the turbine substructure. A member is defined between two entries of the **SUBJOINTS** table (defined by their ID nr.) and one entry from either the **SUBELEMENT** or **SUBELEMENTRIGID** tables. 
   Additionally, it can have one Morison force coefficients group defined via the **HYDROMEMBERCOEFF** keyword and a marine growth entry from the **MARINEGROWTH** table. Also, this table allows the member to be flooded via a
-  flooded cross sectional area entry (in m^2). The member can be subdivided into smaller elements for a more accurate structural and hydrodynamic evaluation. This is done in the 'MembDisc' column; it gives the maximum distance between the 
-  discrete subelements of the member (in m). Also, this table has the option to enable the buoyancy forces for the individual members (0 = False, 1 = True). Finally, the member can be optionally named for easier recognition in the output tables.
+  flooded cross sectional area entry (in m^2). The member can be subdivided into smaller elements for a more accurate structural and hydrodynamic evaluation. This is done in the 'MembDisc' column; it gives the maximum allowed length of a  discrete subelement of the member (in m). Also, this table has the option to enable the buoyancy forces for the individual members (0 = False, 1 = True). Finally, the member can be optionally named for easier recognition in the output tables.
   The keyword table has the following format:
 
   ======= ========= ========= ========= ========= ========= ========= ========= ========= ========= ========== 
@@ -230,7 +232,7 @@ Substructure Geometry and Elements
   ======= ========= ========= 
 
 - **TP_INTERFACE_POS** are the (x,y,z) coordinates (in m) of the position of a particular transition piece point in the substructure. It can for example be the point where the substructure is connected to the tower base. For floating substructures it is defined in (x,y,z) [m] from the MSL = (0,0,0). 
-  For bottom fixed substructures, it is defined from the mudline. Note that the inertia and hydrodynamic reference points (**REF_COG_POS** and **REF_HYDRO_POS**) are always constrained to this point (see :ref:`StrDef_LPFT`). There can be several transition piece points. Further points are then defined
+  For bottom fixed substructures, it is defined from the seabed. Note that the inertia and hydrodynamic reference points (**REF_COG_POS** and **REF_HYDRO_POS**) are always constrained to this point (see :ref:`StrDef_LPFT`). There can be several transition piece points. Further points are then defined
   by additional keywords where an underscore and a number is added to the keyword (e.g. **TP_INTERFACE_POS_2**). This allows the user to define additional inertia and hydrodynamic reference points (see :ref:`StrDef_LPFT`). All transition piece points have to be constrained to a least one joint of the substructure via the **SUBCONSTRAINTS** table.  
   The structure of the table is:
 
@@ -239,6 +241,17 @@ Substructure Geometry and Elements
   ========= ========= =========  
   <Value 1> <Value 2> <Value 3>
   ========= ========= ========= 
+
+- **TP_ORIENTATION** defines the orientation of the tower base or RNA coordinate system which is connected to the **TP_INTERFACE_POS** by defining its :math:`X_t`- and :math:`Y_t`-Axis in the global coordinate system. 
+  If **TP_ORIENTATION** is not specified the default values are :math:`X_t=(1,0,0)` and :math:`Y_t=(0,1,0)`, so the tower base coordinate system is aligned with the global coordinate system. The :math:`Z_t`-Axis is evaluated from the cross-product of :math:`X_t` and :math:`Y_t`.
+
+  =============== =============== ===============
+  XGlobal         YGlobal         ZGlobal
+  =============== =============== ===============  
+  :math:`X_{t1}`  :math:`X_{t2}`  :math:`X_{t3}`
+  --------------- --------------- ---------------
+  :math:`Y_{t1}`  :math:`Y_{t2}`  :math:`Y_{t3}`
+  =============== =============== ===============
 
 Morison Equation-Related Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -293,7 +306,7 @@ As explained above, the inertia and hydrodynamic reference points are always con
 
 
 It should be noted that QBlade supports multiple linear potential flow bodies as part of a substructure definition.
-In order to include multiple bodies, each body has to have its own set of keywords. The required keywords lie between the entries **REF_COG_POS** and **POT_EXC_FILE**. With the exception of the
+In order to include multiple bodies, each body has to have its own set of keywords. The required keywords lie between the entries **REF_COG_POS** and **POT_EXC_FILE** that are listed in the following. With the exception of the
 first body, additional bodies are defined by adding an underscore and a number after the keyword. So, for example, if a substructure has two bodies that use the linear potential flow theory,
 the second body would be defined by adding a second transition piece point **TP_INTERFACE_POS_2**  with its corresponding inertia point denoted as **REF_COG_POS_2**, a mass matrix denoted as **SUB_MASS_2** and so on. 
 
@@ -360,7 +373,7 @@ the second body would be defined by adding a second transition piece point **TP_
 - **SUB_HYDROADDEDMASS** defines a complete 6 by 6 added mass matrix that is evaluated in the location defined by the **REF_HYDRO_POS** keyword.
   The units are kg. This matrix has the same form as the **SUB_HYDROSTIFFNESS** matrix.
 
-- **SUB_CONSTFORCE** applies a constant force (and/or torque) to the **REF_HYDRO_POS** point. It can be used to e.g. model linear buoyancy forces.
+- **SUB_CONSTFORCE** applies a constant force (and/or torque) to the **REF_HYDRO_POS** point. It can be used to e.g. model the constant buoyancy force acting on the floater in its equilibrium position.
   The units are N or Nm, depending on the entry.
   
   ============== ============== ============== ============== ============== ==============
@@ -372,6 +385,12 @@ the second body would be defined by adding a second transition piece point **TP_
 
 - **POT_EXC_FILE** defines the file where the excitation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file.
   QBlade currently supports excitation files in the WAMIT, NEMOH and BEMUse formats.
+  
+- **POT_DIFF_FILE** defines the file where the second-order difference-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file. 
+  QBlade currently supports difference-frequency files only in the WAMIT format.
+
+- **POT_SUM_FILE** defines the file where the second-order sum-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file. 
+  QBlade currently supports sum-frequency files only in the WAMIT format.
 
 - **USE_RADIATION** is a flag that enables the calculation of the radiation loads on all potential flow bodies.
 - **DELTA_FREQ_RAD** is the discretization of the frequencies used for the calculation of the radiation forces (in Hz).
@@ -380,6 +399,10 @@ the second body would be defined by adding a second transition piece point **TP_
 - **DELTA_FREQ_DIFF** is the discretization of the frequencies used for the calculation of the excitation forces (in Hz).
 - **DELTA_DIR_DIFF** is the discretization of the directions used for the calculation of multi-directional excitation forces (in rad).
 - **TRUNC_TIME_DIFF** is the truncation time for the wave excitation kernel calculations (in s). 
+- **USE_DIFF_FREQS** is a flag that enables the calculation (full field QTF) of the difference-frequency loads on all potential flow bodies.
+- **USE_NEWMAN** is a flag that enables the (computationally efficient) Newman approximation for the evaluation of difference-frequency wave forces
+- **USE_MEANDRIFT** is a flag that, when activated, applies the mean drift forces
+- **USE_SUM_FREQS** is a flag that enables the (full field QTF) calculation of the sum-frequency loads on all potential flow bodies.
 
 
 .. _StrDef_Mooring:
@@ -394,23 +417,23 @@ It can be either a rigid connection or a connection via a system of non-linear s
 - **MOORELEMENTS** is a table that contains the structural parameters of the flexible cable elements of the substructure such as mooring lines. Each row defines one set of parameters and has 7 values. These are the mooring element ID number, the mass density (in kg/m^3), the cross sectional area used for structural calculations (in m^2),
   the second moment of area (in m^4), Young's modulus if the cable element (in N/m^2), the Rayleigh damping and the effective diameter of the cable used for hydrodynamic calculations.
 
-  ======= ========= ========= ============= ============ ========= =========
-  MoorID  Mass dens Area      2nd Mom. Area Young's Mod. R. Damp.  Diameter 
-  ======= ========= ========= ============= ============ ========= =========   
-  1       <Value 1> <Value 2> <Value 3>     <Value 4>    <Value 5> <Value 6>
-  ------- --------- --------- ------------- ------------ --------- ---------
-  ...     ...       ...       ...           ...          ...       ...       
-  ======= ========= ========= ============= ============ ========= =========  
+  ============= ============= ============= ============= ============= ============= =============
+  MoorID        Mass dens     Area          2nd Mom. Area Young's Mod.  Rayl. Damp.   Diameter 
+  ============= ============= ============= ============= ============= ============= =============   
+  1             <Value 1>     <Value 2>     <Value 3>     <Value 4>     <Value 5>     <Value 6>
+  ------------- ------------- ------------- ------------- ------------- ------------- -------------
+  ...           ...           ...           ...           ...           ...           ...       
+  ============= ============= ============= ============= ============= ============= ============= 
 
 - **MOORMEMBERS** is a table that contains the information of the cable members (such as the mooring lines). Each row defines one cable member and has 10 entries. The first entry is the ID number of the cable member.
   The next two entries are the connection points of the cable member. There are several ways of defining the connection points. These are:
   
-  - With the keyword **JNT_<Nr>**, where <Nr> represents the number of the joint. This way, the cable is connected directly to a existing joint.
-  - With the keyword **FLT_<XPos>_<YPos>_<ZPos>**, where <XPos>_<YPos>_<ZPos> represent the (x,y,z) coordinates of the connection point (in m). Here, QBlade creates a constraint between this point and the floater to attach the cable.
-  - With the keyword **GRD_<XPos>_<YPos>**, where <XPos>_<YPos> represent the (x,y) coordinates of the anchor point (in m).
+  - With the keyword **JNT_<ID>**, where <ID> represents the ID of the joint. This way, the cable is connected directly to a existing joint.
+  - With the keyword **FLT_<XPos>_<YPos>_<ZPos>**, where <XPos>_<YPos>_<ZPos> represent the global (x,y,z) coordinates of the connection point (in m). Here, QBlade creates a constraint between this point and the floater to attach the cable.
+  - With the keyword **GRD_<XPos>_<YPos>**, where <XPos>_<YPos> represent the global (x,y) (in m) coordinates of an anchor point which is located at the z-position of the seabed.
   
   The fourth entry is the length of the cable (in m). The fifth entry is the ID number of the cable element defined in **MOORELEMENTS**. The sixth entry is the ID number of the hydrodynamic coefficient group defined in **HYDROMEMBERCOEFF**.
-  The seventh entry specifies if the cable is buoyant (= 1) or not (= 0). The eighth entry specifies the ID number of the marine growth element used for this cable (see **MARINEGROWTH**). The ninth entry is the number of discretization elements used 
+  The seventh entry specifies if the cable is buoyant (= 1) or not (= 0). The eighth entry specifies the ID number of the marine growth element used for this cable (see **MARINEGROWTH**). The ninth entry is the number of discretization nodes used 
   to discretize the cable and the tenth entry is the name of the cable element.
 
   ======= ========= ========= ========= ========= ========= ========= ========= ========= =========  
@@ -454,3 +477,4 @@ The logic of defining an ouput is as follows:
 - **SUB_<MemID>_<RelPos>** is the keyword used for setting an output of the submember with the ID number = <MemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Joint1ID) to 1 (= the postion of Joint2ID).
 - **MOO_<MMemID>_<RelPos>** is the keyword used for setting an output of the cable member with the ID number = <MMemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Conn1) to 1 (= the postion of Conn2).
   
+.. footbibliography::
