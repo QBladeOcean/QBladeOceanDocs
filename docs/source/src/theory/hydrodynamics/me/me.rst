@@ -106,7 +106,7 @@ formulation.
 
 .. _ME_modeling-considerations:
 
-Modeling Considerations for Morsion Elements
+Modeling Considerations for Morison Elements
 --------------------------------------------
 In QBlade, each cylindrical element can be divided into sub-elements to each of which the Morison forces are evaluated and applied at each time step. 
 Setting the hydrodynamic coefficients to 0 effectively disables their contribution in the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only. 
