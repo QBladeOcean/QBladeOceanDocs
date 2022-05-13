@@ -74,5 +74,8 @@ To illustrate two of these features, the NACA 4412 profile generated above has b
 
     The NACA4412 airfoil generated previously is transformed to have a trailing edge gap (dashed line) and a trailing edge flap (dash-dot line).
 
+Exporting Airfoil
+-----------------
+All airfoils generated within the airfoil creation module can be exported as a ``.dat`` file simply be selecting the *Export Current Airfoil* option from the *Airfoil* dropdown menu shown in :numref:`fig-circ-airfoil`.
 
 .. footbibliography::
