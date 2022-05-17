@@ -45,8 +45,7 @@ The generated extrapolation is visualised in the graph section to allow for opti
 The following parameters can be tuned to improve the behaviour of the polar:
 
 
-* **Range of original polar:** This determine which :math:`\alpha` range of the 
-polar is used for the interpolation.
+* **Range of original polar:** This determine which :math:`\alpha` range of the polar is used for the interpolation.
 * **CD90:** Specifies the value of the drag coefficient at :math:`\alpha = 90^\text{o}`. This also influences the lift coefficient behaviour.
 * **St+, St-:** These specify the positive and negative stall :math:`\alpha` for the airfoil, respectively.
 
