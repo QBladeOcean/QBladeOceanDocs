@@ -17,11 +17,11 @@ This is possible within QBlade using the polar extrapolation module. The module 
 
     The polar extrapolation module is represented by the 360 :math:`^\text{o}` symbol in the QBlade main tool bar. 
 	
-A range of options for generating or defining 360° polars are available in the polar extrapolation module. These are described in the following sections.
+A range of options for generating or defining 360 :math:`^\text{o}` polars are available in the polar extrapolation module. These are described in the following sections.
 
 Import and Export of Polars
 ---------------------------
-Much as is the case with polars, a range of import and export options exist so that external sources and files may be used to define 360° polars within QBlade. 
+Much as is the case with polars, a range of import and export options exist so that external sources and files may be used to define 360 :math:`^\text{o}` polars within QBlade. 
 This is achieved by selecting the *360 Polar* dropdown menu, as illustrated in :numref:`fig-extrap-dropdown`. 
 
 * **Plain text format:** These include either AeroDyn V13 files or XFoil formats (see :doc:`../airfoil/airfoil`)
@@ -36,7 +36,7 @@ This is achieved by selecting the *360 Polar* dropdown menu, as illustrated in :
     :scale: 75%
     :alt: Polar import options in QBlade.
 
-    A range of 360° polar import options are available in QBlade.
+    A range of 360 :math:`^\text{o}` polar import options are available in QBlade.
 	
 Viterna Extrapolation
 ---------------------
