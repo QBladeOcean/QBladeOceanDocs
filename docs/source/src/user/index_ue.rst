@@ -59,6 +59,8 @@ Generate Wind Fields
 ********************
 .. toctree::
    :maxdepth: 1
+   
+   windfield/windfield
 
 Define Wind Turbines
 ********************
@@ -68,9 +70,10 @@ Define Wind Turbines
    turbine/controller
    turbine/structure
    
-
 Define a Complete Turbine Simulation
 ************************************
 .. toctree::
    :maxdepth: 1
+   
+   simulation/simulation
 
