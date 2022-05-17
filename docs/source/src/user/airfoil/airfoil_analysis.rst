@@ -7,12 +7,13 @@ This is accomplished within the airfoil creation module. This module is shown in
 .. _fig-analysis-module:
 .. figure:: analysis_module.png
     :align: center
+    :scale: 80%
     :alt: Airfoil analysis module in QBlade.
 
     The airfoil analysis module is represented by the dynamic foil symbol in the QBlade main tool bar. 
 	
 The aerodynamic models within QBlade calculate local aerodynamic properties using airfoil look-up tables. 
-These tables store the relevant aerodynamic quantities such as airfoil lift :math:`C_l`, drag :math:`C_d` and moment :math:`C_m` coefficients as a function of angle of attack :math:`\alpha`.
+These tables store the relevant aerodynamic quantities such as airfoil lift, drag and moment coefficients as a function of angle of attack :math:`\alpha`.
 There are two ways to generate these tables in QBlade. These two options are described below.
 
 In general the method used to generate the airfoil polars, whether experimental or numerical, only delivers reliable or repeatable values within a certain :math:`\alpha` range.
@@ -28,6 +29,7 @@ An XFoil analysis can be carried out by generating a polar definition by selecti
 .. _fig-xfoil-createpolar:
 .. figure:: create_xfoilpolar.png
     :align: center
+    :scale: 80%
     :alt: Create XFoil Polar
 
     The XFoil polar creation dialogue.
@@ -53,6 +55,7 @@ To streamline this process, QBlade features an XFoil batch option. The creation 
 .. _fig-xfoil-batch:
 .. figure:: create_xfoilbatch.png
     :align: center
+    :scale: 75%
     :alt: Create XFoil batch analysis
 
     The XFoil batch creation dialogue.
