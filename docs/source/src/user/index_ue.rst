@@ -54,6 +54,8 @@ Generate Wave Fields
 .. toctree::
    :maxdepth: 1
 
+   wavefield/wavefield
+
 
 Generate Wind Fields
 ********************

@@ -1,5 +1,5 @@
-Creating Wind Fields
-====================
+Wind Field Creation Module
+==========================
 
 If an unsteady simulation is being carried out, it is necessary to define the wind field.
 This provides important information for the calculation of aerodynamic quantities. 
