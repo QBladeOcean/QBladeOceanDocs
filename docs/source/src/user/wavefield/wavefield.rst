@@ -46,8 +46,7 @@ with the remaining available inputs. Additionally to the wave train characteriza
     :scale: 70%
     :alt: Iregular wave creation dialogue in QBlade.
 
-    Definition of a irregular wave field
-    in the Ocean Wave Generator.
+    Definition of a irregular wave field in the Ocean Wave Generator.
 
 Main Parameters
 
