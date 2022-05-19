@@ -40,7 +40,7 @@ Irregular Wave Field
 To generate an irregular wave field, the wave type *Spectrum* has to be chosen. The user is now given the option to characterize the wave field
 with the remaining available inputs. Additionally to the wave train characterization discussed above, spectra discretization options can be selected.
 
-.. _fig-irregwave:
+.. _fig-irregwave_user:
 .. figure:: irregwave_dialogue.png
     :align: center
     :scale: 70%
