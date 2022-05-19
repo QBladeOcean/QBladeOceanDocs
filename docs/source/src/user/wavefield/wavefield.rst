@@ -85,6 +85,11 @@ Visualization
 After a wave field has been created, visual and quantative evaluation can be carried out in the *3D* View or *Graph View* display window. A time resolved animation of
 the wave field can be carried out in the *Time control* box.
 
+Import and Export Functionality
+-------------------------------
+QBlade allows to imopt and export wave fields either in the four column format descirbed in :ref:`Prescribed Wave Field` or in a ``.Iwa`` format. This functionality
+can be found in the menu toolbar below the *Wave* tab.
+
 .. _fig-vis:
 .. figure:: demo_wavefield.png
     :align: center
