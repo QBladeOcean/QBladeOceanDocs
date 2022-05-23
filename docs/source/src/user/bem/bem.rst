@@ -1,24 +1,91 @@
 Steady BEM Analysis
 ===================
-The *Steady BEM Analysis* tool allows to run simulations with very little usage of computational ressources with short simulation times and provides generally accurate
+The *Steady BEM Analysis* tool allows to run simulations with very little usage of computational ressources, short run times and generally accurate
 preamptive results with regard to rotor perfomance. The module is very useful to e.g., perform a first evaulation of a blade design, to get a fast estimate on annual energy production (AEP) or
-to identify the controll strategies through parameter studies. This section gives insight into the three submodules *Rotor BEM*, *Characteristic BEM* and *Turbine BEM*.
+to identify the control strategies through parameter studies. This section gives insight into the three submodules *Rotor BEM*, *Characteristic BEM* and *Turbine BEM*.
 
 Rotor BEM
 ---------
-In the rotor simulation submodule, the user can commit rotor blade simulations over a range of tip speed ratios (TSRs). A rotor simulation can only be defined when at
-least one rotor blade is present in the database (see :ref:`Blade Design Module`. When defining a rotor simulation in the *Analysis Settings* box, the user has to select the desired corrections to
-the BEM algorithm and the simulation parameters. Once a simulation is defined, the user can select a range of l-values (tipspeed ratios), and the incremental step
-for the simulation. A rotor simulation is always carried out dimensionless. The freestream velocity is assumed to be unity and the rotor radius is normalized for
-the computation. This implies, that no power curve or load curves, like the bending moment, can be computed during a rotor simulation.
+In the 'Rotor Simulation* submodule, the user can commit rotor blade simulations over a range of tip speed ratios (TSRs). A rotor simulation can only be defined when at
+least one rotor blade is present in the database (see :ref:`Blade Design Module`). When defining a rotor simulation in the *Analysis Settings* box, the user has to select the desired corrections (:ref:`Corrections`) to
+the BEM algorithm and the simulation parameters. Once a simulation is defined, the user can select a range of  TSRs, and the incremental step
+for the simulation. 
 
-.. _fig-def_roto_bem:
+A rotor simulation is always carried out dimensionless. The freestream velocity is assumed to be unifrom and the rotor radius is normalized for
+the computation. This implies, that no power curve or load curves, like the bending moment, can be computed during a rotor simulation (see :footcite:t:`QBlade06`).
+
+.. _fig-rotor_bem:
 .. figure:: define_rotor_params.png
     :align: center
     :scale: 70%
     :alt: Rotor BEM definition dialogue
 
     Definition of a Rotor BEM simulaton.
+
+Characteristic BEM
+------------------
+
+In the *Characteristic BEM* submodule simulations can be carried out over a specified range of windspeeds, rotational speeds and pitch angles. By right clicking on a graph the user can specify the main variable and 
+a parameter for each individual graph. For the currently selected main variable and parameter, the resulting series of curves is displayed in each graph. When the selected windspeed, rotational speed or pitch angle is changed in the top toolbar, the series of curves is changed accordingly. This submodule is of great help when designing custom control strategies for variable rotational
+speed and/or pitch controlled wind turbine rotors (see :footcite:t:`QBlade06`).
+
+.. _fig-def_char_bem:
+.. figure:: char_BEM.png
+    :align: center
+    :scale: 30%
+    :alt: Characteristic BEM demonstration
+
+    Result of a characteristic BEM simulation. The :math:`C_p` coefficent is plotted over :math:`rpm`, showing multiple wind speed (selected Parameter) curves for a constant pitch angle.
+    
+Turbine BEM
+-----------
+In the *Turbine BEM* submodule, the user can simulated steady state BEM simulations. To define a wind turbine, a rotor blade must be present in the runtime database. In preparation for the simulations, a turbine has 
+to be set up. Thereby, the turbine type and the turbine parameters have to be specified. The turbine type is defined by:
+
+* **Power Regulation**:
+
+    * None (stall): A stall regulated turbine has no pitch control and the power output is limited solely when stall occurs at the rotor. Designing a stall turbine that limits its power to the desired output and at the desired windspeed requires an iterative approach.
+    
+    * Pitch limited: Requires the user to specify a nominal power output. When the windspeed that yields the nominal power output is reached, the blades are pitched to reduce the power for higher windspeeds to the nominal output.
+    
+    * Prescribed: Allows to set the pitch to an arbitrary value defined in an ``.txt`` file. This option is useful to match a certain control behaviour or for code-to-code comparisons.
+    
+* **Transmission**:
+
+    * Single: One stationary rotational speed in which the turbine operates over the whole range of windspeeds.
+    
+    * 2-step: Two rotational speeds and a windspeed at which the transmission switches have to be selected.
+    
+    * Optimal: A minimum and a maximum value for the rotational speed has to be selected. Additionally, the user selects a desired tipspeed ratio from which a rotational speed is computed for every given wind speed during the simulation.
+    
+    * Prescribed: Allows to set the rpm to an arbitrary value defined in an ``.txt`` file. This option is useful to match a certain control behaviour or for code-to-code comparisons.
+
+Further parameters that need to be selected by the user are shown in :numref:`fig-turbSpec`. At ``V cut In``, the turbine starts and at ``V Cut Out`` the turbine stops operation. 
+To account for power losses that are not of aerodynamical nature but are caused by the efficiency of the generator and the gearbox, a value for fixed losses and a value for variable losses can be selected. 
+The equation in which these losses are implemented is:
+
+.. math::
+   \begin{align}
+   P_{out} = (1-k_v)P_0-P_{fixed},
+   \end{align}
+
+where, :math:`k_v` is the variable ``Loss Factor`` and :math:`P_{fixed}` the ``Fixed Losses``. Finally, a previously defined turbine blade has to be selected (see :footcite:t:`QBlade06`).
+
+.. _fig-turbSpec:
+.. figure:: turbine_specification.png
+    :align: center
+    :scale: 70%
+    :alt: Turbine specifications Turbine BEM
+    
+    Turbine specification dialogue.
+    
+After the turbine has been added to the runtime database, the BEM simulation can be executed identically to the :ref:`Rotor BEM` described above.
+The simulation is carried out over the specified range of windspeeds with the selected incremental step size. 
+
+Annual Energy Production Calculation
+------------------------------------
+If a turbine simulation has been conducted, the user may calculate the annual yield of the turbine. Therefore, the the annual windspeed distribution 
+can be detailed in the Weibull Settings via the WEIBULL distribution parameters k and A (see :footcite:t:`QBlade06`).
 
 ..
     Corrections
