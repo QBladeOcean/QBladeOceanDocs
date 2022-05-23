@@ -48,6 +48,7 @@ Perform Steady Blade Element Momentum Simulations
 .. toctree::
    :maxdepth: 1
 
+   bem/bem
 
 Generate Wave Fields
 ********************
