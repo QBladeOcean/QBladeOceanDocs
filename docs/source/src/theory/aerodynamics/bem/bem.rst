@@ -35,6 +35,7 @@ The rotor performance coefficients for power and thrust may also be expressed as
 
 .. figure:: MT.png
    :scale: 75 %
+   :align: center
    :alt: MT_1D
 
    1D momentum theory, pressure and velocity evolution.
@@ -43,25 +44,26 @@ The rotor performance coefficients for power and thrust may also be expressed as
 Blade Element Theory
 --------------------
 The blade element theory (BET) allows to compute the loads acting on a rotor based on the geometric and aerodynamic properties of individual blade sections at a certain
-radius of the blade. Thereby, a blade is devided into a discrete number of radially distributed sections. The loads on a singular section may be determined
+radius of the blade. Thereby, a blade is divided into a discrete number of radially distributed sections. The loads on a singular section may be determined
 individually below the assumption that flow only has a component in chordwise direction and that the aerodynamic characteristics of 2-dimensional lift, drag and moment coefficients are applicable.
 
 .. figure:: 2d_af.png
    :scale: 60 %
+   :align: center
    :alt: Forces on a 2D airfoil
 
    2D forces on an airfoil.
 
 Classical Blade Element Momentum Theory
 ----------------------------------------
-The blade element momentum theory interlinks the 1D momentum theory with the blade element momentum theory. For pracitcal reasons, the stream tube theory is
+The blade element momentum theory interlinks the 1D momentum theory with the blade element momentum theory. For practical reasons, the stream tube theory is
 applied to radially distributed annular rings that match the discretization of the blade elements. Since both theories allow to express
 the rotor loads (power and thrust) within an annular segment in dependence of the induction factors :math:`a` and :math:`a'`, a system of equations can be iterated with
-the induction factors serving as the iterative quantities until a covergence threshold is reached.
+the induction factors serving as the iterative quantities until a convergence threshold is reached.
 
 Corrections
 -----------
-Due to the two dimensional nature of the BEM theory, three dimensional effects, can not be accounted for by the classical BEM. This leads to large deviations of
+Due to the two-dimensional nature of the BEM theory, three dimensional effects, cannot be accounted for by the classical BEM. This leads to large deviations of
 the computed data compared with measured turbine data, especially under the influence of stall. Additionally, the assumption of the actuator disk (infitnite blade number) eradicates
 the tip loss in theory. To improve the accuracy of the BEM results, two correctional methods are implemented into QBlade:
 
@@ -72,10 +74,10 @@ the tip loss in theory. To improve the accuracy of the BEM results, two correcti
 
 Unsteady Blade Element Momentum Theory
 ---------------------------------------
-The classical BEM theory provides good estimates of the annual energy production but is incapable of taking unsteady phenomena like the atmospheric boundary layer, turbulence or the tower influecne into account. These unsteady phenomena make the position of each blade at a certain time necessary. Hence, non-rotating coordinate systems are placed at the bottom of the tower and the nacelle.
-Furthermore, a coordinate system is attached to the rotating shaft and each blade. The instantenouse velocity seen by each blade can now be determined and be accounted for in the calculation of
+The classical BEM theory provides good estimates of the annual energy production but is incapable of taking unsteady phenomena like the atmospheric boundary layer, turbulence or the tower influence into account. These unsteady phenomena make the position of each blade at a certain time necessary. Hence, non-rotating coordinate systems are placed at the bottom of the tower and the nacelle.
+Furthermore, a coordinate system is attached to the rotating shaft and each blade. The instantaneous velocity seen by each blade can now be determined and be accounted for in the calculation of
 the flow angle (:footcite:t:`Tavares2013`).
-Since the clasical BEM is only valid for an equilibrium state and provides induced velocities corresopnding to this specific state, a dynamic inflow model is used to introduce a lag with which the
+Since the clasical BEM is only valid for an equilibrium state and provides induced velocities corresponding to this specific state, a dynamic inflow model is used to introduce a lag with which the
 wake settles to a new equilibrium state (see :footcite:t:`Glauert1935` or :footcite:t:`Henriksen2012`).
 
 Polar Grid
@@ -86,9 +88,10 @@ velocity of the neighboring two blades and weighted by their azimuthal distance 
 
 .. figure:: polargrid.png
    :scale: 60 %
+   :align: center
    :alt: Polar grid
 
-   Classical BEM appraoch (left) and polar grid with aziumthal sub elements (right), taken from :footcite:t:`Madsen2020`)
+   Classical BEM approach (left) and polar grid with azimuthal sub elements (right), taken from :footcite:t:`Madsen2020`)
 
 
 
