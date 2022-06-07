@@ -4,6 +4,11 @@ Validation Cases and Examples
 Aerodynamic Validation Tests
 *****************************
 
+.. toctree::
+   :maxdepth: 1
+
+   aerodynamics/dynamic_stall
+
 Structural Dynamics Validation Tests
 *************************************
 
