@@ -45,10 +45,11 @@ The integrated potential flow approach also includes the higher order slow drift
 
 .. toctree::
    :maxdepth: 4
-   :caption: Documentation
+   :caption: QBlade Docs
 
    src/theory/index_th
    src/user/index_ue
    src/validation/index_val
+   src/license/index_license
 
 .. footbibliography::

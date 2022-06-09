@@ -27,7 +27,8 @@ Structural Dynamics
    :maxdepth: 1
 
    structure/chrono/chrono
-   coupling/coupling
+   structure/coupling/coupling
+   structure/table/table
    
 Environmental Conditions
 ************************
