@@ -20,12 +20,24 @@ In QBlade's implementation of the structural model the complete turbine structur
 .. _fig-structural_model:
 .. figure:: structural_model.png
    :align: center
-   :alt: Forces on a 2D airfoil
+   :alt: Visualization of the co-rotational beam approach
 
    Visualization of the co-rotational beam approach.
 
 After the bodies have been created they are assembled using joints or constraints (see :numref:`fig-structural_model`). The tower is fixed to the ground by constraining all six DoF of the bottom tower node. A spring and damper may be defined at the ground to include foundation and soil dynamics. Using a revolute constraint, a free yaw node is connected to the tower top. Another revolute constraint then connects the hub node to the yaw node. Lastly, the blades are fixed around the hub node with revolute constraints, allowing them to rotate around the pitch axis. After the assembly of the bodies is completed, actuators are added to the revolute constraints. These actuators are used to yaw or pitch the turbine, based on controller signals and to model the generator. Actuators are implemented as engine type constraints. At these engine type constraints either a rotational angle, a rotational speed or a torque can be applied. This functionality is used to prescribe pitch angles at the pitch constraints, yaw angles at the yaw constraint and the generator torque at the shaft constraint. Furthermore, if no controller is used within a simulation, a constant rotational speed is prescribed to the main shaft to operate the turbine at a constant rotational speed.
 
+Time Integrators and Solver for the Structural Dynamics Simulation
+------------------------------------------------------------------
+Various factors influence the overall contribution of the structural model to the total computational cost of an aeroelastic simulation. The size of the problem matrix is proportional to the number of degrees of freedom that the system contains. Each main component (blades, struts, tower) of the assembled turbine can be discretized with an arbitrary number of structural nodes, where each node adds 6 degrees of freedom to the system matrix. Clearly, the total contribution of the structural model evaluations to the overall computational cost scales with the time step size of the structural evaluations. Due to the loose coupling method that is being employed in QBlade the time step size can be set independently of that of the aerodynamic calculations. 
 
+.. _fig-startup:
+.. figure:: startup.png
+   :scale: 40
+   :align: center
+   :alt: Large blade deformations caused by inertial forces during rotor ramp-up
+
+   Large blade deformations caused by inertial forces during rotor ramp-up.
+
+In the Chrono library the multi-body FEA problem is formulated as a *Differential Variational Inequality* (DVI) problem. At each time step of the structural simulation the DVI problem is solved using the EIGEN SparseLU solver, which is included in the EIGEN C++ template library :footcite:t:`eigen`. The structural simulation is then advanced using a time integrator of choice. Several different time integrators :footcite:t:`Tasora2017` are available in Chrono, however only the iterative HHT (*Hilber-Hughes-Taylor formulation*) has proven its usability within the current integration of Chrono in QBlade. While other, non-iterative, integrators suffer from constraint drifts or require very small timesteps to yield reasonable results the HHT integrator shows good performance for structural time steps in the range of up to 5 degree azimuthal rotor increments.
 
 .. footbibliography::
