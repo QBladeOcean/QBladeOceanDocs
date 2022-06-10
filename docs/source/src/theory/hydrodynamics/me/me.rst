@@ -1,6 +1,6 @@
 Morison Equation
 ================
-QBlade also offers the possibility to model hydrodynamic loads on slender cylindrical bodies via the Morison equation.
+QBlade also offers the possibility to model hydrodynamic loads on slender cylindrical bodies with a full Morison equation approach.
 This is especially useful for calculating distributed hydrodynamic loads on the members and allow substructure flexibility.
 QBlade considers two types of Morison forces on cylindrical elements: normal forces that act at the center of the element and axial forces that
 act at the ends of the element.
@@ -20,7 +20,7 @@ In this equation,
 - :math:`F_M^n` is the normal Morison force,
 - :math:`\rho` is the water density,
 - :math:`D` and :math:`L` are the diameter and length of the cylinder element, respectively,
-- :math:`R_{MG}` is the marine growth tickness,
+- :math:`R_{MG}` is the marine growth thickness,
 - :math:`C_a^n` is the normal added mass coefficient,
 - :math:`C_p^n` is the normal dynamic pressure coefficient,
 - :math:`C_d^n` is the normal drag coefficient,
@@ -28,7 +28,7 @@ In this equation,
 - :math:`\dot{X}^n` is the resulting normal velocity of the center of the cylinder element.
 
 The structural model of QBlade naturally handles the vector direction of the local normal force components depending on the element location and orientation (see :doc:`../../structure/chrono/chrono`). 
-The normal force is assumed to be constant over the submerged part of the cylinder, and only integrated along the submerged length. 
+The normal force is assumed to be constant over the submerged part of the cylinder and is integrated along the submerged length. 
 For this evaluation the local instantaneous wave elevation is obtained at every timestep to calculate the current submerged fraction of the cylinder. 
 It is recommended to subdivide cylindrical elements that are close to the water surface into smaller sub-elements to increase the model accuracy (see :ref:`ME_modeling-considerations`)
 
@@ -48,7 +48,7 @@ In this equation,
 - :math:`F_M^{ax}` is the axial Morison force,
 - :math:`\rho` is the water density,
 - :math:`D` and :math:`L` are the diameter and length of the cylinder element respectively,
-- :math:`R_{MG}` is the marine growth tickness,
+- :math:`R_{MG}` is the marine growth thickness,
 - :math:`C_a^{ax}` is the axial added mass coefficient,
 - :math:`C_p^{ax}` is the axial dynamic pressure coefficient,
 - :math:`C_d^{ax}` is the axial drag coefficient, along the ith axis,
@@ -81,12 +81,12 @@ McCamy-Fuchs Correction
 -----------------------
 For cylindrical elements that have a diameter to wavelength ratio larger than
 0.2, the diffraction forces become relevant and the pure Morison equation is no longer accurate, see :footcite:t:`Faltinsen1993`. The
-diffraction effects can be accounted for with the ME formulation by introducing the MacCamy-Fuchs
+diffraction effects can be accounted for with the Morison equation formulation by introducing the MacCamy-Fuchs
 Correction (MCFC). The original MCFC is formulated in terms of the normal force per unit length on the
-cylinder. It can be recast so that the inertia part of the Morison equation is affected, see :footcite:t:`IEC61400-3-1` for reference. Following an
-approach presented in :footcite:t:`USFOS`, QBlade changes the local water particle acceleration's magnitude and phase that
+cylinder. It can be recast so that the inertia part of the Morison equation is affected, see the IEC standard :footcite:`IEC61400-3-1` for reference. Following an
+approach presented in the USFOS reality engineering guide :footcite:`USFOS`, QBlade changes the local water particle acceleration's magnitude and phase to
 affect the Morison element. The original modifications include the calculation of Bessel functions. To
-speed up calculations, an approximation based on easier functions proposed in :footcite:t:`USFOS` is used for the
+speed up calculations, an more efficiently calculable approximation proposed in :footcite:t:`USFOS` is used for the
 modification of the particle acceleration's magnitude and phase. The equivalent particle acceleration
 amplitude is given by:
 
@@ -101,18 +101,18 @@ The phase shift of the acceleration is given by:
 
 Since it affects the incoming water particle acceleration and phase, this implementation of the MCFC can
 be easily extended to irregular wave spectra. In this case, the correction is done on each wave train that
-makes up the wave spectrum and avoids using frequency dependent added mass coefficients in the ME
+makes up the wave spectrum and avoids using frequency dependent added mass coefficients in the Morison equation
 formulation.
 
 .. _ME_modeling-considerations:
 
 Modeling Considerations for Morison Elements
 --------------------------------------------
-In QBlade, each cylindrical element can be divided into sub-elements to each of which the Morison forces are evaluated and applied at each time step. 
+In QBlade, each cylindrical element can be divided into sub-elements. Morison forces acting on these elements are evaluated and applied at each time step. 
 Setting the hydrodynamic coefficients to 0 effectively disables their contribution in the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only. 
 To determine if a sub-element is partially or fully submerged, the wave elevation is required. 
 Wave kinematics are also required to calculate :math:`u` and :math:`\dot{u}` in the equations above. There are three possibilities in QBlade to do this. 
-These options are presented in the following figure.
+These options are presented in :numref:`fig-me-kin-opt`.
 
 .. _fig-me-kin-opt:
 .. figure:: me_considerations.PNG
@@ -121,10 +121,10 @@ These options are presented in the following figure.
 
     Options in QBlade to consider the wave elevation and kinematics. (a) local instantaneous values; (b) values at the initial undisplaced position; (c) values at a low-passed position of the element.
 
-The first option shown in :numref:`fig-me-kin-opt` (a) is the wave kinematics and elevation in the local instantaneous position of the cylinder. In this example, the cylinder has been divided into four
+The first option shown in :numref:`fig-me-kin-opt` (a) is the wave kinematics and elevation at the local instantaneous position of the cylinder. In this example, the cylinder has been divided into four
 sub-elements. The lower two are fully submerged and one sub-element is partially submerged. The second option in :numref:`fig-me-kin-opt` (b) 
 is using the wave elevation and kinematics at the initial position of the sub-element. This option allows a coherent theoretical assumption of small oscillations around a steady positon when Morison forces are used in conjunction with a linear potential
-flow model (see :doc:`../lpft/lpft`). The third option is using the wave elevation and kinematics at a low-passed position of the sub-element (:numref:`fig-me-kin-opt` (c)). This allows for an assumption of 
-small oscillations around a steady state for an element that as drifted from its initial position due to e.g. an aerodynamic thrust or sea current forces.
+flow model (see :doc:`../lpft/lpft`). The third option uses the wave elevation and kinematics at a low-passed position of the sub-element (:numref:`fig-me-kin-opt` (c)). This allows for an assumption of 
+small oscillations around a steady state for an element that as drifted from its initial position due to an acting force such as and aerodynamic thrust or sea current hydrodynamic force.
 
 .. footbibliography::
