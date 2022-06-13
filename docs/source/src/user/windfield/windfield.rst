@@ -3,12 +3,12 @@ Wind Field Creation Module
 
 If an unsteady simulation is being carried out, it is necessary to define the wind field.
 This provides important information for the calculation of aerodynamic quantities. 
-Three types of wind field can be specified for use in QBlade. These are described individually below.
+Three types of wind fields can be generated for use in QBlade. These are described individually below.
 
 Uniform Wind Field 
 ------------------
-In the case of a uniform wind field, this is specified directly within the *Wind Input Type* pane of the turbine simulation dialogue, shown in :numref:`fig-wind-pane` (see :doc:`../simulation/simulation`).
-The necessary input parameters including velocity, velocity and horizontal inflow angle and directional shear are defined here. 
+A uniform wind field is specified directly within the *Wind Input Type* of the turbine simulation dialogue, shown in :numref:`fig-wind-pane` (see :doc:`../simulation/simulation`).
+The necessary input parameters including velocity, horizontal inflow angle and directional shear are defined here.
 In the case that the atmospheric boundary layer is to be modelled, this can be selected with the wind shear type radio button. 
 The corresponding shear parameters can then by specified (see :doc:`../../theory/environment/wind/wind`). 
 
@@ -22,22 +22,24 @@ The corresponding shear parameters can then by specified (see :doc:`../../theory
 	
 Hub Height File
 ---------------
-The user has more modelling freedom when a hub-height wind file is used. 
-This allows specification of the velocity field at the hub height as a function of time. This file is specified as either a ``.dat`` or ``.txt`` file.
-An example of this type of file is shown in :numref:`fig-wind-hubheight`.
+The user has more modelling freedom when a hub-height wind file is used. This type of file can either be created manually or by using the IEC wind tool :footcite:`IECwindtool`.
+This allows the specification of the velocity field at the hub height as a function of time. This file can either be of ``.dat`` or ``.txt`` format.
+An example of a file generated with the IEC wind tool is shown in :numref:`fig-wind-hubheight`. QBlade interpolates the time between the starting time of the file
+and the point where the predefined wind velocity profile (EOG in this case) should start. If the user specified simulation time exceeds the ending time in the hub-height file,
+QBlade will create a constant wind field with the parameters from the last entry of the hub-height file until the end of the simulation
 
 .. _fig-wind-hubheight:
-.. figure:: winddialogue.png
+.. figure:: hubheightfile.png
     :align: center
-    :scale: 80%
+    :scale: 65%
     :alt: Hub height wind field example in QBlade.
 
     Hub-height wind file for specification of a laminar unsteady wind field. 
 
 Turbulent Wind Field 
 --------------------
-The final type of wind file which can be specified is a fully turbulent wind file. 
-This can be either generated through the *Wind Input Type* pane of the turbine simulation dialogue, as shown in :numref:`fig-wind-pane` or by directly generating this within the 
+The final type of wind file which can be set up is a fully turbulent wind file.
+This can be either generated through the *Wind Input Type* button of the turbine simulation dialogue, as shown in :numref:`fig-wind-pane` or by directly generating this within the
 turbulent wind module, shown in :numref:`fig-wind-module`. 
 
 .. _fig-wind-module:
@@ -47,8 +49,8 @@ turbulent wind module, shown in :numref:`fig-wind-module`.
 
     The wind field creation symbol in the QBlade main tool bar. 
 	
-When a new turbulent wind file is specified, a range of parameters must be specified as shown by the turbulent wind dialogue in :numref:`fig-turb-dia`. 
-After these have been selected, clicking on the *Create* button automatically passes the specified information to the TurbSim program :footcite:`TurbSimGuide`.
+When a new turbulent wind file is created, a range of parameters must be specified as shown by the turbulent wind dialogue in :numref:`fig-turb-dia`.
+After these have been selected, clicking on the *Create* button automatically passes the information to the TurbSim program :footcite:`TurbSimGuide`.
 This is linked to the QBlade release, so that no additional user input is required.
 The input parameters are described in detail in the following sections. 
 
@@ -66,11 +68,11 @@ as is consistent with Taylor's hypothesis for a turbulent flow :footcite:`Batche
 * **Grid Height**: Specifies box size in vertical (:math:`z`) direction.
 * **Grid Y Points**: Specifies spatial discretisation in :math:`y` direction.
 * **Grid Z Points**: Specifies spatial discretisation in :math:`z` direction.
-* **Hub Height**: Specifies the vertical position of the box centre.
+* **Hub Height**: Specifies the vertical position of the box center.
 
 Turbine Class
 ^^^^^^^^^^^^^
-These specify the turbine class as defined in the IEC 61400 design standard :footcite:`IEC61400-1`.
+These determine the turbine class as defined in the IEC 61400 design standard :footcite:`IEC61400-1`.
 
 * **Turbine Class**: Specifies the design turbine class.
 * **Turbulence Class**: Specifies the design turbulence class.
@@ -93,7 +95,7 @@ These parameters specify the parameters and model inputs required for generation
 * **Roughness Length**: Specifies the reference height of the aforementioned shear layer model (if logarithmic model chosen).
 * **Jet Height**: Specifies the jet height of the aforementioned shear layer model (if jet model chosen).
 * **ETMC value**: Specifies the extreme turbulence model :math:`c` value (if ETM model chosen).
-* **Remove TurbSim Files**: If checked, the turbsim files generated (and subsequently read by QBlade) is deleted.
+* **Remove TurbSim Files**: If checked, the TurbSim files generated (and subsequently read by QBlade) is deleted.
 * **Close Console**: If checked, the console which is called to generate the TurbSim file is automatically closed upon completion of TurbSim file generation.
  
 .. _fig-turb-dia:
