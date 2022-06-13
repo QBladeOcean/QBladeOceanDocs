@@ -34,7 +34,7 @@ It is assumed that the flow is unidirectional (uniform) and that the streamtube 
 We shall introduce a new quantity, the axial induction :math:`a = 1 - u/u_{\infty}`, where :math:`u_{\infty}=u_1` is the inflow velocity far upstream of the rotor. 
 The axial induction is a measure for the deceleration of the wind cased by the presence of the rotor. Following this specification, it is clear that the velocity through the rotor can be expressed as :math:`u = u_{\infty}(1-a)`.
 The flow downstream is given by :math:`u_4 = u_{\infty}(1-2a)`. In addition to predictions of the velocity field, the Bernoulli equation is utilized within the actuator disc to calculate integral forces acting over the disc. 
-The total force in freestream direction, the thrust :math:`T` is given by:
+The total force in freestream direction, the thrust :math:`T`, is given by:
 
 .. math::
 	\begin{equation}
@@ -89,14 +89,14 @@ Yaw, Vertical Shear, and Veer
 In addition to the atmospheric boundary layer, the mean inflow direction may not be aligned with the rotor axis due to change in wind direction or misalignment of the turbine.
 The angle between the mean inflow direction and the rotor axis in a horizontal plane (:math:`z=\textrm{const.}`) is referred to as the yaw misalignment. The relative velocity of the inflow seen by the blade changes
 depending on whether the blade is moving upstream or downstream, and this hence induces an unsteady load on the turbine. A misalignment in a vertical plane can also occur, this is commonly referred to as the vertical inflow angle. 
-For very large rotors, coriolis forces acting on the atmosphere can also give rise to a change in wind direction with height, this is referred to as vertical veer. 
+For very large rotors, Coriolis forces acting on the atmosphere can also give rise to a change in wind direction with height, this is referred to as vertical veer.
 
 Turbulent Inflow
 ---------------------------------------------
 In generally all cases of practical interest, the inflow of a wind turbine is turbulent.
 The influence of atmospheric stability, terrain, obstacles and upstream turbines act to further increase the turbulence in the inflow of a wind turbine. 
 A realistic modelling approaching therefore also accounts for this.
-Inflow turbulence is generally inhomogenous and anisotropic, however for many cases homogeneity and isotropy can be assumed. 
+Inflow turbulence is generally inhomogeneous and anisotropic, however for many cases homogeneity and isotropy can be assumed.
 A representative quantity for the magnitude of the turbulent velocity fluctuations is given by the turbulence intensity :math:`I_T`, given by:
 
 .. math::
@@ -127,7 +127,7 @@ provides a measure for the physical scale of the turbulent structures in the flo
 	
 	The autocorrelation function of a field quantity. The integral length scale :math:`L` can be determined from this.
 
-Within the scope of isotropic turbulence theory :footcite:`BatchelorBook`, emperical observations of atmospheric flows have allowed for the development of models which describe accurately turbulence spectra within atmospheric boundary layers.
+Within the scope of isotropic turbulence theory :footcite:`BatchelorBook`, empirical observations of atmospheric flows have allowed for the development of models which describe accurately turbulence spectra within atmospheric boundary layers.
 Two models are commonly applied to determine the spectral density distribution :math:`S(f)`, where :math:`f` represents the frequency. The first is the Kaimal spectrum:
 
 .. math::

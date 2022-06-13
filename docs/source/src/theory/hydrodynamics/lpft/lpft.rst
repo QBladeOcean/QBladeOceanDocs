@@ -1,7 +1,7 @@
 Linear Potential Flow Theory
 ============================
 QBlade is capable of calculating hydrodynamic forces on submerged elements due to floater motion and waves by making use of potential flow theory. 
-This allows the full interaction between the three dimensional floater geometry and the wave field to be accounted for.
+This allows the full interaction between the three-dimensional floater geometry and the wave field to be accounted for.
 
 Potential flow and boundary conditions
 ---------------------------------------------
@@ -39,7 +39,7 @@ A few assumptions are outlined here for the following discussion:
 - The floater is submerged in a fluid with density :math:`\rho` :math:`\textrm{kg}\,\textrm{m}^{-3}`.    
 
 Equations of Motion
----------------------------------------------
+-------------------
 The motion of a generic floating body in dimension :math:`j`: :math:`x_j(t)` can be modelled with the equation due to :footcite:t:`Cummins_1962`:
 
 .. math::
@@ -54,16 +54,16 @@ In the above expression the indices :math:`i` and :math:`j` represent the degree
 and the acting force, respectively. In this equation:
 
 - :math:`M_{ij}` represents the inertia of the floater
-- :math:`A_{ij}^{\infty}` is the added mass matrix (see Radiation forces below) 
-- :math:`K_{ij}` is the radiation damping matrix (see below) 
-- :math:`C_{ij}` is the hydrostatic stiffness matrix (see Article on Buoyancy)
-- :math:`F_j^{w}` are the forces due to waves (see Excitation forces below)
+- :math:`A_{ij}^{\infty}` is the added mass matrix (see :ref:`Radiation Forces` below)
+- :math:`K_{ij}` is the radiation damping matrix (see :ref:`Radiation Forces` below)
+- :math:`C_{ij}` is the hydrostatic stiffness matrix (see :ref:`Hydrostatic Forces`)
+- :math:`F_j^{w}` are the forces due to waves (see :ref:`Excitation Forces` below)
 - :math:`F_j^{m}` are external forces due to moorings
 	
 These terms shall be described in the following sections.
 
-Radiation forces
----------------------------------------------
+Radiation Forces
+-----------------
 The motion of the floater in an undisturbed field generates waves which radiate away from the body. 
 Newton's third law dictates that the force required to set this disturbance in motion gives rise to an equal and opposite force on the body. This acts in the form of a pressure disturbance. 
 An example of this is shown in the following figure for a motion in the surge direction.
@@ -115,8 +115,7 @@ The time convolution kernel is referred to as the *impulse response function*, o
 	
 In practise the second form is used due to its easier numerical integration.
 
-The arrays for :math:`A_{ij}(\omega)` and :math:`B_{ij}(\omega)` can be imported into QBlade in NEMOH, WAMIT, or BEMUse formats. This integration is carried out numerically with a frequency step size :math:`\Delta_{\omega}`, 
-specified in the input file with the parameter DELTA_FREQ_RAD over the frequency range specified in the input file:
+The arrays for :math:`A_{ij}(\omega)` and :math:`B_{ij}(\omega)` can be imported into QBlade in NEMOH, WAMIT, or BEMUse formats. This integration is carried out numerically with a frequency step size :math:`\Delta_{\omega}`.
 	
 .. math::
 	\begin{equation}
@@ -126,8 +125,7 @@ specified in the input file with the parameter DELTA_FREQ_RAD over the frequency
 	\end{equation}
 	\textrm{  .}
 
-The decay of :math:`K_{ij}` implies that the time convolution can be truncated to a finite time :math:`T`, specified in the input file with the parameter TRUNC_TIME_RAD. 
-The time convolution is carried out numerically based on the timestep :math:`\Delta_t`:
+The decay of :math:`K_{ij}` implies that the time convolution can be truncated to a finite time :math:`T`. The time convolution is carried out numerically based on the timestep :math:`\Delta_t`:
 
 .. math::
 	\begin{equation}
@@ -135,9 +133,7 @@ The time convolution is carried out numerically based on the timestep :math:`\De
 	\sum_{i=1}^{i=T/\Delta_t} \Delta_t K_{ij}(i\Delta_t)\dot{x}_j(t-i\Delta_t)
 	\end{equation}
 	\textrm{  .}
-	
-In practise this is a double summation. 
-	
+
 Excitation forces
 ---------------------------------------------
 The boundary condition on the surface of the floater causes incoming waves to be reflected away. As with the radiation forces, this gives rise to a disturbance potential :math:`\phi_d` and a corresponding force :math:`X_j` which acts on the floater.
@@ -153,21 +149,27 @@ where :math:`\phi_0` is the potential of the incoming wave. An IRF for this is c
 
 .. math::
 	\begin{equation}
-	E_{ij}(t) = 
-	\frac{1}{2\pi}\int_{-\infty}^{\infty}X_j(\omega)e^{i\omega t}\,d\omega 
+	H_{ij}(t) =
+	\frac{1}{2\pi}\int_{-\infty}^{\infty}X_j(\omega)e^{i\omega t}\,d\omega
 	\end{equation}
 	\textrm{  .}
 
-This is numerically integrated as with the IRF for the radiation forces with a frequency step size :math:`\Delta_{\omega}`, specified in the input file with the parameter DELTA_FREQ_DIFF over the frequency range specified in the input file.
+This is numerically integrated with a frequency step size :math:`\Delta_{\omega}`. The lower limit
+of the integral indicates that the excitation IRF is non-causal, which means the chosen input is not the cause for the output. In this context, the
+non-causality may be explained by the fact that the incident wave hits the body and exerts a wave force before the wave reaches
+the chosen reference point for the body (usually located at the geometrical center), see :footcite:t:`Falnes95`:.
+
 As with the radiation forces, the time-domain excitation forces are calculated with a time convolution with the IRF given above:
 
 .. math::
 	\begin{equation}
-	F_j^{w}(t) = \int_{-\infty}^{\infty} E_{ij}(\tau)\dot{x}_j(t-\tau)\,d\tau
+	F_j^{w}(t) = \int_{-\infty}^{\infty} H_{ij}(\tau)\zeta(x_0,y_0,t-\tau)\,d\tau
 	\end{equation}
 	\textrm{  .}
 	
-This implies that incoming wave information is required as *upstream* waves induce an excitation force on the floater. 
-This integral is again calculated numerically over a truncated time period :math:`T`, specified in the input file with the parameter TRUNC_TIME_DIFF, in an equivalent fashion to that done for the radiation forces.
+where :math:`\zeta(x_0,y_0,t)` is the wave elevation at the reference position :math:`(x_0,y_0,)` during time :math:`t`.
+
+Since the non-causality of the excitation IRF means :math:`H_{ij}(t) ≠ 0` for :math:`(t) < 0`, future wave information is required before the waves reach the neutral reference position of the floater, see :footcite:t:`Falnes95`.
+This integral is again calculated numerically over a truncated time period :math:`T` with the time step :math:`dT`.
 	
 .. footbibliography::

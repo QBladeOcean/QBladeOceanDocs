@@ -7,7 +7,7 @@ is only available for a certain range of angles of attack :math:`\alpha`, these 
 It often occurs that as a result of the turbine architecture, geometry, operational state or other factors that :math:`\alpha` values outside of this range are experienced by the airfoils of the turbine blade. 
 For this reason, the blade creation module of QBlade requires that polars are defined for the full 360 :math:`^\text{o}` :math:`\alpha` range. 
 It is therefore practical to have a methodology for extrapolating the partial polars.  
-This is possible within QBlade using the polar extrapolation module. The module button for this is shown in :numref:`fig-pol-extrap`.
+This is possible within QBlade using the polar extrapolation module. The module button in the main toolbar for this is shown in :numref:`fig-pol-extrap`.
 
 .. _fig-pol-extrap:
 .. figure:: extrap_module.png
@@ -22,25 +22,20 @@ A range of options for generating or defining 360 :math:`^\text{o}` polars are a
 Import and Export of Polars
 ---------------------------
 Much as is the case with polars, a range of import and export options exist so that external sources and files may be used to define 360 :math:`^\text{o}` polars within QBlade. 
-This is achieved by selecting the *360 Polar* dropdown menu, as illustrated in :numref:`fig-extrap-dropdown`. 
+This is achieved by selecting the *360 Polar* menu option.
 
 * **Plain text format:** These include either AeroDyn V13 files or XFoil formats (see :doc:`../airfoil/airfoil`)
-* **Flex5 polar file:** This format is used as input to the aeroelastic software Flex5, developed at the Technical University of Denmark :footcite:`Oye_1996`.
-* **HAWC2 polar file:** This format is used as input to the aeroelastic software HAWC2, developed at the Technical University of Denmark :footcite:`HAWC2`.
 * **Multi Re polar file:** This format is generated within QBlade in the :doc:`../blade/blade` when multiple Reynolds number airfoils are applied to a single blade section.
 * **Dynamics Polar set:** This format is generated within QBlade when the airfoil is configured for use with a dynamic stall model. This is described below.
-
-.. _fig-extrap-dropdown:
-.. figure:: extrap_dropdown.png
-    :align: center
-    :scale: 75%
-    :alt: Polar import options in QBlade.
-
-    A range of 360 :math:`^\text{o}` polar import options are available in QBlade.
 	
+..
+	* **Flex5 polar file:** This format is used as input to the aeroelastic software Flex5, developed at the Technical University of Denmark :footcite:`Oye_1996`.
+..
+	* **HAWC2 polar file:** This format is used as input to the aeroelastic software HAWC2, developed at the Technical University of Denmark :footcite:`HAWC2`.
+
 Viterna Extrapolation
 ---------------------
-The first option available to extrapolate airfoil polar data is the Viterna method :footcite:`Viterna_1982`. 
+The first option available to extrapolate airfoil polar data is the Viterna method. :footcite:`Viterna_1982`. 
 The generated extrapolation is visualised in the graph section to allow for optimisation. 
 The following parameters can be tuned to improve the behaviour of the polar:
 
