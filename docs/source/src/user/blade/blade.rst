@@ -79,16 +79,16 @@ QBlade also offers the possibility to add blade damage or active elements such a
 To add an active element to the blade definition, a dynamic polar set must have been previously defined in the :doc:`../airfoil/polar_extrapolation`.
 Each active element is defined between two blade sections (defined by the station number) and at least one dynamic polar set. 
 Note that two active polar sets can be used if the airfoil polars are different in the start and end station. QBlade then interpolates between the two dynamic polar sets.
-Care should be taken if two polar sets are used for the active element. They should have the same states defined so that the interpolation between station can occur seamlessly for each state.
+Care should be taken if two polar sets are used for the active element. They should have the same states defined so that the interpolation between the stations can occur seamlessly for each state.
 
 The second option is to add blade damage to the blade definition. This is again done through the modification of the airfoil polars that are used in the blade section.
 The airfoil polar for the damaged blade section must be created previously in the :doc:`../airfoil/polar_extrapolation`. Similar to an active element, the blade damage is defined between two stations. These can have 
-different airfoils and polars, even multi-polar sets. QBlade will interpolate along the blade between the two station with the different polars.
+different airfoils and polars, even multi-polar sets. QBlade will interpolate along the blade between the two stations with the different polars.
 
 Importing and Exporting Blade Definitions
 =========================================
 
-QBlade allows to import and export blade definitions in a series of formats. QBlade can read blade definitions in several formats. The import/export options are located in the menu item *Blade Design*.   
+QBlade allows to import and export blade definitions in a series of formats. The import/export options are located in the menu item *Blade Design*.
 QBlade is currently capable of importing blade definitions in the following formats:
 
 - QBlade blade format (.bld),
@@ -98,7 +98,7 @@ QBlade is currently capable of importing blade definitions in the following form
 - HAWC2 full blade definition,
 - Flex5 blade and polar definition.
 
-QBlade is also able to export blade definitions and geometries created within the software in multiple formats:
+QBlade is currently capable of exporting blade definitions in the following formats:
 
 - QBlade blade format (.bld),
 - Full blade definition in AeroDyn V13 format,
