@@ -1,5 +1,5 @@
-Airfoil Analysis Module
-=======================
+Airfoil Analysis Overview
+-------------------------
 
 Once the desired blade section profiles have been selected in the :doc:`../airfoil/airfoil`, the aerodynamic data for these profiles must be generated. 
 This is accomplished within the airfoil creation module. This module is shown in the main toolbar in :numref:`fig-analysis-module`.

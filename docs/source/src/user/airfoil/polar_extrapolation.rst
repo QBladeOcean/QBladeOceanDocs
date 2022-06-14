@@ -1,5 +1,5 @@
-Polar Extrapolation Module
-==========================
+Polar Extrapolation Overview
+----------------------------
 
 The numerical models used by QBlade to calculate aerodynamic properties and forces require knowledge of the airfoil sectional properties. 
 It is often the case that the polar data for an airfoil (which has previously been either defined or imported- see :doc:`../airfoil/airfoil`) 

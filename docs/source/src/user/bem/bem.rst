@@ -1,5 +1,6 @@
-Steady BEM Analysis
-===================
+BEM Analysis Overview
+---------------------
+
 The *Steady BEM Analysis* tool allows the user to run aerodynamic simulations with very low computational expense, short run times and generally accurate
 preliminary results with regard to rotor performance parameters. The module is very useful for:
 

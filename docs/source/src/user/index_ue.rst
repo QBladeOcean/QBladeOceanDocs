@@ -1,11 +1,6 @@
 User's Guide
 ============
 
-Overview
-************
-.. toctree::
-   :maxdepth: 1
-
 
 General GUI Functionality
 *************************
@@ -13,70 +8,77 @@ General GUI Functionality
    :maxdepth: 1
 
    guigraph/guigraph
+   
+Data Structure, Import & Export
+*******************************
+.. toctree::
+   :maxdepth: 1
 
-Create and Modify Airfoils
-**************************
+   data_import_export/data_import_export
+
+Airfoil Module
+**************
+
 .. toctree::
    :maxdepth: 1
 
    airfoil/airfoil
+   
 
-Analyze Airfoils 
-****************
+Airfoil Analysis Module
+***********************
 .. toctree::
    :maxdepth: 1
    
    airfoil/airfoil_analysis
 
-Extrapolate and Tune Polar Data
-*******************************
+Polar Extrapolation Module
+**************************
 .. toctree::
    :maxdepth: 1
 
    airfoil/polar_extrapolation
 
-Design a Blade
-**************
+Blade Design Module
+*******************
 .. toctree::
    :maxdepth: 1
 
    blade/blade
 
-
-Perform Steady Blade Element Momentum Simulations
-*************************************************
+BEM Analysis Module
+*******************
 .. toctree::
    :maxdepth: 1
 
    bem/bem
 
-Generate Wave Fields
-********************
-.. toctree::
-   :maxdepth: 1
-
-   wavefield/wavefield
-
-
-Generate Wind Fields
-********************
-.. toctree::
-   :maxdepth: 1
-   
-   windfield/windfield
-
-Define Wind Turbines
-********************
+Turbine Definition Module
+*************************
 .. toctree::
    :maxdepth: 1
 
    turbine/controller
    turbine/structure
    
-Define a Complete Turbine Simulation
-************************************
+Simulation Definition Module
+****************************
 .. toctree::
    :maxdepth: 1
    
    simulation/simulation
 
+Windfield Generator Module
+**************************
+.. toctree::
+   :maxdepth: 1
+   
+   windfield/windfield
+   
+Wave Generator Module
+*********************
+.. toctree::
+   :maxdepth: 1
+
+   wavefield/wavefield
+   

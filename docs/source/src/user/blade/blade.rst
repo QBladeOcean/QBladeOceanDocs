@@ -1,5 +1,6 @@
-Blade Design Module
-===================
+Blade Design Overview
+---------------------
+
 Once the airfoil polars have been created or imported (see :doc:`../airfoil/airfoil_analysis` and :doc:`../airfoil/polar_extrapolation`), 
 they can be used in an aerodynamic blade design. To access the aerodynamic blade design module in QBlade, the user has to click on the blade symbol in the main tool bar.
 This is shown in :numref:`fig-blade-module`.
@@ -91,18 +92,16 @@ Importing and Exporting Blade Definitions
 QBlade allows to import and export blade definitions in a series of formats. The import/export options are located in the menu item *Blade Design*.
 QBlade is currently capable of importing blade definitions in the following formats:
 
-- QBlade blade format (.bld),
+- QBlade blade format (``.bld``),
 - Blade geometry in QBlade, AeroDyn and WT_perf format,
 - AeroDyn V15 full blade definition,
-- HAWC2 blade geometry,
-- HAWC2 full blade definition,
-- Flex5 blade and polar definition.
+
 
 QBlade is currently capable of exporting blade definitions in the following formats:
 
-- QBlade blade format (.bld),
+- QBlade blade format (``.bld``),
 - Full blade definition in AeroDyn V13 format,
-- 3D blade geometry in STL or txt format.
+- 3D blade geometry in STL or ``.txt`` format.
 
 
 

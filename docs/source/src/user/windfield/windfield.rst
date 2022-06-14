@@ -1,5 +1,5 @@
-Wind Field Creation Module
-==========================
+Wind Field Generator Overview
+-----------------------------
 
 If an unsteady simulation is being carried out, it is necessary to define the wind field.
 This provides important information for the calculation of aerodynamic quantities. 

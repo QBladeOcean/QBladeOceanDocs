@@ -1,2 +1,2 @@
-Setting up a Simulation
-=======================
+Simulation Module Overview
+--------------------------
