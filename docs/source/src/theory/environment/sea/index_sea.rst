@@ -1,5 +1,5 @@
-Sea
-====
+Waves
+=====
 
 Linear Waves
 ************
