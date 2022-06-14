@@ -15,7 +15,7 @@ This module is shown in the main toolbar in :numref:`fig-airfoil-module`.
 Airfoils may be added to the active airfoil design list either by generating them within QBlade or importing them as described in the sections below. 
 Airfoils objects can be removed or renamed simply by selecting the *Airfoil* dialog in the menu.
 or by right-clicking on the appropriate item in the foil list (see :numref:`fig-naca-airfoil`). 
-All airfoil profiles can be exported in a ``.dat`` file format. Once the airfoil profiles have been specified, the user can proceed with the aerodynamic analysis of the profiles (see :doc:`../airfoil/airfoil_analysis`).
+All airfoil profiles can be exported in a ``.txt`` file format. Once the airfoil profiles have been specified, the user can proceed with the aerodynamic analysis of the profiles (see :doc:`../airfoil/airfoil_analysis`).
 
 Creating Standard Airfoils
 --------------------------
@@ -68,6 +68,32 @@ To illustrate two of these features, the NACA 4412 profile generated above has b
 
 Exporting Airfoils
 ------------------
-All airfoils generated within the airfoil creation module can be exported as a ``.dat`` file simply be selecting the *Export Current Airfoil* option from the *Airfoil* menu.
+All airfoils generated within the airfoil creation module can be exported as a ``.afl`` file simply be selecting the *Export Current Airfoil* option from the *Airfoil* menu.
+An exemplary ``.afl`` file is shown below:
+
+.. code-block:: console
+
+	NACA 0020
+	 1.00000     0.00210
+	 0.91670     0.02063
+	 0.74385     0.05373
+	 0.56305     0.08092
+	 0.39002     0.09731
+	 0.23691     0.09839
+	 0.12569     0.08441
+	 0.06125     0.06450
+	 0.02521     0.04375
+	 0.00589     0.02202
+	 0.00000    -0.00000
+	 0.00589    -0.02203
+	 0.02521    -0.04375
+	 0.06125    -0.06451
+	 0.12569    -0.08441
+	 0.23691    -0.09839
+	 0.39002    -0.09731
+	 0.56305    -0.08092
+	 0.74385    -0.05373
+	 0.91670    -0.02063
+	 1.00000    -0.00210
 
 .. footbibliography::

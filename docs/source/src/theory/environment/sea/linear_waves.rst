@@ -14,7 +14,7 @@ may be expressed as
 
 where,
 
-- :math:`\Theta` is the volity potential,
+- :math:`\Theta` is the velocity potential,
 - :math:`g` is the graviational acceleration,
 - :math:`A` is the wave amplitude,
 - :math:`\omega` is the ciruclar frequency,
@@ -153,7 +153,7 @@ In this equation,
 - :math:`s` is the spreading exponent,
 - :math:`\Theta_p` is the principal wave direction,
 
-When the directional spectrum is added, the equation of the wave elevation needs to be advanced by another summation term over the number of directions of the wave trains. Subsequently, the wave amplitdue needs to be
+When the directional spectrum is added, the equation of the wave elevation needs to be advanced by another summation term over the number of directions of the wave trains. Subsequently, the wave amplitude needs to be
 extended by the wave direction
 
 .. math::
