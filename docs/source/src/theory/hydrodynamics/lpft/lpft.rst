@@ -125,10 +125,12 @@ The arrays for :math:`A_{ij}(\omega)` and :math:`B_{ij}(\omega)` can be imported
 	\end{equation}
 	\textrm{  .}
 
-The decay of :math:`K_{ij}` implies that the time convolution can be truncated to a finite time :math:`T`. The time convolution is carried out numerically based on the timestep :math:`\Delta_t`:
+The decay of :math:`K_{ij}` implies that the time convolution can be truncated to a finite time :math:`T`. 
+The radiation force :math:`F^{r}` can be calculated by carrying out a time convolution numerically with timestep :math:`\Delta_t`:
 
 .. math::
 	\begin{equation}
+	F_j^{r}(t) =
 	\int_{t-T}^{t}K_{ij}(t-\tau)\dot{x}_j(\tau)\,d\tau \approx
 	\sum_{i=1}^{i=T/\Delta_t} \Delta_t K_{ij}(i\Delta_t)\dot{x}_j(t-i\Delta_t)
 	\end{equation}
@@ -159,15 +161,16 @@ of the integral indicates that the excitation IRF is non-causal, which means the
 non-causality may be explained by the fact that the incident wave hits the body and exerts a wave force before the wave reaches
 the chosen reference point for the body (usually located at the geometrical center), see :footcite:t:`Falnes95`:.
 
-As with the radiation forces, the time-domain excitation forces are calculated with a time convolution with the IRF given above:
+As with the radiation forces, the time-domain excitation forces :math:`F^{e}` are calculated with a time convolution with the IRF given above:
 
 .. math::
 	\begin{equation}
-	F_j^{w}(t) = \int_{-\infty}^{\infty} H_{ij}(\tau)\zeta(x_0,y_0,t-\tau)\,d\tau
+	F_j^{e}(t) = 
+	\int_{-\infty}^{\infty} H_{ij}(\tau)\zeta(x_0,y_0,t-\tau)\,d\tau
 	\end{equation}
 	\textrm{  .}
 	
-where :math:`\zeta(x_0,y_0,t)` is the wave elevation at the reference position :math:`(x_0,y_0,)` during time :math:`t`.
+where :math:`\zeta(x_0,y_0,t)` is the wave elevation at the reference position :math:`(x_0,y_0)` during time :math:`t`.
 
 Since the non-causality of the excitation IRF means :math:`H_{ij}(t) ≠ 0` for :math:`(t) < 0`, future wave information is required before the waves reach the neutral reference position of the floater, see :footcite:t:`Falnes95`.
 This integral is again calculated numerically over a truncated time period :math:`T` with the time step :math:`dT`.
