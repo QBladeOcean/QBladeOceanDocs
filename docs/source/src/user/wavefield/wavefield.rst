@@ -117,11 +117,11 @@ This functionality can be found in the menu toolbar below the *Wave* tab. An exe
 	Date : 14.06.2022
 
 	----------------------------------------Object Name-----------------------------------------------------------------
-	New_Wave_(2)                            OBJECTNAME          - the name of the linear wave definition object
+	Jonswap_Wave                            OBJECTNAME          - the name of the linear wave definition object
 
 	----------------------------------------Main Parameters-------------------------------------------------------------
 	0.000                                   TIMEOFFSET          - the time offset from t=0s [s]
-	3                                       WAVETYPE            - the type of wave: 0 = IMP_TIMESERIES, 1 = PRESCRIBED, 2 = SINGLE, 3 = JONSWAP, 4 = ISSC, 5 = TORSETHAUGEN
+	3                                       WAVETYPE            - the type of wave: 0 = TIMESERIES, 1 = COMPONENTS, 2 = SINGLE, 3 = JONSWAP, 4 = ISSC, 5 = TORSETHAUGEN
 	8.100                                   SIGHEIGHT           - the significant wave height (Hs) [m]
 	12.700                                  PEAKPERIOD          - the peak period (Tp) [s]
 	1                                       AUTOGAMMA           - use gamma according to IEC: 0 = OFF, 1 = ON (JONSWAP & TORSE only)

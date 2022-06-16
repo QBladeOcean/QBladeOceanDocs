@@ -22,12 +22,13 @@ be used with the Enterprise Edition of QBlade (QBlade-EE). In that case, or
 if you are unsure, please contact the authors (info@qblade.org) or visit 
 www.qblade.org to inquire about commercial licenses. 
 
-Regardless of the terms and conditions of this license, that are mentioned 
+In addition to the terms and conditions of this license, that are mentioned 
 above, QBlade-CE also serves as an evaluation version for QBlade-EE, thus 
-permission is granted to commerical users to use QBlade-CE for a reasonably 
-limited period of time for the only purpose of evaluating its usefulness for a 
-particular purpose as long as it is not directly used for or applied in a 
-commercial task or project.
+permission is granted to commercial users to use QBlade-CE for a reasonably 
+limited period of time for the purpose of evaluating its usefulness for a 
+particular purpose. However, during this limited evaluation period permission 
+is not granted to directly apply or use QBlade-CE in the context of a commercial 
+task or project.
 
 What are the rights given to noncommercial users? Similarly to GPL, you
 have the right to use the software, to distribute copies, to receive source
@@ -85,7 +86,9 @@ commercial entity, government-funded, EU-funded, military or similar
 research projects, you have to contact the Author or visit www.qblade.org
 for an appropriate license. Permission is also granted to use the Program
 for a reasonably limited period of time for the purpose of evaluating its
-usefulness for a particular purpose.
+usefulness for a particular purpose. However, during this limited evaluation 
+period permission is not granted to directly apply or use QBlade-CE in the 
+context of a commercial task or project.
 
 2. You may copy and distribute verbatim copies of the Program's
 source code as you receive it, in any medium, provided that you
