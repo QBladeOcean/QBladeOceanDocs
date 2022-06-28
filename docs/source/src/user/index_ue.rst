@@ -58,9 +58,12 @@ Turbine Definition Module
 .. toctree::
    :maxdepth: 1
 
-   turbine/controller
+   turbine/turbine
+   turbine/unsteadybem
+   turbine/vortexwake
    turbine/structure
-   
+   turbine/controller
+
 Simulation Definition Module
 ****************************
 .. toctree::

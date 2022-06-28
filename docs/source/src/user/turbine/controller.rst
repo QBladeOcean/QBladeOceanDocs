@@ -1,5 +1,5 @@
-Setting up a Controller
-=======================
+Turbine Controller
+==================
 
 QBlade allows the integration of controllers to perform aero-servo-hydro-elastic simulations. This is done via the integration of a controller dynamic link library (.dll)
 that is called every time step by QBlade. In a predefined exchange array, QBlade passes the necessary sensor input to the controller, calls the controller function and the controller returns the demanded actuator actions. 

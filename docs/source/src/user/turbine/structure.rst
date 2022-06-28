@@ -1,5 +1,5 @@
-Turbine Structural Definition
-=============================
+Turbine Structural Model
+========================
 
 .. _StrDef_MainFile:
 
