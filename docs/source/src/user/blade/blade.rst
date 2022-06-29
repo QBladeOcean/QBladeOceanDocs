@@ -103,6 +103,44 @@ QBlade is currently capable of exporting blade definitions in the following form
 - Full blade definition in AeroDyn V13 format,
 - 3D blade geometry in STL or ``.txt`` format.
 
+When a blade is exported into the ``.bld`` format, the associated 360 polar (``.plr``) and airfoil (``.afl``) files are automatically created.
+An exemplary ``.bld`` file is shown below:
 
+.. code-block:: console
+
+	----------------------------------------QBlade Blade Definition File------------------------------------------------
+	Generated with : QBlade IH v2.0.2_alpha windows
+	Archive Format: 310002
+	Time : 12:05:50
+	Date : 29.06.2022
+
+	----------------------------------------Object Name-----------------------------------------------------------------
+	NREL_5MW                                 OBJECTNAME         - the name of the blade object
+
+	----------------------------------------Parameters------------------------------------------------------------------
+	HAWT                                     ROTORTYPE          - the rotor type
+	3                                        NUMBLADES          - number of blades
+
+	----------------------------------------Blade Data------------------------------------------------------------------
+	POS [m]             CHORD [m]           TWIST [deg]         OFFSET_X [m]        OFFSET_Z [m]        TAXIS [-]           POLAR_FILE          
+	1.5000              3.5420              0.0000              0.0000              0.0000              0.5000              t100.0_nre_5mw_Cylinder_1_section_with_a_Cd_of_0.50.plr
+	2.8674              3.5420              13.3080             0.0027              0.0006              0.5000              t100.0_nre_5mw_Cylinder_1_section_with_a_Cd_of_0.50.plr
+	5.5992              3.8540              13.3080             0.1057              0.0250              0.5000              t100.0_nre_5mw_Cylinder_1_section_with_a_Cd_of_0.50.plr
+	8.3289              4.1670              13.3080             0.2499              0.0591              0.5000              t90.0_nre_5mw_Cylinder_2_section_with_a_Cd_of_0.35.plr
+	11.7402             4.5570              13.3080             0.4586              0.1085              0.5000              t40.0_nre_5mw_DU40_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	15.8399             4.6520              11.4845             0.5696              0.1157              0.5000              t35.0_nre_5mw_DU35_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	19.9410             4.4580              10.1649             0.5485              0.0983              0.5000              t35.0_nre_5mw_DU35_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	24.0421             4.2490              9.0132              0.5246              0.0832              0.5000              t30.0_nre_5mw_DU30_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	28.1432             4.0070              7.7970              0.4962              0.0679              0.5000              t25.0_nre_5mw_DU25_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	32.2443             3.7480              6.5457              0.4654              0.0534              0.5000              t25.0_nre_5mw_DU25_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	36.3454             3.5020              5.3623              0.4358              0.0409              0.5000              t21.0_nre_5mw_DU21_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	40.4464             3.2560              4.1890              0.4059              0.0297              0.5000              t21.0_nre_5mw_DU21_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	44.5475             3.0100              3.1256              0.3757              0.0205              0.5000              t17.0_nre_5mw_NA64_A17_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	48.6486             2.7640              2.3193              0.3452              0.0140              0.5000              t17.0_nre_5mw_NA64_A17_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	52.7497             2.5180              1.5261              0.3146              0.0084              0.5000              t17.0_nre_5mw_NA64_A17_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	56.1676             2.3130              0.8629              0.2891              0.0044              0.5000              t17.0_nre_5mw_NA64_A17_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	58.9013             2.0860              0.3699              0.2607              0.0017              0.5000              t17.0_nre_5mw_NA64_A17_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	61.6338             1.4190              0.1059              0.1774              0.0003              0.5000              t17.0_nre_5mw_NA64_A17_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
+	63.0000             0.9610              0.0000              0.1201              0.0000              0.5000              t17.0_nre_5mw_NA64_A17_airfoil_with_an_aspect_ratio_of_17._Original_-180_to_180deg.plr
 
 .. footbibliography::

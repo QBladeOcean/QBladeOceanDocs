@@ -89,7 +89,7 @@ A plot of these parameters, as generated for a NACA 4412 profile are shown in :n
 
     Dynamics airfoil parameters for a NACA 4412 airfoil dynamic decomposition carried out in QBlade.
 	
-Import and Export of 360 :math:`^\text{o}` Polars
+Import and Export of 360 Polars
 -------------------------------------------------
 
 Much as is the case with non extrapolated polars, a range of import and export options exist so that external sources and files may be used to define 360 :math:`^\text{o}` polars within QBlade. 

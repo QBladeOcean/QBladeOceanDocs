@@ -2,7 +2,16 @@ Turbine Controller
 ==================
 
 QBlade allows the integration of controllers to perform aero-servo-hydro-elastic simulations. This is done via the integration of a controller dynamic link library (.dll)
-that is called every time step by QBlade. In a predefined exchange array, QBlade passes the necessary sensor input to the controller, calls the controller function and the controller returns the demanded actuator actions. 
+that is called every time step by QBlade. A controller can be added to a turbine definition by selecting it in the dialog shown in :numref:`fig-controller_dialog`.
+
+.. _fig-controller_dialog:
+.. figure:: controller_dialog.png
+    :align: center
+    :alt: The controller dialog.
+    
+    The controller dialog.
+
+In a predefined exchange array, QBlade passes the necessary sensor input to the controller, calls the controller function and the controller returns the demanded actuator actions. 
 This is shown in :numref:`fig-controller-interaction`.
 
 .. _fig-controller-interaction:

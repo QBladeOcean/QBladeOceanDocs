@@ -63,6 +63,7 @@ Turbine Definition Module
    turbine/vortexwake
    turbine/structure
    turbine/controller
+   turbine/turbineexport
 
 Simulation Definition Module
 ****************************
@@ -84,4 +85,11 @@ Wave Generator Module
    :maxdepth: 1
 
    wavefield/wavefield
+   
+Coordinate Systems
+******************
+.. toctree::
+   :maxdepth: 1
+
+   coordinates/coordinates
    

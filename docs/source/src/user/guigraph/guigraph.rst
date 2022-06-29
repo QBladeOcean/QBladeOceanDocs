@@ -18,6 +18,34 @@ The main concepts and terms of QBlades user interface are briefly described in t
 - The **GL View** is available for some modules and shows a rendered representation of the simulation or data object.
 - The **Graph View** is used to plot simulation results or object data in QBlade's custom 2D Graph class.
 
+General Settings
+================
+
+the general settings dialog (see :numref:`fig-generalsettings`) can be found in the top *Menu* under *Options->General Gui Appearance*. 
+
+.. _fig-generalsettings:
+.. figure:: generalsettings.png
+   :align: center
+   :alt: The general settings dialog.
+
+   The general settings dialog.
+   
+In this dialog the global font size and font type can be changed. Furthermore the overall wind style and several other global visualization options can be set.
+
+Opengl Light Settings
+=====================
+
+The OpenGl Light Settings Dialog (see :numref:`fig-openglsettings`) can be found in the top *Menu* under *Options->OpenGl Light Settings*. 
+
+.. _fig-openglsettings:
+.. figure:: openglsettings.png
+   :align: center
+   :alt: The opengl light settings dialog.
+
+   The opengl light settings dialog.
+   
+This dialog allows to change the global illumination and light settings for all scenes that are rendered in 3D using opengl.
+
 Graph Functionality
 ===================
 
