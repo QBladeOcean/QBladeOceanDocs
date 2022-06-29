@@ -1,8 +1,10 @@
+QBlade-CE License
+=================
 
 Academic Public License
-=======================
+-----------------------
 
-.. centered:: ACADEMIC PUBLIC LICENSE
+.. centered:: **Academic Public license**
 .. centered:: (QBlade CE License v1.0)
 
 .. centered::Preamble
