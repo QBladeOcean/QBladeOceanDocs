@@ -17,18 +17,20 @@ As an example: If a polar object is deleted all associated rotor blades are dele
    
 Project Serialization
 =====================
+
+All data and objects in QBlade can be serialized into the binary QBlade Project file formnat ``.qpr``. QBlade project files allow easy sharing or saving of projects and simulation results.
    
 Data Objects Import and Export
 ==============================
 
 In QBlade several data objects exists. An aero-servo-hydro-elastic simulation definition is made up of several data objects (see :numref:`fig-data_struct`).  These objects are:
 
-* **Simulation definition**: The simulation definition objects defines boundary conditions, discretization and simulation length and other parameters
-* **Turbine definition**: The turbine definition object defines the aero-servo-hydro elastic model of the turbine that is simulated
-* **Blade definition**: The blade definition contains the aerodynamic definition of the rotor blade
-* **Polar**: The polar object contains the airfoil coefficients
-* **Airfoil**: The airfoil object contains the outer contour of the airfoil
-* **Windfield**: The windfield object contains the time resolved data of the inflow
-* **Wavefield**: The wavefield contains the time resolved information of the seastate
+* **Simulation definition**: The simulation definition objects defines boundary conditions, discretization and simulation length and other parameters (``.sim`` files)
+* **Turbine definition**: The turbine definition object defines the aero-servo-hydro elastic model of the turbine that is simulated (``.trb`` files)
+* **Blade definition**: The blade definition contains the aerodynamic definition of the rotor blade (``.bld`` files)
+* **Polar**: The polar object contains the airfoil coefficients (``.plr`` files)
+* **Airfoil**: The airfoil object contains the outer contour of the airfoil (``.afl`` files)
+* **Windfield**: The windfield object contains the time resolved data of the inflow (``.bts``, ``.hht`` or ``.inp`` files)
+* **Wavefield**: The wavefield contains the time resolved information of the seastate (``.lwa`` files)
 
-One main concept in QBlade is the ability to easily create and edit the use data objects. In the GUI
+One main concept in QBlade is the ability to easily create and edit the use data objects. In the GUI objects can easily be created within custom dialogs. These objects can be exported into ASCII format and edited, or completely created, outside of QBlade and imported with ease.
