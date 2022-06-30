@@ -21,7 +21,7 @@ All turbine and simulation details are readily available to be accessed and modi
 Simulation results are presented in dynamic graphs that give insight into every simulation detail. 
 Simulations and turbine designs are fully rendered in real time to aid with the comprehension and evaluation of our complex multi-physics models. 
 QBlade enabled the serialization of the complete model data, setup and results into project files to enable simple sharing and collaboration of complex simulation and turbine design projects. 
-The Community Edition (CE) of QBlade is freely available to everyone under the open-source GNU GPLv2 license.
+The Community Edition of QBlade (QBlade-CE) is freely available under the Academic Public License, while the Enterprise Edition (QBlade-EE) is available under a Commercial License.
 
 QBlade uses a highly optimized and thoroughly validated Lifting Line Free Vortex Wake Method for its aerodynamic calculations. 
 Instead of approximating the wake aerodynamics with a steady-state momentum balance (BEM), the rotor wake is explicitly modeled through Lagrangian vortex elements. 
