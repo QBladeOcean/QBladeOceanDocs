@@ -11,12 +11,12 @@ The main concepts and terms of QBlades user interface are briefly described in t
 
    Overview of QBlades user interface.
    
-- The **Menu** allows to change between HAWT and VAWT mode and enables access to GUI customization and export functionality.
-- The **Main Toolbar** is used to switch to quickly open or save project and to switch between QBlade's different modules.
-- The **Module Toolbar** changes, depending on which module is currently selected. The main functionality of this Toolbar is to select data objects through the shown *Combo Boxes* and to switch between the *Graph View*, *Gl View* or *Dual View* modes
-- The **Dock Widget** changes, depending on which module is currently selected. Here data objects can be created, edited or removed and simulation can be started. Furthermore it contains module specific functionality.
-- The **GL View** is available for some modules and shows a rendered representation of the simulation or data object.
-- The **Graph View** is used to plot simulation results or object data in QBlade's custom 2D Graph class.
+* The **Menu** allows to change between HAWT and VAWT mode and enables access to GUI customization and export functionality.
+* The **Main Toolbar** is used to switch to quickly open or save project and to switch between QBlade's different modules.
+* The **Module Toolbar** changes, depending on which module is currently selected. The main functionality of this Toolbar is to select data objects through the shown *Combo Boxes* and to switch between the *Graph View*, *Gl View* or *Dual View* modes
+* The **Dock Widget** changes, depending on which module is currently selected. Here data objects can be created, edited or removed and simulation can be started. Furthermore it contains module specific functionality.
+* The **GL View** is available for some modules and shows a rendered representation of the simulation or data object.
+* The **Graph View** is used to plot simulation results or object data in QBlade's custom 2D Graph class.
 
 General Settings
 ================
@@ -75,11 +75,11 @@ Graph Context Menu
 The *Graph Context Menu* contains two sections, separated by a horizontal line. The bottom section can be used to change the *Graph Type*. Depending on the module several different graph types are available. 
 The top part of the *Graph Context Menu* is the same for all modules. The functionality is described below:
 
-- **Show All Curves**: All data objects or simulations are displayed in the graph.
-- **Show Current Curve Only**: Only the currently selected object curve is shown in the graph, all other object curves are hidden.
-- **Reset Graph Scales**: The graph scales are adapted to best fit the currently shown curves
-- **No Automatic Scaling**: Disables the automatic graph scaling, the graph scaling is frozen until this option is deselected again.
-- **Export Graph**: The curves displayed in the currently selected graph are exported to a ``.txt`` file.
+* **Show All Curves**: All data objects or simulations are displayed in the graph.
+* **Show Current Curve Only**: Only the currently selected object curve is shown in the graph, all other object curves are hidden.
+* **Reset Graph Scales**: The graph scales are adapted to best fit the currently shown curves
+* **No Automatic Scaling**: Disables the automatic graph scaling, the graph scaling is frozen until this option is deselected again.
+* **Export Graph**: The curves displayed in the currently selected graph are exported to a ``.txt`` file.
 
 Variables & Styles and Axes
 ***************************
@@ -116,10 +116,10 @@ Curve Styles
    
 When in the *Graph View* of a module the *Curve Styles* box is visible in the *Dock Widget*. The *Curve Styles* menu is used to set the appearance of the data curve of an object. By clicking on the colored line box the curve color, curve style and curve width can be changed by the user. Furthermore, the following options are avaliable:
 
-- **Highlight**: If this checkbox is ticked the currently selected object will be highlighted by increasing the width of the associated curve.
-- **Show**: This checkbox toggles the visibility of the curve.
-- **Curve**: This toggles if the curve is diaplyed.
-- **Points**: This toggles if the individual data points are displayed.
+* **Highlight**: If this checkbox is ticked the currently selected object will be highlighted by increasing the width of the associated curve.
+* **Show**: This checkbox toggles the visibility of the curve.
+* **Curve**: This toggles if the curve is diaplyed.
+* **Points**: This toggles if the individual data points are displayed.
 
 Graph Layout
 ************

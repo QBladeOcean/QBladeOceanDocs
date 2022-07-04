@@ -64,6 +64,7 @@ Turbine Definition Module
    turbine/structure
    turbine/controller
    turbine/turbineexport
+   turbine/multi_turbine
 
 Simulation Definition Module
 ****************************
