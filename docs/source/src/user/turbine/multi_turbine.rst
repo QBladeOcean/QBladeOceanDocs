@@ -1,7 +1,7 @@
 Multi Rotor Turbine Assembly
 ****************************
 
-**This feature is only available in the *Enterprise Edition* of QBlade.**
+**This feature is only available in the Enterprise Edition of QBlade.**
 
 .. _fig-multi_turbine:
 .. figure:: multi_turbine.png
@@ -22,7 +22,7 @@ A turbine with multiple rotors may be defined in the dialog *Menu->Turbine Defin
 Multi Rotor Turbine Assembly Export
 ***********************************
 
-A Multi Turbine Assembly can be exported or imported in the ``.mta`` format. The file content points towards the common substructure file and towards the turbine `(`.trb``) files that are used in the multi-rotor assembly. See an exemplary ``.mta`` file below:
+A Multi Turbine Assembly can be exported or imported in the ``.mta`` format. The file content points towards the common substructure file and towards the turbine (``.trb``) files that are used in the multi-rotor assembly. See an exemplary ``.mta`` file below:
 
 .. code-block:: console
 
