@@ -87,6 +87,21 @@ Wave Generator Module
 
    wavefield/wavefield
    
+DLC Generator Module
+********************
+.. toctree::
+   :maxdepth: 1
+
+   dlc/dlc
+   
+Interfaces / Scripting
+**********************
+.. toctree::
+   :maxdepth: 1
+
+   interfaces/commandline
+   interfaces/inloop
+
 Coordinate Systems
 ******************
 .. toctree::

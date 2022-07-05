@@ -10,7 +10,7 @@ Multi Rotor Turbine Assembly
 
     Visualization of a Multi-Rotor Turbine Assembly. 
 
-A turbine with multiple rotors may be defined in the dialog *Menu->Turbine Definition->Create a Multi-Rotor Turbine Assembly*. A Multi-Rotor Assembly requires the definition of a common :ref:`Substructure Definition`. The common substructure definition must then contain multiple transition pieces (**TP_INTERFACE_POS**) that may have different orientations (**TP_ORIENTATION**). If a common substructure is loaded into the Multi Turbine Assembly dialog (see :ref:`fig-multi_turbine_dialog`) a turbine from QBlades database (that contains its own structural definition and controller) can be assigned to each of these transition pieces.
+A turbine with multiple rotors may be defined in the dialog *Menu->Turbine Definition->Create a Multi-Rotor Turbine Assembly*. A Multi-Rotor Assembly requires the definition of a common :ref:`Substructure Definition`. The common substructure definition must then contain multiple transition pieces (**TP_INTERFACE_POS**) that may have different orientations (**TP_ORIENTATION**). If a common substructure is loaded into the Multi Turbine Assembly dialog (see :numref:`fig-multi_turbine_dialog`) a turbine from QBlades database (that contains its own structural definition and controller) can be assigned to each of these transition pieces.
 
 .. _fig-multi_turbine_dialog:
 .. figure:: multi_turbine_dialog.png
