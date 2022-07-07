@@ -203,8 +203,10 @@ The turbine location and orientation can be prescribed using a file of the follo
 
 Multi Turbine Simulations
 -------------------------
-**This feature is only available in the Enterprise Edition of QBlade.**
+.. admonition:: QBlade-EE
 
+   This feature is only available in the Enterprise Edition of QBlade.
+   
 If enabled multiple turbines may be added to a single simulation object and their wake interaction can be evaluated.
 
 Turbine Environment
@@ -264,8 +266,10 @@ The uer can choose here to only store a certain type of simulation data (to limi
 VPML Particle Remeshing
 -----------------------
 
-**This feature is only available in the Enterprise Edition of QBlade.**
+.. admonition:: QBlade-EE
 
+   This feature is only available in the Enterprise Edition of QBlade.
+   
 Free wake filaments may be converted into vortex particles. The following parameters govern the treatment of free vortex particles during a simulation.
 
 * **Remeshing Scheme**
@@ -279,8 +283,10 @@ Free wake filaments may be converted into vortex particles. The following parame
 Modal Analysis
 --------------
 
-**This feature is only available in the Enterprise Edition of QBlade.**
+.. admonition:: QBlade-EE
 
+   This feature is only available in the Enterprise Edition of QBlade.
+   
 A modal analysis may be performed at the end of a simulation run, based on the linearized structural model data. A modal analysis id performed when the rotor has reached its initial azimuthal position, to facilitate the comparison of modeshapes when generating automated Campbell Diagrams.
 
 * **Perform Modal Analysis at end**: Toggles if a modal analysis is performed at the end of the simulation.
@@ -290,8 +296,10 @@ A modal analysis may be performed at the end of a simulation run, based on the l
 Ice Throw Simulation
 --------------------
 
-**This feature is only available in the Enterprise Edition of QBlade.**
+.. admonition:: QBlade-EE
 
+   This feature is only available in the Enterprise Edition of QBlade.
+   
 A simulation of ice throw, shed from the rotor, can be performed in QBlade, see :footcite:t:`Lennie2019`. The following parameters govern the range of the randomized uniform distributions of ice particle properties. The distribution of *landed* ice particles can then be exported to generate iso-risk contours for the localized individual risk (*LIRA*) of a person being hit by an ice throw event.
 
 * **Simulate Ice Throw**: Toggles if an Ice Throw Simulation is carried out.
@@ -304,7 +312,10 @@ A simulation of ice throw, shed from the rotor, can be performed in QBlade, see 
 Multi-Threaded Batch Analysis
 =============================
 
-**This feature is only available in the Enterprise Edition of QBlade.**
+.. admonition:: QBlade-EE
+
+   This feature is only available in the Enterprise Edition of QBlade.
+
 
 Multiple simulations can be evaluated in a parallel batch queue through the dialog *Menu->Turbine Simulation->Multi-Threaded Batch Analysis*. The simulations are selected from a list in the dialog (see :numref:`fig-multi_batch`). After choosing the number of parallel threads the batch analysis starts by clicking the *Start Batch* button.
 

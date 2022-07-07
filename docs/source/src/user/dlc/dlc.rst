@@ -1,8 +1,10 @@
 DLC Generator
 *************
 
-**This feature is only available in the Enterprise Edition of QBlade.**
+.. admonition:: QBlade-EE
 
+   This feature is only available in the Enterprise Edition of QBlade.
+   
 QBlade-EE is equipped with a fully featured automatic DLC generator (see :numref:`fig-dlc_diag`), according to the following standards:
 
 * **IEC 61400-1 Ed. 2**

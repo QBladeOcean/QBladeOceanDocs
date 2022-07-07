@@ -1,8 +1,10 @@
 Multi Rotor Turbine Assembly
 ****************************
 
-**This feature is only available in the Enterprise Edition of QBlade.**
+.. admonition:: QBlade-EE
 
+   This feature is only available in the Enterprise Edition of QBlade.
+   
 .. _fig-multi_turbine:
 .. figure:: multi_turbine.png
     :align: center
