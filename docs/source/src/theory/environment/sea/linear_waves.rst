@@ -3,7 +3,7 @@ Linear Wave Theory
 
 Linear wave theory (also referred to as Airy waves in the literature) may be applied when the sea water is assumed to be incompressible,
 inviscid and the fluid motion is irrotational. In addition to this is it assumed that the wave steepness is very small. Subsequently,
-a velocity potential can be used to describe the velocity vector (u,v,w) of a water particle at an arbitrary position (x,y,z) at any time (t) :footcite:t:`Faltinsen1993`.
+a velocity potential can be used to describe the velocity vector (u,v,w) of a water particle at an arbitrary position (x,y,z) at any time (t) :footcite:t:`Bladed`.
 Following these assumptions, the linear wave model in QBlade is implemented through the following set of equations. The velocity potential for finite depth
 may be expressed as
 
