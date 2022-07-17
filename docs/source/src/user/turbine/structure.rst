@@ -658,15 +658,15 @@ Morison Equation-Related Parameters
 * **WAVEKINEVAL_MOR** is a flag that control how the local wave kinematics are used to calculate the Morison forces (see :ref:`ME_modeling-considerations`).
   The available options are:
 
-  - 0: local evaluation of wave kinematics, 
-  - 1: evaluation at the fixed initial reference position, 
+  - 0: local evaluation of wave kinematics (**this is the default value if not specified**)
+  - 1: evaluation at the fixed, undisplaced/unrotated initial reference position
   - 2: evaluation at a lagged position (controlled by **WAVEKINTAU**).
   
 * **WAVEKINEVAL_POT** is a flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
 The available options are:
 
-  - 0: local evaluation of wave kinematics, 
-  - 1: evaluation at the fixed initial reference position, 
+  - 0: local evaluation of wave kinematics
+  - 1: evaluation at the fixed, undisplaced/unrotated initial reference position (**this is the default value if not specified**)
   - 2: evaluation at a lagged position (controlled by **WAVEKINTAU**).
   
 * **WAVEKINTAU** is the time constant for the first order low-pass filter used to determine lagged position of the Morison/Potential Flow elements (when **WAVEKINEVAL_MOR** or **WAVEKINEVAL_POT** is set to 2).
