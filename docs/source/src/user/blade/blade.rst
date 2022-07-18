@@ -57,8 +57,8 @@ If the blade is to have multi-polar sets, then these need to be previously creat
 The columns of the advanced blade properties are:
 
 - **Position [m]** is the position of the section along the blade pitch axis (in m). It should match the position given in the basic blade properties. 
-- **IP Offset [m]** is an additional offset of the blade section in the global y-direction. This is the in-plane direction.
-- **OOP Offset [m]** is an additional offset of the blade section in the global x-direction. This is the out-of-plane direction.
+- **X (IP) Offset [m]** is an additional offset of the blade section in the global y-direction. This is the in-plane direction.
+- **Y (OOP) Offset [m]** is an additional offset of the blade section in the global x-direction. This is the out-of-plane direction.
 - **T Axis [%c]** is the position of the thread axis as a percentage of the local chord. It is used to define the axis at which the section is rotated and also to define the position of the structural beam (see :ref:`StrDef_BladeTower`). 
 
 In addition to the manual blade definition option, QBlade allows for some automated setups to speed up the blade design. It has the option to automatically set the
@@ -122,7 +122,7 @@ An exemplary ``.bld`` file is shown below:
 	3                                        NUMBLADES          - number of blades
 
 	----------------------------------------Blade Data------------------------------------------------------------------
-	POS [m]             CHORD [m]           TWIST [deg]         OFFSET_OOP [m]      OFFSET_IP [m]       TAXIS [-]           POLAR_FILE          
+	POS [m]             CHORD [m]           TWIST [deg]         OFFSET_X [m]        OFFSET_Y [m]        TAXIS [-]           POLAR_FILE          
 	1.5000              3.5420              0.0000              0.0000              0.0000              0.5000              t100.0_nre_5mw_Cylinder_1_section_with_a_Cd_of_0.50.plr
 	2.8674              3.5420              13.3080             0.0027              0.0006              0.5000              t100.0_nre_5mw_Cylinder_1_section_with_a_Cd_of_0.50.plr
 	5.5992              3.8540              13.3080             0.1057              0.0250              0.5000              t100.0_nre_5mw_Cylinder_1_section_with_a_Cd_of_0.50.plr
