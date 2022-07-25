@@ -31,7 +31,7 @@ Characteristic BEM
 ------------------
 
 In the *Characteristic BEM* submodule simulations can be carried out over a specified range of windspeeds, rotational speeds and pitch angles. 
-By right-clicking on each graph in the graphics module, the user can specify the plotted variables whcih are displayed.
+By right-clicking on each graph in the graphics module, the user can specify the plotted variables which are displayed.
 When the selected windspeed, rotational speed or pitch angle is changed in the top toolbar, the series of curves is changed accordingly. 
 This submodule is of great help when designing custom control strategies for variable rotational speed and/or pitch controlled wind turbine rotors.
 

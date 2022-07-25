@@ -61,10 +61,8 @@ Once the polar is found to be suitable, this can be stored by clicking on the *S
 
 Dynamic Polar Decomposition
 ---------------------------
-In the case that a dynamic stall model is to be applied during a simulation, then a decomposition of the airfoil must be carried out. 
-This separates the the airfoil coefficients into attached and separated regimes, which are applied together with kinematic data to calculate the unsteady lift, drag or moment coefficients.
-QBlade provides this utility to the user with the dynamic polar set option. Upon selecting this option the user must select analysis states for the decomposition. 
-This dialogue is shown in :numref:`fig-decomp1`.
+In the case that the :ref:`ATEFlap Dynamic Stall Model` dynamic stall model is to be applied for a simulation, then a decomposition of the airfoil must be carried out. This separates the the airfoil coefficients into fully attached and fully separated regimes, which are applied together with kinematic data to calculate the unsteady lift, drag or moment coefficients.
+QBlade provides this utility to the user with the dynamic polar set option. Upon selecting this option the user must select analysis states for the decomposition. This dialogue is shown in :numref:`fig-decomp1`.
 
 .. _fig-decomp1:
 .. figure:: dynamic_spec.png

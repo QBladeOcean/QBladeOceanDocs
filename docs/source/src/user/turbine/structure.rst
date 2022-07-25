@@ -663,7 +663,7 @@ Morison Equation-Related Parameters
   - 2: evaluation at a lagged position (controlled by **WAVEKINTAU**).
   
 * **WAVEKINEVAL_POT** is a flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
-The available options are:
+  The available options are:
 
   - 0: local evaluation of wave kinematics
   - 1: evaluation at the fixed, undisplaced/unrotated initial reference position (**this is the default value if not specified**)

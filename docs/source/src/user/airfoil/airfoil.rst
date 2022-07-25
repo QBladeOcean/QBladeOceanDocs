@@ -1,5 +1,5 @@
-Airfoil Creation Overview
--------------------------
+Airfoil Generation Overview
+---------------------------
 
 QBlade calculates both local blade values as well as global performance metrics by using local aerodynamic properties of the discrete blade sections (see :doc:`../blade/blade`).
 Prior to designing a blade, these must be defined for each blade section. For this purpose, QBlade has an airfoil module which allows creating or importing airfoil profiles. 

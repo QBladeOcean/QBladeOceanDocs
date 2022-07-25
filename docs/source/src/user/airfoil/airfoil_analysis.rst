@@ -49,8 +49,7 @@ The user must specify the start, end and delta values for :math:`\alpha`. Subseq
 
 XFoil Batch Analysis
 ^^^^^^^^^^^^^^^^^^^^
-For any given blade design, the airfoil section of a blade will be exposed to a range of operating conditions. For this reason, it can be beneficial to carry out an airfoil analysis for a range of Reynolds numbers. 
-To streamline this process, QBlade features an XFoil batch option. The creation dialogue for this is shown in :numref:`fig-xfoil-batch`.
+For any given blade design, the different airfoil sections of a blade will be exposed to a range of operating conditions. For this reason, it can be beneficial to carry out an airfoil analysis for a range of Reynolds numbers for each of the airfoils that is used in the particular blade design. To streamline this process, QBlade features an XFoil batch option. The creation dialogue for this is shown in :numref:`fig-xfoil-batch`.
 
 .. _fig-xfoil-batch:
 .. figure:: create_xfoilbatch.png
@@ -89,9 +88,9 @@ Airfoil aerodynamic data can also be imported within the airfoil analysis module
 
 It should again be emphasized that polars for the entire :math:`\alpha` range are required for an analysis, as such polar import is more practical within the :doc:`../airfoil/polar_extrapolation`. 
 
-Exporting Airfoil Data
+Exporting Polar Data
 ----------------------
-Airfoil data generated within the airfoil creation module can be exported for each airfoil either as an XFoil file or as an 
+Airfoil polar data generated within the airfoil creation module can be exported for each airfoil either as an XFoil file or as an 
 NREL file simply be selecting the *Export Data* option from the *Polar* menu. The option is also available to export all generated airfoil data by selecting *Export ALL*.
 
 
