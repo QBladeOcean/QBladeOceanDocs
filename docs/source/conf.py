@@ -22,7 +22,7 @@ copyright = '2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebasti
 author = 'David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker'
 
 # The full version, including alpha/beta/rc tags
-release = '0.XX'
+release = '1.00_beta'
 
 
 # -- General configuration ---------------------------------------------------
@@ -55,12 +55,17 @@ numfig = True
 #html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
 html_theme_path = ['_themes', ]
-html_logo = 'images/logo_1000.png'
+html_logo = 'images/qblade_logo_white.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# custom.css is inside one of the html_static_path folders (e.g. _static)
+html_css_files = ['custom.css']
+
+html_js_files = ['custom.js']
 
 #html_theme_options = {
 #    'logo_only': False,
