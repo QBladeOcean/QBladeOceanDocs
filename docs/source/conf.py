@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'QBlade Docs'
+project = 'QBlade Documentation'
 copyright = '2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND'
 author = 'D. Marten, J. Saverin, R. Behrens de Luna, S. Perez-Becker'
 
 # The full version, including alpha/beta/rc tags
-release = '2.0.4, Licensed under CC-BY-NC-ND'
+release = '2.0.4'
 
 
 # -- General configuration ---------------------------------------------------
