@@ -19,7 +19,7 @@
 
 project = 'QBlade Docs'
 copyright = '2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND'
-author = 'David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker'
+author = 'D. Marten, J. Saverin, R. Behrens de Luna, S. Perez-Becker'
 
 # The full version, including alpha/beta/rc tags
 release = '2.0.4_beta'
