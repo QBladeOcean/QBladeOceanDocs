@@ -59,24 +59,15 @@ Upon generation the tuning parameters are specified such that they correspond to
 Once the polar is found to be suitable, this can be stored by clicking on the *Save* button. 
 
 
-Dynamic Polar Decomposition
+Polar Decomposition
 ---------------------------
 In the case that the :ref:`ATEFlap Dynamic Stall Model` dynamic stall model is to be applied for a simulation, then a decomposition of the airfoil must be carried out. This separates the the airfoil coefficients into fully attached and fully separated regimes, which are applied together with kinematic data to calculate the unsteady lift, drag or moment coefficients.
-QBlade provides this utility to the user with the dynamic polar set option. Upon selecting this option the user must select analysis states for the decomposition. This dialogue is shown in :numref:`fig-decomp1`.
-
-.. _fig-decomp1:
-.. figure:: dynamic_spec.png
-    :align: center
-    :scale: 50%
-    :alt: Dynamic airfoil state selection in QBlade.
-
-    A dynamic polar decomposition requires the specific of airfoil states.
-	
-Once this has been carried out, the dynamic parameters of the decomposition can be visualised for analysis. These include:
+In QBlade this decomposition is automatically performed during the polar extrapolation - or can be applied as a post processing to already extrapolated polars. 
+Once the extrapolation has been carried out, the parameters of the decomposition can be visualized. The parameters are include:
 
 * **Attached Lift Coefficient:** The value of the lift coefficient for attached flows. 
 * **Detached Lift Coefficient:** The value of the lift coefficient for detached flows and dynamic airfoils near the detachment point. 
-* **f function:** The function which determines which fraction of the aforementioned polars are used based on kinematic parameters (this varies depending on the dynamic stall model applied).
+* **f function:** The function which determines the fraction of the aforementioned lift contributions over the range of angles of attack.
 
 A plot of these parameters, as generated for a NACA 4412 profile are shown in :numref:`fig-decomp1`.
 
@@ -85,7 +76,7 @@ A plot of these parameters, as generated for a NACA 4412 profile are shown in :n
     :align: center
     :alt: Dynamic airfoil data for an airfoil in QBlade.
 
-    Dynamics airfoil parameters for a NACA 4412 airfoil dynamic decomposition carried out in QBlade.
+    Dynamics airfoil parameters for a NACA 4412 polar decomposition carried out in QBlade.
 	
 Import and Export of 360 Polars
 -------------------------------------------------
