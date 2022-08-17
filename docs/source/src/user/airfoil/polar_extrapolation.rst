@@ -71,7 +71,7 @@ Once the extrapolation has been carried out, the parameters of the decomposition
 
 A plot of these parameters, as generated for a NACA 4412 profile are shown in :numref:`fig-decomp1`.
 
-.. _fig-decomp2:
+.. _fig-decomp1:
 .. figure:: dynamic_plots.png
     :align: center
     :alt: Dynamic airfoil data for an airfoil in QBlade.
