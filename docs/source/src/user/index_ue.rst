@@ -15,6 +15,13 @@ Data Structure, Import & Export
    :maxdepth: 1
 
    data_import_export/data_import_export
+   
+HAWT, VAWT and PROP Mode
+************************
+.. toctree::
+   :maxdepth: 1
+
+   hawtvawtprop/hawtvawtprop
 
 Airfoil Module
 **************
