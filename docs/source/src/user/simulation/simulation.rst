@@ -132,7 +132,6 @@ Structural Simulation Settings
 
 * **Structural Steps / Aerostep**: Sets how many structural steps will be evaluated per global timestep. If multiple structural steps are evaluated per global timestep the aerodynamic loading is assumed to be constant.
 * **Initial Relaxation Steps**: An initial iterative relaxation is performed, taking into account only gravitational forces.
-* **Time Integrator Type**: The structural simulation is then advanced using a time integrator of choice. Several different time integrators (:footcite:t:`Tasora2017`) are available in Chrono, however only the iterative **HHT** (Hilber-Hughes-Taylor formulation) has proven its usability within the current integration of Chrono in QBlade. While other, non-iterative, integrators suffer from constraint drifts or require very small timesteps to yield reasonable results the HHT integrator shows good performance for structural time steps in the range of 3 degree azimuthal rotor increments.
 * **Number of Iterations**: Set the number of iterations for the *iterative* time steppers, such as the **HHT**.
 * **Include Aero Forces & Moments**: Toggles if aerodynamic forces are projected onto  the structural model definition.
 * **Include Hydro Forces & Moments**: Toggles if hydrodynamic forces are projected onto  the structural model definition.
@@ -144,9 +143,9 @@ In this section special events, external loading, prescribed motion and prescrib
 
 * **Event Definition File**: An event is defined by a combination of *Keywords* and values. The following list gives an overview of the available event types. Events can only be defined if the turbine definition has a structural definition. Multiple events may be defined in a single file. The events override any events / control that is returned via the controller exchange array:
 
-	* **30 FAILGRID**: At time 30 s, the pitch rate of blade nr. 1 is set to a maximum rate of 1.5 deg/s
 	* **30 FAILGRID**: At time 30 s, the generator moment is set to 0 Nm.
 	* **30 SETBRAKE**: At time 30 s, the brake is engaged.
+	* **30 1.5 FAILPITCH_1**: At time 30 s, the pitch rate of blade nr. 1 is set to a maximum rate of 1.5 deg/s
 	* **30 90 1.5 PITCHTO**: At time 30 s, the collective pitch rate is set to 1.5deg/s until 90 deg are reached.
 	* **30 FAILBLADE_1**: At time 30 s, blade nr. 1 is *released* from the hub, by deactivating the respective structural constraint.
 	* **30 FAILCABLE_1**: At time 30 s, the cable with the IDNr. 1 brakes away from the substructure.
@@ -359,7 +358,6 @@ Simulation objects can be exported into the text based ``.sim`` format. When a s
 	    20                                   RELAXSTEPS         - the number of initial static structural relaxation steps
 	    0                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
 	    2.000                                RPMPRESCRIBED      - the prescribed rotor RPM [-]
-	    0                                    TINTEGRATOR        - the time integrator for the structural sim (0 = HHT; 1 = linEuler; 2 = projEuler; 3 = Euler)
 	    10                                   STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
 	    1                                    MODNEWTONITER      - use the modified newton iteration?
 	    0.00                                 GLOBPOS_X          - the global x-position of the turbine [m]
@@ -384,7 +382,7 @@ Simulation objects can be exported into the text based ``.sim`` format. When a s
 	Windfield.bts                            WNDNAME            - filename of the turbsim input file or hubheight file (with extension), leave blank if unused
 	1                                        STITCHINGTYPE      - the windfield stitching type; 0 = periodic; 1 = mirror
 	0                                        WINDAUTOSHIFT      - the windfield shifting automatically based on rotor diameter; 0 = false; 1 = true
-	11.00                                    SHIFTTIME          - the windfield is shifted by this time if shift type = 1
+	11.00                                    SHIFTTIME          - the windfield is shifted by this time if WINDAUTOSHIFT = 0
 	10.00                                    MEANINF            - the mean inflow velocity, overridden if a windfield or hubheight file is use
 	0.00                                     HORANGLE           - the horizontal inflow angle
 	0.00                                     VERTANGLE          - the vertical inflow angle
