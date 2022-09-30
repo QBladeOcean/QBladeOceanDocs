@@ -147,7 +147,7 @@ In this section special events, external loading, prescribed motion and prescrib
 	* **30 SETBRAKE**: At time 30 s, the brake is engaged.
 	* **30 1.5 FAILPITCH_1**: At time 30 s, the pitch rate of blade nr. 1 is set to a maximum rate of 1.5 deg/s
 	* **30 90 1.5 PITCHTO**: At time 30 s, the collective pitch rate is set to 1.5deg/s until 90 deg are reached.
-    * **30 90 1.5 YAWTO**: At time 30 s, the yaw rate is set to 1.5deg/s until 90 deg are reached.
+	* **30 90 1.5 YAWTO**: At time 30 s, the yaw rate is set to 1.5deg/s until 90 deg are reached.
 	* **30 FAILBLADE_1**: At time 30 s, blade nr. 1 is *released* from the hub, by deactivating the respective structural constraint.
 	* **30 FAILCABLE_1**: At time 30 s, the cable with the IDNr. 1 brakes away from the substructure.
 
