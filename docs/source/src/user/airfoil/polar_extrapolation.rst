@@ -60,7 +60,7 @@ Once the polar is found to be suitable, this can be stored by clicking on the *S
 
 
 Polar Decomposition
----------------------------
+-------------------
 In the case that the :ref:`ATEFlap Dynamic Stall Model` dynamic stall model is to be applied for a simulation, then a decomposition of the airfoil must be carried out. This separates the the airfoil coefficients into fully attached and fully separated regimes, which are applied together with kinematic data to calculate the unsteady lift, drag or moment coefficients.
 In QBlade this decomposition is automatically performed during the polar extrapolation - or can be applied as a post processing to already extrapolated polars. 
 Once the extrapolation has been carried out, the parameters of the decomposition can be visualized. The parameters are include:
@@ -68,6 +68,12 @@ Once the extrapolation has been carried out, the parameters of the decomposition
 * **Attached Lift Coefficient:** The value of the lift coefficient for attached flows. 
 * **Detached Lift Coefficient:** The value of the lift coefficient for detached flows and dynamic airfoils near the detachment point. 
 * **f function:** The function which determines the fraction of the aforementioned lift contributions over the range of angles of attack.
+
+.. _decomposition:
+.. math::
+	\begin{align}
+	Cl_{st} = f   Cl_{att}	 + (1-f)   Cl_{sep}, 
+	\end{align}
 
 A plot of these parameters, as generated for a NACA 4412 profile are shown in :numref:`fig-decomp1`.
 

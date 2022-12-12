@@ -11,8 +11,8 @@ The implemented ATEFlap model also accounts for unsteady lift contribution of ac
 
 
 
-Polar Decomposition
--------------------
+Decomposed Polar Data
+---------------------
 
 .. _fig-decomposition:
 .. figure:: decomposition.jpg
@@ -31,7 +31,7 @@ The unsteady aerodynamics model is based on a decomposition of the static, two d
 
 where :math:`f` represents the separation function.
 	
-A module to perform the decomposition of polar data has been integrated with QBlade's airfoil data pre-processor (see :doc:`../../../user/airfoil/polar_extrapolation`). 
+A module to perform the decomposition of polar data has been integrated with QBlade's airfoil data pre-processor (see :ref:`Polar Decomposition`). 
 
 .. To generate the decomposed data, the angle of 
 .. attack for the positive and the negative stall point, as well as the attached lift slope of the static polar, have to be provided as a user input.
