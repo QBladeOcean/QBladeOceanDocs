@@ -530,16 +530,17 @@ Substructure Geometry and Elements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * **SUBJOINTS** is a table that is used to place spatial points that help define the members of the substructure. 
-  Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the cartesian coordinates of the joint (in m). The origin is the seabed if **ISFLOATING** is false and the MSL if **ISFLOATING** is true.
+  Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the cartesian coordinates of the joint (in m). The origin is the seabed if **ISFLOATING** is false and the MSL if **ISFLOATING** is true. 
+  The values X1, Y1, Z1, X2, Y2 and Z2 are optional and can be used to define the local coordinate axes of the joint. X1, Y1 and Z1 are defining the vector of the joints local X-Axis (in global coordinates). X2, Y2 and Z2 define the joints Y-Axis (in global coordinates). The Z-Axis is then constructed to define a right-hand coordinate system. The standard joint orientation is X1, Y1, Z1 = (1,0,0) and X2, Y2, Z2 = (0,1,0). If the user wants to define joint orientations they have to be defined for each joint in the table.
   The table is structured as follows:
 
-  ======= ========= ========= =========
-  JointID JointX    JointY    JointZ 
-  ======= ========= ========= =========  
-  1       <Value 1> <Value 2> <Value 3>
-  ------- --------- --------- ---------
-  ...     ...       ...       ...
-  ======= ========= ========= ========= 
+  ======= ========= ========= ========= ========= ========= ========= ========= ========= ========= 
+  JointID JointX    JointY    JointZ 	X1 		  Y1        Z1        X2        Y2        Z2
+  ======= ========= ========= ========= ========= ========= ========= ========= ========= ========= 
+  1       <Value 1> <Value 2> <Value 3> <Value 4> <Value 5> <Value 6> <Value 7> <Value 8> <Value 9>
+  ------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
+  ...     ...       ...       ...		...       ...       ...       ...       ...       ...      
+  ======= ========= ========= ========= ========= ========= ========= ========= ========= =========
 
 * **JOINTOFFSET** is a table that can be used to apply a global offset to the positions of ALL **SUBJOINTS**. Note that the offset is only applied to the joints and not the mass and hydro reference points defined in :ref:`StrDef_LPFT`.
   The table is structured as follows:
@@ -583,10 +584,10 @@ Substructure Geometry and Elements
 
 * **SUBCONSTRAINTS** is a table that defines the constraints of joints that are not connected by members, constraints of joints to the ground or to one **TP_INTERFACE_POS** transition piece point. 
   Each row of the table has 12 entries. The first entry defines the constraint ID number. The next two entries define the two joints which can be constrained. The forth entry defines the number of the transition piece point (**TP_INTERFACE_POS**) that is to be constrained (see **TP_INTERFACE_POS** keyword and :ref:`StrDef_LPFT`). 
-  Note that at least one joint of the substructure should be constrained to the transition piece (defined by **TP_INTERFACE_POS**) and that a constraint is defined **either** between two joints or one joint and one transition piece point. 
-  The fifth and sixth entries specify the connection method for bottom-fixed substructures to the ground (see :ref:`StrDef_Mooring`). The fifth entry specifies a stiff constraint with the ground. The sixth entry specifies a constraint to the ground via a non-linear spring-damping element (defined via an ID number). 
-  The last 6 entries specify which degrees of freedom are constrained: three translational and three rotational degrees of freedom. 
-  For these entries 0 means unconstrained and 1 means constrained.
+  Note that at least one joint of the substructure should be constrained to the transition piece (defined by **TP_INTERFACE_POS**) and that a constraint is defined **either** between two joints or one joint and one transition piece point. The fifth entry specifies a constraint with the fixed ground. The sixth entry specifies the constraint to be realized via a non-linear spring-damping element (defined via an ID number). If no spring or damper element is selected the connection is realized as stiff.
+  The last 6 entries specify which degrees of freedom are constrained (either stiff or with a spring damper element): three translational and three rotational degrees of freedom. 
+  For these entries 0 means unconstrained and 1 means constrained. A spring-damper element is always acting along the constrained degrees of freedom. 
+  The coordinate system for these constraints is defined by the type that JointID1 is connected to. If Joint1ID is connected to Joint2ID the coordinate system in which this constrained is carried out is that of Joint2ID. If Joint1ID is connected to the transition piece the coordinate system of the transition piece is utilized for the connection. A connection with the ground is realized in the global world coordinate system.
 
   ======= ========= ========= ========= ========= ========= ========= ========= ========= ========= ========== ========== 
   ConID   Joint1ID  Joint2ID  TrPID     Fixed     SpringID  DoF_tX    DoF_tY    DoF_tZ    DoF_rX    DoF_rY     DoF_rZ
@@ -833,8 +834,10 @@ It can be either a rigid connection or a connection via a system of non-linear s
   The first entry represents the ID number of the system (used in the **SUBCONSTRAINTS** table). The second entry defines the type of system that is being modelled.
   There are two options: 'spring' and 'damp'. This affects the way the coefficients in the following entries are interpreted. 
 
-  * If 'spring' is selected, then QBlade expects the definition table to consists of displacement (in m) and stiffness (in N/m) entries.
-  * If 'damp' is selected, then QBlade expects the definition table to consist of velocity (in m/s) and damping (in N/(m/s)) entires.
+  * If 'spring' is selected, then QBlade expects the definition table to consists of displacement or rotation (in m or rad) and stiffness (in N/m or Nm/rad) entries.
+  * If 'damp' is selected, then QBlade expects the definition table to consist of velocity (in m/s or rad/s) and damping (in N(m/s) or Nm/(rad/s)) entries.
+  
+  When a spring or damper is used to constrain two joints its nonlinear definition always acts as a rotational spring or damper along the rotational DOF's and as a translational spring or damper along the translational DOF's. Thus, usually a spring is either defined as a rotational spring and then assigned to constrain rotational DOF's or as a translational spring to constrain translational DOF's.
   
   The third row represents the stiffness/damping at zero displacement/velocity. The following 2N entries represent the additional lookup table entries for the non-linear spring/damper system.
   The order is :math:`x_1/v_1`, :math:`K/D(x_1/v_1)`; :math:`x_2/v_2`, :math:`K/D(x_2/v_2)` and so on.
