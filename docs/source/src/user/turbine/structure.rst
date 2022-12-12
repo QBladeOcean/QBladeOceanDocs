@@ -535,11 +535,11 @@ Substructure Geometry and Elements
   The table is structured as follows:
 
   ======= ========= ========= ========= ========= ========= ========= ========= ========= ========= 
-  JointID JointX    JointY    JointZ 	X1 		  Y1        Z1        X2        Y2        Z2
+  JointID JointX    JointY    JointZ    X1        Y1        Z1        X2        Y2        Z2
   ======= ========= ========= ========= ========= ========= ========= ========= ========= ========= 
   1       <Value 1> <Value 2> <Value 3> <Value 4> <Value 5> <Value 6> <Value 7> <Value 8> <Value 9>
   ------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
-  ...     ...       ...       ...		...       ...       ...       ...       ...       ...      
+  ...     ...       ...       ...       ...       ...       ...       ...       ...       ...      
   ======= ========= ========= ========= ========= ========= ========= ========= ========= =========
 
 * **JOINTOFFSET** is a table that can be used to apply a global offset to the positions of ALL **SUBJOINTS**. Note that the offset is only applied to the joints and not the mass and hydro reference points defined in :ref:`StrDef_LPFT`.
