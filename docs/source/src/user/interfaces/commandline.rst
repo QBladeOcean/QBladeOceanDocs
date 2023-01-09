@@ -1,5 +1,5 @@
-Command Line Interface
-**********************
+Overview
+********
 
 .. admonition:: QBlade-EE
 

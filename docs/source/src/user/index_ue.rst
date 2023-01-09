@@ -16,6 +16,13 @@ Data Structure, Import & Export
 
    data_import_export/data_import_export
    
+Coordinate Systems
+******************
+.. toctree::
+   :maxdepth: 1
+
+   coordinates/coordinates
+   
 HAWT, VAWT and PROP Mode
 ************************
 .. toctree::
@@ -101,18 +108,16 @@ DLC Generator Module
 
    dlc/dlc
    
-Interfaces / Scripting
-**********************
-.. toctree::
+Command Line Interface (CLI)
+****************************
+   .. toctree::
    :maxdepth: 1
 
    interfaces/commandline
-   interfaces/inloop
-
-Coordinate Systems
-******************
-.. toctree::
+   
+Simulation in Loop (SIL) Scripting Interface
+********************************************
+   .. toctree::
    :maxdepth: 1
 
-   coordinates/coordinates
-   
+   interfaces/inloop
