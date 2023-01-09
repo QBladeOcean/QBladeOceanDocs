@@ -215,11 +215,11 @@ The location of the structural data tables for the blades is defined by the keyw
 .. code-block:: console
 
 	------------------------------- TOWER -------------------------------------
-	77.6				TWRHEIGHT - Height of the tower (m)
+	77.6						TWRHEIGHT - Height of the tower (m)
 	OC3_Sparbuoy_Tower.str		TWRFILE - Name of file containing properties for the tower
 	OC3_Sparbuoy_Sub_LPMD.str	SUBFILE	 - Name of the substructure file
 	
-The structural tower data table is defined in a similar fashion as for the blades. The keyword **TWRHEIGHT** defines the absolute height of the tower. The keyword **SUBFILE** points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword **SUBFILE** is not defined then the tower will simply be rigidly contrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Definition`.
+The structural tower data table is defined in a similar fashion as for the blades. The keyword **TWRHEIGHT** defines the absolute height of the tower. The keyword **SUBFILE** points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword **SUBFILE** is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Definition`.
 
 Loading Data and Sensor Locations
 ---------------------------------
@@ -453,6 +453,7 @@ The local cross-sectional coordinate system for the definition of the structural
 Substructure Definition
 -----------------------
 
+To add a substructure to a turbine definition you need to add the filename followed by the keyword **SUBFILE** anywhere within the main structural input file.
 As with the other structural definition files, the substructure is defined by a series of keywords that are recognized by QBlade when creating the turbine. The format is the same as with the other structural file definitions: 
 
  * *<Value>* **<Keyword>**, for parameters defined by a single values.
@@ -487,10 +488,221 @@ The main keywords that are used to define a substructure are shown in :numref:`f
 It should also be noted that QBlade allows the user to combine elements from the :doc:`../../theory/hydrodynamics/lpft/lpft` and :doc:`../../theory/hydrodynamics/me/me` hydrodynamic models freely. 
 So the user should be careful when setting up the substructure in QBlade so that the model remains consistent.
 
-Following keywords can be used to define the substructure.
+An exemplary substructure file for the OC4 Semi-Submersible floater is shown below:
+
+.. code-block:: console
+
+	true 	ISFLOATING //if the structure is fixed the joint coordinates are assigned in a coordinate system with O(0,0,0) at the mudline, for floaters O(0,0,0) is at the MSL and marks the floaters's NP
+
+	200		WATERDEPTH  //design depth
+
+	1025	WATERDENSITY // design density, used for flooded member mass calcs
+
+	100 	ADVANCEDBUOYANCY //using an advanced discretization technique (N must be a square int number) to calculate buoyancy of partially submerged members, especially usefull if "lying" cylinders are used to generate the draft
+
+	false	STATICBUOYANCY // static buoyancy, based on the MSL should be used when using morison member buoyancy combined with potential flow diffraction forces
+	
+	0.9992 	BUOYANCYTUNER //fine tuning of the buoyancy
+
+	JOINTOFFSET // these global offsets are only applied to joints (not the TP or cog position)	
+	XPOS	YPOS	ZPOS
+	0	0	0
+
+	MARINEGROWTH
+	ID	Thickness	Density		
+	1	0.1		1100		
+
+	//all following positions are defined in (x,y,z) [m]: for floaters: from the neutral point, which is located at MSL (0,0,0); for bottom fixed substructures: defined from seabed
+
+	TP_INTERFACE_POS //the interface position between substructure and tower or RNA 
+	X[m]		Y[m]		Z[m]
+	0 		0 		10
+
+	REF_COG_POS  //cog reference position, at which the mass matrix is evaluated
+	X[m]		Y[m]		Z[m]
+	0		0		-13.46
+
+	REF_HYDRO_POS //reference point for the evaluation of linearized hydrodynamic stiffness, damping, quaddamping, addedmass matrices and the constant force vector
+	X[m]		Y[m]		Z[m]
+	0		0		0
+
+	SUB_MASS //the floater mass matrix is defined at the REF_COG_POS
+	1.34730e+07   0.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00
+	0.00000e+00   1.34730e+07   0.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00
+	0.00000e+00   0.00000e+00   1.34730e+07   0.00000e+00   0.00000e+00   0.00000e+00
+	0.00000e+00   0.00000e+00   0.00000e+00   6.82700e+09   0.00000e+00   0.00000e+00
+	0.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00   6.82700e+09   0.00000e+00
+	0.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00   0.00000e+00   1.22600e+10
+
+	SUBJOINTS //defined either from MSL (if isFLoating) or from seabed using the designDepth variable (if !isFLoating)	
+	JointID	JointX	JointY	JointZ
+	 1     0.00000     0.00000   -20.00000
+	 2     0.00000     0.00000    10.00000
+	 3    14.43376    25.00000   -14.00000
+	 4    14.43376    25.00000    12.00000
+	 5   -28.86751     0.00000   -14.00000
+	 6   -28.86751     0.00000    12.00000
+	 7    14.43376   -25.00000   -14.00000
+	 8    14.43376   -25.00000    12.00000
+	 9    14.43375    25.00000   -20.00000
+	10   -28.86750     0.00000   -20.00000
+	11    14.43375   -25.00000   -20.00000
+	12     9.23760    22.00000    10.00000
+	13   -23.67130     3.00000    10.00000
+	14   -23.67130    -3.00000    10.00000
+	15     9.23760   -22.00000    10.00000
+	16    14.43375   -19.00000    10.00000
+	17    14.43375    19.00000    10.00000
+	18     4.04145    19.00000   -17.00000
+	19   -18.47520     6.00000   -17.00000
+	20   -18.47520    -6.00000   -17.00000
+	21     4.04145   -19.00000   -17.00000
+	22    14.43375   -13.00000   -17.00000
+	23    14.43375    13.00000   -17.00000
+	24     1.62500     2.81500    10.00000
+	25    11.43376    19.80385    10.00000
+	26    -3.25000     0.00000    10.00000
+	27   -22.87000     0.00000    10.00000
+	28     1.62500    -2.81500    10.00000
+	29    11.43376   -19.80385    10.00000
+	30     1.62500     2.81500   -17.00000
+	31     8.43376    14.60770   -17.00000
+	32    -3.25000     0.00000   -17.00000
+	33   -16.87000     0.00000   -17.00000
+	34     1.62500    -2.81500   -17.00000
+	35     8.43376   -14.60770   -17.00000
+	36     1.62500     2.81500   -16.20000
+	37    11.43376    19.80385     9.13000
+	38    -3.25000     0.00000   -16.20000
+	39   -22.87000     0.00000     9.13000
+	40     1.62500    -2.81500   -16.20000
+	41    11.43376   -19.80385     9.13000
+	42    14.43376    25.00000   -19.94000
+	43   -28.86751     0.00000   -19.94000
+	44    14.43376   -25.00000   -19.94000
+	45    14.43376    25.00000   -6.170000	
+	46   -28.86751     0.00000   -6.170000
+	47    14.43376   -25.00000   -6.170000
+	48    14.43376    25.00000   -14.89000
+	49   -28.86751     0.00000   -14.89000
+	50    14.43376   -25.00000   -14.89000
+
+	SUBELEMENTSRIGID
+	ElemID 	BMASSD	DIAMETER
+	1		  1		6.5
+	2		  1		12
+	3		  1 	24
+	4		  1 	1.6
+
+	// Heave hydro forces of base columns
+	HYDROJOINTCOEFF  //hydrodynamic coefficients to be assigned to joints, acting on connected members faces in axial direction, occulation of interconnected members is automatically accounted for
+	CoeffID	JointID	CdA	CaA	CpA
+	1	9	4.8	0.67 	1.0	// Bottom_Base_Column_1
+	2	10	4.8	0.67 	1.0	// Bottom_Base_Column_2
+	3	11	4.8	0.67 	1.0	// Bottom_Base_Column_3
+	4 	1 	0.0 0.0 	1.0 // Main_Column
+	5	3	0.0	0.67 	1.0	// Top_Base_Column_1
+	6	5	0.0	0.67 	1.0	// Top_Base_Column_2
+	7	7	0.0	0.67 	1.0	// Top_Base_Column_3	
+
+
+	HYDROMEMBERCOEFF //hydrodynamic coefficients to be assigned to rigid or elastic cylindrical members, defined for the normal-to-axis direction of the cylinders
+	CoeffID		CdN			CaN			CpN		MCFC
+	1			2.0 		0.8			1.0		0	// Mooring_Lines
+	2			0.63		0.63		1.0		1	// D_1.6m
+	3			0.56		0.63		1.0		1	// D_6.5m
+	4			0.61		0.63		1.0		1	// D_12m
+	5			0.68		0.63		1.0		1	// D_24m
+
+	SUBCONSTRAINTS //in this version of the OC4 the member nodes are connected to the transition piece (TrP) directly through the constraints table
+	ID		JntID	Jnt2ID	TrP		Fixed	Spring	DoF_X	DoF_Y	DoF_Z	DoF_rX	DoF_rY	DoF_rZ
+	1		2		0		1		0		0		1		1		1		1		1		1
+	2		24		0		1		0		0		1		1		1		1		1		1
+	3		26		0		1		0		0		1		1		1		1		1		1
+	4		28		0		1		0		0		1		1		1		1		1		1
+	8		30		0		1		0		0		1		1		1		1		1		1
+	9		32		0		1		0		0		1		1		1		1		1		1
+	10		34		0		1		0		0		1		1		1		1		1		1
+	14		12		0		1		0		0		1		1		1		1		1		1
+	15		14		0		1		0		0		1		1		1		1		1		1
+	16		16		0		1		0		0		1		1		1		1		1		1
+	20		18		0		1		0		0		1		1		1		1		1		1
+	21		20		0		1		0		0		1		1		1		1		1		1
+	22		22		0		1		0		0		1		1		1		1		1		1
+	26		36		0		1		0		0		1		1		1		1		1		1
+	27		38		0		1		0		0		1		1		1		1		1		1
+	28		40		0		1		0		0		1		1		1		1		1		1
+	29		9		0		1		0		0		1		1		1		1		1		1
+	30		10		0		1		0		0		1		1		1		1		1		1
+	31		11		0		1		0		0		1		1		1		1		1		1
+
+
+	SUBMEMBERS
+	MemID	Jnt1ID	Jnt2ID	ElmID	RElmID	HyCoID	IsBuoy 	MaGrID	FldArea	ElmDsc	Name (optional)
+	 1       1       2      0       1       3      	1		0		0       2     	Main_Column
+	 2      45       4      0       2       4      	1		0		0       2     	Upper_Column_1
+	 3      46       6      0       2       4      	1		0		0       2     	Upper_Column_2
+	 4      47       8      0       2       4      	1		0		0       2     	Upper_Column_3
+	29       3      45      0       2       4      	1		0		0		2     	Upper_Column_flooded_1
+	30       5      46      0       2       4      	1		0		0		2     	Upper_Column_flooded_2
+	31       7      47      0       2       4      	1		0		0		2     	Upper_Column_flooded_3
+	 5      48       3      0       3       5      	1		0		0       2     	Base_Column_1
+	 6      49       5      0       3       5      	1		0		0       2     	Base_Column_2
+	 7      50       7      0       3       5      	1		0		0       2     	Base_Column_3
+	26      42      48      0       3       5      	1		0		0		2     	Base_column_flooded_1
+	27      43      49      0       3       5      	1		0		0		2     	Base_column_flooded_2
+	28      44      50      0       3       5      	1		0		0		2     	Base_column_flooded_3
+	23       9      42      0       3       5      	1		0		0       2   	Base_column_cap_1
+	24      10      43      0       3       5      	1		0		0       2   	Base_column_cap_2
+	25      11      44      0       3       5      	1		0		0       2   	Base_column_cap_3
+	 8      12      13      0       4       2      	1		0		0       10      Delta_Pontoon_Upper_1
+	 9      14      15      0       4       2      	1		0		0       10      Delta_Pontoon_Upper_2
+	10      16      17      0       4       2      	1		0		0       10      Delta_Pontoon_Upper_3
+	11      18      19      0       4       2      	1		0		0       10      Delta_Pontoon_Lower_1
+	12      20      21      0       4       2      	1		0		0       10      Delta_Pontoon_Lower_2
+	13      22      23      0       4       2      	1		0		0       10      Delta_Pontoon_Lower_3
+	14      24      25      0       4       2      	1		0		0       10      Y_Pontoon_Upper_1
+	15      26      27      0       4       2      	1		0		0       10      Y_Pontoon_Upper_2
+	16      28      29      0       4       2      	1		0		0       10      Y_Pontoon_Upper_3
+	17      30      31      0       4       2      	1		0		0       10      Y_Pontoon_Lower_1
+	18      32      33      0       4       2      	1		0		0       10      Y_Pontoon_Lower_2
+	19      34      35      0       4       2      	1		0		0       10      Y_Pontoon_Lower_3
+	20      36      37      0       4       2      	1		0		0       10      Cross_Brace_1
+	21      38      39      0       4       2      	1		0		0       10      Cross_Brace_2
+	22      40      41      0       4       2      	1		0		0       10      Cross_Brace_3
+
+	MOORELEMENTS
+	ID	Dens.[kg/m^3]	Area[m^2]	Iyy[m^4]	EMod[N/m^4]	RDp.[-]	Dia[m]
+	1	2.35723E+04		4.6084E-03	3.7601E-03	1.6353E+11	0.015	0.0766
+
+	MOORMEMBERS
+	ID	CONN_1						CONN_2				Len.[m]	MoorID 	HyCoID	IsBuoy	MaGrID	ElmDsc	Name
+	1	FLT_-40.868_0.0_-14.0		GRD_-837.6_0		835.5	1		1		1		0		30		Mooring1
+	2	FLT_20.434_35.393_-14.0		GRD_418.8_725.4		835.5	1		1		1		0		30		Mooring2
+	3	FLT_20.434_-35.393_-14.0	GRD_418.8_-725.4	835.5	1		1		1		0		30		Mooring3
+
+
+	TRANSITIONCYLINDER // just for visualization of the transition between floater and tower
+	HEIGHT	DIAMETER	
+	0.5	6.5
+
+	RGBCOLOR //color of the substructure
+	R	G	B
+	255	200	15
+
+	// adding outputs sensors to the mooring lines
+	MOO_1_0.0
+	MOO_1_1.0
+	MOO_2_0.0
+	MOO_2_1.0
+	MOO_3_0.0
+	MOO_3_1.0
+
 
 General Substructure Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following keywords can be used to define the substructure.
 
 * **ISFLOATING** is a flag that determines if the substructure is floating of bottom-fixed. If the structure is bottom-fixed the joint coordinates (see **SUBJOINTS** below) are assigned in a coordinate system with its origin placed at the seabed. For floaters, the origin is placed at the mean see level (MSL) and marks the floaters's neutral point (NP)
 * **WATERDEPTH** sets the design water depth of the substructure, this value is only used for visualization of the turbine and the identification of flooded members. Note that this water depth is only for the turbine setup and is not used for offshore calculations.
