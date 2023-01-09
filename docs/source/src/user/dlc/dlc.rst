@@ -14,7 +14,7 @@ QBlade-EE is equipped with a fully featured automatic DLC generator (see :numref
 * **IEC 61400-3-2 Ed. 2**
 
 Furthermore, the DLC generator allows to setup automatic evaluations of *Campbell Diagrams* and *Aeroelastic Operational (Power) Curves*.
-After a DLC has been defined in the dialog, all individual loadcases can be automatically exported as ``.sim`` files, for an evaluation in the :ref:`Command Line Interface` or can be directly evaluated in the GUI via the :ref:`Multi-Threaded Batch Analysis` (see :numref:`fig-dlc_gen`).
+After a DLC has been defined in the dialog, all individual loadcases can be automatically exported as ``.sim`` files, for an evaluation in the Command Line Interface (:ref:`CLI Overview`) or can be directly evaluated in the GUI via the :ref:`Multi-Threaded Batch Analysis` (see :numref:`fig-dlc_gen`).
    
 .. _fig-dlc_diag:
 .. figure:: dlc_diag.png

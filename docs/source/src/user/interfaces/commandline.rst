@@ -1,5 +1,5 @@
-Overview
-********
+CLI Overview
+************
 
 .. admonition:: QBlade-EE
 

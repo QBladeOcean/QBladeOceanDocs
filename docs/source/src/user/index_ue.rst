@@ -110,14 +110,14 @@ DLC Generator Module
    
 Command Line Interface (CLI)
 ****************************
-   .. toctree::
+.. toctree::
    :maxdepth: 1
 
    interfaces/commandline
    
 Simulation in Loop (SIL) Scripting Interface
 ********************************************
-   .. toctree::
+.. toctree::
    :maxdepth: 1
 
    interfaces/inloop
