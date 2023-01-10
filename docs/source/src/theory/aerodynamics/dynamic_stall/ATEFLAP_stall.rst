@@ -7,7 +7,8 @@ To account for dynamic stall and unsteady aerodynamics the ATEFlap :footcite:`Be
 Note that the ATEFlap model has been specifically modified to be used with :doc:`../lifting_line/lifting_line` simulations :footcite:`Wendler2016`, it is currently not advised to use the ATEFlap model in simulations that use the :doc:`../bem/bem` aerodynamic model. 
 
 The ATEFlap unsteady aerodynamics model consists of mainly two parts; an attached or potential flow model, as proposed by Bergami and Gaunaa :footcite:`Bergami2012`, and the classical Beddoes-Leishman dynamic stall model with a custom formulation for vortex lift, as presented by Hansen and Gaunaa :footcite:`Hansen2004b`. 
-The implemented ATEFlap model also accounts for unsteady lift contribution of active trailing edge flap deflections. 
+The implemented ATEFlap model also accounts for unsteady lift contribution of active trailing edge flap deflections. In its implementation in QBlade the ATEFlap dynamic stall model is only applied within the angle of attack range of -50° to 50°.
+
 
 
 

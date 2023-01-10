@@ -1,9 +1,7 @@
 OYE Dynamic Stall Model
 =======================
 
-In QBlade dynamic stall may be modeled in unsteady :doc:`../lifting_line/lifting_line` or :doc:`../bem/bem` simulations by using the dynamic stall model proposed by Oye :footcite:`Oye1991`. 
-It should be noted that this model only captures the dynamics of separated flow. The additional attached flow dynamics due to airfoil wake memory effects are captured intrinsically by the :doc:`../lifting_line/lifting_line` model.
-Currently, QBlades does not have an adapted dynamic stall model that captures the attached flow dynamics for simulations using the :doc:`../bem/bem`.
+In QBlade dynamic stall may be modeled in unsteady :doc:`../lifting_line/lifting_line` or :doc:`../bem/bem` simulations by using the dynamic stall model proposed by Oye :footcite:`Oye1991`. It should be noted that this model only captures the dynamics of separated flow. The additional attached flow dynamics due to airfoil wake memory effects are captured intrinsically by the :doc:`../lifting_line/lifting_line` model. In its implementation in QBlade the Oye dynamic stall model is only applied within the angle of attack range of -50° to 50°.
 
 
 In Oye's work the dynamic stall is modeled with th help of a separation function :math:`f`. It is used to calculate the dynamic lift :math:`Cl_{dyn}` in the following way:
