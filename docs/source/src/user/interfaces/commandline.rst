@@ -94,19 +94,19 @@ This parameter sets how many parallel instances of QBlade should be started when
 
 	**\\directory\\simulation.sim**
 	
-Passing the absolute location of a :ref:`Simulation Definition ASCII File` (\*.sim) as one of the parameters adds this simulation definition to the list of simulations that will be evaluated. Finished simulation definitions are stored as **.qpr1**, to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation. :code:`\\directory\\project.qpr`.
+Passing the absolute location of a :ref:`Simulation Definition ASCII File` (\*.sim) as one of the parameters adds this simulation definition to the list of simulations that will be evaluated. Multiple simulation definitions may be added during a single CLI call. Finished simulation definitions are stored as **.qpr1**, to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation. :code:`\\directory\\project.qpr`.
 
 	**\\directory\\project.qpr**
 
-Passing the absolute location of a QBlade Project File (\*.qpr) adds all simulation definitions within this project to the list of simulations that will be evaluated. Finished project files are stored as ***.qpr1**,  to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation. :code:`\\directory\\project.qpr`.
+Passing the absolute location of a QBlade Project File (\*.qpr) adds all simulation definitions within this project to the list of simulations that will be evaluated. Multiple project files may be added during a single CLI call. Finished project files are stored as ***.qpr1**,  to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation. :code:`\\directory\\project.qpr`.
 
 	**\\directory\\cutplane.cut**
 	
-When passing the absolute location of a cut-pLane definition (\*.cut) this Cut-Plane Definition is added to the list of cut-plane definitions that will be calculated for all simulations that are evaluated. :code:`\\directory\\cutplane.cut`.
+When passing the absolute location of a cut-pLane definition (\*.cut) this Cut-Plane Definition is added to the list of cut-plane definitions that will be calculated for all simulations that are evaluated. Multiple cut-plane definitions may be added during a single CLI call. :code:`\\directory\\cutplane.cut`.
 
 	**\\directory\\**
 	
-Passing the absolute path of any directory adds this directory to the list of working directories (**WORKING_DIR**). :code:`\\directory\\`.
+Passing the absolute path of any directory adds this directory to the list of working directories (**WORKING_DIR**). :code:`\\directory\\`. Multiple directories may be added during a single CLI call.
 
 	**all_sim**
 	
@@ -167,7 +167,7 @@ The following call is an example for a CLI call of QBlade to evaluate and automa
 
 	:code:`QBladeEE -cmd -d1 -g64 -t12 c:\simulations\ all_sim exp_h2bin remove_wind skip`
 	
-After this CLI call QBlade will evaluate all simulation definitions (:code:`all_sim`) located in c:\\simulations\\ over 12 parallel threads (:code:`-t12`). OpenCL device 1 will be used (:code:`-d1`) with a work-group size of 64 (:code:`-g64`). The simulation results will automatically be exported to the HAWC2 binary format (:code:`exp_h2bin`). Simulations that have already been evaluated previously will be skipped (:code:`skip`) and the automatically generated binary wind fields will be removed after a simulation is finished (:code:`remove_wind`). Upon this call the following info is printed out on the screen::
+After this CLI call QBlade will evaluate all simulation definitions (:code:`all_sim`) located in c:\\simulations\\ over 12 parallel threads (:code:`-t12`). OpenCL device 1 will be used (:code:`-d1`) with a work-group size of 64 (:code:`-g64`). The simulation results will automatically be exported to the HAWC2 binary format (:code:`exp_h2bin`). Simulations that have already been evaluated previously will be skipped (:code:`skip`) and the automatically generated binary wind fields will be removed after a simulation is finished (:code:`remove_wind`). After executing this call the following info is printed out on the screen::
 
 	!!!!! Welcome to QBlade EE v2.0.5.1_alpha windows Command Line Interface (CLI) !!!!!
 
