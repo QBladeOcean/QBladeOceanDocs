@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Turbine Controller &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Turbine Export" href="turbineexport.html" />
+    <link rel="prev" title="Turbine Structural Model" href="structure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="turbine.html">Turbine Definition Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unsteadybem.html">Unsteady BEM Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vortexwake.html">Free Vortex Wake Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structure.html">Turbine Structural Model</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Turbine Controller</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-custom-sensors-to-the-exchange-array">Adding Custom Sensors to the Exchange Array</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="turbineexport.html">Turbine Export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi_turbine.html">Multi Rotor Turbine Assembly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi_turbine.html#multi-rotor-turbine-assembly-export">Multi Rotor Turbine Assembly Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>Turbine Controller</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/turbine/controller.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="turbine-controller">
+<h1>Turbine Controller<a class="headerlink" href="#turbine-controller" title="Permalink to this headline"></a></h1>
+<p>QBlade allows the integration of controllers to perform aero-servo-hydro-elastic simulations. This is done via the integration of a controller dynamic link library (.dll)
+that is called every time step by QBlade. A controller can be added to a turbine definition by selecting it in the dialog shown in <a class="reference internal" href="#fig-controller-dialog"><span class="std std-numref">Fig. 79</span></a>.</p>
+<figure class="align-center" id="id5">
+<span id="fig-controller-dialog"></span><img alt="The controller dialog." src="../../../_images/controller_dialog.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">The controller dialog.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In a predefined exchange array, QBlade passes the necessary sensor input to the controller, calls the controller function and the controller returns the demanded actuator actions.
+This is shown in <a class="reference internal" href="#fig-controller-interaction"><span class="std std-numref">Fig. 80</span></a>.</p>
+<figure class="align-center" id="id6">
+<span id="fig-controller-interaction"></span><img alt="Controller Interaction with QBlade." src="../../../_images/controller_interaction.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 80 </span><span class="caption-text">Controller interaction with QBlade: For each time step, QBlade passes the sensor input and retrieves the control actions demanded from the controller in a predetermined exchange array.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Currently, three controller formats are compatible with QBlade:</p>
+<ul class="simple">
+<li><p>Blade-style controllers</p></li>
+<li><p>DTU-style controllers</p></li>
+<li><p>TUB-style controller</p></li>
+</ul>
+<p>For Bladed-style controllers, QBlade calls the controller function <em>DISCON</em> from the dll. For DTU-style controllers, QBlade calls the controller function <em>update_regulation</em>.
+For TUB-Style controllers, QBlade calls the controller function <em>TUBController</em>.</p>
+<p>Open source examples of these three formats are available online. An example for the Bladed-style controller is the NREL<a class="footnote-reference brackets" href="#footcite-rosco" id="id1">1</a> controller.
+An example for a DTU-style controller is the DTU<a class="footnote-reference brackets" href="#footcite-dtuwec" id="id2">2</a> controller. An example for the TUB-Style controller is the TUB Controller presented in Perez-Becker <em>et al.</em><a class="footnote-reference brackets" href="#footcite-perez-becker2021" id="id3">3</a>.
+QBlade is delivered with pre-compiled DTU and TUB Controllers.</p>
+<figure class="align-center" id="id7">
+<span id="fig-controller-setup"></span><img alt="Setting up a controller in QBlade" src="../../../_images/setup_controller.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 81 </span><span class="caption-text">Setting up a controller in QBlade. The user can choose between three formats.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>All controllers are set up in the same manner in the turbine definition dialog, shown in <a class="reference internal" href="#fig-controller-setup"><span class="std std-numref">Fig. 81</span></a>.
+The user must choose which controller format to use and specify the name of the controller dll and the path to the controller parameter file.</p>
+<p><strong>IMPORTANT</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The controller dll must always be located in the relative folder path <em>.\ControllerFiles</em> to the QBlade executable file.</p></li>
+<li><p>QBlade is a 64bit code, so the controller dlls must also be compiled for 64bit use.</p></li>
+</ul>
+</div></blockquote>
+<p>In addition to the controller dll, the user also has to provide the controller parameter file. There are no specific requirements for this file, except that it should be in ASCII. The user is therefore free to choose the format.
+The latter file is saved in the QBlade project file and can be edited once loaded. This if for example useful for setting up an identical turbine with a modified controller parameter (i.e. for control parameter tuning).
+Controller parameter files edited within QBlade can also be exported to ASCII format.</p>
+<section id="adding-custom-sensors-to-the-exchange-array">
+<h2>Adding Custom Sensors to the Exchange Array<a class="headerlink" href="#adding-custom-sensors-to-the-exchange-array" title="Permalink to this headline"></a></h2>
+<p>In addition to the standard sensor information that is passed between QBlade and the controller, the user can add additional sensors to the exchange array. This is useful for the development
+of specialized controllers that rely on unconventional sensorial input. Depending on the controller format chosen, different positions of the exchange array will be unoccupied.</p>
+<p><strong>IMPORTANT</strong>: The user should know which array entries are unused before adding custom sensors. Otherwise, using this option will lead to unwanted turbine behavior!</p>
+<p>To add custom sensors to the exchange array, following keywords need to be added to the controller parameter file in a new line:</p>
+<ul class="simple">
+<li><p>[&lt;ArrayEntry&gt;] “&lt;Sensor Name&gt;”</p></li>
+</ul>
+<p>The &lt;ArrayEntry&gt; specifies the location of the array in which the sensor input should be written (the first index starts at the array[0] position).
+The &lt;Sensor Name&gt; is the name of the sensor that is written in the simulation output graphs. Using these commands, multiple custom sensors can be added to the interface array.
+For example, if the local tip acceleration in the x direction of blade 1 should be passed to the controller in the 300th entry (at position array[299]) of the exchange array, the user can add following line anywhere in the
+controller parameter file.</p>
+<p>[299] “X_l Acc. BLD_1 pos 1.000”</p>
+<p>Note that the output of the desired sensor should be enabled in the <a class="reference internal" href="structure.html#strdef-mainfile"><span class="std std-ref">Main Definition File</span></a>. Otherwise, only zeros will be passed to the controller.</p>
+<p id="id4"><dl class="footnote brackets">
+<dt class="label" id="footcite-rosco"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>NREL. ROSCO. <a class="reference external" href="https://github.com/nrel/rosco">https://github.com/nrel/rosco</a>, 2022. [Online; accessed 2022-05-09].</p>
+</dd>
+<dt class="label" id="footcite-dtuwec"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>DTU. DTUWEC. <a class="reference external" href=" https://gitlab.windenergy.dtu.dk/OpenLAC/BasicDTUController"> https://gitlab.windenergy.dtu.dk/OpenLAC/BasicDTUController</a>, 2022. [Online; accessed 2022-05-09].</p>
+</dd>
+<dt class="label" id="footcite-perez-becker2021"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>S. Perez-Becker, D. Marten, C. N. Nayeri, and C. O. Paschereit. Implementation and Validation of an Advanced Wind Energy Controller in Aero-Servo-Elastic Simulations Using the Lifting Line Free Vortex Wake Model. <em>Energies</em>, 14(3):783, 2021. URL: <a class="reference external" href="https://www.mdpi.com/1996-1073/14/3/783">https://www.mdpi.com/1996-1073/14/3/783</a>, <a class="reference external" href="https://doi.org/10.3390/en14030783">doi:10.3390/en14030783</a>.</p>
+</dd>
+</dl>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="structure.html" class="btn btn-neutral float-left" title="Turbine Structural Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="turbineexport.html" class="btn btn-neutral float-right" title="Turbine Export" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

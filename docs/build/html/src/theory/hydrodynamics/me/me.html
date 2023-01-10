@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morison Equation &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../../_static/custom.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Hydrostatic Forces" href="../hydrostatics/hs.html" />
+    <link rel="prev" title="Linear Potential Flow Theory" href="../lpft/lpft.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_th.html">Theory Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#aerodynamics">Aerodynamics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index_th.html#hydrodynamics">Hydrodynamics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../lpft/lpft.html">Linear Potential Flow Theory</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Morison Equation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#normal-morison-force-on-a-cylindrical-element">Normal Morison Force on a Cylindrical Element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#axial-morison-force-on-a-cylindrical-element">Axial Morison Force on a Cylindrical Element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mccamy-fuchs-correction">McCamy-Fuchs Correction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modeling-considerations-for-morison-elements">Modeling Considerations for Morison Elements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../hydrostatics/hs.html">Hydrostatic Forces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#structural-dynamics">Structural Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#environmental-conditions">Environmental Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index_th.html">Theory Guide</a> &raquo;</li>
+      <li>Morison Equation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/src/theory/hydrodynamics/me/me.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="morison-equation">
+<h1>Morison Equation<a class="headerlink" href="#morison-equation" title="Permalink to this headline"></a></h1>
+<p>QBlade also offers the possibility to model hydrodynamic loads on slender cylindrical bodies with a full Morison equation approach.
+This is especially useful for calculating distributed hydrodynamic loads on the members and allow substructure flexibility.
+QBlade considers two types of Morison forces on cylindrical elements: normal forces that act at the center of the element and axial forces that
+act at the ends of the element.</p>
+<section id="normal-morison-force-on-a-cylindrical-element">
+<h2>Normal Morison Force on a Cylindrical Element<a class="headerlink" href="#normal-morison-force-on-a-cylindrical-element" title="Permalink to this headline"></a></h2>
+<p>The hydrodynamic normal forces on a cylindrical element are given by Faltinsen<a class="footnote-reference brackets" href="#footcite-faltinsen1993" id="id1">1</a></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+F_M^n &amp;= \rho \pi \left(\frac{D}{2}+R_{MG}\right)^2 L \left((C_a^n+C_p^n) \dot{u}^n - C_a^n \ddot{X}^n\right)  \\
+      &amp;+ \frac{1}{2} \rho \left(D+R_{MG}\right) L C_d^n \left(u^n - \dot{X}^n\right)\left|u^n - \dot{X}^n\right|.
+\end{align}\end{split}\]</div>
+<p>In this equation,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F_M^n\)</span> is the normal Morison force,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> is the water density,</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(L\)</span> are the diameter and length of the cylinder element, respectively,</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_{MG}\)</span> is the marine growth thickness,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_a^n\)</span> is the normal added mass coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_p^n\)</span> is the normal dynamic pressure coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_d^n\)</span> is the normal drag coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(u^n\)</span> is the resulting normal flow velocity,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{X}^n\)</span> is the resulting normal velocity of the center of the cylinder element.</p></li>
+</ul>
+<p>The structural model of QBlade naturally handles the vector direction of the local normal force components depending on the element location and orientation (see <a class="reference internal" href="../../structure/chrono/chrono.html"><span class="doc">Multi Body Beam Formulation</span></a>).
+The normal force is assumed to be constant over the submerged part of the cylinder and is integrated along the submerged length.
+For this evaluation the local instantaneous wave elevation is obtained at every timestep to calculate the current submerged fraction of the cylinder.
+It is recommended to subdivide cylindrical elements that are close to the water surface into smaller sub-elements to increase the model accuracy (see <a class="reference internal" href="#me-modeling-considerations"><span class="std std-ref">Modeling Considerations for Morison Elements</span></a>)</p>
+</section>
+<section id="axial-morison-force-on-a-cylindrical-element">
+<h2>Axial Morison Force on a Cylindrical Element<a class="headerlink" href="#axial-morison-force-on-a-cylindrical-element" title="Permalink to this headline"></a></h2>
+<p>Axial forces can also be applied to the ends of a cylindrical element. In QBlade, the hydrodynamic forces are calculated using following equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+F_M^{ax} &amp;= \rho \frac{2\pi}{3} \left(\frac{D}{2}+R_{MG}\right)^3 C_a^{ax} (\dot{u}^{ax} - \ddot{X}^{ax}) + C_p^{ax} p_{dyn}^{ax} \pi \left(\frac{D}{2}+R_{MG}\right)^2  \\
+         &amp;+ \frac{1}{2} \rho \pi \left(D+R_{MG}\right)^2 C_d^{ax} \left(u^{ax} - \dot{X}^{ax}\right)\left|u^{ax} - \dot{X}^{ax}\right| .
+\end{align}\end{split}\]</div>
+<p>In this equation,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F_M^{ax}\)</span> is the axial Morison force,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> is the water density,</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(L\)</span> are the diameter and length of the cylinder element respectively,</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_{MG}\)</span> is the marine growth thickness,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_a^{ax}\)</span> is the axial added mass coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_p^{ax}\)</span> is the axial dynamic pressure coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_d^{ax}\)</span> is the axial drag coefficient, along the ith axis,</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{dyn}^{ax}\)</span> is the axial dynamic pressure,</p></li>
+<li><p><span class="math notranslate nohighlight">\(u^{ax}\)</span> is the resulting axial flow velocity,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{X}^{ax}\)</span> is the resulting axial velocity of the center of the cylinder end.</p></li>
+</ul>
+<p>As with <span class="math notranslate nohighlight">\(F_M^n\)</span>, the structural model in QBlade always applies the axial loads in the local frame of reference considering the orientation of the cylinder.</p>
+<p>The axial force calculation is only performed at the ends of cylindrical elements that are not obstructed, or overlapped, by the ends of other cylindrical elements which share the same node.
+Example: If a ‘thinner’ cylindrical element <span class="math notranslate nohighlight">\(D_{thin}\)</span> is connected to a ‘thicker’ element <span class="math notranslate nohighlight">\(D_{thick}\)</span> via a common node the axial force is evaluated at the end of the ‘thick’ element only.</p>
+<p>In such a case the effective volume at the ‘thicker’ element would be calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+V = \frac{2\pi}{3}\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^3-\left(\frac{D_{thin}}{2}+R_{MG}\right)^3\right) ,
+\end{align}\]</div>
+<p>and the effective area would be calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+A = \pi\left(\left(\frac{D_{thick}}{2}+R_{MG}\right)^2-\left(\frac{D_{thin}}{2}+R_{MG}\right)^2\right) .
+\end{align}\]</div>
+</section>
+<section id="mccamy-fuchs-correction">
+<span id="me-mccamyfuchs"></span><h2>McCamy-Fuchs Correction<a class="headerlink" href="#mccamy-fuchs-correction" title="Permalink to this headline"></a></h2>
+<p>For cylindrical elements that have a diameter to wavelength ratio larger than
+0.2, the diffraction forces become relevant and the pure Morison equation is no longer accurate, see Faltinsen<a class="footnote-reference brackets" href="#footcite-faltinsen1993" id="id2">1</a>. The
+diffraction effects can be accounted for with the Morison equation formulation by introducing the MacCamy-Fuchs
+Correction (MCFC). The original MCFC is formulated in terms of the normal force per unit length on the
+cylinder. It can be recast so that the inertia part of the Morison equation is affected, see the IEC standard <a class="footnote-reference brackets" href="#footcite-iec61400-3-1" id="id3">2</a> for reference. Following an
+approach presented in the USFOS reality engineering guide <a class="footnote-reference brackets" href="#footcite-usfos" id="id4">3</a>, QBlade changes the local water particle acceleration’s magnitude and phase to
+affect the Morison element. The original modifications include the calculation of Bessel functions. To
+speed up calculations, an more efficiently calculable approximation proposed in USFOS Reality Engineering<a class="footnote-reference brackets" href="#footcite-usfos" id="id5">3</a> is used for the
+modification of the particle acceleration’s magnitude and phase. The equivalent particle acceleration
+amplitude is given by:</p>
+<div class="math notranslate nohighlight">
+\[\dot{u}_{eq} = \dot{u} \cdot \mathrm{min}\left( \frac{1.05\tanh \left( 2\pi \frac{d}{\lambda} \right) }{\left(\mathrm{abs}\left(\pi \frac{D}{\lambda}-0.2\right)^{2.2} + 1 \right)^{0.85}},1 \right).\]</div>
+<p>In this equation, <span class="math notranslate nohighlight">\(\dot{u}\)</span> is the water particle acceleration amplitude, <span class="math notranslate nohighlight">\(d\)</span> is the water depth, <span class="math notranslate nohighlight">\(D\)</span> is the diameter of the element and <span class="math notranslate nohighlight">\(\lambda\)</span> is the wavelength.
+The phase shift of the acceleration is given by:</p>
+<div class="math notranslate nohighlight">
+\[\alpha^{\mathrm{phase}} = \frac{\pi}{180}\left( -\frac{450}{8}\left(\pi\frac{D}{\lambda} -2\right) - \frac{75}{\left( \pi \frac{D}{\lambda} + 0.5 \right)^2} \right).\]</div>
+<p>Since it affects the incoming water particle acceleration and phase, this implementation of the MCFC can
+be easily extended to irregular wave spectra. In this case, the correction is done on each wave train that
+makes up the wave spectrum and avoids using frequency dependent added mass coefficients in the Morison equation
+formulation.</p>
+</section>
+<section id="modeling-considerations-for-morison-elements">
+<span id="me-modeling-considerations"></span><h2>Modeling Considerations for Morison Elements<a class="headerlink" href="#modeling-considerations-for-morison-elements" title="Permalink to this headline"></a></h2>
+<p>In QBlade, each cylindrical element can be divided into sub-elements. Morison forces acting on these elements are evaluated and applied at each time step.
+Setting the hydrodynamic coefficients to 0 effectively disables their contribution in the calculation of the Morison forces. This way, it possible to include for example the hydrodynamic drag only.
+To determine if a sub-element is partially or fully submerged, the wave elevation is required.
+Wave kinematics are also required to calculate <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(\dot{u}\)</span> in the equations above. There are three possibilities in QBlade to do this.
+These options are presented in <a class="reference internal" href="#fig-me-kin-opt"><span class="std std-numref">Fig. 14</span></a>.</p>
+<figure class="align-center" id="id7">
+<span id="fig-me-kin-opt"></span><img alt="Morison wave kinematic options" src="../../../../_images/me_considerations.PNG" />
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Options in QBlade to consider the wave elevation and kinematics. (a) local instantaneous values; (b) values at the initial undisplaced position; (c) values at a low-passed position of the element.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The first option shown in <a class="reference internal" href="#fig-me-kin-opt"><span class="std std-numref">Fig. 14</span></a> (a) is the wave kinematics and elevation at the local instantaneous position of the cylinder. In this example, the cylinder has been divided into four
+sub-elements. The lower two are fully submerged and one sub-element is partially submerged. The second option in <a class="reference internal" href="#fig-me-kin-opt"><span class="std std-numref">Fig. 14</span></a> (b)
+is using the wave elevation and kinematics at the initial position of the sub-element. This option allows a coherent theoretical assumption of small oscillations around a steady positon when Morison forces are used in conjunction with a linear potential
+flow model (see <a class="reference internal" href="../lpft/lpft.html"><span class="doc">Linear Potential Flow Theory</span></a>). The third option uses the wave elevation and kinematics at a low-passed position of the sub-element (<a class="reference internal" href="#fig-me-kin-opt"><span class="std std-numref">Fig. 14</span></a> (c)). This allows for an assumption of
+small oscillations around a steady state for an element that as drifted from its initial position due to an acting force such as and aerodynamic thrust or sea current hydrodynamic force.</p>
+<p id="id6"><dl class="footnote brackets">
+<dt class="label" id="footcite-faltinsen1993"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>O. M. Faltinsen. <em>Sea Loads on Ships and Offshore Structures</em>. Cambridge University Press, 1993.</p>
+</dd>
+<dt class="label" id="footcite-iec61400-3-1"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>IEC61400-3-1 Standard. IEC 61400-3-1: Wind Energy Generation Systems - Part 3-1: Design Requirements for fixed offshore wind turbines. Standard, International Electrotechnical Commission, Geneva, Switzerland, 2019.</p>
+</dd>
+<dt class="label" id="footcite-usfos"><span class="brackets">3</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id5">2</a>)</span></dt>
+<dd><p>USFOS Reality Engineering. USFOS Theory, Description of use and Verification Manual. <a class="reference external" href="https://www.usfos.no/manuals/usfos/theory/documents/Usfos_Hydrodynamics.pdf">https://www.usfos.no/manuals/usfos/theory/documents/Usfos_Hydrodynamics.pdf</a>, 2021. [Online; accessed 2021-11-21].</p>
+</dd>
+</dl>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../lpft/lpft.html" class="btn btn-neutral float-left" title="Linear Potential Flow Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../hydrostatics/hs.html" class="btn btn-neutral float-right" title="Hydrostatic Forces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

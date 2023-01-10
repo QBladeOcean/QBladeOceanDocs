@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theory Guide &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Blade Element Momentum Method" href="aerodynamics/bem/bem.html" />
+    <link rel="prev" title="QBlade Documentation" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Theory Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aerodynamics">Aerodynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="aerodynamics/bem/bem.html">Blade Element Momentum Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aerodynamics/lifting_line/lifting_line.html">Lifting Line Free Vortex Wake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aerodynamics/dynamic_stall/index_dynamicstall.html">Dynamic Stall</a></li>
+<li class="toctree-l3"><a class="reference internal" href="aerodynamics/secondary_effects/index_secondary.html">Secondary Effects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hydrodynamics">Hydrodynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hydrodynamics/lpft/lpft.html">Linear Potential Flow Theory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrodynamics/me/me.html">Morison Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hydrodynamics/hydrostatics/hs.html">Hydrostatic Forces</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#structural-dynamics">Structural Dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structure/chrono/chrono.html">Multi Body Beam Formulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structure/coupling/coupling.html">Aero-Elastic Coupling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structure/table/table.html">Structural Data Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#environmental-conditions">Environmental Conditions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="environment/soil/soil.html">Soil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment/sea/index_sea.html">Waves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment/wind/wind.html">Wind</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Theory Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/theory/index_th.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="theory-guide">
+<h1>Theory Guide<a class="headerlink" href="#theory-guide" title="Permalink to this headline"></a></h1>
+<section id="aerodynamics">
+<h2>Aerodynamics<a class="headerlink" href="#aerodynamics" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aerodynamics/bem/bem.html">Blade Element Momentum Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aerodynamics/lifting_line/lifting_line.html">Lifting Line Free Vortex Wake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aerodynamics/dynamic_stall/index_dynamicstall.html">Dynamic Stall</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aerodynamics/secondary_effects/index_secondary.html">Secondary Effects</a></li>
+</ul>
+</div>
+</section>
+<section id="hydrodynamics">
+<h2>Hydrodynamics<a class="headerlink" href="#hydrodynamics" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hydrodynamics/lpft/lpft.html">Linear Potential Flow Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hydrodynamics/me/me.html">Morison Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hydrodynamics/hydrostatics/hs.html">Hydrostatic Forces</a></li>
+</ul>
+</div>
+</section>
+<section id="structural-dynamics">
+<h2>Structural Dynamics<a class="headerlink" href="#structural-dynamics" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structure/chrono/chrono.html">Multi Body Beam Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure/coupling/coupling.html">Aero-Elastic Coupling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure/table/table.html">Structural Data Tables</a></li>
+</ul>
+</div>
+</section>
+<section id="environmental-conditions">
+<h2>Environmental Conditions<a class="headerlink" href="#environmental-conditions" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="environment/soil/soil.html">Soil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment/sea/index_sea.html">Waves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment/wind/wind.html">Wind</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="QBlade Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="aerodynamics/bem/bem.html" class="btn btn-neutral float-right" title="Blade Element Momentum Method" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

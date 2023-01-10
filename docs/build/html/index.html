@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QBlade Documentation &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/custom.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Theory Guide" href="src/theory/index_th.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> QBlade Documentation
+            <img src="_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>QBlade Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qblade-documentation">
+<h1>QBlade Documentation<a class="headerlink" href="#qblade-documentation" title="Permalink to this headline"></a></h1>
+<p>QBlade <a class="footnote-reference brackets" href="#footcite-marten19" id="id1">1</a> is a state of the art multi-physics code, covering the complete range of aspects required for the aero-servo-hydro-elastic simulation of horizontal, or vertical axis wind turbines.
+QBlade is being developed since 2010 at the Technical University of Berlin, and is realized as a modular implementation of highly efficient multi-fidelity aerodynamic, structural dynamic and hydrodynamic solvers in a modern, object oriented C++ framework.</p>
+<p>QBlade leverages the current computer architecture by thoroughly utilizing CPU (via OpenMP) and GPU (via OpenCL) parallelization techniques for a high numerical performance.
+QBlade is a platform independent software, and can be deployed on workstations or clusters running Windows, Unix or MacOS based operating systems.
+The software is equipped with an intuitive graphical user interface that aids the user during the whole wind turbine design process.
+All turbine and simulation details are readily available to be accessed and modified in a logical well-structured and tested interface.
+Simulation results are presented in dynamic graphs that give insight into every simulation detail.
+Simulations and turbine designs are fully rendered in real time to aid with the comprehension and evaluation of our complex multi-physics models.
+QBlade enabled the serialization of the complete model data, setup and results into project files to enable simple sharing and collaboration of complex simulation and turbine design projects.
+The Community Edition of QBlade (QBlade-CE) is freely available under the Academic Public License, while the Enterprise Edition (QBlade-EE) is available under a Commercial License.</p>
+<p>QBlade uses a highly optimized and thoroughly validated Lifting Line Free Vortex Wake Method for its aerodynamic calculations.
+Instead of approximating the wake aerodynamics with a steady-state momentum balance (BEM), the rotor wake is explicitly modeled through Lagrangian vortex elements.
+This results in a more accurate and detailed spatial and temporal representation (see Marten <em>et al.</em><a class="footnote-reference brackets" href="#footcite-marten2020" id="id2">2</a>) of the rotor induction, when compared to BEM approaches, and fully resolves the velocity distribution behind the rotor.
+This allows to assess wind turbine wake interaction, accurately accounts for the aerodynamics of oscillating floating wind turbine structures and explicitly resolves unsteady vertical axis wind turbine wake dynamics (see Balduzzi <em>et al.</em><a class="footnote-reference brackets" href="#footcite-balduzzi2017b" id="id3">3</a>).
+As an alternative with lower computational demand the aerodynamics of horizontal-axis wind turbines can be simulated using an unsteady polar-BEM implementation (see Madsen <em>et al.</em><a class="footnote-reference brackets" href="#footcite-polarbem" id="id4">4</a>).</p>
+<p>The structural dynamics in QBlade are modeled in a true multi-body formulation. The sub components of the multi-body model are made up of rigid- or flexible nonlinear Euler beam elements in a corotational formulation.
+For floating offshore simulations QBlade integrates cable elements in the absolute nodal coordinate formulation (ANCF) which meet the requirements to effectively model the nonlinear dynamics of complex mooring systems.
+Both bottom-fixed and floating offshore wind turbine systems can be modeled in QBlade.</p>
+<p>The hydrodynamic loads on the wind turbine’s substructure are calculated either via the potential flow theory, the Morison equation based strip theory or a user defined combination of the two.
+The integrated potential flow approach also includes the higher order slow drift forces obtained from quadratic transfer functions. QBlade integrates with potential flow data from common software such as the WAMIT, NEMOH or similar toolboxes.</p>
+<figure class="align-center" id="id6">
+<span id="fig-turbines"></span><img alt="Turbines" src="_images/turbines.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Different wind turbine types modelled with QBlade.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src/theory/index_th.html">Theory Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/theory/index_th.html#aerodynamics">Aerodynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/aerodynamics/bem/bem.html">Blade Element Momentum Method</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/bem/bem.html#momentum-theory">Momentum Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/bem/bem.html#blade-element-theory">Blade Element Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/bem/bem.html#classical-blade-element-momentum-theory">Classical Blade Element Momentum Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/bem/bem.html#corrections">Corrections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/bem/bem.html#unsteady-blade-element-momentum-theory">Unsteady Blade Element Momentum Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/bem/bem.html#polar-grid">Polar Grid</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/aerodynamics/lifting_line/lifting_line.html">Lifting Line Free Vortex Wake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/lifting_line/lifting_line.html#overview-of-llfvw-theory">Overview of LLFVW Theory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/lifting_line/lifting_line.html#wake-lattice-and-connectivity">Wake Lattice and Connectivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/lifting_line/lifting_line.html#vortex-core-desingularization">Vortex Core Desingularization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/aerodynamics/dynamic_stall/index_dynamicstall.html">Dynamic Stall</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/dynamic_stall/OYE_stall.html">OYE Dynamic Stall Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/dynamic_stall/ATEFLAP_stall.html">ATEFlap Dynamic Stall Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/aerodynamics/secondary_effects/index_secondary.html">Secondary Effects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/secondary_effects/towershadow.html">Tower Influence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/secondary_effects/ground_effect.html">Ground Effect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/aerodynamics/secondary_effects/himmelskamp.html">Himmelskamp Effect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/theory/index_th.html#hydrodynamics">Hydrodynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/hydrodynamics/lpft/lpft.html">Linear Potential Flow Theory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/lpft/lpft.html#potential-flow-and-boundary-conditions">Potential flow and boundary conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/lpft/lpft.html#equations-of-motion">Equations of Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/lpft/lpft.html#radiation-forces">Radiation Forces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/lpft/lpft.html#excitation-forces">Excitation forces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/hydrodynamics/me/me.html">Morison Equation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/me/me.html#normal-morison-force-on-a-cylindrical-element">Normal Morison Force on a Cylindrical Element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/me/me.html#axial-morison-force-on-a-cylindrical-element">Axial Morison Force on a Cylindrical Element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/me/me.html#mccamy-fuchs-correction">McCamy-Fuchs Correction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/me/me.html#modeling-considerations-for-morison-elements">Modeling Considerations for Morison Elements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/hydrodynamics/hydrostatics/hs.html">Hydrostatic Forces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/hydrostatics/hs.html#archmides-principle">Archmides’ Principle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/hydrostatics/hs.html#discrete-surface-buoyancy-calculation">Discrete Surface Buoyancy Calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/hydrostatics/hs.html#discrete-volume-buoyancy-calculation">Discrete Volume Buoyancy Calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/hydrodynamics/hydrostatics/hs.html#hydrostatic-stiffness-matrix">Hydrostatic Stiffness Matrix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/theory/index_th.html#structural-dynamics">Structural Dynamics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/structure/chrono/chrono.html">Multi Body Beam Formulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/structure/chrono/chrono.html#element-and-multi-body-formulation">Element and Multi-Body Formulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/structure/chrono/chrono.html#time-integrators-and-solver-for-the-structural-dynamics-simulation">Time Integrators and Solver for the Structural Dynamics Simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/structure/coupling/coupling.html">Aero-Elastic Coupling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/structure/table/table.html">Structural Data Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/theory/index_th.html#environmental-conditions">Environmental Conditions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/environment/soil/soil.html">Soil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/environment/sea/index_sea.html">Waves</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/environment/sea/index_sea.html#linear-waves">Linear Waves</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/environment/sea/index_sea.html#kinematics">Kinematics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/theory/environment/wind/wind.html">Wind</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/environment/wind/wind.html#energy-content-of-the-wind">Energy Content of the Wind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/environment/wind/wind.html#atmospheric-boundary-layer">Atmospheric Boundary Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/environment/wind/wind.html#yaw-vertical-shear-and-veer">Yaw, Vertical Shear, and Veer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/theory/environment/wind/wind.html#turbulent-inflow">Turbulent Inflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/user/index_ue.html">User’s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#general-gui-functionality">General GUI Functionality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/guigraph/guigraph.html">GUI Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/guigraph/guigraph.html#general-settings">General Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/guigraph/guigraph.html#opengl-light-settings">Opengl Light Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/guigraph/guigraph.html#graph-functionality">Graph Functionality</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/guigraph/guigraph.html#graph-context-menu">Graph Context Menu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/guigraph/guigraph.html#variables-styles-and-axes">Variables &amp; Styles and Axes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/guigraph/guigraph.html#curve-styles">Curve Styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/guigraph/guigraph.html#graph-layout">Graph Layout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/data_import_export/data_import_export.html">Object Hierarchy and Data Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/data_import_export/data_import_export.html#project-serialization">Project Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/data_import_export/data_import_export.html#data-objects-import-and-export">Data Objects Import and Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#coordinate-systems">Coordinate Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/coordinates/coordinates.html">Global Coordinate System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/coordinates/coordinates.html#local-body-coordinate-systems">Local Body Coordinate Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/coordinates/coordinates.html#local-blade-coordinate-system">Local Blade Coordinate System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/coordinates/coordinates.html#local-tower-coordinate-system">Local Tower Coordinate System</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/coordinates/coordinates.html#local-sensor-coordinate-systems">Local Sensor Coordinate Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/hawtvawtprop/hawtvawtprop.html">Setting the Design Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/hawtvawtprop/hawtvawtprop.html#hawt-mode-vawt-mode-and-prop-mode">HAWT Mode, VAWT Mode and PROP Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#airfoil-module">Airfoil Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil.html">Airfoil Generation Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil.html#creating-standard-airfoils">Creating Standard Airfoils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil.html#importing-airfoils">Importing Airfoils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil.html#airfoil-editing-options">Airfoil Editing Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil.html#airfoil-transformations">Airfoil Transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil.html#exporting-airfoils">Exporting Airfoils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil_analysis.html">Airfoil Analysis Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil_analysis.html#carrying-out-an-xfoil-analysis">Carrying out an XFoil Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/airfoil/airfoil_analysis.html#xfoil-batch-analysis">XFoil Batch Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil_analysis.html#operational-point-analysis">Operational Point Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil_analysis.html#importing-polar-data">Importing Polar Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/airfoil_analysis.html#exporting-polar-data">Exporting Polar Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/polar_extrapolation.html">Polar Extrapolation Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/polar_extrapolation.html#viterna-extrapolation">Viterna Extrapolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/polar_extrapolation.html#montgomery-extrapolation">Montgomery Extrapolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/polar_extrapolation.html#polar-decomposition">Polar Decomposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/polar_extrapolation.html#dynamic-polar-sets">Dynamic Polar Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/airfoil/polar_extrapolation.html#import-and-export-of-360-polars">Import and Export of 360 Polars</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#blade-design-module">Blade Design Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/blade/blade.html">Blade Design Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/blade/blade.html#blade-definition">Blade Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/blade/blade.html#active-elements-and-blade-damage">Active Elements and Blade Damage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/blade/blade.html#importing-and-exporting-blade-definitions">Importing and Exporting Blade Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/blade/blade.html#blade-definition-ascii-file">Blade definition ASCII File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#bem-analysis-module">BEM Analysis Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/bem/bem.html">BEM Analysis Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/bem/bem.html#rotor-bem">Rotor BEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/bem/bem.html#characteristic-bem">Characteristic BEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/bem/bem.html#turbine-bem">Turbine BEM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#turbine-definition-module">Turbine Definition Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/turbine.html">Turbine Definition Dialog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/turbine.html#turbine-name-and-rotor">Turbine Name and Rotor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/turbine.html#turbine-version-info">Turbine Version Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/turbine.html#turbine-geometry">Turbine Geometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/turbine.html#aerodynamic-discretization">Aerodynamic Discretization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/turbine.html#aerodynamic-models">Aerodynamic Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/turbine.html#wake-type">Wake Type</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/unsteadybem.html">Unsteady BEM Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/unsteadybem.html#unsteady-bem-parameters">Unsteady BEM Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/vortexwake.html">Free Vortex Wake Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/vortexwake.html#wake-modelling">Wake Modelling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/vortexwake.html#vortex-modelling">Vortex Modelling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/vortexwake.html#turbine-gamma-iteration-parameters">Turbine Gamma Iteration Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/structure.html">Turbine Structural Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/structure.html#main-definition-file">Main Definition File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/structure.html#loading-data-and-sensor-locations">Loading Data and Sensor Locations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/structure.html#blade-and-tower-structural-data-tables">Blade and Tower Structural Data Tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/structure.html#substructure-definition">Substructure Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/controller.html">Turbine Controller</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/turbine/controller.html#adding-custom-sensors-to-the-exchange-array">Adding Custom Sensors to the Exchange Array</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/turbineexport.html">Turbine Definition ASCII File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/multi_turbine.html">Multi Rotor Turbine Assembly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/turbine/multi_turbine.html#multi-rotor-turbine-assembly-export">Multi Rotor Turbine Assembly Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#simulation-definition-module">Simulation Definition Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/simulation/simulation.html">Simulation Module Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/simulation/simulation.html#simulation-definition-dialog">Simulation Definition Dialog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#general-simulation-settings">General Simulation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#structural-model-initialization">Structural Model Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#wind-boundary-condition">Wind Boundary Condition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#turbine-setup">Turbine Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#rotational-speed-settings">Rotational Speed Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#turbine-initial-conditions">Turbine Initial Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#floater-initial-conditions">Floater Initial Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#structural-simulation-settings">Structural Simulation Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#turbine-behavior">Turbine Behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#multi-turbine-simulations">Multi Turbine Simulations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#turbine-environment">Turbine Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#wave-boundary-conditions">Wave Boundary Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#ocean-current-boundary-conditions">Ocean Current Boundary Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#environmental-variables">Environmental Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#seabed-modelling">Seabed Modelling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#stored-simulation-data">Stored Simulation Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#vpml-particle-remeshing">VPML Particle Remeshing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#modal-analysis">Modal Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/simulation/simulation.html#ice-throw-simulation">Ice Throw Simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/simulation/simulation.html#multi-threaded-batch-analysis">Multi-Threaded Batch Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/simulation/simulation.html#simulation-definition-ascii-file">Simulation Definition ASCII File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#windfield-generator-module">Windfield Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/windfield/windfield.html">Wind Field Generator Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/windfield/windfield.html#uniform-wind-field">Uniform Wind Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/windfield/windfield.html#hub-height-file">Hub Height File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/windfield/windfield.html#turbulent-wind-field">Turbulent Wind Field</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/user/windfield/windfield.html#grid-parameters">Grid Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/windfield/windfield.html#turbine-class">Turbine Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/user/windfield/windfield.html#flow-parameters">Flow Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#wave-generator-module">Wave Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/wavefield/wavefield.html">Wave Generator Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/wavefield/wavefield.html#regular-wave">Regular Wave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/wavefield/wavefield.html#irregular-wave-field">Irregular Wave Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/wavefield/wavefield.html#import-components">Import Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/wavefield/wavefield.html#import-timeseries">Import Timeseries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/wavefield/wavefield.html#visualization">Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/wavefield/wavefield.html#import-and-export-functionality">Import and Export Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#dlc-generator-module">DLC Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/dlc/dlc.html">DLC Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/interfaces/commandline.html">CLI Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/interfaces/commandline.html#cli-options">CLI Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/interfaces/commandline.html#sample-cli-call-to-start-a-batch-run">Sample CLI Call to Start a Batch Run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/user/index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/user/interfaces/inloop.html">SIL Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="src/user/interfaces/inloop.html#sil-example">SIL Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/validation/index_val.html">Validation Cases and Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/validation/index_val.html#aerodynamic-validation-tests">Aerodynamic Validation Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/validation/aerodynamics/dynamic_stall.html">Validation of the ATEFlap Dynamic Stall Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/validation/index_val.html#structural-dynamics-validation-tests">Structural Dynamics Validation Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src/validation/index_val.html#hydrodynamics-validation-tests">Hydrodynamics Validation Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/validation/hydrodynamics/lpmd/lpmd.html">Validation Tests for Potential Flow Models with Morison Drag (LPMD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/validation/hydrodynamics/lpmd/lpmd.html#oc3-spar-buoy-lpmd-model">OC3 Spar Buoy LPMD Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/validation/hydrodynamics/lpmd/lpmd.html#oc4-semisubmersible-lpmd-model">OC4 Semisubmersible LPMD Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/validation/hydrodynamics/me/me.html">Validation Tests for Morison Equation (ME)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/validation/hydrodynamics/me/me.html#oc4-semisubmersible-me-model">OC4 Semisubmersible ME Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="src/validation/hydrodynamics/hydroelastics/hydroelastics.html">Validation and Examples of Hydroelasticity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="src/validation/hydrodynamics/hydroelastics/hydroelastics.html#oc4-semisubmersible-me-hydroelastic-model">OC4 Semisubmersible ME Hydroelastic Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src/validation/hydrodynamics/hydroelastics/hydroelastics.html#mw-tetraspar-hydroelastic-model">10 MW TetraSpar Hydroelastic Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src/license/index_license.html">License Info</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src/license/license_docs.html">Documentation License</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/license/license_docs.html#cc-by-nc-nd-4-0">CC BY-NC-ND 4.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/license/license_ce.html">QBlade-CE License</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src/license/license_ce.html#academic-public-license">Academic Public License</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src/license/license_ee.html">QBlade-EE License</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p id="id5"><dl class="footnote brackets">
+<dt class="label" id="footcite-marten19"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>D. Marten. <em>QBlade: A Modern Tool for the Aeroelastic Simulation of Wind Turbines</em>. PhD thesis, TU Berlin, 2019. <a class="reference external" href="https://doi.org/10.14279/depositonce-10646">doi:10.14279/depositonce-10646</a>.</p>
+</dd>
+<dt class="label" id="footcite-marten2020"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>D. Marten, C. O. Paschereit, X. Huang, M. Meinke, W. Schröder, J. Müller, and K. Oberleithner. Predicting wind turbine wake breakdown using a free vortex wake code. <em>AIAA Journal</em>, 58(11):4672–4685, 2020. URL: <a class="reference external" href="https://doi.org/10.2514/1.J058308">https://doi.org/10.2514/1.J058308</a>, <a class="reference external" href="https://arxiv.org/abs/https://doi.org/10.2514/1.J058308">arXiv:https://doi.org/10.2514/1.J058308</a>, <a class="reference external" href="https://doi.org/10.2514/1.J058308">doi:10.2514/1.J058308</a>.</p>
+</dd>
+<dt class="label" id="footcite-balduzzi2017b"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>Francesco Balduzzi, David Marten, Alessandro Bianchini, Jernej Drofelnik, Lorenzo Ferrari, Michele Sergio Campobasso, Georgios Pechlivanoglou, Christian Navid Nayeri, Giovanni Ferrara, and Christian Oliver Paschereit. Three-Dimensional Aerodynamic Analysis of a Darrieus Wind Turbine Blade Using Computational Fluid Dynamics and Lifting Line Theory. <em>Journal of Engineering for Gas Turbines and Power</em>, 140(2):022602, 2017. <a class="reference external" href="https://doi.org/10.1115/1.4037750">doi:10.1115/1.4037750</a>.</p>
+</dd>
+<dt class="label" id="footcite-polarbem"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>H. A. Madsen, T. J. Larsen, G. R. Pirrung, A. Li, and F. Zahle. Implementation of the blade element momentum model on a polar grid and its aeroelastic load impact. <em>Wind Energy Science</em>, 5(1):1–27, 2020. URL: <a class="reference external" href="https://wes.copernicus.org/articles/5/1/2020/">https://wes.copernicus.org/articles/5/1/2020/</a>, <a class="reference external" href="https://doi.org/10.5194/wes-5-1-2020">doi:10.5194/wes-5-1-2020</a>.</p>
+</dd>
+</dl>
+</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src/theory/index_th.html" class="btn btn-neutral float-right" title="Theory Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

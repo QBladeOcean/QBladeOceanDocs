@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airfoil Analysis Overview &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Polar Extrapolation Overview" href="polar_extrapolation.html" />
+    <link rel="prev" title="Airfoil Generation Overview" href="airfoil.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Airfoil Analysis Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#carrying-out-an-xfoil-analysis">Carrying out an XFoil Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#xfoil-batch-analysis">XFoil Batch Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operational-point-analysis">Operational Point Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing-polar-data">Importing Polar Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-polar-data">Exporting Polar Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>Airfoil Analysis Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/airfoil/airfoil_analysis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="airfoil-analysis-overview">
+<h1>Airfoil Analysis Overview<a class="headerlink" href="#airfoil-analysis-overview" title="Permalink to this headline"></a></h1>
+<p>Once the desired blade section profiles have been selected in the <a class="reference internal" href="airfoil.html"><span class="doc">Airfoil Generation Overview</span></a>, the aerodynamic data for these profiles must be generated.
+This is accomplished within the airfoil creation module. This module is shown in the main toolbar in <a class="reference internal" href="#fig-analysis-module"><span class="std std-numref">Fig. 50</span></a>.</p>
+<figure class="align-center" id="id4">
+<span id="fig-analysis-module"></span><a class="reference internal image-reference" href="../../../_images/analysis_module.png"><img alt="Airfoil analysis module in QBlade." src="../../../_images/analysis_module.png" style="width: 587.2px; height: 55.2px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">The airfoil analysis module is represented by the dynamic foil symbol in the QBlade main tool bar.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The aerodynamic models within QBlade calculate local aerodynamic properties using airfoil look-up tables.
+These tables store the relevant aerodynamic quantities such as airfoil lift, drag and moment coefficients as a function of angle of attack <span class="math notranslate nohighlight">\(\alpha\)</span>.
+There are two ways to generate these tables in QBlade. These two options are described below.</p>
+<p>Generally the method used to generate the airfoil polars, whether experimental or numerical, only delivers reliable or repeatable values within a certain <span class="math notranslate nohighlight">\(\alpha\)</span> range.
+For this reason, the polars generated or imported here may only correspond to a disjoint range: <span class="math notranslate nohighlight">\(\alpha \in [-180^\text{o},180^\text{o}]\)</span>.
+Extrapolating this range to ensure continuity of aerodynamic coefficients is the topic of the <a class="reference internal" href="polar_extrapolation.html"><span class="doc">Polar Extrapolation Overview</span></a> page.</p>
+</section>
+<section id="carrying-out-an-xfoil-analysis">
+<h1>Carrying out an XFoil Analysis<a class="headerlink" href="#carrying-out-an-xfoil-analysis" title="Permalink to this headline"></a></h1>
+<p>It is possible for the user to carry out an analysis using the 2D airfoil solver XFoil <a class="footnote-reference brackets" href="#footcite-xfoil" id="id1">1</a> directly within QBlade.
+This solver is linked to QBlade such that no preprocessing is required and the airfoil coordinates generated in the <a class="reference internal" href="airfoil.html"><span class="doc">Airfoil Generation Overview</span></a> are automatically prepared for analysis.
+An XFoil analysis can be carried out by generating a polar definition by selecting a new analysis from the polar control panel. The dialogue which then appears is shown in <a class="reference internal" href="#fig-xfoil-createpolar"><span class="std std-numref">Fig. 51</span></a>.</p>
+<figure class="align-center" id="id5">
+<span id="fig-xfoil-createpolar"></span><a class="reference internal image-reference" href="../../../_images/create_xfoilpolar.png"><img alt="Create XFoil Polar" src="../../../_images/create_xfoilpolar.png" style="width: 291.2px; height: 297.6px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">The XFoil polar creation dialogue.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>This requires the input of a range of parameters:</p>
+<ul class="simple">
+<li><p><strong>Polar Name</strong>: This is the name stored for the generated polar.</p></li>
+<li><p><strong>Reynolds</strong>: The Reynolds number of the analysis dictates the Reynolds number at which the airfoil is operating.</p></li>
+<li><p><strong>Mach</strong>: The Mach number of the analysis. XFoil is also capable of treating transonic flow. For most wind energy applications however the flow around the airfoil is assumed to be incompressible.</p></li>
+<li><p><strong>N-Crit</strong>: This is a parameter of the <span class="math notranslate nohighlight">\(e^n\)</span> model XFoil uses to predict when the boundary layer over the airfoil freely transitions from laminar to turbulent flow. <a class="footnote-reference brackets" href="#footcite-xfoil-bl" id="id2">2</a></p></li>
+<li><p><strong>Forced top transition</strong>: If the <span class="math notranslate nohighlight">\(e^n\)</span> model is to be ignored on the suction side of the airfoil, this parameter gives the position of boundary layer transition (as a fraction of chord length).</p></li>
+<li><p><strong>Forced bottom transition</strong>: If the <span class="math notranslate nohighlight">\(e^n\)</span> model is to be ignored on the pressure side of the airfoil, this parameter gives the position of boundary layer transition (as a fraction of chord length).</p></li>
+</ul>
+<p>A range of advanced XFoil parameter settings can also be found in the <em>Polar</em> menu option under <em>XFoil Parameter Settings</em>.
+Once a polar object has been created, the operational points for the analysis can be selected. This is accomplished in the <em>Analysis Settings</em> module widget.
+The user must specify the start, end and delta values for <span class="math notranslate nohighlight">\(\alpha\)</span>. Subsequently, the analysis is executed by clicking on the <em>Start Analysis</em> button. A progress bar will display the state of completion of the analysis.</p>
+<section id="xfoil-batch-analysis">
+<h2>XFoil Batch Analysis<a class="headerlink" href="#xfoil-batch-analysis" title="Permalink to this headline"></a></h2>
+<p>For any given blade design, the different airfoil sections of a blade will be exposed to a range of operating conditions. For this reason, it can be beneficial to carry out an airfoil analysis for a range of Reynolds numbers for each of the airfoils that is used in the particular blade design. To streamline this process, QBlade features an XFoil batch option. The creation dialogue for this is shown in <a class="reference internal" href="#fig-xfoil-batch"><span class="std std-numref">Fig. 52</span></a>.</p>
+<figure class="align-center" id="id6">
+<span id="fig-xfoil-batch"></span><a class="reference internal image-reference" href="../../../_images/create_xfoilbatch.png"><img alt="Create XFoil batch analysis" src="../../../_images/create_xfoilbatch.png" style="width: 594.75px; height: 323.25px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">The XFoil batch creation dialogue.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The parameter options are as described above and the batch calculation is executed by clicking on the <em>Analyze!</em> button.</p>
+</section>
+</section>
+<section id="operational-point-analysis">
+<h1>Operational Point Analysis<a class="headerlink" href="#operational-point-analysis" title="Permalink to this headline"></a></h1>
+<p>Open completion of the XFoil analysis, a detailed aerodynamic description of the flow over the airfoil at each of the selected operational points (OpPoint) is available.
+These parameters can be conveniently viewed in the graphics interface. Three options are available for data visualization:</p>
+<ul class="simple">
+<li><p><strong>Polar Graph:</strong> Shows changes of global aerodynamic parameters for each OpPoint.</p></li>
+<li><p><strong>OpPoint Graph:</strong> Shows local aerodynamic quantities as a function of the position on the airfoil.</p></li>
+<li><p><strong>Aifoil visualization:</strong> Provide a visualization of flow features superimposed onto the airfoil profile.</p></li>
+</ul>
+<p>An example output for an airfoil is given in <a class="reference internal" href="#fig-oppoint"><span class="std std-numref">Fig. 53</span></a>.</p>
+<figure class="align-center" id="id7">
+<span id="fig-oppoint"></span><img alt="Operational point output" src="../../../_images/op_point.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Operational point data from an XFoil Analysis. Top left: Polar plot. Top right: OpPoint plot. Bottom plots: Airfoil visualizations.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="importing-polar-data">
+<h1>Importing Polar Data<a class="headerlink" href="#importing-polar-data" title="Permalink to this headline"></a></h1>
+<p>Airfoil aerodynamic data can also be imported within the airfoil analysis module by selecting this option in the <em>Polar</em> menu.</p>
+<ul class="simple">
+<li><p><strong>Plain Text</strong>: The file needs to contain somewhere in the body an array with at least three columns containing: [<span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(C_L\)</span>, <span class="math notranslate nohighlight">\(C_D\)</span>, (<span class="math notranslate nohighlight">\(C_M\)</span>)].</p></li>
+<li><p><strong>XFOIL</strong>: This is a filetype generated by the XFoil solver which contains numerous additional aerodynamic parameters for the airfoil.</p></li>
+<li><p><strong>NREL (Aerodyn v.13)</strong>: The Aerodyn v.13 <code class="docutils literal notranslate"><span class="pre">.dat</span></code> format.</p></li>
+<li><p><strong>QBlade</strong>: The polar file <code class="docutils literal notranslate"><span class="pre">.plr</span></code> format of QBlade (see <a class="reference internal" href="polar_extrapolation.html#import-and-export-of-360-polars"><span class="std std-ref">Import and Export of 360 Polars</span></a>).</p></li>
+</ul>
+<p>It should again be emphasized that polars for the entire <span class="math notranslate nohighlight">\(\alpha\)</span> range are required for an analysis, as such polar import is more practical within the <a class="reference internal" href="polar_extrapolation.html"><span class="doc">Polar Extrapolation Overview</span></a>.</p>
+</section>
+<section id="exporting-polar-data">
+<h1>Exporting Polar Data<a class="headerlink" href="#exporting-polar-data" title="Permalink to this headline"></a></h1>
+<p>Airfoil polar data generated within the airfoil creation module can be exported for each airfoil either as an XFoil file or as an NREL (Aerodyn file simply be selecting the <em>Export Data</em> option from the <em>Polar</em> menu. The option is also available to export all generated airfoil data by selecting <em>Export ALL</em>.</p>
+<p id="id3"><dl class="footnote brackets">
+<dt class="label" id="footcite-xfoil"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>M. Drela. Xfoil: an analysis and design system for low reynolds number airfoils. In <em>Conference on Low Reynolds Number Airfoil Aerodynamics</em>. Notre Dame, Ind (USA), 1989.</p>
+</dd>
+<dt class="label" id="footcite-xfoil-bl"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>M. Drela and M.B. Giles. Viscous-inviscid analysis of transonic and low reynolds number airfoils. <em>AIAA</em>, 1987.</p>
+</dd>
+</dl>
+</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="airfoil.html" class="btn btn-neutral float-left" title="Airfoil Generation Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="polar_extrapolation.html" class="btn btn-neutral float-right" title="Polar Extrapolation Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

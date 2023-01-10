@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATEFlap Dynamic Stall Model &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../../_static/custom.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Secondary Effects" href="../secondary_effects/index_secondary.html" />
+    <link rel="prev" title="OYE Dynamic Stall Model" href="OYE_stall.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_th.html">Theory Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index_th.html#aerodynamics">Aerodynamics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../bem/bem.html">Blade Element Momentum Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lifting_line/lifting_line.html">Lifting Line Free Vortex Wake</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index_dynamicstall.html">Dynamic Stall</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="OYE_stall.html">OYE Dynamic Stall Model</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ATEFlap Dynamic Stall Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../secondary_effects/index_secondary.html">Secondary Effects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#hydrodynamics">Hydrodynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#structural-dynamics">Structural Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#environmental-conditions">Environmental Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index_th.html">Theory Guide</a> &raquo;</li>
+          <li><a href="index_dynamicstall.html">Dynamic Stall</a> &raquo;</li>
+      <li>ATEFlap Dynamic Stall Model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/src/theory/aerodynamics/dynamic_stall/ATEFLAP_stall.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ateflap-dynamic-stall-model">
+<h1>ATEFlap Dynamic Stall Model<a class="headerlink" href="#ateflap-dynamic-stall-model" title="Permalink to this headline"></a></h1>
+<p>To account for dynamic stall and unsteady aerodynamics the ATEFlap <a class="footnote-reference brackets" href="#footcite-bergami2012" id="id1">1</a> model for 2D airfoil behavior has been integrated to be used with <a class="reference internal" href="../lifting_line/lifting_line.html"><span class="doc">Lifting Line Free Vortex Wake</span></a> simulations.</p>
+<p>Note that the ATEFlap model has been specifically modified to be used with <a class="reference internal" href="../lifting_line/lifting_line.html"><span class="doc">Lifting Line Free Vortex Wake</span></a> simulations <a class="footnote-reference brackets" href="#footcite-wendler2016" id="id2">2</a>, it is currently not advised to use the ATEFlap model in simulations that use the <a class="reference internal" href="../bem/bem.html"><span class="doc">Blade Element Momentum Method</span></a> aerodynamic model.</p>
+<p>The ATEFlap unsteady aerodynamics model consists of mainly two parts; an attached or potential flow model, as proposed by Bergami and Gaunaa <a class="footnote-reference brackets" href="#footcite-bergami2012" id="id3">1</a>, and the classical Beddoes-Leishman dynamic stall model with a custom formulation for vortex lift, as presented by Hansen and Gaunaa <a class="footnote-reference brackets" href="#footcite-hansen2004b" id="id4">3</a>.
+The implemented ATEFlap model also accounts for unsteady lift contribution of active trailing edge flap deflections.</p>
+<section id="decomposed-polar-data">
+<h2>Decomposed Polar Data<a class="headerlink" href="#decomposed-polar-data" title="Permalink to this headline"></a></h2>
+<figure class="align-center" id="id10">
+<span id="fig-decomposition"></span><img alt="Decomposition of static polar data" src="../../../../_images/decomposition.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Decomposition of static polar data.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The unsteady aerodynamics model is based on a decomposition of the static, two dimensional lift <span class="math notranslate nohighlight">\(Cl_{st}\)</span> into a fully attached <span class="math notranslate nohighlight">\(Cl_{att}\)</span> and a fully separated <span class="math notranslate nohighlight">\(Cl_{sep}\)</span> contribution. This is shown in <a class="reference internal" href="#fig-decomposition"><span class="std std-numref">Fig. 9</span></a>. The contributions of the attached and the separated lift to the static lift are described by the following equation:</p>
+<div class="math notranslate nohighlight" id="decompose">
+\[\begin{align}
+Cl_{st} = f   Cl_{att}   + (1-f)   Cl_{sep},
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> represents the separation function.</p>
+<p>A module to perform the decomposition of polar data has been integrated with QBlade’s airfoil data pre-processor (see <a class="reference internal" href="../../../user/airfoil/polar_extrapolation.html#polar-decomposition"><span class="std std-ref">Polar Decomposition</span></a>).</p>
+</section>
+<section id="lift-attached-flow-contribution">
+<h2>Lift: Attached Flow Contribution<a class="headerlink" href="#lift-attached-flow-contribution" title="Permalink to this headline"></a></h2>
+<p>The potential flow model accounts for non-circulatory (added mass) effects, and circulatory lift which includes wake memory effects that play a role in the linear attached flow region.
+The added mass term models the forces due to the reaction of the fluid to the airfoil motion and the motion of its trailing edge flap:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cl^{nc} = \pi\frac{b_{hc}}{V_\infty}\dot{\alpha}^{str} + \frac{F_{dydxLE}}{\pi}\frac{b_{hc}}{V_\infty}\dot{\beta}.
+\end{align}\]</div>
+<p><span class="math notranslate nohighlight">\(b_{hc}\)</span> denotes the half chord length of the airfoil, <span class="math notranslate nohighlight">\(V_{\infty}\)</span> the free stream velocity and <span class="math notranslate nohighlight">\(\dot{\alpha}_{str}\)</span> the pitch rate due to torsional deformation, <span class="math notranslate nohighlight">\(F_{dxdyLE}\)</span> is the deflection shape integral, a geometrical property depending on the airfoils shape (See Gaunaa’s work in <a class="footnote-reference brackets" href="#footcite-gaunaa2010" id="id5">4</a>) and <span class="math notranslate nohighlight">\(\dot\beta\)</span> the flap deflection rate.</p>
+<p>The quasi steady lift component is the steady lift that is generated by the airfoil at the current angle of attack <span class="math notranslate nohighlight">\(\alpha_{qs}\)</span> and the current flap deflection <span class="math notranslate nohighlight">\(\beta_{qs}\)</span> obtained from the relative airfoil motion and free-stream velocity, but without the influence of shed wake vorticity:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cl^{qs} = Cl^{att}(\alpha_{qs}, \beta_{qs}).
+\end{align}\]</div>
+<p>The circulatory component of the lift coefficient is obtained by evaluating the attached lift coefficient at the effective angle of attack <span class="math notranslate nohighlight">\(\alpha_{eff}\)</span> with the effective flap angle <span class="math notranslate nohighlight">\(\beta_{eff}\)</span> (see <a class="footnote-reference brackets" href="#footcite-bergami2012" id="id6">1</a> for details).</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cl^{circ}=Cl^{att}(\alpha_{eff}, \beta_{eff}).
+\end{align}\]</div>
+<p><span class="math notranslate nohighlight">\(\alpha_{eff}\)</span> is the angle of attack that arises of the airfoil interaction with its wake. Wake memory effects are caused by the influence of the trailing and shed vorticity in the wake on the quasi-steady angle of attack.
+Originally the ATEFlap model was formulated for BEM codes, so the downwash of the wake (which also causes the wake memory effect) is modeled with an effective angle of attack that is computed via step responses that are described by exponential indicial response functions <a class="footnote-reference brackets" href="#footcite-bergami2012" id="id7">1</a>.
+In QBlade’s implementation, the effective angle of attack is directly obtained as the induction from the free vortex wake formulation is already considered in the evaluation of the on-blade velocities.</p>
+<p>It should be noted that the quasi steady angle of attack, which does not include the effect of wake vorticity, is not known in the free vortex wake formulation of QBlade. As the quasi steady angle <span class="math notranslate nohighlight">\(\alpha_{qs}\)</span> is needed for a later evaluation of the induced drag contribution it is computed by calculating the isolated contribution of the wake vorticity on the angle of attack, denoted as <span class="math notranslate nohighlight">\(\alpha_{shed}\)</span>, separately. <span class="math notranslate nohighlight">\(\alpha_{shed}\)</span> is obtained by considering the induction of the total shed vorticity in the vicinity of the blade, up to <span class="math notranslate nohighlight">\(8\)</span> chord lengths away from the trailing edge. As the dynamic stall model is formulated for an isolated two-dimensional airfoil, it is necessary to limit the vortices that are involved in the evaluation of <span class="math notranslate nohighlight">\(\alpha_{shed}\)</span> to those in the vicinity of the blade to exclude the significant influence of the total shed vorticity from all previous time steps on the global flow field (this is especially important for VAWT simulations where the shed vorticity has a major contribution to the total induction field around the rotor). <span class="math notranslate nohighlight">\(\alpha_{shed}\)</span> is then used to calculate the quasi steady angle of attack from the effective angle of attack.</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                \alpha_{qs} = \alpha_{eff}-\alpha_{shed}.
+\end{align}\]</div>
+<p>This extra treatment is necessary because the common unsteady aerodynamics models are formulated for BEM codes and use indicial functions. In QBlade, these functions are replaced by the free vortex wake model.</p>
+</section>
+<section id="lift-separated-flow-contribution">
+<h2>Lift: Separated Flow Contribution<a class="headerlink" href="#lift-separated-flow-contribution" title="Permalink to this headline"></a></h2>
+<figure class="align-center" id="id11">
+<span id="fig-dsloop"></span><img alt="The dynamic stall hysteresis loop" src="../../../../_images/dsloop.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">The dynamic stall hysteresis loop.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The implementation of the Beddoes-Leishman dynamic stall model follows the procedure explained in <a class="footnote-reference brackets" href="#footcite-bergami2012" id="id8">1</a>. A schematic representation of the dynamic stall loop is shown in <a class="reference internal" href="#fig-dsloop"><span class="std std-numref">Fig. 10</span></a>.</p>
+<p>In QBlade, the dynamic stall effect is modeled by means of three contributions. The first contribution is the lagged potential lift (leading edge pressure time lag), obtained via a low pass filter function with the pressure time lag constant <span class="math notranslate nohighlight">\(\tau_p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                \dot{Cl}^{lag} = -\frac{V_{\infty}}{b_{hc}}\frac{1}{\tau_p}Cl^{lag}+\frac{V_{\infty}}{b_{hc}}\frac{1}{\tau_p}Cl^{pot}.
+\end{align}\]</div>
+<p>In the equation above, <span class="math notranslate nohighlight">\(Cl^{pot}\)</span> represents the potential lift from the attached flow contribution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cl^{pot} = Cl^{circ} + Cl^{nc}.
+\end{align}\]</div>
+<p>Using the lagged potential lift <span class="math notranslate nohighlight">\(Cl^{lag}\)</span> the second contribution can be calculated, namely the intermediate separation function. In this contribution, a separation function is calculated from the static separation function <span class="math notranslate nohighlight">\(f\)</span> (obtained via the polar decomposition) in combination with
+an equivalent angle of attack <span class="math notranslate nohighlight">\(\alpha_{\ast}\)</span> and flap angle <span class="math notranslate nohighlight">\(\beta_{\ast}\)</span> that are obtained with the help of <span class="math notranslate nohighlight">\(Cl^{lag}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+                \alpha^{\ast} &amp;= \frac{Cl^{lag}}{\frac{\partial Cl}{\partial \alpha}}+\alpha_0, \\
+                \beta^{\ast}  &amp;= \frac{Cl^{lag} - Cl^{lag}_{\beta=0}}{\frac{\partial Cl}{\partial \beta}}.
+\end{align}\end{split}\]</div>
+<p>With the help of <span class="math notranslate nohighlight">\(\alpha^{\ast}\)</span> and <span class="math notranslate nohighlight">\(\beta^{\ast}\)</span>, the third contribution can be calculated: the dynamic separation function. In this contribution, the dynamic separation function <span class="math notranslate nohighlight">\(f^{dyn}\)</span> is calculated by passing the intermediate separation function <span class="math notranslate nohighlight">\(f(\alpha^{\ast},\beta^{\ast})\)</span> through a low pass filter with the boundary layer lag constant <span class="math notranslate nohighlight">\(\tau_f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                \dot{f}^{dyn} = -\frac{V_{\infty}}{b_{hc}}\frac{1}{\tau_f}f^{dyn}+\frac{V_{\infty}}{b_{hc}}\frac{1}{\tau_f}f(\alpha^{\ast},\beta^{\ast}),
+\end{align}\]</div>
+<p>The dynamic circulatory lift <span class="math notranslate nohighlight">\(Cl^{circ,dyn}\)</span> is then obtained by multiplying the dynamic separation function <span class="math notranslate nohighlight">\(f^{dyn}\)</span> with the fully attached <span class="math notranslate nohighlight">\(Cl^{att}\)</span> and the fully separated <span class="math notranslate nohighlight">\(Cl^{sep}\)</span> lift contributions that were obtained from the polar decomposition:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cl^{circ,dyn} = Cl^{att}(\alpha_{eff},\beta_{eff})f^{dyn}+Cl^{sep}(\alpha_{eff},\beta_{eff})(1-f^{dyn}).
+\end{align}\]</div>
+<p>Within the ATEFlap formulation for separated flow a term for modeling the vortex lift is included:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                 C_v = Cl^{circ,dyn}(1-\frac{(1+\sqrt{f^{dyn}})^2}{4}).
+ \end{align}\]</div>
+<p>However, it was found, especially when simulating VAWT with large fluctuations in angle of attack, that this term is prone to large fluctuations, often causing unrealistically large values for the total dynamic lift coefficient. Thus, in favor of robustness, it was decided to exclude this term from the calculation of total lift. The total lift, including the attached and separated flow contribution, but excluding the vortex lift, then equals:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cl^{dyn} = Cl^{circ,dyn}+Cl^{nc}.
+\end{align}\]</div>
+</section>
+<section id="drag">
+<h2>Drag<a class="headerlink" href="#drag" title="Permalink to this headline"></a></h2>
+<p>The dynamic drag is evaluated from four contributions. These are: first, the steady drag at the effective angle of attack and the effective flap angle:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cd^{eff} = Cd(\alpha_{eff},\beta_{eff}).
+\end{align}\]</div>
+<p>Second, the drag induced from shed wake vorticity. It is obtained using the quasi steady angle of attack:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cd_{ind}=Cl^{circ,dyn}(\alpha_{qs}-\alpha_{eff}).
+\end{align}\]</div>
+<p>The third contribution is the induced drag contribution from the flap deflection. It is calculated according to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cd_{ind}^\beta=Cl^{circ,dyn}\cdot \frac{\frac{\partial Cl}{\partial\beta}}{\frac{\partial Cl}{\partial\alpha}}(\beta^{st}-\beta^{eff})f^{dyn}.
+\end{align}\]</div>
+<p>The last contribution is the drag change caused through the separation delay:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cd_{ind}^f = (Cd^{eff}-Cd(\alpha_0))\left[\frac{\left(1-\sqrt{f^{dyn}(\alpha^{\ast},\beta^{\ast})}\right)^2}{4}-\frac{\left(1+\sqrt{f^{st}(\alpha^{\ast},\beta^{\ast})}\right)^2}{4}\right].
+\end{align}\]</div>
+<p>The total drag is then computed as the sum of these contributions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+                Cd = Cd^{eff}+Cd_{ind}+Cd_{ind}^\beta+Cd_{ind}^f.
+\end{align}\]</div>
+</section>
+<section id="moment">
+<h2>Moment<a class="headerlink" href="#moment" title="Permalink to this headline"></a></h2>
+<p>Will soon be updated!</p>
+<p id="id9"><dl class="footnote brackets">
+<dt class="label" id="footcite-bergami2012"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id6">3</a>,<a href="#id7">4</a>,<a href="#id8">5</a>)</span></dt>
+<dd><p>Leonardo Bergami and Mac Gaunaa. ATEFlap Aerodynamic Model. Technical Report, DTU, 2012.</p>
+</dd>
+<dt class="label" id="footcite-wendler2016"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Juliane Wendler, David Marten, George Pechlivanoglou, Christian Oliver Paschereit, and Christian Navid Nayeri. An Unsteady Aerodynamics Model for Lifting Line Free Vortex Wake Simulations of HAWT and VAWT in QBlade. In <em>Proceedings of ASME Turbo Expo 2016: Turbomachinery Technical Conference and Exposition</em>. 2016.</p>
+</dd>
+<dt class="label" id="footcite-hansen2004b"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>Morten Hartvig Hansen, Mac Gaunaa, and Helge Aagaard Madsen. A Beddoes-Leishman type dynamic stall model in state-space and indicial formulation. Technical Report, DTU, 2004.</p>
+</dd>
+<dt class="label" id="footcite-gaunaa2010"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p>Mac Gaunaa. Unsteady two-dimensional potential-fl ow model for thin variable geometry airfoils. <em>Wind Energ.</em>, 13(December 2005):167–192, 2010. <a class="reference external" href="https://doi.org/I: 10.1002/we.3">doi:I: 10.1002/we.3</a>.</p>
+</dd>
+</dl>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="OYE_stall.html" class="btn btn-neutral float-left" title="OYE Dynamic Stall Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../secondary_effects/index_secondary.html" class="btn btn-neutral float-right" title="Secondary Effects" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

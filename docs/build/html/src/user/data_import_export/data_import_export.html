@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Object Hierarchy and Data Structure &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Global Coordinate System" href="../coordinates/coordinates.html" />
+    <link rel="prev" title="GUI Overview" href="../guigraph/guigraph.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Object Hierarchy and Data Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#project-serialization">Project Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-objects-import-and-export">Data Objects Import and Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>Object Hierarchy and Data Structure</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/data_import_export/data_import_export.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="object-hierarchy-and-data-structure">
+<h1>Object Hierarchy and Data Structure<a class="headerlink" href="#object-hierarchy-and-data-structure" title="Permalink to this headline"></a></h1>
+<p>In the back-end of QBlade all simulation objects and all data is organized in a specific hierarchy, representing the ‘building blocks’ of a completer aero-servo-hydro-elastic wind turbine simulation.
+The data structure and object hierarchy of QBlade is shown in the following figure.</p>
+<figure class="align-center" id="id1">
+<span id="fig-data-struct"></span><img alt="Overview of QBlades data structure" src="../../../_images/data_struct.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Overview of QBlades data structure.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>One important thing to note is that when a data object is deleted from QBlades database all objects associated with it, that are below in the object hierarchy, are automatically removed from the database.
+As an example: If a polar object is deleted all associated rotor blades are deleted and thus all associated simulations as well!</p>
+</section>
+<section id="project-serialization">
+<h1>Project Serialization<a class="headerlink" href="#project-serialization" title="Permalink to this headline"></a></h1>
+<p>All data and objects in QBlade can be serialized into the binary QBlade Project file formnat <code class="docutils literal notranslate"><span class="pre">.qpr</span></code>. QBlade project files allow easy sharing or saving of projects and simulation results.</p>
+</section>
+<section id="data-objects-import-and-export">
+<h1>Data Objects Import and Export<a class="headerlink" href="#data-objects-import-and-export" title="Permalink to this headline"></a></h1>
+<p>In QBlade several data objects exists. An aero-servo-hydro-elastic simulation definition is made up of several data objects (see <a class="reference internal" href="#fig-data-struct"><span class="std std-numref">Fig. 40</span></a>).  These objects are:</p>
+<ul class="simple">
+<li><p><strong>Simulation definition</strong>: The simulation definition objects defines boundary conditions, discretization and simulation length and other parameters (<code class="docutils literal notranslate"><span class="pre">.sim</span></code> files)</p></li>
+<li><p><strong>Turbine definition</strong>: The turbine definition object defines the aero-servo-hydro elastic model of the turbine that is simulated (<code class="docutils literal notranslate"><span class="pre">.trb</span></code> files)</p></li>
+<li><p><strong>Blade definition</strong>: The blade definition contains the aerodynamic definition of the rotor blade (<code class="docutils literal notranslate"><span class="pre">.bld</span></code> files)</p></li>
+<li><p><strong>Polar</strong>: The polar object contains the airfoil coefficients (<code class="docutils literal notranslate"><span class="pre">.plr</span></code> files)</p></li>
+<li><p><strong>Airfoil</strong>: The airfoil object contains the outer contour of the airfoil (<code class="docutils literal notranslate"><span class="pre">.afl</span></code> files)</p></li>
+<li><p><strong>Windfield</strong>: The windfield object contains the time resolved data of the inflow (<code class="docutils literal notranslate"><span class="pre">.bts</span></code>, <code class="docutils literal notranslate"><span class="pre">.hht</span></code> or <code class="docutils literal notranslate"><span class="pre">.inp</span></code> files)</p></li>
+<li><p><strong>Wavefield</strong>: The wavefield contains the time resolved information of the seastate (<code class="docutils literal notranslate"><span class="pre">.lwa</span></code> files)</p></li>
+</ul>
+<p>One main concept in QBlade is the ability to easily create and edit the use data objects. In the GUI objects can easily be created within custom dialogs. These objects can be exported into ASCII format and edited, or completely created, outside of QBlade and imported with ease.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../guigraph/guigraph.html" class="btn btn-neutral float-left" title="GUI Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../coordinates/coordinates.html" class="btn btn-neutral float-right" title="Global Coordinate System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

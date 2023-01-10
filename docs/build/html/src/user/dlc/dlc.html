@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DLC Generator &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="CLI Overview" href="../interfaces/commandline.html" />
+    <link rel="prev" title="Wave Generator Overview" href="../wavefield/wavefield.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">DLC Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>DLC Generator</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/dlc/dlc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dlc-generator">
+<h1>DLC Generator<a class="headerlink" href="#dlc-generator" title="Permalink to this headline"></a></h1>
+<div class="admonition-qblade-ee admonition">
+<p class="admonition-title">QBlade-EE</p>
+<p>This feature is only available in the Enterprise Edition of QBlade.</p>
+</div>
+<p>QBlade-EE is equipped with a fully featured automatic DLC generator (see <a class="reference internal" href="#fig-dlc-diag"><span class="std std-numref">Fig. 96</span></a>), according to the following standards:</p>
+<ul class="simple">
+<li><p><strong>IEC 61400-1 Ed. 2</strong></p></li>
+<li><p><strong>IEC 61400-1 Ed. 3</strong></p></li>
+<li><p><strong>IEC 61400-2 Ed. 2</strong></p></li>
+<li><p><strong>IEC 61400-3-1 Ed. 1</strong></p></li>
+<li><p><strong>IEC 61400-3-2 Ed. 2</strong></p></li>
+</ul>
+<p>Furthermore, the DLC generator allows to setup automatic evaluations of <em>Campbell Diagrams</em> and <em>Aeroelastic Operational (Power) Curves</em>.
+After a DLC has been defined in the dialog, all individual loadcases can be automatically exported as <code class="docutils literal notranslate"><span class="pre">.sim</span></code> files, for an evaluation in the Command Line Interface (<a class="reference internal" href="../interfaces/commandline.html#cli-overview"><span class="std std-ref">CLI Overview</span></a>) or can be directly evaluated in the GUI via the <a class="reference internal" href="../simulation/simulation.html#multi-threaded-batch-analysis"><span class="std std-ref">Multi-Threaded Batch Analysis</span></a> (see <a class="reference internal" href="#fig-dlc-gen"><span class="std std-numref">Fig. 97</span></a>).</p>
+<figure class="align-center" id="id1">
+<span id="fig-dlc-diag"></span><img alt="The DLC Generator Dialog." src="../../../_images/dlc_diag.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 96 </span><span class="caption-text">The DLC Generator Dialog.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<span id="fig-dlc-gen"></span><img alt="Generation of DLC Simulations from a DLC definition." src="../../../_images/dlc_gen.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 97 </span><span class="caption-text">Generation of DLC Simulations from a DLC definition.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Alternatively, DLC sets can be defined using an Excel spreadsheet.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../wavefield/wavefield.html" class="btn btn-neutral float-left" title="Wave Generator Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../interfaces/commandline.html" class="btn btn-neutral float-right" title="CLI Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

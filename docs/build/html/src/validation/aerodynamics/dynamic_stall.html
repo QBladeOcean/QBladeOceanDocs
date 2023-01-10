@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validation of the ATEFlap Dynamic Stall Model &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Validation Tests for Potential Flow Models with Morison Drag (LPMD)" href="../hydrodynamics/lpmd/lpmd.html" />
+    <link rel="prev" title="Validation Cases and Examples" href="../index_val.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_val.html">Validation Cases and Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index_val.html#aerodynamic-validation-tests">Aerodynamic Validation Tests</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Validation of the ATEFlap Dynamic Stall Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_val.html#structural-dynamics-validation-tests">Structural Dynamics Validation Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_val.html#hydrodynamics-validation-tests">Hydrodynamics Validation Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_val.html">Validation Cases and Examples</a> &raquo;</li>
+      <li>Validation of the ATEFlap Dynamic Stall Model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/validation/aerodynamics/dynamic_stall.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="validation-of-the-ateflap-dynamic-stall-model">
+<h1>Validation of the ATEFlap Dynamic Stall Model<a class="headerlink" href="#validation-of-the-ateflap-dynamic-stall-model" title="Permalink to this headline"></a></h1>
+<p>Two exemplary validation graphs for the <a class="reference internal" href="../../theory/aerodynamics/dynamic_stall/ATEFLAP_stall.html"><span class="doc">ATEFlap Dynamic Stall Model</span></a> from the publication by Wendler et al. <a class="footnote-reference brackets" href="#footcite-wendler2016" id="id1">1</a> are shown in <a class="reference internal" href="#fig-vali1"><span class="std std-numref">Fig. 98</span></a>, where the general sensitivity of the dynamic stall hysteresis loop to the reduced frequency and amplitude is well reproduced.</p>
+<figure class="align-center" id="id4">
+<span id="fig-vali1"></span><img alt="Validation of the unsteady aerodynamics model with OSU test data (in circles) of the S809 airfoil; top: varying mean AoA; bottom: varying dimensionless frequency" src="../../../_images/vali1.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 98 </span><span class="caption-text">Validation of the unsteady aerodynamics model with OSU test data <a class="footnote-reference brackets" href="#footcite-nrel1999" id="id2">2</a> (in circles) of the S809 airfoil; top: varying mean AoA; bottom: varying dimensionless frequency.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p id="id3"><dl class="footnote brackets">
+<dt class="label" id="footcite-wendler2016"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Juliane Wendler, David Marten, George Pechlivanoglou, Christian Oliver Paschereit, and Christian Navid Nayeri. An Unsteady Aerodynamics Model for Lifting Line Free Vortex Wake Simulations of HAWT and VAWT in QBlade. In <em>Proceedings of ASME Turbo Expo 2016: Turbomachinery Technical Conference and Exposition</em>. 2016.</p>
+</dd>
+<dt class="label" id="footcite-nrel1999"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>NREL. OSU Wind-Tunnel Test Data S809. 1999. URL: <a class="reference external" href="https://wind.nrel.gov/airfoils/OSU{\_}data/data/">https://wind.nrel.gov/airfoils/OSU{\_}data/data/</a> (visited on 2019-07-12).</p>
+</dd>
+</dl>
+</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index_val.html" class="btn btn-neutral float-left" title="Validation Cases and Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../hydrodynamics/lpmd/lpmd.html" class="btn btn-neutral float-right" title="Validation Tests for Potential Flow Models with Morison Drag (LPMD)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Vortex Wake Settings &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Turbine Structural Model" href="structure.html" />
+    <link rel="prev" title="Unsteady BEM Settings" href="unsteadybem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="turbine.html">Turbine Definition Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unsteadybem.html">Unsteady BEM Settings</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Free Vortex Wake Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wake-modelling">Wake Modelling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vortex-modelling">Vortex Modelling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turbine-gamma-iteration-parameters">Turbine Gamma Iteration Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="structure.html">Turbine Structural Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="controller.html">Turbine Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbineexport.html">Turbine Export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi_turbine.html">Multi Rotor Turbine Assembly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi_turbine.html#multi-rotor-turbine-assembly-export">Multi Rotor Turbine Assembly Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>Free Vortex Wake Settings</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/turbine/vortexwake.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="free-vortex-wake-settings">
+<h1>Free Vortex Wake Settings<a class="headerlink" href="#free-vortex-wake-settings" title="Permalink to this headline"></a></h1>
+<section id="wake-modelling">
+<h2>Wake Modelling<a class="headerlink" href="#wake-modelling" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>Wake Integration Type</strong>: This sets the velocity integration method for the wake nodes during the free wake convection step. <strong>EF</strong>: A simple 1st Order Euler Forward integration. <strong>PC</strong>: A 2nd Order Predictor Corrector integration method. <strong>PC2B</strong>: A second Order Predictor Corrector Backwards integration scheme.</p></li>
+<li><p><strong>Wake Rollup</strong>: This actives or deactivates the wake self-induction.</p></li>
+<li><p><strong>Include Trailing/Shed Vortices</strong>: This sets if trailing (streamwise) or shed (spanwise) vortices are generated at the blades trailing edge during every timepstep.</p></li>
+<li><p><strong>Wake Convection</strong>: The user can choose here which free-stream velocity contributes to the total convection velocitzy of the wake nodes. <strong>BL</strong>: The convection velocity is the mean boundary layer velocity (as a function of height). <strong>HH</strong>: The convection velocity is the constant hub-height velocity. <strong>LOC</strong>: The convection velocity is evaluated locally at each wake node position.</p></li>
+<li><p><strong>Wake Relaxation Factor</strong>: This factor can be used to <em>relax</em> the wake by blending out the starting vortex. The factor controls how long the wake is allowed to be after a given number of rotor revolutions or timesteps (depending on the <strong>Count Wake Length In</strong> setting). Such as a value of 0.5 allows for a wake length of 5 revolutions after the rotor has undergone 10 revolutions. A factor of 1 deactivaes the blending.</p></li>
+<li><p><strong>First Wake Row Length Factor</strong>: This factor can be used to assign a shortened length to the newly created wake elements at the trailing edge so that the newly created shed vorticity is in closer proximity to the blade. A factor of 1 deactivates the shortening.</p></li>
+<li><p><strong>Max Num. Elements / Norm. Distance</strong>: These two values are used to cut-off the wake after a fixed numbner of vortex elements has been created (Max. Num. Wake Elements) or after a vortex element has reached a distance (normalized by rotor diameter) from the hub that is larger than <strong>Norm. Distance</strong>.</p></li>
+<li><p><strong>Wake Reduction Factor</strong>: This factor <em>filters</em> out wake elements that have a circulation smaller than the maximum circulation in the wake multiplied by this factor. In most cases this effectively removes shed vorticity that does not significantly affect the wake induction (see <a class="reference internal" href="#fig-wakereduction"><span class="std std-numref">Fig. 70</span></a>).</p></li>
+</ul>
+<figure class="align-center" id="id1">
+<span id="fig-wakereduction"></span><img alt="Visualization of the wake reduction approach." src="../../../_images/wakereduction.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Visualization of the wake reduction approach.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Count Wake Length In</strong>: This setting controls how the age of a vortex element is counted. Either as a number of rotor revolutions, or as a number of timesteps that have passed since the elemnt was created.</p></li>
+<li><p><em>Particle Conversion after [Revolutions/Timesteps]*</em>: (<strong>Only QBlade-EE</strong>) This setting controls when a vortex filament is converted into a vortex particle. If the vortex elemnt has reached an age (in timesteps or revolutions) equal to this value it is converted into a particle.</p></li>
+<li><p><strong>Wake Zones N/1/2/3 in [Revolutions/Timesteps]</strong>: This setting controls the <em>length</em> of the different wake zones. The length is either counted in rotor revolutions or in timesteps, depending on the setting (<strong>Count Wake Length In</strong>). Each wake zone has a successively coarser discretization (depending on the <strong>Wake Zones Factor</strong> settings) to reduce the total number of free wake elements and thereby to speed up the simulation.</p></li>
+<li><p><strong>Wake Zones 1/2/3 factor</strong>: These (integer) factors control by how much the wake is coarsenend in between the different wake zones. A factor of 4 means that when transitioning from one zone to the next 4 wake elements are replaced by a single wake element to coarsen the wake resolution (see :numref:fig-wakezones`.png`).</p></li>
+</ul>
+<figure class="align-center" id="id2">
+<span id="fig-wakezones"></span><img alt="Visualization of the wake zoning approach." src="../../../_images/wakezones.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Visualization of the wake zoning approach.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="vortex-modelling">
+<h2>Vortex Modelling<a class="headerlink" href="#vortex-modelling" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>Fixed Bound Core Radius (% Chord)</strong>: This sets the fixed core radius of the bound blade vortices. Defined as a fraction of the local blade chord.</p></li>
+<li><p><strong>Initial Wake Core Radius (% Chord)</strong>: This sets the intial core radius of the free vortices that are created at the blades trailing edge. Defined as a fraction of the local blade chord.</p></li>
+<li><p><strong>Turbulent Vortex Viscosity</strong>: This value is used in the vortex core growth model, see <a class="reference internal" href="../../theory/aerodynamics/lifting_line/lifting_line.html#vortex-core-desingularization"><span class="std std-ref">Vortex Core Desingularization</span></a>.</p></li>
+<li><p><strong>Include Vortex Stretching</strong>: This option activates vortex stretching, see <a class="reference internal" href="../../theory/aerodynamics/lifting_line/lifting_line.html#vortex-core-desingularization"><span class="std std-ref">Vortex Core Desingularization</span></a>.</p></li>
+<li><p><strong>Maximum Vortex Stretching Factor</strong>: After the cummulative vortex strain rate has reached a value larger than this factor it is automatically removed from the wake.</p></li>
+</ul>
+</section>
+<section id="turbine-gamma-iteration-parameters">
+<h2>Turbine Gamma Iteration Parameters<a class="headerlink" href="#turbine-gamma-iteration-parameters" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>Relaxation Factor</strong>: This relaxation factor is used when the blade circulation is updated during the circulation iteration.</p></li>
+<li><p><strong>Max. Epsilon for Convergence</strong>: The convergence criteria for the blade circulation.</p></li>
+<li><p><strong>Max. Number of Iterations</strong>: The maximum number of blade circulation iterations that will be carried out.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="unsteadybem.html" class="btn btn-neutral float-left" title="Unsteady BEM Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="structure.html" class="btn btn-neutral float-right" title="Turbine Structural Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

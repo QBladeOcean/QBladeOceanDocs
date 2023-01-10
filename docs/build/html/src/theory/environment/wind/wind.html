@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wind &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../../_static/custom.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="User’s Guide" href="../../../user/index_ue.html" />
+    <link rel="prev" title="Currents" href="../sea/currents.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_th.html">Theory Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#aerodynamics">Aerodynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#hydrodynamics">Hydrodynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#structural-dynamics">Structural Dynamics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index_th.html#environmental-conditions">Environmental Conditions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../soil/soil.html">Soil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sea/index_sea.html">Waves</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Wind</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#energy-content-of-the-wind">Energy Content of the Wind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#atmospheric-boundary-layer">Atmospheric Boundary Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yaw-vertical-shear-and-veer">Yaw, Vertical Shear, and Veer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turbulent-inflow">Turbulent Inflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index_th.html">Theory Guide</a> &raquo;</li>
+      <li>Wind</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/src/theory/environment/wind/wind.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wind">
+<h1>Wind<a class="headerlink" href="#wind" title="Permalink to this headline"></a></h1>
+<p>A wind turbine extracts energy from the wind. This occurs by converting linear kinetic energy of the wind into a force on the turbine blades.
+The force distribution along the blades generates a torque which drives a generator capable of converting the rotational kinetic energy into electrical energy.
+As such, the spatial and temporal distribution of the wind greatly affects both the loads experienced by the turbine components as well as the amount of energy which can be captured.
+A good understanding of the wind field is hence necessary in order to accurately simulate both the loads acting on the turbine as well as the energy yield.</p>
+<section id="energy-content-of-the-wind">
+<h2>Energy Content of the Wind<a class="headerlink" href="#energy-content-of-the-wind" title="Permalink to this headline"></a></h2>
+<p>A small packet of wind with mass <span class="math notranslate nohighlight">\(m\)</span>, velocity <span class="math notranslate nohighlight">\(u\)</span> has a total kinetic energy <span class="math notranslate nohighlight">\(E\)</span> given by <span class="math notranslate nohighlight">\(\frac{1}{2} mu^2\)</span>.
+The number of packets passing through the rotor per unit time <span class="math notranslate nohighlight">\(\dot{m}\)</span> is proportional to the inflow velocity <span class="math notranslate nohighlight">\(u\)</span>. The total energy per unit time passing through the rotor is hence given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\frac{dE}{dt} = \frac{1}{2}\dot{m}u^2 \propto \frac{1}{2}m u^3
+\end{equation}
+\textrm{  .}\]</div>
+<p>We see that the total energy captured is in fact proportional to the cube of the inflow velocity.
+The actuator disc theory is a simplified analysis which can be used to assess the maximum amount of energy which can be extracted by the turbine.
+In this theory the rotor is modelled as a thin disc which extracts energy from the field in the form of a uniform pressure drop <a class="footnote-reference brackets" href="#footcite-burtonbook" id="id1">1</a>.
+It is assumed that the flow is unidirectional (uniform) and that the streamtube containing the inflow expands passing through the rotor, as illustrated in <a class="reference internal" href="#fig-wind-ad1"><span class="std std-numref">Fig. 26</span></a>.</p>
+<figure class="align-center" id="id7">
+<span id="fig-wind-ad1"></span><a class="reference internal image-reference" href="../../../../_images/AD1.png"><img alt="AD" src="../../../../_images/AD1.png" style="width: 447.0px; height: 269.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Idealised treatment of the flow field through a wind turbine rotor of the actuator disc theory. The streamtube is shown dashed.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>We shall introduce a new quantity, the axial induction <span class="math notranslate nohighlight">\(a = 1 - u/u_{\infty}\)</span>, where <span class="math notranslate nohighlight">\(u_{\infty}=u_1\)</span> is the inflow velocity far upstream of the rotor.
+The axial induction is a measure for the deceleration of the wind cased by the presence of the rotor. Following this specification, it is clear that the velocity through the rotor can be expressed as <span class="math notranslate nohighlight">\(u = u_{\infty}(1-a)\)</span>.
+The flow downstream is given by <span class="math notranslate nohighlight">\(u_4 = u_{\infty}(1-2a)\)</span>. In addition to predictions of the velocity field, the Bernoulli equation is utilized within the actuator disc to calculate integral forces acting over the disc.
+The total force in freestream direction, the thrust <span class="math notranslate nohighlight">\(T\)</span>, is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+T = 4a(1-a)\frac{1}{2}\rho u_{\infty}^2 A
+\end{equation}
+\textrm{  ,}\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is the area of the rotor and <span class="math notranslate nohighlight">\(\rho\)</span> is the density of the inflow field. A similar analysis can be used to determine the total power <span class="math notranslate nohighlight">\(P\)</span> extracted by the disc:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+P = 4a(1-a)^2\frac{1}{2}\rho u_{\infty}^3 A
+\end{equation}
+\textrm{  .}\]</div>
+<p>The factor <span class="math notranslate nohighlight">\(4a(1-a)^2\)</span> leading this equation provides insight into the energy which can be extracted from the wind. The factor reaches a maximum of <span class="math notranslate nohighlight">\(16/27\)</span> at <span class="math notranslate nohighlight">\(a = 1/3\)</span>.
+This is known as the Betz limit and implies that practically only approximately 60% of the kinetic energy of the wind can be extracted in practice.
+Although the actuator disc theory is useful for theoretical predictions, in practice the wind field is nonuniform and unsteady. The following sections describe realistic corrections to this model.</p>
+</section>
+<section id="atmospheric-boundary-layer">
+<h2>Atmospheric Boundary Layer<a class="headerlink" href="#atmospheric-boundary-layer" title="Permalink to this headline"></a></h2>
+<p>In a realistic inflow the velocity of the windfield at low altitudes is decelerated due to the no-slip boundary condition at the surface of the earth.
+This means practically that as the height from the ground increases, the wind speed increases until it reaches the velocity of the geostrophic wind (outside of the boundary layer).
+This is also commonly referred to as vertical shear. One common approach to modelling this is to use a power law rule for the velocity field as a function of height <span class="math notranslate nohighlight">\(z\)</span>. In this case the velocity is specified as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+u(z) = u_0\left( \frac{z}{z_0} \right)^\alpha
+\end{equation}
+\textrm{  ,}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_0\)</span> is a reference wind velocity specified at a reference height <span class="math notranslate nohighlight">\(z_0\)</span> and <span class="math notranslate nohighlight">\(\alpha\)</span> is the exponent.
+A typical value for <span class="math notranslate nohighlight">\(\alpha\)</span> is <span class="math notranslate nohighlight">\(0.2\)</span> for normal wind conditions onshore and <span class="math notranslate nohighlight">\(0.14\)</span> for normal wind conditions offshore. An alternative model is to assume a logarithmic wind profile, described by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+u(z) = u_0\frac{\log (z/l)}{\log (z_0/l)}
+\end{equation}
+\textrm{  ,}\]</div>
+<p>where <span class="math notranslate nohighlight">\(l\)</span> is a roughness height. These are visualised for three profiles in <a class="reference internal" href="#fig-wind-vertvel"><span class="std std-numref">Fig. 27</span></a>.</p>
+<figure class="align-center" id="id8">
+<span id="fig-wind-vertvel"></span><img alt="WV" src="../../../../_images/WindVert.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Standard approaches to modelling the atmospheric boundary layer velocity profile.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="yaw-vertical-shear-and-veer">
+<h2>Yaw, Vertical Shear, and Veer<a class="headerlink" href="#yaw-vertical-shear-and-veer" title="Permalink to this headline"></a></h2>
+<p>In addition to the atmospheric boundary layer, the mean inflow direction may not be aligned with the rotor axis due to change in wind direction or misalignment of the turbine.
+The angle between the mean inflow direction and the rotor axis in a horizontal plane (<span class="math notranslate nohighlight">\(z=\textrm{const.}\)</span>) is referred to as the yaw misalignment. The relative velocity of the inflow seen by the blade changes
+depending on whether the blade is moving upstream or downstream, and this hence induces an unsteady load on the turbine. A misalignment in a vertical plane can also occur, this is commonly referred to as the vertical inflow angle.
+For very large rotors, Coriolis forces acting on the atmosphere can also give rise to a change in wind direction with height, this is referred to as vertical veer.</p>
+</section>
+<section id="turbulent-inflow">
+<h2>Turbulent Inflow<a class="headerlink" href="#turbulent-inflow" title="Permalink to this headline"></a></h2>
+<p>In generally all cases of practical interest, the inflow of a wind turbine is turbulent.
+The influence of atmospheric stability, terrain, obstacles and upstream turbines act to further increase the turbulence in the inflow of a wind turbine.
+A realistic modelling approaching therefore also accounts for this.
+Inflow turbulence is generally inhomogeneous and anisotropic, however for many cases homogeneity and isotropy can be assumed.
+A representative quantity for the magnitude of the turbulent velocity fluctuations is given by the turbulence intensity <span class="math notranslate nohighlight">\(I_T\)</span>, given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+I_T = \frac{\sqrt{u'^2}}{u_0} = \frac{\sigma}{u_0}
+\end{equation}
+\textrm{  ,}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is the standard deviation of the velocity fluctuations.
+Turbulent fluctuations are strongly a function of space and time, and the degree of correlation of these fluctuations provides insight into the statistical variance of the field.
+The autocorrelation function <span class="math notranslate nohighlight">\(R\)</span> quantifies how a given flow quantity (here, <span class="math notranslate nohighlight">\(u'\)</span> for example) are spatially coincident based on its value at two positions <span class="math notranslate nohighlight">\(\Delta\vec{x}\)</span> apart in space:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+R(\vec{x},\Delta\vec{x}) = \frac{ u'(\vec{x})u'(\vec{x}+\Delta\vec{x}) }{ \sqrt{ u'^2(\vec{x}) }\sqrt{ u'^2(\vec{x}+\Delta\vec{x}) } }
+\end{equation}
+\textrm{  ,}\]</div>
+<p>all quantities here refer to ensemble averaged values. By recording this for a given turbulent field (shown in <a class="reference internal" href="#fig-wind-r"><span class="std std-numref">Fig. 28</span></a>), this allows the calculation of the integral length scale <span class="math notranslate nohighlight">\(L\)</span>, which
+provides a measure for the physical scale of the turbulent structures in the flow field.</p>
+<figure class="align-center" id="id9">
+<span id="fig-wind-r"></span><a class="reference internal image-reference" href="../../../../_images/R.png"><img alt="R" src="../../../../_images/R.png" style="width: 455.25px; height: 257.25px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">The autocorrelation function of a field quantity. The integral length scale <span class="math notranslate nohighlight">\(L\)</span> can be determined from this.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Within the scope of isotropic turbulence theory <a class="footnote-reference brackets" href="#footcite-batchelorbook" id="id2">2</a>, empirical observations of atmospheric flows have allowed for the development of models which describe accurately turbulence spectra within atmospheric boundary layers.
+Two models are commonly applied to determine the spectral density distribution <span class="math notranslate nohighlight">\(S(f)\)</span>, where <span class="math notranslate nohighlight">\(f\)</span> represents the frequency. The first is the Kaimal spectrum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\frac{fS_u(f)}{\sigma^2} = \frac{4fL{u_0}^{-1}}{ (1 + 6fL{u_0}^{-1})^{5/3} }
+\end{equation}
+\textrm{  .}\]</div>
+<p>The second is the von Karman spectrum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\frac{fS_u(f)}{\sigma^2} = \frac{4fL{u_0}^{-1}}{ (1 + 70.8(fL{u_0}^{-1})^2)^{5/6} }
+\end{equation}
+\textrm{  ,}\]</div>
+<p>With these models it is possible to generate a synthetic turbulence field which has representative statistical properties. Two methods are commonly applied to cases of wind turbine simulation.
+These methods, based upon Taylor’s hypothesis <a class="footnote-reference brackets" href="#footcite-batchelorbook" id="id3">2</a>, generate a <em>block</em> grid which is convected with the mean free stream velocity through the computational domain.
+The first method, commonly known as Veer’s method <a class="footnote-reference brackets" href="#footcite-veers-1988" id="id4">3</a> takes as input the power spectral density type and coherence function.
+A turbulent windfield generated with this method is illustrated in <a class="reference internal" href="#fig-wind-turb"><span class="std std-numref">Fig. 29</span></a>. The second method, referred to as Mann’s method <a class="footnote-reference brackets" href="#footcite-mann-1998" id="id5">4</a> relies on a model of the spectral tensor.</p>
+<figure class="align-center" id="id10">
+<span id="fig-wind-turb"></span><a class="reference internal image-reference" href="../../../../_images/Turb.png"><img alt="Turb" src="../../../../_images/Turb.png" style="width: 536.25px; height: 578.25px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">A synthetically generated turbulent velocity field for the simulation of a turbine operating in a turbulent inflow.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p id="id6"><dl class="footnote brackets">
+<dt class="label" id="footcite-burtonbook"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>T. Burton, N. Jenkins, D. Sharpe, and E. Bossanya. <em>Wind Energy Handbook</em>. Wiley, 2 edition, 2011. ISBN 978-0-470-69975-1.</p>
+</dd>
+<dt class="label" id="footcite-batchelorbook"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p>G.K. Batchelor. <em>The Theory of Homogeneous Turbulence</em>. Cambridge University Press, 1953. ISBN 0521041171.</p>
+</dd>
+<dt class="label" id="footcite-veers-1988"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>P.S. Veers. Three-dimensional wind simulation. 1 1988. URL: <a class="reference external" href="https://www.osti.gov/biblio/6633902">https://www.osti.gov/biblio/6633902</a>, <a class="reference external" href="https://doi.org/">doi:</a>.</p>
+</dd>
+<dt class="label" id="footcite-mann-1998"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p>J. Mann. Wind field simulation. <em>Probabilistic Engineering Mechanics</em>, 13(4):269–282, 1998. URL: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0266892097000362">https://www.sciencedirect.com/science/article/pii/S0266892097000362</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1016/S0266-8920(97)00036-2">doi:https://doi.org/10.1016/S0266-8920(97)00036-2</a>.</p>
+</dd>
+</dl>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sea/currents.html" class="btn btn-neutral float-left" title="Currents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../user/index_ue.html" class="btn btn-neutral float-right" title="User’s Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

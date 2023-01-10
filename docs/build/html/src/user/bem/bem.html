@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BEM Analysis Overview &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Turbine Definition Dialog" href="../turbine/turbine.html" />
+    <link rel="prev" title="Blade Design Overview" href="../blade/blade.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">BEM Analysis Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rotor-bem">Rotor BEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#characteristic-bem">Characteristic BEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#turbine-bem">Turbine BEM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>BEM Analysis Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/bem/bem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bem-analysis-overview">
+<h1>BEM Analysis Overview<a class="headerlink" href="#bem-analysis-overview" title="Permalink to this headline"></a></h1>
+<p>The <em>Steady BEM Analysis</em> tool allows the user to run aerodynamic simulations with very low computational expense, short run times and generally accurate
+preliminary results with regard to rotor performance parameters. The module is very useful for:</p>
+<ul class="simple">
+<li><p>Performing a first evaluation of a blade design,</p></li>
+<li><p>Calculating a fast estimate on annual energy production (AEP), or</p></li>
+<li><p>Identifying control strategies through parameter studies.</p></li>
+</ul>
+<p>This section gives insight into the three submodules <em>Rotor BEM</em>, <em>Characteristic BEM</em> and <em>Turbine BEM</em>.</p>
+</section>
+<section id="rotor-bem">
+<h1>Rotor BEM<a class="headerlink" href="#rotor-bem" title="Permalink to this headline"></a></h1>
+<p>In the <em>Rotor BEM</em> submodule, the user can carry out rotor blade simulations over a range of tip speed ratios (TSRs). A rotor simulation can only be defined when at
+least one rotor blade is present in the database (see <a class="reference internal" href="../index_ue.html#blade-design-module"><span class="std std-ref">Blade Design Module</span></a>). When defining a rotor simulation in the <em>Analysis Settings</em> box, the user can select the desired corrections (<a class="reference internal" href="../../theory/aerodynamics/bem/bem.html#corrections"><span class="std std-ref">Corrections</span></a>) to
+the BEM algorithm and the simulation parameters. Once a simulation is defined, the user can select a range of TSRs, and the incremental step for the simulation.</p>
+<p>A rotor simulation is always carried out with dimensionless arguments. The freestream velocity is assumed to be uniform and the rotor radius is normalized for
+the computation. This implies that no dimensional power curve or load distributions (e.g. bending moment) can be computed during a rotor simulation.</p>
+<figure class="align-center" id="id1">
+<span id="fig-rotor-bem"></span><a class="reference internal image-reference" href="../../../_images/define_rotor_params.png"><img alt="Rotor BEM definition dialogue" src="../../../_images/define_rotor_params.png" style="width: 342.29999999999995px; height: 302.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Definition of a Rotor BEM simulaton.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="characteristic-bem">
+<h1>Characteristic BEM<a class="headerlink" href="#characteristic-bem" title="Permalink to this headline"></a></h1>
+<p>In the <em>Characteristic BEM</em> submodule simulations can be carried out over a specified range of windspeeds, rotational speeds and pitch angles.
+By right-clicking on each graph in the graphics module, the user can specify the plotted variables which are displayed.
+When the selected windspeed, rotational speed or pitch angle is changed in the top toolbar, the series of curves is changed accordingly.
+This submodule is of great help when designing custom control strategies for variable rotational speed and/or pitch controlled wind turbine rotors.</p>
+<figure class="align-center" id="id2">
+<span id="fig-def-char-bem"></span><a class="reference internal image-reference" href="../../../_images/char_BEM.png"><img alt="Characteristic BEM demonstration" src="../../../_images/char_BEM.png" style="width: 445.8px; height: 307.8px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Result of a characteristic BEM simulation. The <span class="math notranslate nohighlight">\(C_p\)</span> coefficent is plotted over <span class="math notranslate nohighlight">\(rpm\)</span>, showing multiple wind speeds curves for a constant pitch angle.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="turbine-bem">
+<h1>Turbine BEM<a class="headerlink" href="#turbine-bem" title="Permalink to this headline"></a></h1>
+<p>In the <em>Turbine BEM</em> submodule, the user can simulate steady state BEM simulations. To define a wind turbine, a rotor blade must be present in the runtime database. In preparation for the simulations, a turbine has
+to be set up. This requires specification of the turbine type and turbine operational parameters. The turbine type is defined by:</p>
+<ul>
+<li><p><strong>Power Regulation</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None (stall): A stall regulated turbine has no pitch control and the power output is limited solely when stall occurs at the rotor. Designing a stall turbine that limits its power to the desired output and at the desired windspeed requires an iterative approach.</p></li>
+<li><p>Pitch limited: Requires the user to specify a nominal power output. When the windspeed that yields the nominal power output is reached, the blades are pitched to reduce the power for higher windspeeds to the nominal output.</p></li>
+<li><p>Prescribed: Allows to set the pitch to an arbitrary value defined in an <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file. This option is useful to match a certain control behavior or for code-to-code comparisons.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Transmission</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Single: One stationary rotational speed in which the turbine operates over the whole range of windspeeds.</p></li>
+<li><p>2-step: Two rotational speeds and a windspeed at which the transmission switches have to be selected.</p></li>
+<li><p>Optimal: A minimum and a maximum value for the rotational speed has to be selected. Additionally, the user selects a desired TSR from which a rotational speed is computed for every given wind speed during the simulation.</p></li>
+<li><p>Prescribed: Allows the user to set the rpm to an arbitrary value defined in an <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file. This option is useful to match a certain control behavior or for code-to-code comparisons.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Further parameters that need to be selected by the user are shown in <a class="reference internal" href="#fig-turbspec"><span class="std std-numref">Fig. 64</span></a>. At <span class="math notranslate nohighlight">\(V_{cut in}\)</span>, the turbine starts and at <span class="math notranslate nohighlight">\(V_{cut out}\)</span> the turbine stops operation.
+To account for power losses that are not of aerodynamical nature but are caused by the efficiency of the generator and the gearbox, a value for fixed losses and a value for variable losses can be selected.
+The equation in which these losses are implemented is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+P_{out} = (1-k_v)P_0-P_{fixed},
+\end{align}\]</div>
+<p>where, <span class="math notranslate nohighlight">\(k_v\)</span> is the variable loss factor and <span class="math notranslate nohighlight">\(P_{fixed}\)</span> the fixed losses. Finally, a previously defined turbine blade has to be selected.</p>
+<figure class="align-center" id="id3">
+<span id="fig-turbspec"></span><a class="reference internal image-reference" href="../../../_images/turbine_specification.png"><img alt="Turbine specifications Turbine BEM" src="../../../_images/turbine_specification.png" style="width: 294.7px; height: 379.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Turbine specification dialogue.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>After the turbine has been added to the runtime database, the BEM simulation can be executed identically to the <a class="reference internal" href="#rotor-bem"><span class="std std-ref">Rotor BEM</span></a> described above.
+The simulation is carried out over the specified range of windspeeds with the selected incremental step size.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../blade/blade.html" class="btn btn-neutral float-left" title="Blade Design Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../turbine/turbine.html" class="btn btn-neutral float-right" title="Turbine Definition Dialog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

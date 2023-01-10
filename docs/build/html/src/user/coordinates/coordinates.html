@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Coordinate System &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Setting the Design Mode" href="../hawtvawtprop/hawtvawtprop.html" />
+    <link rel="prev" title="Object Hierarchy and Data Structure" href="../data_import_export/data_import_export.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Global Coordinate System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-body-coordinate-systems">Local Body Coordinate Systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#local-blade-coordinate-system">Local Blade Coordinate System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#local-tower-coordinate-system">Local Tower Coordinate System</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#local-sensor-coordinate-systems">Local Sensor Coordinate Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>Global Coordinate System</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/coordinates/coordinates.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="global-coordinate-system">
+<h1>Global Coordinate System<a class="headerlink" href="#global-coordinate-system" title="Permalink to this headline"></a></h1>
+<p>The fixed global coordinate system in QBlade is defined as shown in <a class="reference internal" href="#fig-globalcoord"><span class="std std-numref">Fig. 41</span></a>. The x-axis points in the downwind direction and the z-axis points vertically upwards. The y-axis is oriented to form a right handed coordinate system. If a sensor name in one of QBlades graphs is annotated by <strong>_g</strong>, such as <strong>X_g</strong> it is referring to the global coordinate system. Whenever a coordinate system is displayed in QBlade the following color-code is used: x-axis indicated in <strong>RED</strong>, y-axis indicated in <strong>GREEN</strong> and z-axis indicated in <strong>BLUE</strong>. This color code also applies to all local coordinate systems.</p>
+<figure class="align-center" id="id3">
+<span id="fig-globalcoord"></span><img alt="Visualization of the global coordinate system." src="../../../_images/globalcoord.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Visualization of the global coordinate system.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="local-body-coordinate-systems">
+<h1>Local Body Coordinate Systems<a class="headerlink" href="#local-body-coordinate-systems" title="Permalink to this headline"></a></h1>
+<p>Some simulation results are output into local body coordinate systems, such as the local blade coordinate systems or the local tower coordinate system. In general, the local coordinate systems are denoted by <strong>_g</strong> in the variable name, such as <strong>X_g</strong>.</p>
+<figure class="align-center" id="id4">
+<span id="fig-localcoord"></span><img alt="Visualization of the local blade and tower coordinate systems." src="../../../_images/localcoord.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Visualization of the local blade and tower coordinate systems.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="local-blade-coordinate-system">
+<h2>Local Blade Coordinate System<a class="headerlink" href="#local-blade-coordinate-system" title="Permalink to this headline"></a></h2>
+<p>For the rotor blades and struts the x-axis is oriented normal to the chord, pointing towards the suction side, the y-axis is oriented in the chord wise direction, pointing towards the trailing edge and the z-axis points along the principal beam direction to form a right handed coordinate system. If the rotor is constructed to rotate in the reverse direction the y-axis is pointing towards the leading edge instead.</p>
+</section>
+<section id="local-tower-coordinate-system">
+<h2>Local Tower Coordinate System<a class="headerlink" href="#local-tower-coordinate-system" title="Permalink to this headline"></a></h2>
+<p>For the tower the local x-axis is oriented along the global x-axis, the local y-axis is pointing towards the global y-axis and the tower z-axis points along the principal beam direction.</p>
+</section>
+</section>
+<section id="local-sensor-coordinate-systems">
+<h1>Local Sensor Coordinate Systems<a class="headerlink" href="#local-sensor-coordinate-systems" title="Permalink to this headline"></a></h1>
+<p>Additional turbine load sensors are written out in the following coordinate systems: Blade CS, Coned CS, Nacelle CS, Hub CS, Shaft CS. These coordinate systems are defined inline with convention used in the FAST users Guide <a class="footnote-reference brackets" href="#footcite-fastug" id="id1">1</a>. An overview is given in <a class="reference internal" href="#fig-localcoord2"><span class="std std-numref">Fig. 43</span></a>.</p>
+<figure class="align-center" id="id5">
+<span id="fig-localcoord2"></span><img alt="Visualization of the Blade, Coned, Nacelle, Hub and Shaft CS." src="../../../_images/localcoord2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Visualization of the Blade, Coned, Nacelle, Hub and Shaft CS.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p id="id2"><dl class="footnote brackets">
+<dt class="label" id="footcite-fastug"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>J. Jonkman and M. Buhl. FAST User’s Guide. Technical Report NREL/TP-500-38230, NREL, Boulder, USA, 2005.</p>
+</dd>
+</dl>
+</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../data_import_export/data_import_export.html" class="btn btn-neutral float-left" title="Object Hierarchy and Data Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../hawtvawtprop/hawtvawtprop.html" class="btn btn-neutral float-right" title="Setting the Design Mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

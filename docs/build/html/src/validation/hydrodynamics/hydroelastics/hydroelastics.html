@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validation and Examples of Hydroelasticity &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../../_static/custom.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="License Info" href="../../../license/index_license.html" />
+    <link rel="prev" title="Validation Tests for Morison Equation (ME)" href="../me/me.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_val.html">Validation Cases and Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index_val.html#aerodynamic-validation-tests">Aerodynamic Validation Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_val.html#structural-dynamics-validation-tests">Structural Dynamics Validation Tests</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index_val.html#hydrodynamics-validation-tests">Hydrodynamics Validation Tests</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../lpmd/lpmd.html">Validation Tests for Potential Flow Models with Morison Drag (LPMD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../me/me.html">Validation Tests for Morison Equation (ME)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Validation and Examples of Hydroelasticity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#oc4-semisubmersible-me-hydroelastic-model">OC4 Semisubmersible ME Hydroelastic Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mw-tetraspar-hydroelastic-model">10 MW TetraSpar Hydroelastic Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index_val.html">Validation Cases and Examples</a> &raquo;</li>
+      <li>Validation and Examples of Hydroelasticity</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/src/validation/hydrodynamics/hydroelastics/hydroelastics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="validation-and-examples-of-hydroelasticity">
+<h1>Validation and Examples of Hydroelasticity<a class="headerlink" href="#validation-and-examples-of-hydroelasticity" title="Permalink to this headline"></a></h1>
+<p>In this page, examples of hydroelastic simulations and validations with multiple substructure geometries are presented.</p>
+<section id="oc4-semisubmersible-me-hydroelastic-model">
+<span id="oc4-me-hydroelastic-example"></span><h2>OC4 Semisubmersible ME Hydroelastic Model<a class="headerlink" href="#oc4-semisubmersible-me-hydroelastic-model" title="Permalink to this headline"></a></h2>
+<p>The <a class="reference internal" href="../me/me.html#oc4-me-model-results"><span class="std std-ref">OC4 Semisubmersible ME Model</span></a> validated in <a class="reference internal" href="../me/me.html"><span class="doc">Validation Tests for Morison Equation (ME)</span></a> can also be modeled with fully elastic members.
+The elastic members, together with the full Morison equation (see <a class="reference internal" href="../../../theory/hydrodynamics/me/me.html"><span class="doc">Morison Equation</span></a>) at each element allow us to
+have fully hydroelastic simulations within QB. The structural properties of the individual elements were taken from <a class="footnote-reference brackets" href="#footcite-hawc2oc4model" id="id1">1</a>.</p>
+<figure class="align-center" id="id4">
+<span id="fig-oc4me-modes"></span><img alt="OC4 Model Modes" src="../../../../_images/OC4_Modes.PNG" />
+<figcaption>
+<p><span class="caption-number">Fig. 140 </span><span class="caption-text">Two exemplary modes of the flexible OC4 ME model.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-oc4me-modes"><span class="std std-numref">Fig. 140</span></a> show two exemplary eigenmodes of the OC4 ME flexible model. Mode 15 on the left side has
+frequency 0.249 Hz and shows a combination of blade, tower and substructure deflections. For the
+substructure, it is mainly the cross-braces that are deflecting. Mode 404 on the right side of <a class="reference internal" href="#fig-oc4me-modes"><span class="std std-numref">Fig. 140</span></a> has
+a frequency of 20.031 Hz. This mode shows a deflection of the three base and upper columns relative to
+each other. We note that there
+is also a tower deflection taking place in this mode. The high frequency of Mode 404 is also an argument
+for simulating the OC4 substructure as a rigid body if the local forces on the substructure are not required.
+The excitation frequencies from wind and waves are significantly lower than the eigenfrequencies of these
+modes. We also note that both modes shown in <a class="reference internal" href="#fig-oc4me-modes"><span class="std std-numref">Fig. 140</span></a> also include the deflection of the mooring
+cables. All flexible members are taken into account when performing the eigenmode analysis within QB.</p>
+<p>The flexible OC4 ME model was simulated in a regular
+sea state with <span class="math notranslate nohighlight">\(H\)</span> = 6 m and <span class="math notranslate nohighlight">\(T\)</span> = 10 s. No aerodynamic loads were applied on the turbine and the
+wave direction was chosen to coincide with the positive surge direction. The local loads for two locations
+were recorded: the lowest position of the main column and the connection point of the cross brace 1 with
+the upper column 1 (see <a class="reference internal" href="#fig-oc4me-loadsensors"><span class="std std-numref">Fig. 141</span></a>).</p>
+<figure class="align-center" id="id5">
+<span id="fig-oc4me-loadsensors"></span><img alt="OC4 Load sensors" src="../../../../_images/OC4_Hydroelastics_LoadSensors.PNG" />
+<figcaption>
+<p><span class="caption-number">Fig. 141 </span><span class="caption-text">Load sensor locations for flexible OC4 ME calculations.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-oc4me-loads"><span class="std std-numref">Fig. 142</span></a> shows the local forces at the main column and the cross brace for the initial 400 s of the regular
+sea state simulation. We can see that the forces behave as expected. The source of the local forces at the
+main column bottom location arise mainly from the hydrodynamic and gravitational loads. The local force
+in the x-direction (surge) has an oscillatory behavior around 0 kNm, which can be explained by the
+oscillatory nature of the hydrodynamic wave loads in surge direction. This also explains the small forces
+in the y-direction (sway) since no wave loads are acting in this direction. Finally, in z-direction (heave), the
+oscillatory wave loads have a non-zero mean value. This comes from the gravitational loads acting in the
+z-direction. These localized loads can be used to design the individual components of a floating wind
+turbine substructure.</p>
+<figure class="align-center" id="id6">
+<span id="fig-oc4me-loads"></span><img alt="OC4 Distributed Loads" src="../../../../_images/OC4_Hydroelastics_Loads.PNG" />
+<figcaption>
+<p><span class="caption-number">Fig. 142 </span><span class="caption-text">Local forces at two locations of the OC4 ME flexible substructure.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-oc4me-defs"><span class="std std-numref">Fig. 143</span></a> shows the corresponding local deflections of the main column and cross brace. We can see in
+this figure that the substructure deflections at these positions are very small, not even reaching 1 mm.
+This comes from the large stiff structures that make up the OC4 substructure. <a class="reference internal" href="#fig-oc4me-defs"><span class="std std-numref">Fig. 143</span></a> shows that the
+rigid substructure assumption made for this model is a valid.</p>
+<figure class="align-center" id="id7">
+<span id="fig-oc4me-defs"></span><img alt="OC4 Deflections" src="../../../../_images/OC4_Hydroelastics_Deflections.PNG" />
+<figcaption>
+<p><span class="caption-number">Fig. 143 </span><span class="caption-text">Local deflections at two locations of the OC4 ME flexible substructure.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="mw-tetraspar-hydroelastic-model">
+<span id="mw-tetraspar-hydroelastic-example"></span><h2>10 MW TetraSpar Hydroelastic Model<a class="headerlink" href="#mw-tetraspar-hydroelastic-model" title="Permalink to this headline"></a></h2>
+<p>In <a class="reference internal" href="#fig-10mw-tetraspar"><span class="std std-numref">Fig. 144</span></a>, we show a hydroelastic model of a 10 MW turbine mounted on an up-scaled
+TetraSpar substructure <a class="footnote-reference brackets" href="#footcite-borg2020tetraspar" id="id2">2</a>. The modelling of this substructure is particularly challenging because it
+features a flexible suspension between the upper floater structure and the lower keel. Within QB, this
+suspension system can be modelled as a cable element similar to the mooring system (Section XXX). The
+TetraSpar model shown in <a class="reference internal" href="#fig-10mw-tetraspar"><span class="std std-numref">Fig. 144</span></a> is composed of flexible Morison elements and we are therefore
+capable of accurately calculating the local loading on each element even when the substructure model is
+highly deflected. An example of this is shown on the right hand side of <a class="reference internal" href="#fig-10mw-tetraspar"><span class="std std-numref">Fig. 144</span></a>. This extreme roll position
+is unlikely to happen in reality, but being able to simulate such conditions in QB is a good example of the
+modelling capabilities of the tool.</p>
+<figure class="align-center" id="id8">
+<span id="fig-10mw-tetraspar"></span><img alt="TetraSpar Example" src="../../../../_images/10MW-Tetraspar_Example.PNG" />
+<figcaption>
+<p><span class="caption-number">Fig. 144 </span><span class="caption-text">Hydroelastic model of a 10MW turbine on an up-scaled TetraSpar substructure.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p id="id3"><dl class="footnote brackets">
+<dt class="label" id="footcite-hawc2oc4model"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>DTU. HAWC2 OC4 Semisubmersible model. <a class="reference external" href="https://www.hawc2.dk/download/hawc2-model">https://www.hawc2.dk/download/hawc2-model</a>, 2021. [Online; accessed 2021-11-22].</p>
+</dd>
+<dt class="label" id="footcite-borg2020tetraspar"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Michael Borg, Morten Walkusch Jensen, Scott Urquhart, Morten Thøtt Andersen, Jonas Bjerg Thomsen, and Henrik Stiesdal. Technical definition of the tetraspar demonstrator floating wind turbine foundation. <em>Energies</em>, 2020. URL: <a class="reference external" href="https://www.mdpi.com/1996-1073/13/18/4911">https://www.mdpi.com/1996-1073/13/18/4911</a>, <a class="reference external" href="https://doi.org/10.3390/en13184911">doi:10.3390/en13184911</a>.</p>
+</dd>
+</dl>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../me/me.html" class="btn btn-neutral float-left" title="Validation Tests for Morison Equation (ME)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../license/index_license.html" class="btn btn-neutral float-right" title="License Info" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

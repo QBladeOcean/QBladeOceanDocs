@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OYE Dynamic Stall Model &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../../_static/custom.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="ATEFlap Dynamic Stall Model" href="ATEFLAP_stall.html" />
+    <link rel="prev" title="Dynamic Stall" href="index_dynamicstall.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index_th.html">Theory Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index_th.html#aerodynamics">Aerodynamics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../bem/bem.html">Blade Element Momentum Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lifting_line/lifting_line.html">Lifting Line Free Vortex Wake</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index_dynamicstall.html">Dynamic Stall</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">OYE Dynamic Stall Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ATEFLAP_stall.html">ATEFlap Dynamic Stall Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../secondary_effects/index_secondary.html">Secondary Effects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#hydrodynamics">Hydrodynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#structural-dynamics">Structural Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index_th.html#environmental-conditions">Environmental Conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/index_ue.html">User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index_th.html">Theory Guide</a> &raquo;</li>
+          <li><a href="index_dynamicstall.html">Dynamic Stall</a> &raquo;</li>
+      <li>OYE Dynamic Stall Model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/src/theory/aerodynamics/dynamic_stall/OYE_stall.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="oye-dynamic-stall-model">
+<h1>OYE Dynamic Stall Model<a class="headerlink" href="#oye-dynamic-stall-model" title="Permalink to this headline"></a></h1>
+<p>In QBlade dynamic stall may be modeled in unsteady <a class="reference internal" href="../lifting_line/lifting_line.html"><span class="doc">Lifting Line Free Vortex Wake</span></a> or <a class="reference internal" href="../bem/bem.html"><span class="doc">Blade Element Momentum Method</span></a> simulations by using the dynamic stall model proposed by Oye <a class="footnote-reference brackets" href="#footcite-oye1991" id="id1">1</a>.
+It should be noted that this model only captures the dynamics of separated flow. The additional attached flow dynamics due to airfoil wake memory effects are captured intrinsically by the <a class="reference internal" href="../lifting_line/lifting_line.html"><span class="doc">Lifting Line Free Vortex Wake</span></a> model.
+Currently, QBlades does not have an adapted dynamic stall model that captures the attached flow dynamics for simulations using the <a class="reference internal" href="../bem/bem.html"><span class="doc">Blade Element Momentum Method</span></a>.</p>
+<p>In Oye’s work the dynamic stall is modeled with th help of a separation function <span class="math notranslate nohighlight">\(f\)</span>. It is used to calculate the dynamic lift <span class="math notranslate nohighlight">\(Cl_{dyn}\)</span> in the following way:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Cl_{dyn} = f  Cl_{att} + (1-f)  Cl_{sep} .
+\end{align}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(Cl_{att}\)</span> is the fully attached inviscid lift contribution and <span class="math notranslate nohighlight">\(Cl_{sep}\)</span> the fully separated lift contribution.
+To solve the equation above, it is applied to steady conditions. The result is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Cl^{st} = f^{st}  Cl_{att}^{st}  + (1-f^{st} )  Cl_{sep}^{st}  ,
+\end{align}\]</div>
+<p>where the superscript <span class="math notranslate nohighlight">\(st\)</span> refers to steady conditions. Comparing the equations above, <span class="math notranslate nohighlight">\(Cl_{att} = Cl^{st}_{att}\)</span> and <span class="math notranslate nohighlight">\(Cl_{sep} = Cl^{st}_{sep}\)</span>. <span class="math notranslate nohighlight">\(Cl^{st}\)</span> is obtained by reading in static polar data and <span class="math notranslate nohighlight">\(Cl_{att}^{st}\)</span> is obtained by extrapolating the linear part of the lift curve to the required angle of attack.
+Following Hansen <a class="footnote-reference brackets" href="#footcite-hansen2004b" id="id2">2</a>, <span class="math notranslate nohighlight">\(f^{st}\)</span> can be calculated in the following way:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f^{st} = \left(2\sqrt{\frac{Cl^{st}}{Cl_{att}^{st}}}\right)^2  .
+\end{align}\]</div>
+<p>The value of <span class="math notranslate nohighlight">\(f^{st}\)</span> is limited to be between 0 and 1. Now <span class="math notranslate nohighlight">\(f\)</span> is assumed to return to the static value <span class="math notranslate nohighlight">\(f^{st}\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{df}{dt} = \frac{f^{st} - f}{\tau}  .
+\end{align}\]</div>
+<p>Integrating the equation above allows the determination  of the dynamic behavior of <span class="math notranslate nohighlight">\(f(t)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+f(t) = f^{st}(t) + \left(f(t-\Delta t) - f^{st}(t)\right)e^{\frac{-\Delta t}{\tau}} .
+\end{align}\]</div>
+<p><span class="math notranslate nohighlight">\(\tau\)</span> is a time constant, defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\tau = \frac{A \frac{c}{2}}{V_{rel}} ,
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> is a parameter (typically around 8), <span class="math notranslate nohighlight">\(c\)</span> is the airfoil chord and <span class="math notranslate nohighlight">\(V_{rel}\)</span> the relative velocity at the airfoil section. After <span class="math notranslate nohighlight">\(f\)</span> has been evaluated, <span class="math notranslate nohighlight">\(Cl_{sep}\)</span> can be obtained from:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Cl_{sep} = \frac{Cl^{st}-f^{st}Cl_{att}}{1-f^{st}} .
+\end{align}\]</div>
+<p><span class="math notranslate nohighlight">\(Cl_{att}\)</span> is gained by extrapolation of the linear lift curve.</p>
+<p>Now, all variables have been determined and the dynamic lift <span class="math notranslate nohighlight">\(Cl_{dyn}\)</span> can be computed.</p>
+<p>In QBlade, the Oye dynamic stall model also determines a dynamically changing drag coefficient <span class="math notranslate nohighlight">\(Cd_{dyn}\)</span>.  After Bergami, the dynamic drag <span class="math notranslate nohighlight">\(Cd_{dyn}\)</span> is evaluated as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+Cd_{dyn} = Cd^{st} +  (Cd^{st}-Cd^{st}_0) (0.5(\sqrt{f^{st}}-\sqrt{f}))-0.25(f-f^{st}).
+\end{align}\]</div>
+<p>In this equation <span class="math notranslate nohighlight">\(Cd^{st}_{0}\)</span> is the drag at 0 degree angle of attack.</p>
+<p id="id3"><dl class="footnote brackets">
+<dt class="label" id="footcite-oye1991"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Stig Oye. Dynamic stall simulated as time lag of separation. 1991.</p>
+</dd>
+<dt class="label" id="footcite-hansen2004b"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Morten Hartvig Hansen, Mac Gaunaa, and Helge Aagaard Madsen. A Beddoes-Leishman type dynamic stall model in state-space and indicial formulation. Technical Report, DTU, 2004.</p>
+</dd>
+</dl>
+</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index_dynamicstall.html" class="btn btn-neutral float-left" title="Dynamic Stall" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ATEFLAP_stall.html" class="btn btn-neutral float-right" title="ATEFlap Dynamic Stall Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

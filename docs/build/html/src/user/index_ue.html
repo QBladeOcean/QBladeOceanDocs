@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User’s Guide &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GUI Overview" href="guigraph/guigraph.html" />
+    <link rel="prev" title="Wind" href="../theory/environment/wind/wind.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User’s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-gui-functionality">General GUI Functionality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guigraph/guigraph.html">GUI Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guigraph/guigraph.html#general-settings">General Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guigraph/guigraph.html#opengl-light-settings">Opengl Light Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guigraph/guigraph.html#graph-functionality">Graph Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-structure-import-export">Data Structure, Import &amp; Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_import_export/data_import_export.html">Object Hierarchy and Data Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_import_export/data_import_export.html#project-serialization">Project Serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_import_export/data_import_export.html#data-objects-import-and-export">Data Objects Import and Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate-systems">Coordinate Systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="coordinates/coordinates.html">Global Coordinate System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coordinates/coordinates.html#local-body-coordinate-systems">Local Body Coordinate Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coordinates/coordinates.html#local-sensor-coordinate-systems">Local Sensor Coordinate Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hawtvawtprop/hawtvawtprop.html">Setting the Design Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hawtvawtprop/hawtvawtprop.html#hawt-mode-vawt-mode-and-prop-mode">HAWT Mode, VAWT Mode and PROP Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#airfoil-module">Airfoil Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil.html">Airfoil Generation Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil.html#creating-standard-airfoils">Creating Standard Airfoils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil.html#importing-airfoils">Importing Airfoils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil.html#airfoil-editing-options">Airfoil Editing Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil.html#airfoil-transformations">Airfoil Transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil.html#exporting-airfoils">Exporting Airfoils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#airfoil-analysis-module">Airfoil Analysis Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil_analysis.html">Airfoil Analysis Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil_analysis.html#carrying-out-an-xfoil-analysis">Carrying out an XFoil Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil_analysis.html#operational-point-analysis">Operational Point Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil_analysis.html#importing-polar-data">Importing Polar Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/airfoil_analysis.html#exporting-polar-data">Exporting Polar Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#polar-extrapolation-module">Polar Extrapolation Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/polar_extrapolation.html">Polar Extrapolation Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/polar_extrapolation.html#viterna-extrapolation">Viterna Extrapolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/polar_extrapolation.html#montgomery-extrapolation">Montgomery Extrapolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/polar_extrapolation.html#polar-decomposition">Polar Decomposition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/polar_extrapolation.html#dynamic-polar-sets">Dynamic Polar Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airfoil/polar_extrapolation.html#import-and-export-of-360-polars">Import and Export of 360 Polars</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#blade-design-module">Blade Design Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="blade/blade.html">Blade Design Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blade/blade.html#blade-definition">Blade Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blade/blade.html#active-elements-and-blade-damage">Active Elements and Blade Damage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blade/blade.html#importing-and-exporting-blade-definitions">Importing and Exporting Blade Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blade/blade.html#blade-definition-ascii-file">Blade definition ASCII File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bem-analysis-module">BEM Analysis Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bem/bem.html">BEM Analysis Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bem/bem.html#rotor-bem">Rotor BEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bem/bem.html#characteristic-bem">Characteristic BEM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bem/bem.html#turbine-bem">Turbine BEM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#turbine-definition-module">Turbine Definition Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="turbine/turbine.html">Turbine Definition Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine/unsteadybem.html">Unsteady BEM Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine/vortexwake.html">Free Vortex Wake Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine/structure.html">Turbine Structural Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine/controller.html">Turbine Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine/turbineexport.html">Turbine Definition ASCII File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine/multi_turbine.html">Multi Rotor Turbine Assembly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="turbine/multi_turbine.html#multi-rotor-turbine-assembly-export">Multi Rotor Turbine Assembly Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation-definition-module">Simulation Definition Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="simulation/simulation.html">Simulation Module Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulation/simulation.html#simulation-definition-dialog">Simulation Definition Dialog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulation/simulation.html#multi-threaded-batch-analysis">Multi-Threaded Batch Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulation/simulation.html#simulation-definition-ascii-file">Simulation Definition ASCII File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#windfield-generator-module">Windfield Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="windfield/windfield.html">Wind Field Generator Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windfield/windfield.html#uniform-wind-field">Uniform Wind Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windfield/windfield.html#hub-height-file">Hub Height File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="windfield/windfield.html#turbulent-wind-field">Turbulent Wind Field</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wave-generator-module">Wave Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wavefield/wavefield.html">Wave Generator Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavefield/wavefield.html#regular-wave">Regular Wave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavefield/wavefield.html#irregular-wave-field">Irregular Wave Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavefield/wavefield.html#import-components">Import Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavefield/wavefield.html#import-timeseries">Import Timeseries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavefield/wavefield.html#visualization">Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavefield/wavefield.html#import-and-export-functionality">Import and Export Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dlc-generator-module">DLC Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dlc/dlc.html">DLC Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-interface-cli">Command Line Interface (CLI)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interfaces/commandline.html">CLI Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfaces/commandline.html#cli-options">CLI Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfaces/commandline.html#sample-cli-call-to-start-a-batch-run">Sample CLI Call to Start a Batch Run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interfaces/inloop.html">SIL Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfaces/inloop.html#sil-example">SIL Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>User’s Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/user/index_ue.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-s-guide">
+<h1>User’s Guide<a class="headerlink" href="#user-s-guide" title="Permalink to this headline"></a></h1>
+<section id="general-gui-functionality">
+<h2>General GUI Functionality<a class="headerlink" href="#general-gui-functionality" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guigraph/guigraph.html">GUI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guigraph/guigraph.html#general-settings">General Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guigraph/guigraph.html#opengl-light-settings">Opengl Light Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guigraph/guigraph.html#graph-functionality">Graph Functionality</a></li>
+</ul>
+</div>
+</section>
+<section id="data-structure-import-export">
+<h2>Data Structure, Import &amp; Export<a class="headerlink" href="#data-structure-import-export" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="data_import_export/data_import_export.html">Object Hierarchy and Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_import_export/data_import_export.html#project-serialization">Project Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_import_export/data_import_export.html#data-objects-import-and-export">Data Objects Import and Export</a></li>
+</ul>
+</div>
+</section>
+<section id="coordinate-systems">
+<h2>Coordinate Systems<a class="headerlink" href="#coordinate-systems" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="coordinates/coordinates.html">Global Coordinate System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates/coordinates.html#local-body-coordinate-systems">Local Body Coordinate Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coordinates/coordinates.html#local-sensor-coordinate-systems">Local Sensor Coordinate Systems</a></li>
+</ul>
+</div>
+</section>
+<section id="hawt-vawt-and-prop-mode">
+<h2>HAWT, VAWT and PROP Mode<a class="headerlink" href="#hawt-vawt-and-prop-mode" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hawtvawtprop/hawtvawtprop.html">Setting the Design Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hawtvawtprop/hawtvawtprop.html#hawt-mode-vawt-mode-and-prop-mode">HAWT Mode, VAWT Mode and PROP Mode</a></li>
+</ul>
+</div>
+</section>
+<section id="airfoil-module">
+<h2>Airfoil Module<a class="headerlink" href="#airfoil-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil.html">Airfoil Generation Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil.html#creating-standard-airfoils">Creating Standard Airfoils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil.html#importing-airfoils">Importing Airfoils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil.html#airfoil-editing-options">Airfoil Editing Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil.html#airfoil-transformations">Airfoil Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil.html#exporting-airfoils">Exporting Airfoils</a></li>
+</ul>
+</div>
+</section>
+<section id="airfoil-analysis-module">
+<h2>Airfoil Analysis Module<a class="headerlink" href="#airfoil-analysis-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil_analysis.html">Airfoil Analysis Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil_analysis.html#carrying-out-an-xfoil-analysis">Carrying out an XFoil Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil_analysis.html#operational-point-analysis">Operational Point Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil_analysis.html#importing-polar-data">Importing Polar Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/airfoil_analysis.html#exporting-polar-data">Exporting Polar Data</a></li>
+</ul>
+</div>
+</section>
+<section id="polar-extrapolation-module">
+<h2>Polar Extrapolation Module<a class="headerlink" href="#polar-extrapolation-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/polar_extrapolation.html">Polar Extrapolation Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/polar_extrapolation.html#viterna-extrapolation">Viterna Extrapolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/polar_extrapolation.html#montgomery-extrapolation">Montgomery Extrapolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/polar_extrapolation.html#polar-decomposition">Polar Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/polar_extrapolation.html#dynamic-polar-sets">Dynamic Polar Sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="airfoil/polar_extrapolation.html#import-and-export-of-360-polars">Import and Export of 360 Polars</a></li>
+</ul>
+</div>
+</section>
+<section id="blade-design-module">
+<h2>Blade Design Module<a class="headerlink" href="#blade-design-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="blade/blade.html">Blade Design Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blade/blade.html#blade-definition">Blade Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blade/blade.html#active-elements-and-blade-damage">Active Elements and Blade Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blade/blade.html#importing-and-exporting-blade-definitions">Importing and Exporting Blade Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blade/blade.html#blade-definition-ascii-file">Blade definition ASCII File</a></li>
+</ul>
+</div>
+</section>
+<section id="bem-analysis-module">
+<h2>BEM Analysis Module<a class="headerlink" href="#bem-analysis-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bem/bem.html">BEM Analysis Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bem/bem.html#rotor-bem">Rotor BEM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bem/bem.html#characteristic-bem">Characteristic BEM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bem/bem.html#turbine-bem">Turbine BEM</a></li>
+</ul>
+</div>
+</section>
+<section id="turbine-definition-module">
+<h2>Turbine Definition Module<a class="headerlink" href="#turbine-definition-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="turbine/turbine.html">Turbine Definition Dialog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="turbine/unsteadybem.html">Unsteady BEM Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="turbine/vortexwake.html">Free Vortex Wake Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="turbine/structure.html">Turbine Structural Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="turbine/controller.html">Turbine Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="turbine/turbineexport.html">Turbine Definition ASCII File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="turbine/multi_turbine.html">Multi Rotor Turbine Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="turbine/multi_turbine.html#multi-rotor-turbine-assembly-export">Multi Rotor Turbine Assembly Export</a></li>
+</ul>
+</div>
+</section>
+<section id="simulation-definition-module">
+<h2>Simulation Definition Module<a class="headerlink" href="#simulation-definition-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="simulation/simulation.html">Simulation Module Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation/simulation.html#simulation-definition-dialog">Simulation Definition Dialog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation/simulation.html#multi-threaded-batch-analysis">Multi-Threaded Batch Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation/simulation.html#simulation-definition-ascii-file">Simulation Definition ASCII File</a></li>
+</ul>
+</div>
+</section>
+<section id="windfield-generator-module">
+<h2>Windfield Generator Module<a class="headerlink" href="#windfield-generator-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="windfield/windfield.html">Wind Field Generator Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windfield/windfield.html#uniform-wind-field">Uniform Wind Field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windfield/windfield.html#hub-height-file">Hub Height File</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windfield/windfield.html#turbulent-wind-field">Turbulent Wind Field</a></li>
+</ul>
+</div>
+</section>
+<section id="wave-generator-module">
+<h2>Wave Generator Module<a class="headerlink" href="#wave-generator-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wavefield/wavefield.html">Wave Generator Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavefield/wavefield.html#regular-wave">Regular Wave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavefield/wavefield.html#irregular-wave-field">Irregular Wave Field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavefield/wavefield.html#import-components">Import Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavefield/wavefield.html#import-timeseries">Import Timeseries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavefield/wavefield.html#visualization">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wavefield/wavefield.html#import-and-export-functionality">Import and Export Functionality</a></li>
+</ul>
+</div>
+</section>
+<section id="dlc-generator-module">
+<h2>DLC Generator Module<a class="headerlink" href="#dlc-generator-module" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dlc/dlc.html">DLC Generator</a></li>
+</ul>
+</div>
+</section>
+<section id="command-line-interface-cli">
+<h2>Command Line Interface (CLI)<a class="headerlink" href="#command-line-interface-cli" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interfaces/commandline.html">CLI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces/commandline.html#cli-options">CLI Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces/commandline.html#sample-cli-call-to-start-a-batch-run">Sample CLI Call to Start a Batch Run</a></li>
+</ul>
+</div>
+</section>
+<section id="simulation-in-loop-sil-scripting-interface">
+<h2>Simulation in Loop (SIL) Scripting Interface<a class="headerlink" href="#simulation-in-loop-sil-scripting-interface" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interfaces/inloop.html">SIL Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces/inloop.html#sil-example">SIL Example</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../theory/environment/wind/wind.html" class="btn btn-neutral float-left" title="Wind" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="guigraph/guigraph.html" class="btn btn-neutral float-right" title="GUI Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

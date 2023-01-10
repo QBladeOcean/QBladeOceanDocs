@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wind Field Generator Overview &mdash; QBlade Documentation 2.0.4 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../_static/custom.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Wave Generator Overview" href="../wavefield/wavefield.html" />
+    <link rel="prev" title="Simulation Module Overview" href="../simulation/simulation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> QBlade Documentation
+            <img src="../../../_static/q_logo_black.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://docs.qblade.org">QBlade Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory/index_th.html">Theory Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_ue.html">User’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#general-gui-functionality">General GUI Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#data-structure-import-export">Data Structure, Import &amp; Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#coordinate-systems">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#hawt-vawt-and-prop-mode">HAWT, VAWT and PROP Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-module">Airfoil Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#airfoil-analysis-module">Airfoil Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#polar-extrapolation-module">Polar Extrapolation Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#blade-design-module">Blade Design Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#bem-analysis-module">BEM Analysis Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#turbine-definition-module">Turbine Definition Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-definition-module">Simulation Definition Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_ue.html#windfield-generator-module">Windfield Generator Module</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Wind Field Generator Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uniform-wind-field">Uniform Wind Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hub-height-file">Hub Height File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#turbulent-wind-field">Turbulent Wind Field</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#grid-parameters">Grid Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#turbine-class">Turbine Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flow-parameters">Flow Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#wave-generator-module">Wave Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#dlc-generator-module">DLC Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#command-line-interface-cli">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_ue.html#simulation-in-loop-sil-scripting-interface">Simulation in Loop (SIL) Scripting Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation/index_val.html">Validation Cases and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index_license.html">License Info</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QBlade Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_ue.html">User’s Guide</a> &raquo;</li>
+      <li>Wind Field Generator Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/user/windfield/windfield.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wind-field-generator-overview">
+<h1>Wind Field Generator Overview<a class="headerlink" href="#wind-field-generator-overview" title="Permalink to this headline"></a></h1>
+<p>If an unsteady simulation is being carried out, it is necessary to define the wind field.
+This provides important information for the calculation of aerodynamic quantities.
+Three types of wind fields can be generated for use in QBlade. These are described individually below.</p>
+</section>
+<section id="uniform-wind-field">
+<h1>Uniform Wind Field<a class="headerlink" href="#uniform-wind-field" title="Permalink to this headline"></a></h1>
+<p>A uniform wind field is specified directly within the <em>Wind Input Type</em> of the turbine simulation dialogue, shown in <a class="reference internal" href="#fig-wind-pane"><span class="std std-numref">Fig. 91</span></a> (see <a class="reference internal" href="../simulation/simulation.html"><span class="doc">Simulation Module Overview</span></a>).
+The necessary input parameters including velocity, horizontal inflow angle and directional shear are defined here.
+In the case that the atmospheric boundary layer is to be modelled, this can be selected with the wind shear type radio button.
+The corresponding shear parameters can then by specified (see <a class="reference internal" href="../../theory/environment/wind/wind.html"><span class="doc">Wind</span></a>).</p>
+<figure class="align-center" id="id6">
+<span id="fig-wind-pane"></span><a class="reference internal image-reference" href="../../../_images/winddialogue.png"><img alt="Uniform wind field creation dialogue in QBlade." src="../../../_images/winddialogue.png" style="width: 343.20000000000005px; height: 406.40000000000003px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 91 </span><span class="caption-text">Specification of a uniform wind field within the turbine simulation dialogue.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="hub-height-file">
+<h1>Hub Height File<a class="headerlink" href="#hub-height-file" title="Permalink to this headline"></a></h1>
+<p>The user has more modelling freedom when a hub-height wind file is used. This type of file can either be created manually or by using the IEC wind tool <a class="footnote-reference brackets" href="#footcite-iecwindtool" id="id1">1</a>. This allows the specification of the velocity field at the hub height as a function of time. QBlade interpolates the time between the starting time of the file and the point where the predefined wind velocity profile (EOG in this case) should start. If the user specified simulation time exceeds the ending time in the hub-height file, QBlade will create a constant wind field with the parameters from the last entry of the hub-height file until the end of the simulation. An exemplary hubheight input file that described an extreme operating gust (EOG) at 20m/s is shown below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Time    Wind    Horiz.  Vert.   LinH.   Vert.   LinV.   Gust</span>
+<span class="go">        Speed   Dir     Speed   Shear   Shear   Shear   Speed</span>
+<span class="go">0.000   20.000  0.000   0.000   0.000   0.200   0.000   0.000</span>
+<span class="go">60.000  20.000  0.000   0.000   0.000   0.200   0.000   0.000</span>
+<span class="go">60.100  20.000  0.000   0.000   0.000   0.200   0.000   -0.000</span>
+<span class="go">60.200  20.000  0.000   0.000   0.000   0.200   0.000   -0.004</span>
+<span class="go">60.300  20.000  0.000   0.000   0.000   0.200   0.000   -0.012</span>
+<span class="go">60.400  20.000  0.000   0.000   0.000   0.200   0.000   -0.028</span>
+<span class="go">60.500  20.000  0.000   0.000   0.000   0.200   0.000   -0.054</span>
+<span class="go">60.600  20.000  0.000   0.000   0.000   0.200   0.000   -0.092</span>
+<span class="go">60.700  20.000  0.000   0.000   0.000   0.200   0.000   -0.144</span>
+<span class="go">60.800  20.000  0.000   0.000   0.000   0.200   0.000   -0.209</span>
+<span class="go">60.900  20.000  0.000   0.000   0.000   0.200   0.000   -0.289</span>
+<span class="go">61.000  20.000  0.000   0.000   0.000   0.200   0.000   -0.384</span>
+<span class="go">61.100  20.000  0.000   0.000   0.000   0.200   0.000   -0.493</span>
+<span class="go">61.200  20.000  0.000   0.000   0.000   0.200   0.000   -0.614</span>
+<span class="go">61.300  20.000  0.000   0.000   0.000   0.200   0.000   -0.747</span>
+<span class="go">61.400  20.000  0.000   0.000   0.000   0.200   0.000   -0.889</span>
+<span class="go">61.500  20.000  0.000   0.000   0.000   0.200   0.000   -1.037</span>
+<span class="go">61.600  20.000  0.000   0.000   0.000   0.200   0.000   -1.188</span>
+<span class="go">61.700  20.000  0.000   0.000   0.000   0.200   0.000   -1.338</span>
+<span class="go">61.800  20.000  0.000   0.000   0.000   0.200   0.000   -1.485</span>
+<span class="go">61.900  20.000  0.000   0.000   0.000   0.200   0.000   -1.622</span>
+<span class="go">62.000  20.000  0.000   0.000   0.000   0.200   0.000   -1.748</span>
+<span class="go">62.100  20.000  0.000   0.000   0.000   0.200   0.000   -1.856</span>
+<span class="go">62.200  20.000  0.000   0.000   0.000   0.200   0.000   -1.944</span>
+<span class="go">62.300  20.000  0.000   0.000   0.000   0.200   0.000   -2.007</span>
+<span class="go">62.400  20.000  0.000   0.000   0.000   0.200   0.000   -2.041</span>
+<span class="go">62.500  20.000  0.000   0.000   0.000   0.200   0.000   -2.043</span>
+<span class="go">62.600  20.000  0.000   0.000   0.000   0.200   0.000   -2.011</span>
+<span class="go">62.700  20.000  0.000   0.000   0.000   0.200   0.000   -1.942</span>
+<span class="go">62.800  20.000  0.000   0.000   0.000   0.200   0.000   -1.834</span>
+<span class="go">62.900  20.000  0.000   0.000   0.000   0.200   0.000   -1.686</span>
+<span class="go">63.000  20.000  0.000   0.000   0.000   0.200   0.000   -1.498</span>
+<span class="go">63.100  20.000  0.000   0.000   0.000   0.200   0.000   -1.271</span>
+<span class="go">63.200  20.000  0.000   0.000   0.000   0.200   0.000   -1.005</span>
+<span class="go">63.300  20.000  0.000   0.000   0.000   0.200   0.000   -0.703</span>
+<span class="go">63.400  20.000  0.000   0.000   0.000   0.200   0.000   -0.366</span>
+<span class="go">63.500  20.000  0.000   0.000   0.000   0.200   0.000   0.000</span>
+<span class="go">63.600  20.000  0.000   0.000   0.000   0.200   0.000   0.393</span>
+<span class="go">63.700  20.000  0.000   0.000   0.000   0.200   0.000   0.807</span>
+<span class="go">63.800  20.000  0.000   0.000   0.000   0.200   0.000   1.237</span>
+<span class="go">63.900  20.000  0.000   0.000   0.000   0.200   0.000   1.678</span>
+<span class="go">64.000  20.000  0.000   0.000   0.000   0.200   0.000   2.124</span>
+<span class="go">64.100  20.000  0.000   0.000   0.000   0.200   0.000   2.568</span>
+<span class="go">64.200  20.000  0.000   0.000   0.000   0.200   0.000   3.003</span>
+<span class="go">64.300  20.000  0.000   0.000   0.000   0.200   0.000   3.425</span>
+<span class="go">64.400  20.000  0.000   0.000   0.000   0.200   0.000   3.825</span>
+<span class="go">64.500  20.000  0.000   0.000   0.000   0.200   0.000   4.198</span>
+<span class="go">64.600  20.000  0.000   0.000   0.000   0.200   0.000   4.539</span>
+<span class="go">64.700  20.000  0.000   0.000   0.000   0.200   0.000   4.841</span>
+<span class="go">64.800  20.000  0.000   0.000   0.000   0.200   0.000   5.101</span>
+<span class="go">64.900  20.000  0.000   0.000   0.000   0.200   0.000   5.314</span>
+<span class="go">65.000  20.000  0.000   0.000   0.000   0.200   0.000   5.477</span>
+<span class="go">65.100  20.000  0.000   0.000   0.000   0.200   0.000   5.587</span>
+<span class="go">65.200  20.000  0.000   0.000   0.000   0.200   0.000   5.642</span>
+<span class="go">65.300  20.000  0.000   0.000   0.000   0.200   0.000   5.642</span>
+<span class="go">65.400  20.000  0.000   0.000   0.000   0.200   0.000   5.587</span>
+<span class="go">65.500  20.000  0.000   0.000   0.000   0.200   0.000   5.477</span>
+<span class="go">65.600  20.000  0.000   0.000   0.000   0.200   0.000   5.314</span>
+<span class="go">65.700  20.000  0.000   0.000   0.000   0.200   0.000   5.101</span>
+<span class="go">65.800  20.000  0.000   0.000   0.000   0.200   0.000   4.841</span>
+<span class="go">65.900  20.000  0.000   0.000   0.000   0.200   0.000   4.539</span>
+<span class="go">66.000  20.000  0.000   0.000   0.000   0.200   0.000   4.198</span>
+<span class="go">66.100  20.000  0.000   0.000   0.000   0.200   0.000   3.825</span>
+<span class="go">66.200  20.000  0.000   0.000   0.000   0.200   0.000   3.425</span>
+<span class="go">66.300  20.000  0.000   0.000   0.000   0.200   0.000   3.003</span>
+<span class="go">66.400  20.000  0.000   0.000   0.000   0.200   0.000   2.568</span>
+<span class="go">66.500  20.000  0.000   0.000   0.000   0.200   0.000   2.124</span>
+<span class="go">66.600  20.000  0.000   0.000   0.000   0.200   0.000   1.678</span>
+<span class="go">66.700  20.000  0.000   0.000   0.000   0.200   0.000   1.237</span>
+<span class="go">66.800  20.000  0.000   0.000   0.000   0.200   0.000   0.807</span>
+<span class="go">66.900  20.000  0.000   0.000   0.000   0.200   0.000   0.393</span>
+<span class="go">67.000  20.000  0.000   0.000   0.000   0.200   0.000   0.000</span>
+<span class="go">67.100  20.000  0.000   0.000   0.000   0.200   0.000   -0.366</span>
+<span class="go">67.200  20.000  0.000   0.000   0.000   0.200   0.000   -0.703</span>
+<span class="go">67.300  20.000  0.000   0.000   0.000   0.200   0.000   -1.005</span>
+<span class="go">67.400  20.000  0.000   0.000   0.000   0.200   0.000   -1.271</span>
+<span class="go">67.500  20.000  0.000   0.000   0.000   0.200   0.000   -1.498</span>
+<span class="go">67.600  20.000  0.000   0.000   0.000   0.200   0.000   -1.686</span>
+<span class="go">67.700  20.000  0.000   0.000   0.000   0.200   0.000   -1.834</span>
+<span class="go">67.800  20.000  0.000   0.000   0.000   0.200   0.000   -1.942</span>
+<span class="go">67.900  20.000  0.000   0.000   0.000   0.200   0.000   -2.011</span>
+<span class="go">68.000  20.000  0.000   0.000   0.000   0.200   0.000   -2.043</span>
+<span class="go">68.100  20.000  0.000   0.000   0.000   0.200   0.000   -2.041</span>
+<span class="go">68.200  20.000  0.000   0.000   0.000   0.200   0.000   -2.007</span>
+<span class="go">68.300  20.000  0.000   0.000   0.000   0.200   0.000   -1.944</span>
+<span class="go">68.400  20.000  0.000   0.000   0.000   0.200   0.000   -1.856</span>
+<span class="go">68.500  20.000  0.000   0.000   0.000   0.200   0.000   -1.748</span>
+<span class="go">68.600  20.000  0.000   0.000   0.000   0.200   0.000   -1.622</span>
+<span class="go">68.700  20.000  0.000   0.000   0.000   0.200   0.000   -1.485</span>
+<span class="go">68.800  20.000  0.000   0.000   0.000   0.200   0.000   -1.338</span>
+<span class="go">68.900  20.000  0.000   0.000   0.000   0.200   0.000   -1.188</span>
+<span class="go">69.000  20.000  0.000   0.000   0.000   0.200   0.000   -1.037</span>
+<span class="go">69.100  20.000  0.000   0.000   0.000   0.200   0.000   -0.889</span>
+<span class="go">69.200  20.000  0.000   0.000   0.000   0.200   0.000   -0.747</span>
+<span class="go">69.300  20.000  0.000   0.000   0.000   0.200   0.000   -0.614</span>
+<span class="go">69.400  20.000  0.000   0.000   0.000   0.200   0.000   -0.493</span>
+<span class="go">69.500  20.000  0.000   0.000   0.000   0.200   0.000   -0.384</span>
+<span class="go">69.600  20.000  0.000   0.000   0.000   0.200   0.000   -0.289</span>
+<span class="go">69.700  20.000  0.000   0.000   0.000   0.200   0.000   -0.209</span>
+<span class="go">69.800  20.000  0.000   0.000   0.000   0.200   0.000   -0.144</span>
+<span class="go">69.900  20.000  0.000   0.000   0.000   0.200   0.000   -0.092</span>
+<span class="go">70.000  20.000  0.000   0.000   0.000   0.200   0.000   -0.054</span>
+<span class="go">70.100  20.000  0.000   0.000   0.000   0.200   0.000   -0.028</span>
+<span class="go">70.200  20.000  0.000   0.000   0.000   0.200   0.000   -0.012</span>
+<span class="go">70.300  20.000  0.000   0.000   0.000   0.200   0.000   -0.004</span>
+<span class="go">70.400  20.000  0.000   0.000   0.000   0.200   0.000   -0.000</span>
+<span class="go">70.500  20.000  0.000   0.000   0.000   0.200   0.000   0.000</span>
+</pre></div>
+</div>
+</section>
+<section id="turbulent-wind-field">
+<h1>Turbulent Wind Field<a class="headerlink" href="#turbulent-wind-field" title="Permalink to this headline"></a></h1>
+<p>The final type of wind file which can be set up is a fully turbulent wind file.
+This can be either generated through the <em>Wind Input Type</em> button of the turbine simulation dialogue, as shown in <a class="reference internal" href="#fig-wind-pane"><span class="std std-numref">Fig. 91</span></a> or by directly generating this within the
+turbulent wind module, shown in <a class="reference internal" href="#fig-wind-module"><span class="std std-numref">Fig. 92</span></a>.</p>
+<figure class="align-center" id="id7">
+<span id="fig-wind-module"></span><img alt="Wind field creation dialogue in QBlade." src="../../../_images/windbutton.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 92 </span><span class="caption-text">The wind field creation symbol in the QBlade main tool bar.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>When a new turbulent wind file is created, a range of parameters must be specified as shown by the turbulent wind dialogue in <a class="reference internal" href="#fig-turb-dia"><span class="std std-numref">Fig. 93</span></a>.
+After these have been selected, clicking on the <em>Create</em> button automatically passes the information to the TurbSim program <a class="footnote-reference brackets" href="#footcite-turbsimguide" id="id2">2</a>.
+This is linked to the QBlade release, so that no additional user input is required.
+The input parameters are described in detail in the following sections.</p>
+<section id="grid-parameters">
+<h2>Grid Parameters<a class="headerlink" href="#grid-parameters" title="Permalink to this headline"></a></h2>
+<p>These parameters dictate the spatial dimensions of the generated turbulent wind grid.
+A turbulent <em>box</em> is be generated which is then translated through the field of interest at the average velocity (defined below)
+as is consistent with Taylor’s hypothesis for a turbulent flow <a class="footnote-reference brackets" href="#footcite-batchelorbook" id="id3">3</a>.</p>
+<ul class="simple">
+<li><p><strong>Seed</strong>: The random seed used to generate the wind field.</p></li>
+<li><p><strong>Time</strong>: Determines the length of the generated turbulent box.</p></li>
+<li><p><strong>Timestep</strong>: Specifies the discretisation in free stream (<span class="math notranslate nohighlight">\(x\)</span>) direction.</p></li>
+<li><p><strong>Grid Width</strong>: Specifies box size in lateral (<span class="math notranslate nohighlight">\(y\)</span>) direction.</p></li>
+<li><p><strong>Grid Height</strong>: Specifies box size in vertical (<span class="math notranslate nohighlight">\(z\)</span>) direction.</p></li>
+<li><p><strong>Grid Y Points</strong>: Specifies spatial discretisation in <span class="math notranslate nohighlight">\(y\)</span> direction.</p></li>
+<li><p><strong>Grid Z Points</strong>: Specifies spatial discretisation in <span class="math notranslate nohighlight">\(z\)</span> direction.</p></li>
+<li><p><strong>Hub Height</strong>: Specifies the vertical position of the box center.</p></li>
+</ul>
+</section>
+<section id="turbine-class">
+<h2>Turbine Class<a class="headerlink" href="#turbine-class" title="Permalink to this headline"></a></h2>
+<p>These determine the turbine class as defined in the IEC 61400 design standard <a class="footnote-reference brackets" href="#footcite-iec61400-1" id="id4">4</a>.</p>
+<ul class="simple">
+<li><p><strong>Turbine Class</strong>: Specifies the design turbine class.</p></li>
+<li><p><strong>Turbulence Class</strong>: Specifies the design turbulence class.</p></li>
+<li><p><strong>I_ref</strong>: Specifies the turbulence intensity.</p></li>
+<li><p><strong>V_ref</strong>: Specifies the reference velocity.</p></li>
+</ul>
+</section>
+<section id="flow-parameters">
+<h2>Flow Parameters<a class="headerlink" href="#flow-parameters" title="Permalink to this headline"></a></h2>
+<p>These parameters specify the parameters and model inputs required for generation of the turbulent velocity field.</p>
+<ul class="simple">
+<li><p><strong>Mean Wind Speed</strong>: Specifies the mean translational velocity of the frozen turbulent flow field.</p></li>
+<li><p><strong>Horizontal Inflow</strong>: Specifies the horizontal inflow angle.</p></li>
+<li><p><strong>Vertical Inflow</strong>: Specifies the vertical inflow angle.</p></li>
+<li><p><strong>IEC 61400 1-ed</strong>: Specifies the version of the IEC standard applied.</p></li>
+<li><p><strong>Wind Type</strong>: Specifies the wind class of the generated wind field.</p></li>
+<li><p><strong>Spectral Model</strong>: Specifies the form of the spectral tensor applied to generate the stochastic velocity fluctuations.</p></li>
+<li><p><strong>Wind Profile Type</strong>: Specifies the model used to represent the atmospheric shear layer.</p></li>
+<li><p><strong>Reference Height</strong>: Specifies the reference height of the aforementioned shear layer model.</p></li>
+<li><p><strong>Shear Exponent</strong>: Specifies the shear exponent of the aforementioned shear layer model (if exponential model chosen).</p></li>
+<li><p><strong>Roughness Length</strong>: Specifies the reference height of the aforementioned shear layer model (if logarithmic model chosen).</p></li>
+<li><p><strong>Jet Height</strong>: Specifies the jet height of the aforementioned shear layer model (if jet model chosen).</p></li>
+<li><p><strong>ETMC value</strong>: Specifies the extreme turbulence model <span class="math notranslate nohighlight">\(c\)</span> value (if ETM model chosen).</p></li>
+<li><p><strong>Remove TurbSim Files</strong>: If checked, the TurbSim files generated (and subsequently read by QBlade) is deleted.</p></li>
+<li><p><strong>Close Console</strong>: If checked, the console which is called to generate the TurbSim file is automatically closed upon completion of TurbSim file generation.</p></li>
+</ul>
+<figure class="align-center" id="id8">
+<span id="fig-turb-dia"></span><a class="reference internal image-reference" href="../../../_images/turbulentwind.png"><img alt="Turbulent wind field creation dialogue in QBlade." src="../../../_images/turbulentwind.png" style="width: 579.75px; height: 533.25px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 93 </span><span class="caption-text">The turbulent wind field creation dialogue.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p id="id5"><dl class="footnote brackets">
+<dt class="label" id="footcite-iecwindtool"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>NREL. IECWind. <a class="reference external" href="https://www.nrel.gov/wind/nwtc/iecwind.html">https://www.nrel.gov/wind/nwtc/iecwind.html</a>, 2022. [Online; accessed 2022-06-13].</p>
+</dd>
+<dt class="label" id="footcite-turbsimguide"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>B.J. Jonkman and L. Kilcher. <em>TurbSim User’s Guide Verson 1.06.00</em>. NREL, 2012. An optional note.</p>
+</dd>
+<dt class="label" id="footcite-batchelorbook"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>G.K. Batchelor. <em>The Theory of Homogeneous Turbulence</em>. Cambridge University Press, 1953. ISBN 0521041171.</p>
+</dd>
+<dt class="label" id="footcite-iec61400-1"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>IEC61400-1 Standard. IEC 61400-1:2019 Wind energy generation systems - Part 1: Design requirements. Standard, International Electrotechnical Commission, Geneva, Switzerland, 2019.</p>
+</dd>
+</dl>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../simulation/simulation.html" class="btn btn-neutral float-left" title="Simulation Module Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wavefield/wavefield.html" class="btn btn-neutral float-right" title="Wave Generator Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
