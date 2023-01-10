@@ -75,8 +75,8 @@ This command prints out an overview of all CLI functionality::
 	post_cut                  - calculate and export cut planes from all FINISHED .qpr and .qpr1 files in all WORKING_DIR(s), then saves the projects as *.qpr2
 	--------------------------------------------------------------------------------------------
 	
-CLI Options
-***********
+CLI Functionality
+*****************
 
 In this section the different CLI options are briefly explained.
 
