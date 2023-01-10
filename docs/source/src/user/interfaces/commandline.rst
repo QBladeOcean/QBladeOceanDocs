@@ -134,15 +134,15 @@ Adding the parameter :code:`skip` causes QBlade to skip the evaluation of a simu
 
 	**exp_h2bin**
 	
-The parameter :code:`` adds the HAWC2 binary format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+The parameter :code:`exp_h2bin` adds the HAWC2 binary format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 	
 	**exp_h2ascii**
 	
-The parameter :code:`` adds the HAWC2 ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+The parameter :code:`exp_h2ascii` adds the HAWC2 ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
 	**exp_ascii**
 	
-The parameter :code:`` adds the ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+The parameter :code:`exp_ascii` adds the ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
 	**exp_cut_txt**
 	
