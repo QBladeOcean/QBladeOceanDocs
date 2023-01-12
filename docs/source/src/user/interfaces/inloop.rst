@@ -3,7 +3,7 @@ Software in Loop (SIL) Overview
    
 The Software in Loop interface in QBlade provides an easy way of controlling the whole simulation loop of a wind turbine and enable cosimulation within other software frameworks or scripting languages, such as Python or Matlab. To enable this functionality QBlade is compiled as a Dynamic Link Library (.dll, Windows) or as a Shared Object (.so, Unix) and the relevant functionality is exported into an interface.
 
-Through the different functions that are exported the user can explicitly import QBlade projects (.qpr) or Simulation Definition Files (.sim) and then progress the simulation incrementally in time by calling the **advanceTurbineSimulation()** function. At every timestep it is possible to inquire any variable of the simulation and control various aspects of the simulation in response, such as changing the inflow conditions, changing the position and orientation of the turbine or controlling the various control actuators (pitch, yaw, generator torque) of the wind turbine. A possible application for the SIL interface is a cosimulation, where the turbine floater can be modeled within a specialized software that is coupled with QBlade through force/position intercommunication. Another application is controller development, where the controller can run in a scripting language (such as Simulink), receiving custom signals from the simulation and controlling the turbine actuators in response. When running a multi-turbine simulation within the SLI interface the user may control each simulated turbine individually, enabling the modeling of global wind park controllers.
+Through the different functions that are exported the user can explicitly import QBlade projects (.qpr) or Simulation Definition Files (.sim) and then progress the simulation incrementally in time by calling the :code:`advanceTurbineSimulation()` function. At every timestep it is possible to inquire any variable of the simulation and control various aspects of the simulation in response, such as changing the inflow conditions, changing the position and orientation of the turbine or controlling the various control actuators (pitch, yaw, generator torque) of the wind turbine. A possible application for the SIL interface is a cosimulation, where the turbine floater can be modeled within a specialized software that is coupled with QBlade through force/position intercommunication. Another application is controller development, where the controller can run in a scripting language (such as Simulink), receiving custom signals from the simulation and controlling the turbine actuators in response. When running a multi-turbine simulation within the SLI interface the user may control each simulated turbine individually, enabling the modeling of global wind park controllers.
 
 In general, the high level overview of the SLI interface and the simulation loop, when running the SLI in an external language, looks as follows:
 
@@ -31,29 +31,34 @@ Interface Function Definitions
 
 .. code-block:: console
 
+	void createInstance(int clDevice = 0, int groupSize = 32)
 	void loadProject(char *str)
 	void loadSimDefinition(char *str)
+	void initializeSimulation()
+	
+	void advanceController_at_num(double *vars, int num = 0)
+	void advanceTurbineSimulation()
+
 	void storeProject(char *str)
+	void closeInstance()
+	
+	void loadTurbulentWindBinary(char *str)
+	void addTurbulentWind(double windspeed, double refheight, double hubheight, double dimensions, int gridPoints, double length, double dT, char *turbulenceClass, char *turbulenceType, int seed, double vertInf, double horInf, bool removeFiles = false)
+
+	void setPowerLawWind(double windspeed, double horAngle, double vertAngle, double shearExponent, double referenceHeight)
 	void setDebugInfo(bool isDebug)
 	void setLibraryPath(char *str)
-	void createInstance(int clDevice = 0, int groupSize = 32)
-	void closeInstance()
-	void loadTurbulentWindBinary(char *str)
-	void setPowerLawWind(double windspeed, double horAngle, double vertAngle, double shearExponent, double referenceHeight)
-	void addTurbulentWind(double windspeed, double refheight, double hubheight, double dimensions, int gridPoints, double length, double dT, char *turbulenceClass, char *turbulenceType, int seed, double vertInf, double horInf, bool removeFiles = false)
-	void initializeSimulation()
 	void setTimestepSize(double timestep)
 	void setRPMPrescribeType_at_num(int type, int num = 0)
 	void setRampupTime(double time)
-	void getWindspeed(double x, double y, double z, double *velocity)
-	double getCustomData_at_num(char *str, double pos = 0, int num = 0)
 	void setInitialConditions_at_num(double yaw, double pitch, double azimuth, double rpm, int num = 0)
 	void setTurbinePosition_at_num(double x, double y, double z, double rotx, double roty, double rotz, int num = 0)
-	void getTowerBottomLoads_at_num(double *loads, int num)
 	void setControlVars_at_num(double *vars, int num = 0)
+	
+	void getWindspeed(double x, double y, double z, double *velocity)
+	void getTowerBottomLoads_at_num(double *loads, int num)
 	void getTurbineOperation_at_num(double *vars, int num = 0)
-	void advanceController_at_num(double *vars, int num = 0)
-	void advanceTurbineSimulation()
+	double getCustomData_at_num(char *str, double pos = 0, int num = 0)
 
 
 Function Documentation
@@ -61,6 +66,10 @@ Function Documentation
 
 In the following, the functionality that is exported from the QBlade dll or shared object is described and the function arguments and return types are given. ALl functions with the appendix **_at_num** affect the turbine specified by the argument **num** - this has only an effect for multi turbine simulations.
 
+:code:`void createInstance(int clDevice = 0, int groupSize = 32)`
+	
+	This function creates a new instance of QBlade. The OpenCL device and the OpenCL group-size can both be specified in the arguments. **Calling this function is mandatory!** 
+	
 :code:`void loadProject(char *str)`
 	
 	This function loads a qblade (.qpr) project into the QBlade instance. The file location has to be passed as a *char pointer*. File names can be passed as absolute or as relative paths.
@@ -69,42 +78,36 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	
 	This function loads a simulation definition (.sim) file into the QBlade instance. The file location has to be passed as a *char pointer*. File names can be passed as absolute or as relative paths.
 
+:code:`void initializeSimulation()`
+	
+	This function initializes the simulation, e.g. the simulation is reset and structural ramp-up is carried out.
+
+:code:`void advanceController_at_num(double *vars, int num = 0)`
+	
+	This function advancess the controller dll of the selected turbine (argument *num*). The controller outputs are automatically applied to the turbine actuators and to the generator. The controller ouputs are also returned in the *vars* array:
+	
+	* vars[0] = generator torque [Nm]
+	* vars[1] = yaw angle [deg]
+	* vars[2] = pitch blade 1 [deg]
+	* vars[3] = pitch blade 2 [deg]
+	* vars[4] = pitch blade 3 [deg]
+
+:code:`void advanceTurbineSimulation()`
+	
+	This function advances the turbine simulation for all turbines and finishes the timestep.
+
 :code:`void storeProject(char *str)`
 	
 	This functions stores a project file. The file location has to be passed as a *char pointer*. File names can be passed as absolute or as relative paths.
 
-:code:`void setDebugInfo(bool isDebug)`
-	
-	This function enables the debug output if set to true.
-
-:code:`void setLibraryPath(char *atr)`
-	
-	This function sets the location of the QBlade dll or shared object so that the QBlade instance knows about its location. **Calling this function is mandatory** so that the QBlade instance knows about the location of associated binaries (XFoil, TurbSim) and possibly license files.
-
-:code:`void createInstance(int clDevice = 0, int groupSize = 32)`
-	
-	This function creates a new instance of QBlade. The OpenCL device and the OpenCL group-size can both be specified in the arguments. **Calling this function is mandatory!** 
-
 :code:`void closeInstance()`
 
 	This function closes the instance of QBlade and frees the memory.
-
+	
 :code:`void loadTurbulentWindBinary(char *str)`
 	
 	This function allows to load a turbulent windfield that is stored in binary format. The file location has to be passed as a *char pointer*. File names can be passed as absolute or as relative paths.
-
-:code:`void setPowerLawWind(double windspeed, double horAngle,`
-:code:`double vertAngle, double shearExponent, double referenceHeight)`
-
-	This function can be called before or at any time after the simulation has been initialized with *initializeSimulation()* to statically or dynamically change the inflow conditions. It defines a power law wind profile (https://en.wikipedia.org/wiki/Wind_profile_power_law) and its inflow direction. The arguments for this function are:
 	
-	* windspeed: constant windspeed in m/s [m/s]
-	* horAngle: the horizontal inflow angle in degrees [deg]
-	* vertAngle: the vertical inflow angle in degrees [deg]
-	* shearExponent: this is the exponent for the power law boundary layer profile, if this is set to 0 the windspeed is constant with height [-]
-	* referenceHeight: this is the height at which the velocity in the boundary layer is the defined windspeed, usually set to the hubheight [m]
-	* exemplary call: addTurbulentWind(12,115,115,220,20,60,0.1,"A","NTM",1000000,0,0);
-
 :code:`void addTurbulentWind(double windspeed, double refheight, double hubheight,`
 :code:`double dimensions, int gridPoints,double length, double dT, char *turbulenceClass,`
 :code:`char *turbulenceType, int seed, double vertInf, double horInf, bool removeFiles = false)`	
@@ -124,9 +127,26 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* horInf: horizontal inflow angle in degrees [deg]
 
 
-:code:`void initializeSimulation()`
+:code:`void setPowerLawWind(double windspeed, double horAngle,`
+:code:`double vertAngle, double shearExponent, double referenceHeight)`
+
+	This function can be called before or at any time after the simulation has been initialized with *initializeSimulation()* to statically or dynamically change the inflow conditions. It defines a power law wind profile (https://en.wikipedia.org/wiki/Wind_profile_power_law) and its inflow direction. The arguments for this function are:
 	
-	This function initializes the simulation, e.g. the simulation is reset and structural ramp-up is carried out.
+	* windspeed: constant windspeed in m/s [m/s]
+	* horAngle: the horizontal inflow angle in degrees [deg]
+	* vertAngle: the vertical inflow angle in degrees [deg]
+	* shearExponent: this is the exponent for the power law boundary layer profile, if this is set to 0 the windspeed is constant with height [-]
+	* referenceHeight: this is the height at which the velocity in the boundary layer is the defined windspeed, usually set to the hubheight [m]
+	* exemplary call: addTurbulentWind(12,115,115,220,20,60,0.1,"A","NTM",1000000,0,0);
+
+
+:code:`void setDebugInfo(bool isDebug)`
+	
+	This function enables the debug output if set to true.
+
+:code:`void setLibraryPath(char *atr)`
+	
+	This function sets the location of the QBlade dll or shared object so that the QBlade instance knows about its location. **Calling this function is mandatory** so that the QBlade instance knows about the location of associated binaries (XFoil, TurbSim) and possibly license files.
 
 :code:`void setTimestepSize(double timestep)`
 	
@@ -145,18 +165,6 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	
 	This function can be used to change the ramp-up time from the value specified in the project or simulation file, call before *initializeSimulation()*.
 
-:code:`void getWindspeed(double x, double y, double z, double *velocity)`
-	
-	This function can be called to get the current windspeed at the chosen position (x,y,z), returns the windspeed vector in the *double pointer* velocity.
-	
-	* velocity[0] = x-component [m/s];
-	* velocity[1] = y-component [m/s];
-	* velocity[2] = z-component [m/s];
-
-
-:code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
-	
-	This function can be used to access the current value from an arbitrary simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*.
 
 :code:`void setInitialConditions_at_num(double yaw, double pitch, double azimuth, double rpm, int num = 0)`
 	
@@ -165,10 +173,6 @@ In the following, the functionality that is exported from the QBlade dll or shar
 :code:`void setTurbinePosition_at_num(double x, double y, double z, double rotx, double roty, double rotz, int num = 0)`
 	
 	This function sets the turbine tower bottom x, y and z position [m], and xrot, yrot zrot rotation [deg]. It can be called before *initializeSimulation()* if the turbine position should be offset initially or during the simulation loop if it should be changed dynamically, for example during cosimulation with a hydrodynamics software that models the floater.
-
-:code:`void getTowerBottomLoads_at_num(double *loads, int num)`
-	
-	This function can be used to obtain the loads at the bottom of the tower. The main purpose of this is to be used in conjunction with the *setTurbinePosition_at_num()* function for force/position cosimilation with a hydrodynamics solver that is modeling the floater.
 
 :code:`void setControlVars_at_num(double *vars, int num = 0)`
 	
@@ -180,6 +184,18 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* vars[3] = pitch blade 2 [deg];
 	* vars[4] = pitch blade 3 [deg];
 
+
+:code:`void getWindspeed(double x, double y, double z, double *velocity)`
+	
+	This function can be called to get the current windspeed at the chosen position (x,y,z), returns the windspeed vector in the *double pointer* velocity.
+	
+	* velocity[0] = x-component [m/s];
+	* velocity[1] = y-component [m/s];
+	* velocity[2] = z-component [m/s];
+
+:code:`void getTowerBottomLoads_at_num(double *loads, int num)`
+	
+	This function can be used to obtain the loads at the bottom of the tower. The main purpose of this is to be used in conjunction with the *setTurbinePosition_at_num()* function for force/position cosimilation with a hydrodynamics solver that is modeling the floater.
 
 :code:`void getTurbineOperation_at_num(double *vars, int num = 0)`
 	
@@ -228,24 +244,17 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* vars[40] = horizontal inflow angle [deg]
 
 
-:code:`void advanceController_at_num(double *vars, int num = 0)`
+:code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
 	
-	This function advancess the controller dll of the selected turbine (argument *num*). The controller outputs are automatically applied to the turbine actuators and to the generator. The controller ouputs are also returned in the *vars* array:
-	
-	* vars[0] = generator torque [Nm]
-	* vars[1] = yaw angle [deg]
-	* vars[2] = pitch blade 1 [deg]
-	* vars[3] = pitch blade 2 [deg]
-	* vars[4] = pitch blade 3 [deg]
+	This function can be used to access the current value from an arbitrary simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*.
 
-:code:`void advanceTurbineSimulation()`
-	
-	This function advances the turbine simulation for all turbines and finishes the timestep.
 
 
 Sample Script Running the SLI in Python
 ***************************************
-The following code example (*sampleScript.py*) is an example for a Python script that utiizes the QBlade SIL interface. A template script to import the QBlade library or shared object and its functions into Python exists in the file *QBladeLIBImport*. In this example script the library is loaded by calling this script through *import QBladeLIBImport as QBLIB*. After it has been loaded the functions can be accessed through :code:`QBLIB.functionXY()`:
+The following code example (*sampleScript.py*) is an example for a Python script that utiizes the QBlade SIL interface. This exemplary script only uses a small amount of the functionality that is exported by the QBlade library for purely illustrative purposes. 
+
+In this Python example script the library is loaded by calling the script *QBladeLIBImport*, which handles the library import, through the line :code:`import QBladeLIBImport as QBLIB`. After it has been loaded any function of the library can be accessed through :code:`QBLIB.functionXY()`:
 
 
 .. code-block:: python

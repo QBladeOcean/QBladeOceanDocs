@@ -80,85 +80,85 @@ CLI Functionality
 
 In this section the different CLI options are briefly explained.
 
-	**-d**
+:code:`-d`
 
-This parameter is used to specify on which OpenCL device QBlade should be executed. The default value is 0. To execute on the OpenCL device 1, the parameter would be :code:`-d1`.
+	This parameter is used to specify on which OpenCL device QBlade should be executed. The default value is 0. To execute on the OpenCL device 1, the parameter would be :code:`-d1`.
 
-	**-g**
+:code:`-g`
 
-This parameter specifies the OpenCL work-group size, which has a GPU dependent impact on the OpenCL performance. The work-group size should always be a power of 2. The default value is 32. To specify a work-group size of 64 you would pass the parameter :code:`-g64`.  
+	This parameter specifies the OpenCL work-group size, which has a GPU dependent impact on the OpenCL performance. The work-group size should always be a power of 2. The default value is 32. To specify a work-group size of 64 you would pass the parameter :code:`-g64`.  
 
-	**-t**
+:code:`-t`
 
-This parameter sets how many parallel instances of QBlade should be started when evaluating a batch of simulations. The default values is 1. To specify 12 parallel threads you would pass the parameter :code:`-t12`.
+	This parameter sets how many parallel instances of QBlade should be started when evaluating a batch of simulations. The default values is 1. To specify 12 parallel threads you would pass the parameter :code:`-t12`.
 
-	**\\directory\\simulation.sim**
+:code:`c:\directory\simulation.sim`
 	
-Passing the absolute location of a :ref:`Simulation Definition ASCII File` (\*.sim) as one of the parameters adds this simulation definition to the list of simulations that will be evaluated. Multiple simulation definitions may be added during a single CLI call. Finished simulation definitions are stored as **.qpr1**, to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation. :code:`\\directory\\project.qpr`.
+	Passing the absolute location of a :ref:`Simulation Definition ASCII File` (\*.sim) as one of the parameters adds this simulation definition to the list of simulations that will be evaluated. Multiple simulation definitions may be added during a single CLI call. Finished simulation definitions are stored as **.qpr1**, to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
 
-	**\\directory\\project.qpr**
+:code:`c:\directory\project.qpr`
 
-Passing the absolute location of a QBlade Project File (\*.qpr) adds all simulation definitions within this project to the list of simulations that will be evaluated. Multiple project files may be added during a single CLI call. Finished project files are stored as ***.qpr1**,  to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation. :code:`\\directory\\project.qpr`.
+	Passing the absolute location of a QBlade Project File (\*.qpr) adds all simulation definitions within this project to the list of simulations that will be evaluated. Multiple project files may be added during a single CLI call. Finished project files are stored as ***.qpr1**,  to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
 
-	**\\directory\\cutplane.cut**
+:code:`c:\directory\cutplane.cut`
 	
-When passing the absolute location of a cut-pLane definition (\*.cut) this Cut-Plane Definition is added to the list of cut-plane definitions that will be calculated for all simulations that are evaluated. Multiple cut-plane definitions may be added during a single CLI call. :code:`\\directory\\cutplane.cut`.
+	When passing the absolute location of a cut-pLane definition (\*.cut) this Cut-Plane Definition is added to the list of cut-plane definitions that will be calculated for all simulations that are evaluated. Multiple cut-plane definitions may be added during a single CLI call.
 
-	**\\directory\\**
+:code:`c:\directory\ `
 	
-Passing the absolute path of any directory adds this directory to the list of working directories (**WORKING_DIR**). :code:`\\directory\\`. Multiple directories may be added during a single CLI call.
+	Passing the absolute path of any directory adds this directory to the list of working directories (**WORKING_DIR**). Multiple directories may be added during a single CLI call.
 
-	**all_sim**
+:code:`all_sim`
 	
-Adding the parameter :code:`all_sim` causes QBlade to add **all \*.sim files from all WORKING_DIR(s)** to the list of simulations that will be evaluated.
+	Adding the parameter :code:`all_sim` causes QBlade to add **all \*.sim files from all WORKING_DIR(s)** to the list of simulations that will be evaluated.
 
-	**all_qpr**
+:code:`all_qpr`
 	
-Adding the parameter :code:`all_qpr` causes QBlade to add **all \*.qpr files from to all WORKING_DIR(s)** to the list of projects that will be evaluated.
+	Adding the parameter :code:`all_qpr` causes QBlade to add **all \*.qpr files from to all WORKING_DIR(s)** to the list of projects that will be evaluated.
 
-	**all_cut**
+:code:`all_cut`
 	
-Adding the parameter :code:`all_cut` causes QBlade to add **all \*.cut files from to all WORKING_DIR(s)** to the list of cut-plane definitions that will be calculated for all simulations that are evaluated.
+	Adding the parameter :code:`all_cut` causes QBlade to add **all \*.cut files from to all WORKING_DIR(s)** to the list of cut-plane definitions that will be calculated for all simulations that are evaluated.
 
-	**no_save**
+:code:`no_save`
 	
-The parameter :code:`no_save` prevents QBlade from automatically storing finished simulations as **\*.qpr1** or **\*.qpr2** files (*sometimes those files are not explicitly needed, for example if results re automatically exported and the user wants to reduce disk memory consumption during very large batch runs*).
+	The parameter :code:`no_save` prevents QBlade from automatically storing finished simulations as **\*.qpr1** or **\*.qpr2** files. Sometimes those files are not explicitly needed, for example if results are automatically exported and the user wants to reduce disk memory consumption during very large batch runs.
 
-	**remove_wind**
+:code:`remove_wind`
 	
-The parameter :code:`remove_wind` removes the binary windfield files (\*.bts), that may be automatically generated when a simulation definition file (\*.sim) is evaluated. This can be useful to reduce disk memory usage during very large batch runs.
+	The parameter :code:`remove_wind` removes the binary windfield files (\*.bts), that may be automatically generated when a simulation definition file (\*.sim) is evaluated. This can be useful to reduce disk memory usage during very large batch runs.
 
-	**skip**
+:code:`skip`
 	
-Adding the parameter :code:`skip` causes QBlade to skip the evaluation of a simulation (\*.sim) or project (\*.qpr) file if an assocated finished project file (\*.qpr1) already exists, or if the results from this simulation have already been exported previously.
+	Adding the parameter :code:`skip` causes QBlade to skip the evaluation of a simulation (\*.sim) or project (\*.qpr) file if an assocated finished project file (\*.qpr1) already exists, or if the results from this simulation have already been exported previously.
 
-	**exp_h2bin**
+:code:`exp_h2bin`
 	
-The parameter :code:`exp_h2bin` adds the HAWC2 binary format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+	The parameter :code:`exp_h2bin` adds the HAWC2 binary format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 	
-	**exp_h2ascii**
+:code:`exp_h2ascii`
 	
-The parameter :code:`exp_h2ascii` adds the HAWC2 ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+	The parameter :code:`exp_h2ascii` adds the HAWC2 ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
-	**exp_ascii**
+:code:`exp_ascii`
 	
-The parameter :code:`exp_ascii` adds the ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+	The parameter :code:`exp_ascii` adds the ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
-	**exp_cut_txt**
+:code:`exp_cut_txt`
 	
-The parameter :code:`exp_cut_txt` adds the cut-plane TXT format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+	The parameter :code:`exp_cut_txt` adds the cut-plane TXT format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
-	**exp_cut_vtu**
+:code:`exp_cut_vtu`
 	
-The parameter :code:`exp_cut_vtu` adds the cut-plane VTU format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+	The parameter :code:`exp_cut_vtu` adds the cut-plane VTU format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
-	**post_exp**
+:code:`post_exp`
 	
-The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
+	The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
 
-	**post_cut**
+:code:`post_cut`
 	
-The parameter :code:`post_cut` causes QBlade to automatically calculate all cut-plane definitions from the cut-plane definition list for all finished project files (\*.qpr, \*.qpr1) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Cut-planes are exported in all formats that have been added to the export format list.
+	The parameter :code:`post_cut` causes QBlade to automatically calculate all cut-plane definitions from the cut-plane definition list for all finished project files (\*.qpr, \*.qpr1) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Cut-planes are exported in all formats that have been added to the export format list.
 
 Sample CLI Call to Start a Batch Run
 ************************************
