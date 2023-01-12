@@ -115,8 +115,8 @@ Command Line Interface (CLI)
 
    interfaces/commandline
    
-Simulation in Loop (SIL) Scripting Interface
-********************************************
+Simulation in Loop Interface (SIL)
+**********************************
 .. toctree::
    :maxdepth: 1
 
