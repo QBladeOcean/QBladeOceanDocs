@@ -3,7 +3,7 @@ Software in Loop (SIL) Overview
    
 The Software in Loop interface in QBlade provides an easy way of controlling the whole simulation loop of a wind turbine and enable cosimulation within other software frameworks or scripting languages, such as Python or Matlab. To enable this functionality QBlade is compiled as a Dynamic Link Library (.dll, Windows) or as a Shared Object (.so, Unix) and the relevant functionality is exported into an interface.
 
-Through the different functions that are exported the user can explicitly import QBlade projects (.qpr) or Simulation Definition Files (.sim) and then progress the simulation incrementally in time by calling the :code:`advanceTurbineSimulation()` function. At every timestep it is possible to inquire any variable of the simulation and control various aspects of the simulation in response, such as changing the inflow conditions, changing the position and orientation of the turbine or controlling the various control actuators (pitch, yaw, generator torque) of the wind turbine. A possible application for the SIL interface is a cosimulation, where the turbine floater can be modeled within a specialized software that is coupled with QBlade through force/position intercommunication. Another application is controller development, where the controller can run in a scripting language (such as Simulink), receiving custom signals from the simulation and controlling the turbine actuators in response. When running a multi-turbine simulation within the SLI interface the user may control each simulated turbine individually, enabling the modeling of global wind park controllers.
+Through the different functions that are exported the user can explicitly import QBlade projects (.qpr) or Simulation Definition Files (.sim) and then progress the simulation incrementally in time by calling the :code:`advanceTurbineSimulation()` function. At every timestep it is possible to inquire any variable of the simulation and control various aspects of the simulation in response, such as changing the inflow conditions, changing the position and orientation of the turbine or controlling the various control actuators (pitch, yaw, generator torque) of the wind turbine. A possible application for the SIL interface is a cosimulation, where the turbine floater can be modeled within a specialized software that is coupled with QBlade through force/position intercommunication. Instead of modelling the floater, the cosimulation could also model the drivetrain, controller or generator in a more sphisticated way. Another application is controller development, where the controller can run in a scripting language (such as Simulink), receiving custom signals from the simulation and controlling the turbine actuators in response. When running a multi-turbine simulation within the SLI interface the user may control each simulated turbine individually, enabling the modeling of global wind park controllers.
 
 In general, the high level overview of the SLI interface and the simulation loop, when running the SLI in an external language, looks as follows:
 
@@ -112,7 +112,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 :code:`double dimensions, int gridPoints,double length, double dT, char *turbulenceClass,`
 :code:`char *turbulenceType, int seed, double vertInf, double horInf, bool removeFiles = false)`	
 
-	This function allows to define and add a turbulent windfield (using TurbSim) to the simulation. If a turbulent windfield is used the function *setPowerLawWind()* has no effect. It uses the following parameters:
+	This function allows to define and add a turbulent windfield (using TurbSim) to the simulation. If a turbulent windfield is used the function :code:`setPowerLawWind()` has no effect. It uses the following parameters:
 	
 	* windspeed: the mean windspeed at the reference height [m/s]
 	* refheight: the reference height [m]
@@ -130,7 +130,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 :code:`void setPowerLawWind(double windspeed, double horAngle,`
 :code:`double vertAngle, double shearExponent, double referenceHeight)`
 
-	This function can be called before or at any time after the simulation has been initialized with *initializeSimulation()* to statically or dynamically change the inflow conditions. It defines a power law wind profile (https://en.wikipedia.org/wiki/Wind_profile_power_law) and its inflow direction. The arguments for this function are:
+	This function can be called before or at any time after the simulation has been initialized with :code:`initializeSimulation()` to statically or dynamically change the inflow conditions. It defines a power law wind profile (https://en.wikipedia.org/wiki/Wind_profile_power_law) and its inflow direction. The arguments for this function are:
 	
 	* windspeed: constant windspeed in m/s [m/s]
 	* horAngle: the horizontal inflow angle in degrees [deg]
@@ -150,11 +150,11 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 :code:`void setTimestepSize(double timestep)`
 	
-	This function can be used to set the timestep size (in [s]) if the user wants to change this value from the project or simulation definition file. It needs to be called before *initializeSimulation()*.
+	This function can be used to set the timestep size (in [s]) if the user wants to change this value from the project or simulation definition file. It needs to be called before :code:`initializeSimulation()`.
 
 :code:`void setRPMPrescribeType_at_num(int type, int num = 0)`
 	
-	This function can be used to change the rpm prescribe type. It needs to be called before *initializeSimulation()*.
+	This function can be used to change the rpm prescribe type. It needs to be called before :code:`initializeSimulation()`.
 	
 	* 0 - RPM prescribed during ramp-up only
 	* 1 - RPM prescribed for the whole simulation
@@ -163,20 +163,20 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 :code:`void setRampupTime(double time)`
 	
-	This function can be used to change the ramp-up time from the value specified in the project or simulation file, call before *initializeSimulation()*.
+	This function can be used to change the ramp-up time from the value specified in the project or simulation file, call before :code:`initializeSimulation()`.
 
 
 :code:`void setInitialConditions_at_num(double yaw, double pitch, double azimuth, double rpm, int num = 0)`
 	
-	This function may be used to set the turbine initial yaw [deg], collective pitch [deg], azimuthal angle [deg] and initial rotSpeed [rpm] to a value different than specified in the QBlade project or simulation input file. It needs to be called before *initializeSimulation()*.
+	This function may be used to set the turbine initial yaw [deg], collective pitch [deg], azimuthal angle [deg] and initial rotSpeed [rpm] to a value different than specified in the QBlade project or simulation input file. It needs to be called before :code:`initializeSimulation()`.
 
 :code:`void setTurbinePosition_at_num(double x, double y, double z, double rotx, double roty, double rotz, int num = 0)`
 	
-	This function sets the turbine tower bottom x, y and z position [m], and xrot, yrot zrot rotation [deg]. It can be called before *initializeSimulation()* if the turbine position should be offset initially or during the simulation loop if it should be changed dynamically, for example during cosimulation with a hydrodynamics software that models the floater.
+	This function sets the turbine tower bottom x, y and z position [m], and xrot, yrot zrot rotation [deg]. It can be called before :code:`initializeSimulation()` if the turbine position should be offset initially or during the simulation loop if it should be changed dynamically, for example during cosimulation with a hydrodynamics software that models the floater.
 
 :code:`void setControlVars_at_num(double *vars, int num = 0)`
 	
-	This function applies the control actions of the selected turbine (argument *num*) for torque, pitch and yaw angle. If it is called after te function *advanceController()* the control actions from the controller can be overwritten (or modified). The following data needs to be passed in the array *vars*.
+	This function applies the control actions of the selected turbine (argument *num*) for torque, pitch and yaw angle. If it is called after the function :code:`advanceController()` the control actions from the controller can be overwritten (or modified). The following data needs to be passed in the array *vars*.
 	
 	* vars[0] = generator torque [Nm];
 	* vars[1] = yaw angle [deg];
@@ -195,7 +195,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 :code:`void getTowerBottomLoads_at_num(double *loads, int num)`
 	
-	This function can be used to obtain the loads at the bottom of the tower. The main purpose of this is to be used in conjunction with the *setTurbinePosition_at_num()* function for force/position cosimilation with a hydrodynamics solver that is modeling the floater.
+	This function can be used to obtain the loads at the bottom of the tower. The main purpose of this is to be used in conjunction with the :code:`setTurbinePosition_at_num()` function for force/position cosimilation with a hydrodynamics solver that is modeling the floater.
 
 :code:`void getTurbineOperation_at_num(double *vars, int num = 0)`
 	
@@ -252,9 +252,11 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 Sample Script Running the SLI in Python
 ***************************************
-The following code example (*sampleScript.py*) is an example for a Python script that utiizes the QBlade SIL interface. This exemplary script only uses a small amount of the functionality that is exported by the QBlade library for purely illustrative purposes. 
+The following code example (*sampleScript.py*) is an example for a light weight Python script that utiizes the QBlade SIL interface. There are many ways to improve this, e.g. the library could be loaded into multiple seperate processes for parallelization and shophisticated alorithms could be implemented instead of using a standard controller. This exemplary script only uses a small amount of the functionality that is exported by the QBlade library for purely illustrative purposes. 
 
-In this Python example script the library is loaded by calling the script *QBladeLIBImport*, which handles the library import, through the line :code:`import QBladeLIBImport as QBLIB`. After it has been loaded any function of the library can be accessed through :code:`QBLIB.functionXY()`:
+In this Python example script the library is loaded by calling the script *QBladeLIBImport.py*, which handles the library import. After *QBladeLIBImport.py* has been imported (:code:`import QBladeLIBImport as QBLIB`) and the QBlade library has been loaded :code:`	QBLIB.loadLibrary("./QBladeCE_2.0.5.2.dll")` any function of the QBlade library can be accessed by calling :code:`QBLIB.functionXY()`.
+
+After the QBlade library has been loaded a simulation object is imported and a simulation is started over 500 timesteps. During the simulation loop different data is obtained from the turbine simulation. The turbine controller that is defined in the simulation object is advanced and its signals are passed to the turbine actuators. After the simulation loop has finished the simulation is stored into a project file, for later inspection, and the library is unloaded from python.
 
 
 .. code-block:: python
@@ -281,8 +283,9 @@ In this Python example script the library is loaded by calling the script *QBlad
 	#start of the simulation loop
 	for i in range(number_of_timesteps):
 
-		#assign a double array with length [6], filled with zeros, to retrieve the return value from getTowerBottomLoads_at_num()
+		#assign the c-type double array 'loads' with length [6], initialized with zeros
 		loads = (c_double * 6)(0) 
+		#retrieve the tower loads and store the in the array 'loads' by calling the function getTowerBottomLoads_at_num()
 		QBLIB.getTowerBottomLoads_at_num(loads,0)
 		
 		#uncomment the next line to try changing the position of the turbine dynamically
@@ -291,34 +294,35 @@ In this Python example script the library is loaded by calling the script *QBlad
 		#example how to extract a variable by name from the simulation, call as often as needed with different variable names
 		rpm = QBLIB.getCustomData_at_num(b"Rotational Speed [rpm]",0,0) 
 
-		#example of how to assign a double array with length [5], filled with zeros, to retrieve the return value from advanceController()
+		#assign the c-type double array 'ctr_vars' with length [6], initialized with zeros
 		ctr_vars = (c_double * 5)(0); 
-		
-		#advancing the controller
+		#advance the turbine controller and store the controller signals in the array 'ctr_vars'
 		QBLIB.advanceController_at_num(ctr_vars,0)
 		
-		#passing the controller signals to the actuators of the turbine
+		#passthe controller signals in 'ctr_vars' to the turbine by calling setControlVars_at_num(ctr_vars,0) 
 		QBLIB.setControlVars_at_num(ctr_vars,0) 
 		
-		#print out a few recorded values, in this case torque, tower bottom force along z (weight force) and rpm
+		#print out a few of the recorded data, in this case torque, tower bottom force along z (weight force) and rpm
 		print(ctr_vars[0],loads[2],rpm)
 
 		#advance the simulation
 		QBLIB.advanceTurbineSimulation() 
+	
+	#the simulation loop ends here after all 'number_of_timesteps have been evaluated
 		
-	#storing the project as DTU_10MW_Demo.qpr, open this file to view the results of the simulation inside QBlade's GUI
+	#storing the finished simulation in a project as DTU_10MW_Demo_finished.qpr, you can open this file to view the results of the simulation inside QBlade's GUI
 	QBLIB.storeProject(b"./DTU_10MW_Demo_finished.qpr")
 
-	#closing the instance to free memory
+	#closing the QBlade instance to free memory
 	QBLIB.closeInstance()
 
-	#unloading the library
+	#unloading the QBlade library
 	del QBLIB.QB_LIB 
 	
 Sample Script Loading the SLI in Python
 ***************************************
 
-The script *QBladeLibImport.py* that loads the QBlade library into Python and imports its functionality is shown below. Since the library is loaded upon calling the scripts function :code:`loadLibrary()` the imported library functions are defined as *global*, to make them available outside of the :code:`loadLibrary()` scope. This needs to be adapted, depending on the environment in which you plan the run the SIL interface.
+The script *QBladeLibImport.py* which loads the QBlade library into Python and imports its functionality is shown below. Since the QBlade library is loaded upon calling the function :code:`loadLibrary()` defined in the script, the imported library functions are defined as *global*, to make them available outside of the function scope of :code:`loadLibrary()`. This script is imported into the 
 
 .. code-block:: python
 

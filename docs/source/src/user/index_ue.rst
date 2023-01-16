@@ -101,8 +101,8 @@ Wave Generator Module
 
    wavefield/wavefield
    
-DLC Generator Module
-********************
+Design Load Case Generation
+***************************
 .. toctree::
    :maxdepth: 1
 

@@ -106,7 +106,12 @@ Import and Export Functionality
 -------------------------------
 QBlade allows the user to import and export wave fields either in the four column format described in :ref:`Import Components` or in a ``.Iwa`` format. 
 The ``.Iwa`` format contains all of the parameters necessary to define the time and frequency domain descriptions of a wave field.
-This functionality can be found in the menu toolbar below the *Wave* tab. An exemplary ``.lwa`` file is shown below:
+This functionality can be found in the menu toolbar below the *Wave* tab. 
+
+Wave Definition ASCII File
+--------------------------
+
+An exemplary ``.lwa`` file is shown below:
 
 .. code-block:: console
 
