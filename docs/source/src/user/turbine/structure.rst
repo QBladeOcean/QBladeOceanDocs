@@ -820,7 +820,7 @@ Substructure Geometry and Elements
   ...     ...       ...      
   ======= ========= ========= 
 
-* **TP_INTERFACE_POS_X** are the (x,y,z) coordinates (in m) of the position of a particular transition piece point in the substructure (transition piece number X, where _X can be omitted for all keywords if there is just a single transition piece, e.g. X=0). It can for example be the point where the substructure is connected to the tower base. For floating substructures it is defined in (x,y,z) [m] from the MSL = (0,0,0). 
+* **TP_INTERFACE_POS_X** are the (x,y,z) coordinates (in m) of the position of a particular transition piece point in the substructure (transition piece number X, where _X can be omitted for all keywords if there is just a single transition piece, e.g. X=1). It can for example be the point where the substructure is connected to the tower base. For floating substructures it is defined in (x,y,z) [m] from the MSL = (0,0,0). 
   For bottom fixed substructures, it is defined from the seabed. Note that the inertia and hydrodynamic reference points (**REF_COG_POS** and **REF_HYDRO_POS**) are always constrained to this point (see :ref:`StrDef_LPFT`). There can be several transition piece points. Further points are then defined
   by additional keywords where an underscore and a number is added to the keyword (e.g. **TP_INTERFACE_POS_2**). This allows the user to define additional inertia and hydrodynamic reference points (see :ref:`StrDef_LPFT`). All transition piece points have to be constrained to a least one joint of the substructure via the **SUBCONSTRAINTS** table.  
   The structure of the table is:
