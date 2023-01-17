@@ -1,7 +1,7 @@
 Turbine Structural Model
 ========================
 
-A structural model may be loaded into a turbine definition by setting the model to *CHRONO* and loading the structural model main file through the open file dialog. When a structural model has been assigned to a turbine the structural model files may be examined by clicking **View/Edit Struct**. The dialog that shows the file contents can also be used to quickly change parameters of the structural model, without the need to modify and save the file outside of QBlade and then importing them again. This edit functionality however doesnt cause to *reload* files from the file system, such that changing the string of a blade parameter table doesnt lead to reloading the newly defined filename. Generally, it is recommended to only use this edit functionality to quickly change a few parameters, but to setup and work with the structural model files outside of QBlade in a text editor.
+A structural model may be loaded into a turbine definition by setting the model to *CHRONO* and loading the structural model main file through the open file dialog. When a structural model has been assigned to a turbine the structural model files may be examined by clicking **View/Edit Struct**. The dialog that shows the file contents can also be used to quickly change parameters of the structural model, without the need to modify and save the file outside of QBlade and then importing them again. This edit functionality however doesn't cause to *reload* files from the file system, such that changing the string of a blade parameter table doesnt lead to reloading the newly defined filename. Generally, it is recommended to only use this edit functionality to quickly change a few parameters, but to setup and work with the structural model files outside of QBlade in a text editor.
 
 .. _fig-structural_dialog:
 .. figure:: structural_dialog.png
@@ -494,7 +494,7 @@ An exemplary substructure file for the OC4 Semi-Submersible floater is shown bel
 
 	true 	ISFLOATING //if the structure is fixed the joint coordinates are assigned in a coordinate system with O(0,0,0) at the mudline, for floaters O(0,0,0) is at the MSL and marks the floaters's NP
 
-	200		WATERDEPTH  //design depth
+	200	WATERDEPTH  //design depth
 
 	1025	WATERDENSITY // design density, used for flooded member mass calcs
 
@@ -643,15 +643,15 @@ An exemplary substructure file for the OC4 Semi-Submersible floater is shown bel
 	 2      45       4      0       2       4      	1		0		0       2     	Upper_Column_1
 	 3      46       6      0       2       4      	1		0		0       2     	Upper_Column_2
 	 4      47       8      0       2       4      	1		0		0       2     	Upper_Column_3
-	29       3      45      0       2       4      	1		0		0		2     	Upper_Column_flooded_1
-	30       5      46      0       2       4      	1		0		0		2     	Upper_Column_flooded_2
-	31       7      47      0       2       4      	1		0		0		2     	Upper_Column_flooded_3
+	29       3      45      0       2       4      	1		0		0	2     	Upper_Column_flooded_1
+	30       5      46      0       2       4      	1		0		0	2     	Upper_Column_flooded_2
+	31       7      47      0       2       4      	1		0		0	2     	Upper_Column_flooded_3
 	 5      48       3      0       3       5      	1		0		0       2     	Base_Column_1
 	 6      49       5      0       3       5      	1		0		0       2     	Base_Column_2
 	 7      50       7      0       3       5      	1		0		0       2     	Base_Column_3
-	26      42      48      0       3       5      	1		0		0		2     	Base_column_flooded_1
-	27      43      49      0       3       5      	1		0		0		2     	Base_column_flooded_2
-	28      44      50      0       3       5      	1		0		0		2     	Base_column_flooded_3
+	26      42      48      0       3       5      	1		0		0	2     	Base_column_flooded_1
+	27      43      49      0       3       5      	1		0		0	2     	Base_column_flooded_2
+	28      44      50      0       3       5      	1		0		0	2     	Base_column_flooded_3
 	23       9      42      0       3       5      	1		0		0       2   	Base_column_cap_1
 	24      10      43      0       3       5      	1		0		0       2   	Base_column_cap_2
 	25      11      44      0       3       5      	1		0		0       2   	Base_column_cap_3
@@ -676,10 +676,10 @@ An exemplary substructure file for the OC4 Semi-Submersible floater is shown bel
 	1	2.35723E+04		4.6084E-03	3.7601E-03	1.6353E+11	0.015	0.0766
 
 	MOORMEMBERS
-	ID	CONN_1						CONN_2				Len.[m]	MoorID 	HyCoID	IsBuoy	MaGrID	ElmDsc	Name
-	1	FLT_-40.868_0.0_-14.0		GRD_-837.6_0		835.5	1		1		1		0		30		Mooring1
-	2	FLT_20.434_35.393_-14.0		GRD_418.8_725.4		835.5	1		1		1		0		30		Mooring2
-	3	FLT_20.434_-35.393_-14.0	GRD_418.8_-725.4	835.5	1		1		1		0		30		Mooring3
+	ID	CONN_1				CONN_2			Len.[m]	MoorID 	HyCoID	IsBuoy	MaGrID	ElmDsc	Name
+	1	FLT_-40.868_0.0_-14.0		GRD_-837.6_0		835.5	1	1	1	0	30	Mooring1
+	2	FLT_20.434_35.393_-14.0		GRD_418.8_725.4		835.5	1	1	1	0	30	Mooring2
+	3	FLT_20.434_-35.393_-14.0	GRD_418.8_-725.4	835.5	1	1	1	0	30	Mooring3
 
 
 	TRANSITIONCYLINDER // just for visualization of the transition between floater and tower
@@ -820,7 +820,7 @@ Substructure Geometry and Elements
   ...     ...       ...      
   ======= ========= ========= 
 
-* **TP_INTERFACE_POS** are the (x,y,z) coordinates (in m) of the position of a particular transition piece point in the substructure. It can for example be the point where the substructure is connected to the tower base. For floating substructures it is defined in (x,y,z) [m] from the MSL = (0,0,0). 
+* **TP_INTERFACE_POS_X** are the (x,y,z) coordinates (in m) of the position of a particular transition piece point in the substructure (transition piece number X, where _X can be omitted for all keywords if there is just a single transition piece, e.g. X=0). It can for example be the point where the substructure is connected to the tower base. For floating substructures it is defined in (x,y,z) [m] from the MSL = (0,0,0). 
   For bottom fixed substructures, it is defined from the seabed. Note that the inertia and hydrodynamic reference points (**REF_COG_POS** and **REF_HYDRO_POS**) are always constrained to this point (see :ref:`StrDef_LPFT`). There can be several transition piece points. Further points are then defined
   by additional keywords where an underscore and a number is added to the keyword (e.g. **TP_INTERFACE_POS_2**). This allows the user to define additional inertia and hydrodynamic reference points (see :ref:`StrDef_LPFT`). All transition piece points have to be constrained to a least one joint of the substructure via the **SUBCONSTRAINTS** table.  
   The structure of the table is:
@@ -831,8 +831,8 @@ Substructure Geometry and Elements
   <Value 1> <Value 2> <Value 3>
   ========= ========= ========= 
 
-* **TP_ORIENTATION** defines the orientation of the tower base or RNA coordinate system which is connected to the **TP_INTERFACE_POS** by defining its :math:`X_t`- and :math:`Y_t`-Axis in the global coordinate system. 
-  If **TP_ORIENTATION** is not specified the default values are :math:`X_t=(1,0,0)` and :math:`Y_t=(0,1,0)`, so the tower base coordinate system is aligned with the global coordinate system. The :math:`Z_t`-Axis is evaluated from the cross-product of :math:`X_t` and :math:`Y_t`.
+* **TP_ORIENTATION_X** defines the orientation of the tower base or RNA coordinate system which is connected to the **TP_INTERFACE_POS_X** by defining its :math:`X_t`- and :math:`Y_t`-Axis in the global coordinate system. 
+  If **TP_ORIENTATION_X** is not specified the default values are :math:`X_t=(1,0,0)` and :math:`Y_t=(0,1,0)`, so the tower base coordinate system is aligned with the global coordinate system. The :math:`Z_t`-Axis is evaluated from the cross-product of :math:`X_t` and :math:`Y_t`.
 
   =============== =============== ===============
   XGlobal         YGlobal         ZGlobal
@@ -890,7 +890,7 @@ Linear Potential Flow-Related Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 These parameters are related to the :doc:`../../theory/hydrodynamics/lpft/lpft` (LPFT). :numref:`fig-substruc-lpft-ref` shows three important keywords that are used for the implementation of the LPFT on a potential flow body:
-The transition piece point **TP_INTERFACE_POS** the inertia reference point **REF_COG_POS** and the hydrodynamic reference point **REF_HYDRO_POS**. Note that the other keywords in this section are used to specify the forces that act on these reference points.
+The transition piece point **TP_INTERFACE_POS_X** the inertia reference point **REF_COG_POS_X** and the hydrodynamic reference point **REF_HYDRO_POS_X**. Note that the other keywords in this section are used to specify the forces that act on these reference points.
 As explained above, the inertia and hydrodynamic reference points are always constrained to the transition piece point. 
 
 .. _fig-substruc-lpft-ref:
@@ -906,7 +906,7 @@ In order to include multiple bodies, each body has to have its own set of keywor
 first body, additional bodies are defined by adding an underscore and a number after the keyword. So, for example, if a substructure has two bodies that use the linear potential flow theory,
 the second body would be defined by adding a second transition piece point **TP_INTERFACE_POS_2**  with its corresponding inertia point denoted as **REF_COG_POS_2**, a mass matrix denoted as **SUB_MASS_2** and so on. 
 
-* **REF_COG_POS** defines the (x,y,z) position (in m) of a inertia point of the system (i.e. the center of gravity). It is in this position that the **SUB_MASS** matrix is evaluated.
+* **REF_COG_POS_X** defines the (x,y,z) position (in m) of a inertia point of the system (i.e. the center of gravity). It is in this position that the **SUB_MASS** matrix is evaluated.
   This point is automatically constrained to the transition piece, defined by **TP_INTERFACE_POS**. It has the following format:
   
   ========= ========= =========
@@ -915,7 +915,7 @@ the second body would be defined by adding a second transition piece point **TP_
   <Value 1> <Value 2> <Value 3>
   ========= ========= =========
 
-* **SUB_MASS** defines a complete 6 by 6 mass and rotational inertia matrix that is placed in the location defined by the **REF_COG_POS** keyword.
+* **SUB_MASS_X** defines a complete 6 by 6 mass and rotational inertia matrix that is placed in the location defined by the **REF_COG_POS_X** keyword.
   The units are kg for the mass and kg m^2 for the inertias. An example of this matrix is shown below:
 
   ========= ========= ========= ============== ============== ==============
@@ -932,9 +932,9 @@ the second body would be defined by adding a second transition piece point **TP_
   0         0         0         0              0              :math:`I_{zz}`
   ========= ========= ========= ============== ============== ==============
 
-* **REF_HYDRO_POS** defines the (x,y,z) position (in m) of a hydrodynamic evaluation point of the system (i.e. where the lumped hydrodynamic forces are applied). 
-  It is in this position that the hydrodynamic matrices (e.g. **SUB_HYDROSTIFFNESS**, **SUB_HYDRODAMPING**, **SUB_HYDROADDEDMASS**, etc.) and the radiation and excitation forces are applied.
-  This point is directly constrained to the **TP_INTERFACE_POS** point, so no additional constraints are necessary to attach this point to the substructure.
+* **REF_HYDRO_POS_X** defines the (x,y,z) position (in m) of a hydrodynamic evaluation point of the system (i.e. where the lumped hydrodynamic forces are applied). 
+  It is in this position that the hydrodynamic matrices (e.g. **SUB_HYDROSTIFFNESS_X**, **SUB_HYDRODAMPING_X**, **SUB_HYDROADDEDMASS_X**, etc.) and the radiation and excitation forces are applied.
+  This point is directly constrained to the **TP_INTERFACE_POS_X** point, so no additional constraints are necessary to attach this point to the substructure.
   It has the following format:
 
   ========= ========= =========
@@ -943,7 +943,7 @@ the second body would be defined by adding a second transition piece point **TP_
   <Value 1> <Value 2> <Value 3>
   ========= ========= =========
 
-* **SUB_HYDROSTIFFNESS** defines a complete 6 by 6 stiffness matrix that is evaluated in the location defined by the **REF_HYDRO_POS** keyword.
+* **SUB_HYDROSTIFFNESS_X** defines a complete 6 by 6 stiffness matrix that is evaluated in the location defined by the **REF_HYDRO_POS_X** keyword.
   The units are N/m, N/rad, Nm/m, Nm/rad, depending on the entry. The general form of this matrix is shown below:
 
   ============== ============== ============== ============== ============== ==============
@@ -960,32 +960,32 @@ the second body would be defined by adding a second transition piece point **TP_
   :math:`K_{61}` :math:`K_{62}` :math:`K_{63}` :math:`K_{64}` :math:`K_{65}` :math:`K_{66}`
   ============== ============== ============== ============== ============== ==============
 
-* **SUB_HYDRODAMPING** defines a complete 6 by 6 damping matrix that is evaluated in the location defined by the **REF_HYDRO_POS** keyword.
-  The units are N/(m/s), N/(rad/s), Nm/(m/s) or Nm/(rad/s), depending on the entry. This matrix has the same form as the **SUB_HYDROSTIFFNESS** matrix.
+* **SUB_HYDRODAMPING_X** defines a complete 6 by 6 damping matrix that is evaluated in the location defined by the **REF_HYDRO_POS_X** keyword.
+  The units are N/(m/s), N/(rad/s), Nm/(m/s) or Nm/(rad/s), depending on the entry. This matrix has the same form as the **SUB_HYDROSTIFFNESS_X** matrix.
 
-* **SUB_HYDROQUADDAMPING** defines a complete 6 by 6 quadratic damping matrix that is evaluated in the location defined by the **REF_HYDRO_POS** keyword.
-  The units are N/(m/s)^2, N/(rad/s)^2, Nm/(m/s)^2, Nm/(rad/s)^2, depending on the entry. This matrix has the same form as the **SUB_HYDROSTIFFNESS** matrix.
+* **SUB_HYDROQUADDAMPING_X** defines a complete 6 by 6 quadratic damping matrix that is evaluated in the location defined by the **REF_HYDRO_POS_X** keyword.
+  The units are N/(m/s)^2, N/(rad/s)^2, Nm/(m/s)^2, Nm/(rad/s)^2, depending on the entry. This matrix has the same form as the **SUB_HYDROSTIFFNESS_X** matrix.
 
-* **SUB_HYDROADDEDMASS** defines a complete 6 by 6 added mass matrix that is evaluated in the location defined by the **REF_HYDRO_POS** keyword.
-  The units are kg. This matrix has the same form as the **SUB_HYDROSTIFFNESS** matrix.
+* **SUB_HYDROADDEDMASS_X** defines a complete 6 by 6 added mass matrix that is evaluated in the location defined by the **REF_HYDRO_POS** keyword.
+  The units are kg. This matrix has the same form as the **SUB_HYDROSTIFFNESS_X** matrix.
 
-* **SUB_CONSTFORCE** applies a constant force (and/or torque) to the **REF_HYDRO_POS** point. It can be used to e.g. model the constant buoyancy force acting on the floater in its equilibrium position.
+* **SUB_CONSTFORCE_X** applies a constant force (and/or torque) to the **REF_HYDRO_POS_X** point. It can be used to e.g. model the constant buoyancy force acting on the floater in its equilibrium position.
   The units are N or Nm, depending on the entry.
   
   ============== ============== ============== ============== ============== ==============
   :math:`F_{1}`  :math:`F_{2}`  :math:`F_{3}`  :math:`F_{4}`  :math:`F_{5}`  :math:`F_{6}`
   ============== ============== ============== ============== ============== ==============
 
-* **POT_RAD_FILE** defines the file where the radiation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file.
+* **POT_RAD_FILE_X** defines the file where the radiation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file.
   QBlade currently supports radiation files in the WAMIT, NEMOH and BEMUse formats.
 
-* **POT_EXC_FILE** defines the file where the excitation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file.
+* **POT_EXC_FILE_X** defines the file where the excitation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file.
   QBlade currently supports excitation files in the WAMIT, NEMOH and BEMUse formats.
   
-* **POT_DIFF_FILE** defines the file where the second-order difference-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file. 
+* **POT_DIFF_FILE_X** defines the file where the second-order difference-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file. 
   QBlade currently supports difference-frequency files only in the WAMIT format.
 
-* **POT_SUM_FILE** defines the file where the second-order sum-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file. 
+* **POT_SUM_FILE_X** defines the file where the second-order sum-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file. 
   QBlade currently supports sum-frequency files only in the WAMIT format.
 
 * **USE_RADIATION** is a flag that enables the calculation of the radiation loads on all potential flow bodies.
