@@ -260,6 +260,8 @@ After the QBlade library has been loaded a simulation object is imported and a s
 
 
 .. code-block:: python
+	:linenos:
+	:caption: : sampleScript.py
 
 	from ctypes import *
 	import QBladeLibImport as QBLIB
@@ -325,6 +327,8 @@ Sample Script Loading the SLI in Python
 The script *QBladeLibImport.py* which loads the QBlade library into Python and imports its functionality is shown below. Since the QBlade library is loaded upon calling the function :code:`loadLibrary()` defined in the script, the imported library functions are defined as *global*, to make them available outside of the function scope of :code:`loadLibrary()`. This script is imported into the 
 
 .. code-block:: python
+	:linenos:
+	:caption: : QBladeLibImport.py
 
 	from ctypes import *
 

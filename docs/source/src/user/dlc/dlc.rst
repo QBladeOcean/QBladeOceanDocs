@@ -22,7 +22,12 @@ DLC Object Generation (in GUI)
 
 This feature allows to generate a DLC object, which contains the definitions of all simulation timeseries for a specific DLC number from a specific IEC standard. After a DLC object has been generated, all simulations belonging to the DLC object can either be auto-generated as *Simulation Definition Objects* within QBlade or be exported as *Simulation Definition ASCII Files*.
 
+.. _fig-dlc_diag:
+.. figure:: dlc_diag.png
+   :align: center
+   :alt: The DLC Generator Dialog.
 
+   The DLC Generator Dialog.
 
 Template
 --------
@@ -82,12 +87,61 @@ Stored Sim Data
 
 In this section the user can choose from which timestep and what kind of data should be stored for each generated simulation. Typically the initial transient time is discarded from each DLC run.
    
-.. _fig-dlc_diag:
-.. figure:: dlc_diag.png
-   :align: center
-   :alt: The DLC Generator Dialog.
+Offshore DLC Generation in the GUI
+----------------------------------
 
-   The DLC Generator Dialog.
+When IEC **61400-3-1** or **61400-3-2** is selected in the *IEC Design Load Case Generator* dialog, the user is asked to choose a *Wave Template* and to provide a *DLC List*, while the *DLC Parameter Range* section is hidden from view. The *Wave Template* is a *Linear Wave Object* in QBlade, which serves as the template for this particular DLC. E.g. the wave template contains information about the the spectrum, spectral discretization etc. and only the key parameters for wave height, wave period or wave direction will be adjusted for each simulation definition that will be generated from the Design Load Case Generator. The data table that is required then contains all information about the parameter variations for this DLC (that was previously input into the *Parameter Range* section). 
+
+The format of the DLC table that is required is equivalent as described in :ref:`DLC Generation via Spreadsheets`, with the exception that the entries for a few columns in this table are not required, while others can be filled in automatically by QBlade according to the respective IEC standard. 
+
+The table columns that are not required and must be filled out with the keyword *none* are:
+
+3 **Master Simulation** : The simulation template is not required, as all needed data is defined within the *IEC Design Load Case Generator* already. Fill this column with the keyword *none*.
+   
+10 **Hub Height Input File** : The hub height data is automatically generated within QBlade. Fill this column with the keyword *none*.
+   
+11 **TurbSim Template** : The TurbSim template file is not required, as all needed data is defined within the *IEC Design Load Case Generator* already. Fill this column with the keyword *none*.
+
+16 **Wave Template** : The Linear Wave template file is not required, as a linear wave object that serves as a template is already defined within the *IEC Design Load Case Generator*. Fill this column with the keyword *none*.
+
+The following columns can be filled with the keyword *auto* so that QBlade will automatically choose the correct values according to the selected IEC standard:
+
+17 **Near Surface Current Velocity** : The velocity of the near surface current in [m/s], see :ref:`Currents`. The automatic near surface current velocity is 1% of the wind velocity.
+
+18 **Near Surface Current Direction** : The direction of the near surface current in [°], see :ref:`Currents`. The automatic near surface direction is aligned with the wind direction.
+
+19 **Near Surface Current Depth** : The depth of the near surface current in [m], see :ref:`Currents`. The automatic depth is 20m.
+
+21 **Sub Surface Current Direction** : The direction of the sub surface current in [°], see :ref:`Currents`. The automatic sub surface current direction is aligned with the wave direction.
+
+22 **Sub Surface Current Exponent** : The exponent of the sub surface current velocity profile, see :ref:`Currents`. The automatic value for the exponent is 1/7.
+
+Below is an example for such a DLC table, where some entries are replaced with the *none* and *auto* keywords. More information in QBlade DLC tables is found in the section :ref:`DLC Definition via Spreadsheets`.
+
+.. code-block:: console
+
+	QB_HEXAFLOAT_LC12_s0_ws5_hs1_tp6_mis-30_i0_y0		2200	none	none	5	0	0	0.14	0	none	250	1	6	-30		0	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s1_ws5_hs1_tp6_mis30_i0_y0		2200	none	none	5	0	0	0.14	1	none	250	1	6	30		1	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s2_ws5_hs1_tp8_mis-150_i0_y0		2200	none	none	5	0	0	0.14	2	none	250	1	8	-150	2	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s3_ws5_hs1_tp8_mis-90_i0_y0		2200	none	none	5	0	0	0.14	3	none	250	1	8	-90		3	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s4_ws5_hs1_tp8_mis-30_i0_y0		2200	none	none	5	0	0	0.14	4	none	250	1	8	-30		4	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s5_ws5_hs1_tp8_mis30_i0_y0		2200	none	none	5	0	0	0.14	5	none	250	1	8	30		5	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s6_ws5_hs1_tp8_mis90_i0_y0		2200	none	none	5	0	0	0.14	6	none	250	1	8	90		6	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s7_ws5_hs1_tp8_mis150_i0_y0		2200	none	none	5	0	0	0.14	7	none	250	1	8	150		7	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s8_ws5_hs1_tp10_mis-150_i0_y0		2200	none	none	5	0	0	0.14	8	none	250	1	10	-150	8	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s9_ws5_hs1_tp10_mis-90_i0_y0		2200	none	none	5	0	0	0.14	9	none	250	1	10	-90		9	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s10_ws5_hs1_tp10_mis-30_i0_y0		2200	none	none	5	0	0	0.14	10	none	250	1	10	-30		10	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s11_ws5_hs1_tp10_mis30_i0_y0		2200	none	none	5	0	0	0.14	11	none	250	1	10	30		11	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s12_ws5_hs1_tp10_mis90_i0_y0		2200	none	none	5	0	0	0.14	12	none	250	1	10	90		12	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s13_ws5_hs1_tp10_mis150_i0_y0		2200	none	none	5	0	0	0.14	13	none	250	1	10	150		13	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s14_ws5_hs1_tp12_mis-150_i0_y0	2200	none	none	5	0	0	0.14	14	none	250	1	12	-150	14	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s15_ws5_hs1_tp12_mis-90_i0_y0		2200	none	none	5	0	0	0.14	15	none	250	1	12	-90		15	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s16_ws5_hs1_tp12_mis-30_i0_y0		2200	none	none	5	0	0	0.14	16	none	250	1	12	-30		16	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s17_ws5_hs1_tp12_mis30_i0_y0		2200	none	none	5	0	0	0.14	17	none	250	1	12	30		17	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s18_ws5_hs1_tp12_mis90_i0_y0		2200	none	none	5	0	0	0.14	18	none	250	1	12	90		18	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s19_ws5_hs1_tp12_mis150_i0_y0		2200	none	none	5	0	0	0.14	19	none	250	1	12	150		19	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s20_ws5_hs1_tp14_mis30_i0_y0		2200	none	none	5	0	0	0.14	20	none	250	1	14	30		20	none	auto	auto	auto	0	auto	auto	0	0	0	0	0	0	0	0	0	0	0
+
    
 Exporting DLC Definitions
 *************************
@@ -101,10 +155,17 @@ After a *DLC Definition Object* has been defined through the dialog, all individ
 
    Generation of DLC Simulations from a DLC definition.
    
-DLC Generation via Spreadsheets
+DLC Definition via Spreadsheets
 *******************************
 
 Alternatively, to using the GUI based dialog, DLC's may also be generated, based on a spreadsheet software. This gives the user full controll over each aspect of the DLC definition and is especially usefull in the DLC generation for offshore wind turbines where wind and wave distributions, their misalignement and sea currents need to be combined in often unique ways. 
+
+.. _fig-dlc_spread:
+.. figure:: spreadsheet.png
+   :align: center
+   :alt: A DLC spreadsheet.
+
+   Closeup view of a DLC spreadsheet showing the different column entries.
 
 The general methodology, when generating DLC's via a spreadsheet, is to define simulation definition (.sim), wind (.inp) and wave (.lwa) template files and only to define and modify the variable parameters in a spreadsheet. When the spreadsheet is finished and all entries are defined it is possible to either import all defined simulation into QBlade as *Simulation Definition Objects* or to automatically generate *Simulation Definition ACII Files* from the spreadsheet.
 
@@ -177,3 +238,58 @@ The definition of a single simulation requires 33 entries (columns) in a spreads
 32 **Initial FLoater Y Rotation** : The initial rotation of the floating wind turbine around Y, in [°]
 
 33 **Initial FLoater Z Rotation** : The initial rotation of the floating wind turbine around Z, in [°]
+
+DLC Generation via Spreadsheets
+*******************************
+
+Once all DLC's have been defined in the spreadsheet the simulations can either be imported into QBlade or exported as *Simulation Definition ASCII Files*. For either of those options the spreadsheet table containing all columns and rows, excluding any header, has to be pasted into an ASCII file, see the code-block below for an example.
+
+.. code-block:: console
+
+	QB_HEXAFLOAT_LC12_s0_ws5_hs1_tp6_mis-30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	0	DLC1.2_NTM.inp	250	1	6	-30		0	0.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s1_ws5_hs1_tp6_mis30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	1	DLC1.2_NTM.inp	250	1	6	30		1	1.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s2_ws5_hs1_tp8_mis-150_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	2	DLC1.2_NTM.inp	250	1	8	-150	2	2.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s3_ws5_hs1_tp8_mis-90_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	3	DLC1.2_NTM.inp	250	1	8	-90		3	3.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s4_ws5_hs1_tp8_mis-30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	4	DLC1.2_NTM.inp	250	1	8	-30		4	4.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s5_ws5_hs1_tp8_mis30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	5	DLC1.2_NTM.inp	250	1	8	30		5	5.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s6_ws5_hs1_tp8_mis90_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	6	DLC1.2_NTM.inp	250	1	8	90		6	6.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s7_ws5_hs1_tp8_mis150_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	7	DLC1.2_NTM.inp	250	1	8	150		7	7.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s8_ws5_hs1_tp10_mis-150_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	8	DLC1.2_NTM.inp	250	1	10	-150	8	8.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s9_ws5_hs1_tp10_mis-90_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	9	DLC1.2_NTM.inp	250	1	10	-90		9	9.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s10_ws5_hs1_tp10_mis-30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	10	DLC1.2_NTM.inp	250	1	10	-30		10	10.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s11_ws5_hs1_tp10_mis30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	11	DLC1.2_NTM.inp	250	1	10	30		11	11.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s12_ws5_hs1_tp10_mis90_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	12	DLC1.2_NTM.inp	250	1	10	90		12	12.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s13_ws5_hs1_tp10_mis150_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	13	DLC1.2_NTM.inp	250	1	10	150		13	13.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s14_ws5_hs1_tp12_mis-150_i0_y0	2200	Hexafloat_Template.sim	none	5	0	0	0.14	14	DLC1.2_NTM.inp	250	1	12	-150	14	14.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s15_ws5_hs1_tp12_mis-90_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	15	DLC1.2_NTM.inp	250	1	12	-90		15	15.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s16_ws5_hs1_tp12_mis-30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	16	DLC1.2_NTM.inp	250	1	12	-30		16	16.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s17_ws5_hs1_tp12_mis30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	17	DLC1.2_NTM.inp	250	1	12	30		17	17.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s18_ws5_hs1_tp12_mis90_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	18	DLC1.2_NTM.inp	250	1	12	90		18	18.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s19_ws5_hs1_tp12_mis150_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	19	DLC1.2_NTM.inp	250	1	12	150		19	19.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	QB_HEXAFLOAT_LC12_s20_ws5_hs1_tp14_mis30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	20	DLC1.2_NTM.inp	250	1	14	30		20	20.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+
+Now the easiest way to generate all simulations defined in the table above is to place the table and all associated templates (.sim file, .inp file, .lwa file) into the same folder. In this way we can simply specify the templates by their respective filename, without the need to also define their paths, since everything is located in the same directory. 
+
+Importing DLC's from a Spreadsheet
+----------------------------------
+
+To import all simulation defined in a DLC table into QBlade's GUI simply enter the Simulation module and select *Import Simulations from a DLC Table*.
+
+.. _fig-dlc_imp:
+.. figure:: import_DLC.png
+   :align: center
+   :alt: Import a DLC Table.
+
+   Import a DLC Table from the Simulation Menu.
+   
+Exporting DLC's from a Spreadsheet
+----------------------------------
+
+To export all simulation defined in a DLC table into *Simulation Definition ASCII Files* for batch evaluation in QBlade's CLI (see :ref:`Sample CLI Call to Start a Batch Run`) select *Generate (.sim) Files from a DLC Table*.
+
+.. _fig-dlc_exp:
+.. figure:: export_DLC.png
+   :align: center
+   :alt: Export a DLC Table.
+
+   Export a DLC Table from the Simulation Menu.
