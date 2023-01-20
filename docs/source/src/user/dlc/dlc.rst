@@ -158,7 +158,7 @@ After a *DLC Definition Object* has been defined through the dialog, all individ
 DLC Definition via Spreadsheets
 *******************************
 
-Alternatively, to using the GUI based dialog, DLC's may also be generated, based on a spreadsheet software. This gives the user full controll over each aspect of the DLC definition and is especially usefull in the DLC generation for offshore wind turbines where wind and wave distributions, their misalignement and sea currents need to be combined in often unique ways. 
+Alternatively, to using the GUI based dialog, DLC's may also be generated, based on a spreadsheet software. This gives the user full controll over each aspect of the DLC definition and is especially usefull in the DLC generation for offshore wind turbines where wind and wave distributions, their misalignement and sea currents need to be combined in often unique ways. An exemplary spreadsheet can be found here: https://qblade.org/assets/DLC_Table.xlsx
 
 .. _fig-dlc_spread:
 .. figure:: spreadsheet.png
