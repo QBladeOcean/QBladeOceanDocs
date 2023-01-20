@@ -274,7 +274,7 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	import QBladeLibImport as QBLIB
 
 	#loading the QBlade DLL from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
-	QBLIB.loadLibrary("../QBladeEE_2.0.5.2.dll")    
+	QBLIB.loadLibrary("../QBladeCE_2.0.5.2.dll")    
 
 	#creation of a QBlade instance from the DLL
 	QBLIB.createInstance(1,32)
