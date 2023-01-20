@@ -258,9 +258,9 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 Sample Script Running the SLI in Python
 ***************************************
-The following code example (*sampleScript.py*) is an example for a light weight Python script that utiizes the QBlade SIL interface. There are many ways to improve this, e.g. the library could be loaded into multiple seperate processes for parallelization and shophisticated alorithms could be implemented instead of using a standard controller. This exemplary script only uses a small amount of the functionality that is exported by the QBlade library for purely illustrative purposes. 
+The following code example (*sampleScript.py*) is an example for a light weight Python script that utilizes the QBlade SIL interface. There are many ways to improve this, e.g. the library could be loaded into multiple separate processes for parallelization and sophisticated algorithms could be implemented instead of using a standard controller. This exemplary script only uses a small amount of the functionality that is exported by the QBlade library for purely illustrative purposes. 
 
-In this Python example script the library is loaded by calling the script *QBladeLIBImport.py*, which handles the library import. After *QBladeLIBImport.py* has been imported (:code:`import QBladeLIBImport as QBLIB`) and the QBlade library has been loaded :code:`	QBLIB.loadLibrary("./QBladeCE_2.0.5.2.dll")` any function of the QBlade library can be accessed by calling :code:`QBLIB.functionXY()`.
+In this Python example script the library is loaded by calling the script *QBladeLIBImport.py*, which handles the library import. After *QBladeLIBImport.py* has been imported (:code:`import QBladeLIBImport as QBLIB`) and the QBlade library has been loaded :code:`	QBLIB.loadLibrary("./QBladeCE_2.0.5.2.dll")` any function of the QBlade library can be accessed by calling :code:`QBLIB.function_XYZ()`. All lines of code that are needed to load the QBlade library into python are highlighted in the example below.
 
 After the QBlade library has been loaded a simulation object is imported and a simulation is started over 500 timesteps. During the simulation loop different data is obtained from the turbine simulation. The turbine controller that is defined in the simulation object is advanced and its signals are passed to the turbine actuators. After the simulation loop has finished the simulation is stored into a project file, for later inspection, and the library is unloaded from python.
 
@@ -274,14 +274,14 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	import QBladeLibImport as QBLIB
 
 	#loading the QBlade DLL from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
-	QBLIB.loadLibrary("../QBladeCE_2.0.5.2.dll")    
+	QBLIB.loadLibrary("../QBladeEE_2.0.5.2.dll")    
 
 	#creation of a QBlade instance from the DLL
 	QBLIB.createInstance(1,32)
 
 	#loading a project or sim-file, in this case the DTU_10MW_Demo project or simulation definition file
 	#QBLIB.loadSimDefinition(b"./DTU_10MW_Demo.sim") #uncomment this line to load a simulation definition file
-	QBLIB.loadProject(b"./DTU_10MW_Demo.qpr") 
+	QBLIB.loadProject(b"./NREL_5MW_Sample.qpr") 
 
 	#initializing the sim and ramp-up phase, call before starting the simulation loop
 	QBLIB.initializeSimulation()
@@ -300,8 +300,9 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		#uncomment the next line to try changing the position of the turbine dynamically
 		#QBLIB.setTurbinePosition_at_num(-0.2*i,0,0,0,i*0.1,i*0.1,0) 
 		
-		#example how to extract a variable by name from the simulation, call as often as needed with different variable names
+		#example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
 		rpm = QBLIB.getCustomData_at_num(b"Rotational Speed [rpm]",0,0) 
+		time = QBLIB.getCustomData_at_num(b"Time [s]",c_double(0), c_int(0)) #example how to extract a variable by name from the simulation
 
 		#assign the c-type double array 'ctr_vars' with length [6], initialized with zeros
 		ctr_vars = (c_double * 5)(0); 
@@ -312,15 +313,16 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		QBLIB.setControlVars_at_num(ctr_vars,0) 
 		
 		#print out a few of the recorded data, in this case torque, tower bottom force along z (weight force) and rpm
-		print(ctr_vars[0],loads[2],rpm)
+		print("Time:","{:3.2f}".format(time),"  Torque:","{:1.4e}".format(ctr_vars[0]),"    RPM:","{:2.2f}".format(rpm),"   Pitch:","{:2.2f}".format(ctr_vars[2]))
+
 
 		#advance the simulation
 		QBLIB.advanceTurbineSimulation() 
-	
+
 	#the simulation loop ends here after all 'number_of_timesteps have been evaluated
 		
 	#storing the finished simulation in a project as DTU_10MW_Demo_finished.qpr, you can open this file to view the results of the simulation inside QBlade's GUI
-	QBLIB.storeProject(b"./DTU_10MW_Demo_finished.qpr")
+	QBLIB.storeProject(b"./NREL_5MW_Sample_completed.qpr")
 
 	#closing the QBlade instance to free memory
 	QBLIB.closeInstance()
