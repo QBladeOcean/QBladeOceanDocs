@@ -158,14 +158,14 @@ After a *DLC Definition Object* has been defined through the dialog, all individ
 DLC Definition via Spreadsheets
 *******************************
 
-Alternatively, to using the GUI based dialog, DLC's may also be generated, based on a spreadsheet software. This gives the user full controll over each aspect of the DLC definition and is especially usefull in the DLC generation for offshore wind turbines where wind and wave distributions, their misalignement and sea currents need to be combined in often unique ways. An exemplary spreadsheet can be found here: https://qblade.org/assets/DLC_Table.xlsx
+Alternatively, to using the GUI based dialog, DLC's may also be generated, based on a spreadsheet software. This gives the user full controll over each aspect of the DLC definition and is especially usefull in the DLC generation for offshore wind turbines where wind and wave distributions, their misalignement and sea currents need to be combined in often unique ways.
 
 .. _fig-dlc_spread:
 .. figure:: spreadsheet.png
    :align: center
    :alt: A DLC spreadsheet.
 
-   Closeup view of a DLC spreadsheet showing the different column entries.
+   Closeup view of a DLC spreadsheet showing the different column entries. An exemplary spreadsheet Excel file can be downloaded here: https://qblade.org/assets/DLC_Table.xlsx.
 
 The general methodology, when generating DLC's via a spreadsheet, is to define simulation definition (.sim), wind (.inp) and wave (.lwa) template files and only to define and modify the variable parameters in a spreadsheet. When the spreadsheet is finished and all entries are defined it is possible to either import all defined simulation into QBlade as *Simulation Definition Objects* or to automatically generate *Simulation Definition ACII Files* from the spreadsheet.
 
