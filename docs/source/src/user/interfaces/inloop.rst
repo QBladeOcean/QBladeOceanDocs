@@ -35,7 +35,8 @@ Interface Function Definitions
 	void loadProject(char *str)
 	void loadSimDefinition(char *str)
 	void initializeSimulation()
-	
+	void runFullSimulation()
+
 	void advanceController_at_num(double *vars, int num = 0)
 	void advanceTurbineSimulation()
 
@@ -81,6 +82,11 @@ In the following, the functionality that is exported from the QBlade dll or shar
 :code:`void initializeSimulation()`
 	
 	This function initializes the simulation, e.g. the simulation is reset and structural ramp-up is carried out.
+	
+:code:`void runFullSimulation()`
+	
+	This function runs all timesteps for all turbines of the simulation as defined in the simulation object. This is equivalent to pressing the *Start Simulation* button in QBlade`s GUI. This function needs to be called after :code:`void initializeSimulation()`. When calling this function it is not possible to *interact* with the simulation before it is finished. To interact with the simulation you need to create your own simulation loop and call the functions :code:`void advanceController_at_num()` and :code:`void advanceTurbineSimulation()` at every timestep.
+
 
 :code:`void advanceController_at_num(double *vars, int num = 0)`
 	
@@ -262,12 +268,13 @@ After the QBlade library has been loaded a simulation object is imported and a s
 .. code-block:: python
 	:linenos:
 	:caption: : sampleScript.py
-
+	:emphasize-lines: 1, 2, 5
+	
 	from ctypes import *
 	import QBladeLibImport as QBLIB
 
-	#loading the QBlade DLL, if calling this script not from the script folder directly you need to use an absolute path instead!
-	QBLIB.loadLibrary("./QBladeCE_2.0.5.2.dll")    
+	#loading the QBlade DLL from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
+	QBLIB.loadLibrary("../QBladeCE_2.0.5.2.dll")    
 
 	#creation of a QBlade instance from the DLL
 	QBLIB.createInstance(1,32)
@@ -460,3 +467,7 @@ The script *QBladeLibImport.py* which loads the QBlade library into Python and i
 		setPowerLawWind = QB_LIB.setPowerLawWind
 		setPowerLawWind.argtypes = [c_double, c_double, c_double, c_double, c_double]
 		setPowerLawWind.restype = c_void_p
+		
+		global runFullSimulation
+		runFullSimulation = QB_LIB.runFullSimulation
+		runFullSimulation.restype = c_void_p
