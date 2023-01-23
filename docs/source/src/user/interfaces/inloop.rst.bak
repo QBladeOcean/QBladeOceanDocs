@@ -209,7 +209,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	
 	* vars[0] = rotational speed [rad/s]
 	* vars[1] = power [W]
-	* vars[2] = Abs HH wind velocity [m/s]
+	* vars[2] = HH wind velocity [m/s]
 	* vars[3] = yaw angle [deg]
 	* vars[4] = pitch blade 1 [deg]
 	* vars[5] = pitch blade 2 [deg]
@@ -247,9 +247,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* vars[37] = azimuthal position of the HSS [deg]
 	* vars[38] = HSS torque [Nm]
 	* vars[39] = wind speed at hub height [m/s]
-	* vars[40] = HH wind velocity x [m/s]
-	* vars[41] = HH wind velocity y [m/s]
-	* vars[42] = HH wind velocity z [m/s]
+	* vars[40] = horizontal inflow angle [deg]
 
 
 :code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
