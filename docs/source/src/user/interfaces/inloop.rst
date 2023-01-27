@@ -377,7 +377,7 @@ The script *QBladeLibImport.py* which loads the QBlade library into Python and i
 
 		global getWindspeed
 		getWindspeed = QB_LIB.getWindspeed
-		getWindspeed.argtypes = [c_double, c_double, c_double, c_double * 6]
+		getWindspeed.argtypes = [c_double, c_double, c_double, c_double * 3]
 		getWindspeed.restype = c_void_p
 
 		global storeProject
