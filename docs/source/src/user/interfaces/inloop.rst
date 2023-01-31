@@ -29,7 +29,7 @@ In general, the high level overview of the SLI interface and the simulation loop
 Quick Start with the SIL Interface in Python
 ************************************************
 
-To test the SIL interface in Python you can simply start the python script :code:`sampleScript.py`, which you find in the folder :code:`\PythonInterface` of the QBlade directory. This script imports the QBlade library, sets up a simulation by importing a QBlade project file (.qpr) and then runs a simulation loop while printing out some results. This sample is just meant as a quick demo on how to interface with QBlade in Python and does not serve any other particular purpose. Adapt as needed. 
+To test the SIL interface in Python you can simply start the python script :code:`sampleScript.py`, which you find in the folder :code:`\PythonInterface` of the QBlade directory. This script imports the QBlade library, sets up a simulation by importing a QBlade project file (.qpr) and then runs a simulation loop while printing out some results and finally saving the finished simulation as a new project file. This sample is just meant as a quick demo on how to interface with QBlade in Python and does not serve any other particular purpose. Adapt as needed. 
 
 Details on the sample script: :ref:`Sample Script Running the SLI in Python`
 
