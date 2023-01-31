@@ -3,9 +3,9 @@ Software in Loop (SIL) Overview
    
 The Software in Loop interface in QBlade provides an easy way of controlling the whole simulation loop of a wind turbine and enable cosimulation within other software frameworks or scripting languages, such as Python or Matlab. To enable this functionality QBlade is compiled as a Dynamic Link Library (.dll, Windows) or as a Shared Object (.so, Unix) and the relevant functionality is exported into an interface.
 
-Through the different functions that are exported the user can explicitly import QBlade projects (.qpr) or Simulation Definition Files (.sim) and then progress the simulation incrementally in time by calling the :code:`advanceTurbineSimulation()` function. At every timestep it is possible to inquire any variable of the simulation and control various aspects of the simulation in response, such as changing the inflow conditions, changing the position and orientation of the turbine or controlling the various control actuators (pitch, yaw, generator torque) of the wind turbine. A possible application for the SIL interface is a cosimulation, where the turbine floater can be modeled within a specialized software that is coupled with QBlade through force/position intercommunication. Instead of modelling the floater, the cosimulation could also model the drivetrain, controller or generator in a more sphisticated way. Another application is controller development, where the controller can run in a scripting language (such as Simulink), receiving custom signals from the simulation and controlling the turbine actuators in response. When running a multi-turbine simulation within the SLI interface the user may control each simulated turbine individually, enabling the modeling of global wind park controllers.
+Through the different functions that are exported the user can explicitly import QBlade projects (.qpr) or Simulation Definition Files (.sim) and then progress the simulation incrementally in time by calling the :code:`advanceTurbineSimulation()` function. At every timestep it is possible to inquire any variable of the simulation and control various aspects of the simulation in response, such as changing the inflow conditions, changing the position and orientation of the turbine or controlling the various control actuators (pitch, yaw, generator torque) of the wind turbine. A possible application for the SIL interface is a cosimulation, where the turbine floater can be modeled within a specialized software that is coupled with QBlade through force/position intercommunication. Instead of modelling the floater, the cosimulation could also model the drivetrain, controller or generator in a more sphisticated way. Another application is controller development, where the controller can run in a scripting language (such as Simulink), receiving custom signals from the simulation and controlling the turbine actuators in response. When running a multi-turbine simulation within the SIL interface the user may control each simulated turbine individually, enabling the modeling of global wind park controllers.
 
-In general, the high level overview of the SLI interface and the simulation loop, when running the SLI in an external language, looks as follows:
+In general, the high level overview of the SIL interface and the simulation loop, when running the SIL in an external language, looks as follows:
 
 .. code-block:: console
 
@@ -31,15 +31,17 @@ Quick Start with the SIL Interface in Python
 
 To test the SIL interface in Python you can simply start the python script :code:`sampleScript.py`, which you find in the folder :code:`\PythonInterface` of the QBlade directory. This script imports the QBlade library, sets up a simulation by importing a QBlade project file (.qpr) and then runs a simulation loop while printing out some results and finally saving the finished simulation as a new project file. This sample is just meant as a quick demo on how to interface with QBlade in Python and does not serve any other particular purpose. Adapt as needed. 
 
-Details on the sample script: :ref:`Sample Script Running the SLI in Python`
+Details on the sample script: :ref:`Sample Script Running QBlade's SIL Library with Python`
 
-Details on the script that loads QBlade into Python: :ref:`Sample Script Loading the SLI in Python`. 
+Details on the script that loads QBlade into Python: :ref:`Sample Script Importing QBlade's SIL Library into Python`. 
 
 	
 Interface Function Definitions
 ******************************
 
-.. code-block:: console
+.. code-block:: c
+
+	#all variables and return values are c data types
 
 	void createInstance(int clDevice = 0, int groupSize = 32)
 	void loadProject(char *str)
@@ -72,8 +74,8 @@ Interface Function Definitions
 	double getCustomData_at_num(char *str, double pos = 0, int num = 0)
 
 
-Function Documentation
-**********************
+Interface Function Documentation
+********************************
 
 In the following, the functionality that is exported from the QBlade dll or shared object is described and the function arguments and return types are given. ALl functions with the appendix **_at_num** affect the turbine specified by the argument **num** - this has only an effect for multi turbine simulations.
 
@@ -268,11 +270,11 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 
 
-Sample Script Running the SLI in Python
-***************************************
+Sample Script Running QBlade's SIL Library with Python
+******************************************************
 The following code example (*sampleScript.py*) is an example for a light weight Python script that utilizes the QBlade SIL interface. There are many ways to improve this, e.g. the library could be loaded into multiple separate processes for parallelization and sophisticated algorithms could be implemented instead of using a standard controller. This exemplary script only uses a small amount of the functionality that is exported by the QBlade library for purely illustrative purposes. 
 
-In this Python example script the library is loaded by calling the script *QBladeLIBImport.py*, which handles the library import. After *QBladeLIBImport.py* has been imported (:code:`import QBladeLIBImport as QBLIB`) and the QBlade library has been loaded :code:`	QBLIB.loadLibrary("./QBladeCE_2.0.5.2.dll")` any function of the QBlade library can be accessed by calling :code:`QBLIB.function_XYZ()`. All lines of code that are needed to load the QBlade library into python are highlighted in the example below.
+In this Python example script the library is loaded by calling the script *QBladeLIBImport.py*, which handles the library import. After *QBladeLIBImport.py* has been imported (:code:`import QBladeLIBImport as QBLIB`) and the QBlade library has been loaded :code:`QBLIB.loadLibrary("./QBladeCE_2.0.5.2.dll")` any function of the QBlade library can be accessed by calling :code:`QBLIB.function_XYZ()`. All lines of code that are needed to load the QBlade library into python are highlighted in the example below.
 
 After the QBlade library has been loaded a simulation object is imported and a simulation is started over 500 timesteps. During the simulation loop different data is obtained from the turbine simulation. The turbine controller that is defined in the simulation object is advanced and its signals are passed to the turbine actuators. After the simulation loop has finished the simulation is stored into a project file, for later inspection, and the library is unloaded from python.
 
@@ -285,10 +287,10 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	from ctypes import *
 	import QBladeLibImport as QBLIB
 
-	#loading the QBlade DLL from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
+	#loading the QBlade library from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
 	QBLIB.loadLibrary("../QBladeCE_2.0.5.2.dll")    
 
-	#creation of a QBlade instance from the DLL
+	#creation of a QBlade instance from the library
 	QBLIB.createInstance(1,32)
 
 	#loading a project or sim-file, in this case the DTU_10MW_Demo project or simulation definition file
@@ -342,8 +344,8 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	#unloading the QBlade library
 	del QBLIB.QB_LIB 
 	
-Sample Script Loading the SLI in Python
-***************************************
+Sample Script Importing QBlade's SIL Library into Python
+********************************************************
 
 The script *QBladeLibImport.py* which loads the QBlade library into Python and imports its functionality is shown below. Since the QBlade library is loaded upon calling the function :code:`loadLibrary()` defined in the script, the imported library functions are defined as *global*, to make them available outside of the function scope of :code:`loadLibrary()`. This script is imported into the 
 

@@ -30,7 +30,7 @@ release = '2.0.4'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [ 'sphinxcontrib.bibtex','sphinx.ext.autosectionlabel']
+extensions = [ 'sphinxcontrib.bibtex','sphinx.ext.autosectionlabel','sphinx_copybutton']
 
 # bibliography
 bibtex_bibfiles = ['refs.bib']
