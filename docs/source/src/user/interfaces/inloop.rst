@@ -266,7 +266,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 :code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
 	
-	This function can be used to access the current value from an arbitrary simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*.
+	This function can be used to access the current value from an arbitrary simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' cariable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg]", 0.85,0)
 
 
 
@@ -316,7 +316,12 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		
 		#example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
 		rpm = QBLIB.getCustomData_at_num(b"Rotational Speed [rpm]",0,0) 
-		time = QBLIB.getCustomData_at_num(b"Time [s]",c_double(0), c_int(0)) #example how to extract a variable by name from the simulation
+		time = QBLIB.getCustomData_at_num(b"Time [s]",0,0) #example how to extract the variable 'Time' by name from the simulation
+		AoA = QBLIB.getCustomData_at_num(b"Angle of Attack at 0.25c (at section) Blade 1 [deg]",0.85,0) #example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
+		
+		#example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
+		windspeed = (c_double * 3)(0) 
+		QBLIB.getWindspeed(-50,0,100,windspeed)
 
 		#assign the c-type double array 'ctr_vars' with length [6], initialized with zeros
 		ctr_vars = (c_double * 5)(0); 
@@ -327,8 +332,7 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		QBLIB.setControlVars_at_num(ctr_vars,0) 
 		
 		#print out a few of the recorded data, in this case torque, tower bottom force along z (weight force) and rpm
-		print("Time:","{:3.2f}".format(time),"  Torque:","{:1.4e}".format(ctr_vars[0]),"    RPM:","{:2.2f}".format(rpm),"   Pitch:","{:2.2f}".format(ctr_vars[2]))
-
+		print("Time:","{:3.2f}".format(time),"   Windspeed:","{:2.2f}".format(windspeed[0]),"  Torque:","{:1.4e}".format(ctr_vars[0]),"    RPM:","{:2.2f}".format(rpm),"   Pitch:","{:2.2f}".format(ctr_vars[2]),"   AoA at 85%:","{:2.2f}".format(AoA))
 
 		#advance the simulation
 		QBLIB.advanceTurbineSimulation() 
