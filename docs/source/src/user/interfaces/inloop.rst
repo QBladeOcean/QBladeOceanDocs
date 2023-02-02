@@ -306,6 +306,9 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	#start of the simulation loop
 	for i in range(number_of_timesteps):
 
+		#advance the simulation
+		QBLIB.advanceTurbineSimulation() 
+		
 		#assign the c-type double array 'loads' with length [6], initialized with zeros
 		loads = (c_double * 6)(0) 
 		#retrieve the tower loads and store the in the array 'loads' by calling the function getTowerBottomLoads_at_num()
@@ -334,8 +337,6 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		#print out a few of the recorded data, in this case torque, tower bottom force along z (weight force) and rpm
 		print("Time:","{:3.2f}".format(time),"   Windspeed:","{:2.2f}".format(windspeed[0]),"  Torque:","{:1.4e}".format(ctr_vars[0]),"    RPM:","{:2.2f}".format(rpm),"   Pitch:","{:2.2f}".format(ctr_vars[2]),"   AoA at 85%:","{:2.2f}".format(AoA))
 
-		#advance the simulation
-		QBLIB.advanceTurbineSimulation() 
 
 	#the simulation loop ends here after all 'number_of_timesteps have been evaluated
 		
