@@ -41,37 +41,40 @@ Interface Function Definitions
 
 .. code-block:: c
 
+	:linenos:
+	:caption: : QBladeLibInclude.h
+
 	#all variables and return values are c data types
 
-	void createInstance(int clDevice = 0, int groupSize = 32)
-	void loadProject(char *str)
-	void loadSimDefinition(char *str)
-	void initializeSimulation()
-	void runFullSimulation()
+	void createInstance(int clDevice, int groupSize);
+	void loadProject(char *str);
+	void loadSimDefinition(char *str);
+	void initializeSimulation();
+	void runFullSimulation();
 
-	void advanceController_at_num(double *vars, int num = 0)
-	void advanceTurbineSimulation()
+	void advanceController_at_num(double *vars, int num);
+	void advanceTurbineSimulation();
 
-	void storeProject(char *str)
-	void closeInstance()
-	
-	void loadTurbulentWindBinary(char *str)
-	void addTurbulentWind(double windspeed, double refheight, double hubheight, double dimensions, int gridPoints, double length, double dT, char *turbulenceClass, char *turbulenceType, int seed, double vertInf, double horInf, bool removeFiles = false)
+	void storeProject(char *str);
+	void closeInstance();
 
-	void setPowerLawWind(double windspeed, double horAngle, double vertAngle, double shearExponent, double referenceHeight)
-	void setDebugInfo(bool isDebug)
-	void setLibraryPath(char *str)
-	void setTimestepSize(double timestep)
-	void setRPMPrescribeType_at_num(int type, int num = 0)
-	void setRampupTime(double time)
-	void setInitialConditions_at_num(double yaw, double pitch, double azimuth, double rpm, int num = 0)
-	void setTurbinePosition_at_num(double x, double y, double z, double rotx, double roty, double rotz, int num = 0)
-	void setControlVars_at_num(double *vars, int num = 0)
-	
-	void getWindspeed(double x, double y, double z, double *velocity)
-	void getTowerBottomLoads_at_num(double *loads, int num)
-	void getTurbineOperation_at_num(double *vars, int num = 0)
-	double getCustomData_at_num(char *str, double pos = 0, int num = 0)
+	void loadTurbulentWindBinary(char *str);
+	void addTurbulentWind(double windspeed, double refheight, double hubheight, double dimensions, int gridPoints, double length, double dT, char *turbulenceClass, char *turbulenceType, int seed, double vertInf, double horInf, bool removeFiles);
+
+	void setPowerLawWind(double windspeed, double horAngle, double vertAngle, double shearExponent, double referenceHeight);
+	void setDebugInfo(bool isDebug);
+	void setLibraryPath(char *str);
+	void setTimestepSize(double timestep);
+	void setRPMPrescribeType_at_num(int type, int num);
+	void setRampupTime(double time);
+	void setInitialConditions_at_num(double yaw, double pitch, double azimuth, double rpm, int num);
+	void setTurbinePosition_at_num(double x, double y, double z, double rotx, double roty, double rotz, int num);
+	void setControlVars_at_num(double *vars, int num);
+
+	void getWindspeed(double x, double y, double z, double *velocity);
+	void getTowerBottomLoads_at_num(double *loads, int num);
+	void getTurbineOperation_at_num(double *vars, int num);
+	double getCustomData_at_num(char *str, double pos, int num);
 
 
 Interface Function Documentation
