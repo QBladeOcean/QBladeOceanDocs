@@ -451,7 +451,7 @@ The local cross-sectional coordinate system for the definition of the structural
 
 
 Substructure Definition
------------------------
+=======================
 
 To add a substructure to a turbine definition you need to add the filename followed by the keyword **SUBFILE** anywhere within the main structural input file.
 As with the other structural definition files, the substructure is defined by a series of keywords that are recognized by QBlade when creating the turbine. The format is the same as with the other structural file definitions: 
@@ -700,7 +700,7 @@ An exemplary substructure file for the OC4 Semi-Submersible floater is shown bel
 
 
 General Substructure Parameters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 The following keywords can be used to define the substructure.
 
@@ -739,7 +739,7 @@ The following keywords can be used to define the substructure.
 
 
 Substructure Geometry and Elements
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------
 
 * **SUBJOINTS** is a table that is used to place spatial points that help define the members of the substructure. 
   Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the cartesian coordinates of the joint (in m). The origin is the seabed if **ISFLOATING** is false and the MSL if **ISFLOATING** is true. 
@@ -843,7 +843,7 @@ Substructure Geometry and Elements
   =============== =============== ===============
 
 Morison Equation-Related Parameters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------
 
 * **HYDROMEMBERCOEFF** defines a table that contains the hydrodynamic normal coefficients that are used for the different members of the substructure. Each row contains one group of coefficients that can be used by 
   one or more members. The table contains five entries. These are the ID number of the group, the normal drag coefficient, the normal added mass coefficient, the normal dynamic pressure coefficient and a flag that enables the MacCamy-Fuchs correction (MCFC).
@@ -887,7 +887,7 @@ Morison Equation-Related Parameters
 .. _StrDef_LPFT:
 
 Linear Potential Flow-Related Parameters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 These parameters are related to the :doc:`../../theory/hydrodynamics/lpft/lpft` (LPFT). :numref:`fig-substruc-lpft-ref` shows three important keywords that are used for the implementation of the LPFT on a potential flow body:
 The transition piece point **TP_INTERFACE_POS_X** the inertia reference point **REF_COG_POS_X** and the hydrodynamic reference point **REF_HYDRO_POS_X**. Note that the other keywords in this section are used to specify the forces that act on these reference points.
@@ -1005,7 +1005,7 @@ the second body would be defined by adding a second transition piece point **TP_
 .. _StrDef_Mooring:
 
 Cable Elements, Ground-Fixing and Station-Keeping Parameters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------------
 The connection to the ground is handled differently for floating and fixed-bottom substructures. For floating substructures, the anchoring is done via the mooring lines defined with the **MOORELEMENTS** and 
 **MOORMEMBERS** keywords. These keywords can also be used to define flexible cable elements of the substructure. For bottom-fixed substructures, the connection the ground is defined in the **SUBCONSTRAINTS** table.
 It can be either a rigid connection or a connection via a system of non-linear springs and dampers. These latter elements are defined with the keywords **NLSPRINGDAMPERS** and optionally **SPRINGDAMPK**.
@@ -1068,7 +1068,7 @@ It can be either a rigid connection or a connection via a system of non-linear s
 
 
 Setting the Output Sensors
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 The output for the substructure is also controlled by keywords. QBlade can generate output for the members defined in the **SUBMEMBERS** and in the **MOORMEMBERS** tables.
 The logic of defining an ouput is as follows:
