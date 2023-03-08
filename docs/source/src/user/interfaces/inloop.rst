@@ -40,7 +40,6 @@ Interface Function Definitions
 ******************************
 
 .. code-block:: c
-
 	:linenos:
 	:caption: : QBladeLibInclude.h
 
