@@ -1,37 +1,39 @@
-Turbine Definition Dialog
-=========================
+Wind Turbine Definition Overview
+================================
 
-A new wind turbine is defined within the dialog shown below. A turbine object can either be defined with or without a structural model definition. If the turbine object is defined without a structural model it is assumed as rigid, and only aerodynamic forces are evaluated during a simulation. The only operational modes for a turbine object without a structural model are constant or prescribed operational speed. If a structural model is added to a turbine object an aeroelastic simulation can be performed. The simulation results then include gravitational, inertia, centrifugal, gyroscopic and aerodynamic forces. For turbine objects with structural model definitions full supervisory turbine controllers may be added to the turbine definition. If a turbine object also contains a definition of a floating or bottom fixed substructure also hydrodynamic forces are evaluated during the simulation.
+.. _fig-turbine-module:
+.. figure:: turbine_module.png
+    :align: center
+    :alt: The turbine module in the QBlade's main toolbar.
 
-.. _fig-turbine-dialog1:
-.. figure:: turbine_dialog1.png
+    The turbine module in the QBlade's main toolbar.
+
+A new wind turbine can be defined, or an existing turbine can be edited in the **Turbine definition Module** of QBlade. When a new wind turbine is defined a dialog opens where the user can specify in detail how the turbine should be modeled **aerodynamically**, **structurally** and if **controllers** should be included. 
+
+The Turbine Definition Dialog
+-----------------------------
+
+.. _fig-turbine-dialog:
+.. figure:: turbine_dialog.png
     :align: center
-    :alt: The turbine definition dialog, part 1.
+    :alt: The turbine definition dialog in QBlade.
+
+    The turbine definition dialog in QBlade.
     
-    The turbine definition dialog, part 1.
-    
-.. _fig-turbine-dialog2:
-.. figure:: turbine_dialog2.png
-    :align: center
-    :alt: The turbine definition dialog, Unsteady BEM settings.
-    
-    The turbine definition dialog, Unsteady BEM settings.
-    
-.. _fig-turbine-dialog3:
-.. figure:: turbine_dialog3.png
-    :align: center
-    :alt: The turbine definition dialog, part 3.
-    
-    The turbine definition dialog, Free Vortex Wake Settings.
-    
-.. _fig-turbine-dialog4:
-.. figure:: turbine_dialog4.png
-    :align: center
-    :alt: The turbine definition dialog, part 4.
-    
-    The turbine definition dialog, part 4.
-    
-The parameters that need to be filled in are now discussed below.
+In the turbine definition dialog the user can set all details of the wind turbine that should be modeled. In the following all parameters and entries of this dialog are explained. 
+
+Aerodynamic only Turbine Definitions
+------------------------------------
+
+A turbine object can either be defined with or without a structural model definition. If the turbine object is defined without a structural model it is assumed as a rigid model, and only aerodynamic forces are evaluated during a simulation. The only operational modes for a turbine object without a structural model are constant or prescribed operational speed. 
+
+Aeroelastic Turbine Definitions
+-------------------------------
+
+If a structural model is added to a turbine object an aeroelastic simulation can be performed. The simulation results then include gravitational, inertia, centrifugal, gyroscopic and aerodynamic forces. For turbine objects with structural model definitions a wind turbine controller may be added to the turbine definition. If a turbine object also contains a definition of a floating or bottom fixed substructure also hydrodynamic forces are evaluated during the simulation. All input parameters that for the turbine definition in QBlade are briefly described below, ordered by their appearance in the dialog. If you want to quickly find information about a specific parameter it is suggested to use the search function of this documentation.
+
+General Turbine Parameters
+==========================
 
 Turbine Name and Rotor
 ----------------------
@@ -64,29 +66,9 @@ If no structural model is defined for this turbine object the turbine geometry i
 .. _fig-turbine-geometry:
 .. figure:: turbine_geometry.png
     :align: center
+    :scale: 60%
     :alt: Definition of turbine geometry parameters.
     
     Definition of turbine geometry parameters.
     
-Aerodynamic Discretization
---------------------------
-
-- **Blade Panels**: Here the user can specifiy the number of blade panels and the type of spacing. A **Linear** spacing distribues the panels evenly over the blade length. A **Cosine** spacing results in a finer discretization near the blade ends (root and tip) and a slighly coarser discretization near the blade center. The option **Table** uses the aerodynamic blade definition table as a temnplate for the aerodynamic discretization, thus the user can use this option for a fully customized blade discretization.
-
-Aerodynamic Models
-------------------
-
-- **Dynamic Stall**: The user can activate the use of a dynamic stall model. The options are: **Off**: No dynamic stall model is used. **OYE**: The OYE dynamic stall model is used, see :ref:`OYE Dynamic Stall Model`. **ATEF**: The ATEFlap unsteady aerodynamics model is used, see :ref:`ATEFlap Dynamic Stall Model`.
-- **2 Point L/D Eval**: This actives the two point lift and drag evaluation model, proposed by :footcite:t:`wes-2021-163`. The advantage of this two point evaluation is that lift and drag predictions for dihedral or conned wind turbine rotor are improved and the airfoil **pitch rate** is explicitly being taken into account by evaluating the angle of attack at the three-quarter chord point and then applying the aerodynamic coefficients at the quarter-chord point.
-- **Himmelskamp Effect**: The correction for the *Himmelskamp* effect can be activated here, see :ref:`Himmelskamp Effect`.
-- **Tower Shadow**: The *Tower Shadow Effect* can be avtivated, see :ref:`Tower Influence`.
-- **Tower Drag Coeff.**: Sets the drag coefficient that is used to model the *Tower Shadow Effect*.
-    
-Wake Type
----------
-
-Here the user can choose between the **Free Vortex Wake** or the **Unsteady BEM** aerodynamic model. The **Unsteady BEM** model can only be used with **HAWT** turbine defintions.
-See :ref:`Free Vortex Wake Settings` and :ref:`Unsteady BEM Settings`.
-
-
 .. footbibliography::

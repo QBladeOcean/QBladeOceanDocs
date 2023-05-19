@@ -37,8 +37,8 @@ To connect to a specific transition piece in the **SUBCONSTRAINTS** table simply
 
     The Multi-Rotor Assembly Dialog. 
     
-Multi Rotor Turbine Assembly Export
-***********************************
+Multi Rotor Turbine Assembly ASCII File
+***************************************
 
 A Multi Turbine Assembly can be exported or imported in the ``.mta`` format. The file content points towards the common substructure file and towards the turbine (``.trb``) files that are used in the multi-rotor assembly. See an exemplary ``.mta`` file below:
 

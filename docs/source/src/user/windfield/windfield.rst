@@ -1,6 +1,13 @@
 Wind Field Generator Overview
 -----------------------------
 
+.. _fig-wind-module:
+.. figure:: windbutton.png
+    :align: center
+    :alt: Wind field creation dialogue in QBlade.
+
+    The wind field creation symbol in the QBlade main tool bar. 
+
 If an unsteady simulation is being carried out, it is necessary to define the wind field.
 This provides important information for the calculation of aerodynamic quantities. 
 Three types of wind fields can be generated for use in QBlade. These are described individually below.
@@ -142,13 +149,6 @@ Turbulent Wind Field
 The final type of wind file which can be set up is a fully turbulent wind file.
 This can be either generated through the *Wind Input Type* button of the turbine simulation dialogue, as shown in :numref:`fig-wind-pane` or by directly generating this within the
 turbulent wind module, shown in :numref:`fig-wind-module`. 
-
-.. _fig-wind-module:
-.. figure:: windbutton.png
-    :align: center
-    :alt: Wind field creation dialogue in QBlade.
-
-    The wind field creation symbol in the QBlade main tool bar. 
 	
 When a new turbulent wind file is created, a range of parameters must be specified as shown by the turbulent wind dialogue in :numref:`fig-turb-dia`.
 After these have been selected, clicking on the *Create* button automatically passes the information to the TurbSim program :footcite:`TurbSimGuide`.

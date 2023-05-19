@@ -21,6 +21,7 @@ geometric stiffness.
 .. _fig-corotational:
 .. figure:: corotational.png
    :align: center
+   :width: 400px
    :alt: Forces on a 2D airfoil
 
    Visualization of the co-rotational beam approach.
@@ -32,6 +33,7 @@ accelerations and deflections. For a common HAWT, one body is created for each b
 .. _fig-structural_model:
 .. figure:: structural_model.png
    :align: center
+   :width: 600px
    :alt: Visualization of the co-rotational beam approach
 
    Visualization of the co-rotational beam approach.

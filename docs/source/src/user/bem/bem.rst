@@ -1,6 +1,13 @@
 BEM Analysis Overview
 ---------------------
 
+.. _fig-bem_module:
+.. figure:: bem_module.png
+    :align: center
+    :alt: BEM module in QBlade.
+
+    The BEM module in QBlade's main tool bar.
+
 The *Steady BEM Analysis* tool allows the user to run aerodynamic simulations with very low computational expense, short run times and generally accurate
 preliminary results with regard to rotor performance parameters. The module is very useful for:
 

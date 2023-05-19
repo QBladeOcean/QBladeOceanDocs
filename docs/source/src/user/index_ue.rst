@@ -30,8 +30,8 @@ HAWT, VAWT and PROP Mode
 
    hawtvawtprop/hawtvawtprop
 
-Airfoil Module
-**************
+Airfoil Import and Generation
+*****************************
 
 .. toctree::
    :maxdepth: 1
@@ -39,63 +39,63 @@ Airfoil Module
    airfoil/airfoil
    
 
-Airfoil Analysis Module
-***********************
+Airfoil Analysis
+****************
 .. toctree::
    :maxdepth: 1
    
    airfoil/airfoil_analysis
 
-Polar Extrapolation Module
-**************************
+Polar Extrapolation
+*******************
 .. toctree::
    :maxdepth: 1
 
    airfoil/polar_extrapolation
 
-Blade Design Module
-*******************
+Blade and Rotor Design
+**********************
 .. toctree::
    :maxdepth: 1
 
    blade/blade
 
-BEM Analysis Module
-*******************
+Blade and Rotor BEM Analysis
+****************************
 .. toctree::
    :maxdepth: 1
 
    bem/bem
 
-Turbine Definition Module
-*************************
+Wind Turbine Definition
+***********************
 .. toctree::
    :maxdepth: 1
 
    turbine/turbine
-   turbine/unsteadybem
-   turbine/vortexwake
+   turbine/aerodynamic
    turbine/structure
+   turbine/substructure
    turbine/controller
    turbine/turbineexport
    turbine/multi_turbine
 
-Simulation Definition Module
-****************************
+Wind Turbine Simulation
+***********************
 .. toctree::
    :maxdepth: 1
    
    simulation/simulation
 
-Windfield Generator Module
-**************************
+Windfield Generation
+********************
 .. toctree::
    :maxdepth: 1
    
    windfield/windfield
    
-Wave Generator Module
-*********************
+Wave Generation
+***************
 .. toctree::
    :maxdepth: 1
 
@@ -121,3 +121,11 @@ Software in Loop Interface (SIL)
    :maxdepth: 1
 
    interfaces/inloop
+   
+Ensemble Graphs and Campbell Graphs
+***********************************
+.. toctree::
+   :maxdepth: 1
+	
+   advancedgraphs/ensemble
+   advancedgraphs/campbell

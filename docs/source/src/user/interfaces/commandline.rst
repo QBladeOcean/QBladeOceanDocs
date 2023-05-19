@@ -7,7 +7,7 @@ CLI Overview
    
 QBlade-EE can also be executed in a command line interface (CLI). The main purpose of QBlade's CLI is to batch-process large sets of simulations in parallel while reducing any computational overhead from the GUI. When processing large sets of simulations a single instance of QBlade will act as the *thread manager*, in charge of creating new QBlade instances for each simulation that is evaluated and queuing these simulations over all available threads. This approach has the advantage of being highly robust, as if one simulation crashes for any reason it wont affect any other simulation and the batch run will still complete without the need for user intervention. This section details the functionality of the QBlade CLI and its options. 
 
-To start QBlade in CLI mode simply call QBlade's executable from a command window while adding the parameter :code:`-cmd` to indicate that instead of starting QBlade in GUI mode it will be operated in CLI mode. 
+To start QBlade in CLI mode simply call QBlade's executable from the command line while adding the parameter :code:`-cmd` to indicate that instead of starting QBlade in GUI mode it will be operated in CLI mode. 
 
 :code:`QBladeEE -cmd`
 	
@@ -69,6 +69,7 @@ This command prints out an overview of all CLI functionality::
 	exp_h2bin                 - adds HAWC2BINARY format to auto-export and post-export formats
 	exp_h2ascii               - adds HAWC2ASCII format to auto-export and post-export formats (only if HAWC2BINARY is not exported)
 	exp_ascii                 - adds ASCII format to auto-export and post-export formats
+	exp_fastbin		  - adds FAST BINARY format to auto-export and post-export formats
 	exp_cut_txt               - adds cut-plane txt format to auto-export and post-export formats
 	exp_cut_vtu               - adds cut-plane vtu format to auto-export and post-export formats
 	post_exp                  - export results and cut-planes from all FINISHED .qpr, .qpr1 and qpr2 files in all WORKING_DIR(s)
@@ -130,7 +131,7 @@ In this section the different CLI options are briefly explained.
 
 :code:`skip`
 	
-	Adding the parameter :code:`skip` causes QBlade to skip the evaluation of a simulation (\*.sim) or project (\*.qpr) file if an assocated finished project file (\*.qpr1) already exists, or if the results from this simulation have already been exported previously.
+	Adding the parameter :code:`skip` causes QBlade to skip the evaluation of a simulation (\*.sim) or project (\*.qpr) file if an assocated finished project file (\*.qpr1) already exists, or if the results from this simulation have already been exported previously. When using *skip* during post_exp files are only exported if their filename does not exist yet.
 
 :code:`exp_h2bin`
 	
@@ -143,6 +144,10 @@ In this section the different CLI options are briefly explained.
 :code:`exp_ascii`
 	
 	The parameter :code:`exp_ascii` adds the ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+
+:code:`exp_fastbin`
+	
+	The parameter :code:èxp_fastbin`adds the OpenFAST binary format (.outb) to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
 :code:`exp_cut_txt`
 	

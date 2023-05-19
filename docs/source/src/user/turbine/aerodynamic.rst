@@ -1,5 +1,37 @@
-Free Vortex Wake Settings
-=========================
+Aerodynamic Turbine Parameters
+==============================
+
+Aerodynamic Discretization
+--------------------------
+
+**Blade Panels**: Here the user can specifiy the number of blade panels and the type of spacing. A **Linear** spacing distribues the panels evenly over the blade length. A **Cosine** spacing results in a finer discretization near the blade ends (root and tip) and a slighly coarser discretization near the blade center. The option **Table** uses the aerodynamic blade definition table as a temnplate for the aerodynamic discretization, thus the user can use this option for a fully customized blade discretization.
+
+Aerodynamic Models
+------------------
+
+- **Dynamic Stall**: The user can activate the use of a dynamic stall model. The options are: **Off**: No dynamic stall model is used. **OYE**: The OYE dynamic stall model is used, see :ref:`OYE Dynamic Stall Model`. **ATEF**: The ATEFlap unsteady aerodynamics model is used, see :ref:`ATEFlap Dynamic Stall Model`.
+- **2 Point L/D Eval**: This actives the two point lift and drag evaluation model, proposed by :footcite:t:`wes-2021-163`. The advantage of this two point evaluation is that lift and drag predictions for dihedral or conned wind turbine rotor are improved and the airfoil **pitch rate** is explicitly being taken into account by evaluating the angle of attack at the three-quarter chord point and then applying the aerodynamic coefficients at the quarter-chord point.
+- **Himmelskamp Effect**: The correction for the *Himmelskamp* effect can be activated here, see :ref:`Himmelskamp Effect`.
+- **Tower Shadow**: The *Tower Shadow Effect* can be avtivated, see :ref:`Tower Influence`.
+- **Tower Drag Coeff.**: Sets the drag coefficient that is used to model the *Tower Shadow Effect*.
+    
+Wake Type
+---------
+
+Here the user can choose between the **Free Vortex Wake** or the **Unsteady BEM** aerodynamic model. The **Unsteady BEM** model can only be used with **HAWT** turbine definitions.
+
+Unsteady BEM Parameters
+-----------------------
+
+- **Azimuthal Polar Grid Discretization**: The polar grid is discretized into the chosen number of azimuthal sections. A value of 1 is equal to the BEM without a polar grid.
+- **Include Tip Loss**: This activates the classical BEM tip loss correction to account for a finite number of blades, see :footcite:t:`Glauert1935`. 
+- **Convergence Acceleration Time**: The time lag constants in the unsteady BEM implementation are increased by a factor of 20 during the time span entered by the user. This enables a much faster convergence of the unsteady BEM towards a steady operational point.
+
+The theory of the unsteady polar BEM is briefly described in :ref:`Polar Grid`.
+
+
+Free Vortex Wake Parameters
+---------------------------
 
 Wake Modelling
 --------------
@@ -21,7 +53,7 @@ Wake Modelling
     Visualization of the wake reduction approach.
 
 - **Count Wake Length In**: This setting controls how the age of a vortex element is counted. Either as a number of rotor revolutions, or as a number of timesteps that have passed since the elemnt was created.
-- *Particle Conversion after [Revolutions/Timesteps]**: (**Only QBlade-EE**) This setting controls when a vortex filament is converted into a vortex particle. If the vortex elemnt has reached an age (in timesteps or revolutions) equal to this value it is converted into a particle. 
+- **Particle Conversion after [Revolutions/Timesteps]**: (**Only QBlade-EE**) This setting controls when a vortex filament is converted into a vortex particle. If the vortex elemnt has reached an age (in timesteps or revolutions) equal to this value it is converted into a particle. 
 - **Wake Zones N/1/2/3 in [Revolutions/Timesteps]**: This setting controls the *length* of the different wake zones. The length is either counted in rotor revolutions or in timesteps, depending on the setting (**Count Wake Length In**). Each wake zone has a successively coarser discretization (depending on the **Wake Zones Factor** settings) to reduce the total number of free wake elements and thereby to speed up the simulation.
 - **Wake Zones 1/2/3 factor**: These (integer) factors control by how much the wake is coarsenend in between the different wake zones. A factor of 4 means that when transitioning from one zone to the next 4 wake elements are replaced by a single wake element to coarsen the wake resolution (see :numref:fig-wakezones`.png`).
 
@@ -47,3 +79,5 @@ Turbine Gamma Iteration Parameters
 - **Relaxation Factor**: This relaxation factor is used when the blade circulation is updated during the circulation iteration.
 - **Max. Epsilon for Convergence**: The convergence criteria for the blade circulation.
 - **Max. Number of Iterations**: The maximum number of blade circulation iterations that will be carried out.
+
+.. footbibliography::

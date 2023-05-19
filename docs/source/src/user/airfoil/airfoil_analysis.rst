@@ -7,7 +7,6 @@ This is accomplished within the airfoil creation module. This module is shown in
 .. _fig-analysis-module:
 .. figure:: analysis_module.png
     :align: center
-    :scale: 80%
     :alt: Airfoil analysis module in QBlade.
 
     The airfoil analysis module is represented by the dynamic foil symbol in the QBlade main tool bar. 

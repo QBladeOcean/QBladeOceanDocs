@@ -50,9 +50,17 @@ The columns of the basic blade properties are:
 - **Foil** is the airfoil object used for that section (see :doc:`../airfoil/airfoil`).
 - **Polar** is the particular polar used for this section (linked to the airfoil object).
 
-We note that the polar data used in the blade definition always has to be linked to an airfoil object. Several airfoil polars can be linked to one airfoil object (e.g. for different Reynolds numbers).
-A blade section can also contain multiple polars for one airfoil object e.g. for different Reynolds numbers (see :doc:`../airfoil/polar_extrapolation`). 
-If the blade is to have multi-polar sets, then these need to be previously created and assigned to an airfoil object and the corresponding option has to be enabled in the blade design dock.
+We note that the polar data used in the blade definition is always linked to an airfoil object. Several airfoil polars can be linked to one airfoil object (e.g. for different Reynolds numbers).
+A blade section can also contain multiple polars for one airfoil object e.g. for different Reynolds numbers. 
+If the blade is to have multi-polar sets, then these need to be previously created and assigned to an airfoil object and the corresponding option has to be enabled in the blade design dock (see :numref:`fig-blade-multi`).
+
+.. _fig-blade-multi:
+.. figure:: single-multi.png
+    :align: center
+    :scale: 70%
+    :alt: The multi Reynolds number polar option in the blade designer dock.
+
+    The multi Reynolds number polar option in the blade designer dock.
 
 The columns of the advanced blade properties are:
 

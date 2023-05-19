@@ -1,6 +1,13 @@
 Simulation Module Overview
 ==========================
 
+.. _fig-simulation-module:
+.. figure:: simulation_module.png
+    :align: center
+    :alt: The simulation module symbol in the QBlade main tool bar. 
+
+    The simulation module symbol in the QBlade main tool bar. 
+
 .. _fig-simulation:
 .. figure:: simulation.png
    :align: center
@@ -24,41 +31,22 @@ Simulation Definition Dialog
 Setting up a simulation in QBlade is handled through the dialog shown below:
 
 .. _fig-sim_dialog1:
-.. figure:: sim_dialog1.png
+.. figure:: simulation_dialog1.png
    :align: center
-   :alt: Part 1 of the simulation definition dialog.
+   :scale: 25%
+   :alt: Page 1 of the simulation definition dialog.
 
-   Part 1 of the simulation definition dialog.
+   Page 1 of the simulation definition dialog (click to enlarge).
    
 .. _fig-sim_dialog2:
-.. figure:: sim_dialog2.png
+.. figure:: simulation_dialog2.png
    :align: center
-   :alt: Part 2 of the simulation definition dialog.
+   :scale: 25%
+   :alt: Page 2 of the simulation definition dialog.
 
-   Part 2 of the simulation definition dialog.
+   Page 2 of the simulation definition dialog (click to enlarge).
    
-.. _fig-sim_dialog3:
-.. figure:: sim_dialog3.png
-   :align: center
-   :alt: Part 3 of the simulation definition dialog.
-
-   Part 3 of the simulation definition dialog.
-   
-.. _fig-sim_dialog4:
-.. figure:: sim_dialog4.png
-   :align: center
-   :alt: Part 4 of the simulation definition dialog.
-
-   Part 4 of the simulation definition dialog.
-   
-.. _fig-sim_dialog5:
-.. figure:: sim_dialog5.png
-   :align: center
-   :alt: Part 5 of the simulation definition dialog.
-
-   Part 5 of the simulation definition dialog.
-   
-Below, an overview of the different dialog sections and their editable parameters is given:
+Below, an overview of the different dialog sections and each editable parameters is given. If you are looking for a specific parameter from the dialog it is suggested to use the search function of the documentation to find it quickly. Also note that each of the parameters described in the following has an equivalent keyword within the :ref:`Simulation Definition ASCII File`.
    
 General Simulation Settings
 ---------------------------
@@ -102,7 +90,8 @@ Turbine Setup
 
 * **Name of Turbine**: Define a name for the turbine simulation object.
 * **Use Turbine Definition**: Use the selected *turbine definition* object from the data base in this simulation object.
-* **Position (X,Y,Z)**: Set the global position of the wind turbine for this simulation.
+* **Global Position (X,Y,Z)**: Set the global position of the wind turbine for this simulation.
+* **Global Rotation (X,Y,Z)**: Set the global rotation of the wind turbine for this simulation. In the case of a floating turbine being simulated the global rotation also rotates the mooring line connections to the ground.
 
 Rotational Speed Settings
 -------------------------
@@ -207,7 +196,7 @@ Multi Turbine Simulations
 
    This feature is only available in the Enterprise Edition of QBlade.
    
-If enabled multiple turbines may be added to a single simulation object and their wake interaction can be evaluated.
+If enabled multiple turbines may be added to a single simulation object and their wake interaction can be evaluated. Find more information in the section :ref:`Multi Turbine Simulation Setup`.
 
 Turbine Environment
 -------------------
@@ -309,161 +298,13 @@ A simulation of ice throw, shed from the rotor, can be performed in QBlade, see 
 * **Min. / Max. Radius**: Set the range of ice particle release positions (in % of rotor radius).
 * **Total N Particles**: Set the total number of ice particles that are generated during the simulation. This number will be evenly distributed over all timesteps of the simulation.
 
-Multi-Turbine Simulations
-=========================
-
-.. admonition:: QBlade-EE
-
-   This feature is only available in the Enterprise Edition of QBlade.
-   
-.. _fig-multi_turbines:
-.. figure:: multi_turbines.png
-   :align: center
-   :alt: The multi turbine section in the simulation definition dialog.
-   
-   The multi-turbine section in the simulation definition dialog.
-
-   
-To define a simulation containing multiple turbines the user needs to activate the multiple turbines option in the simulation dialog (see :fig:'fig-multi_turbines`). After the option has been set to *On* turbines can be added by clicking the *Add* button. The currently selected turbine definition, with all parameters that are currently selected in the dialog, is then added to the list of turbines. Instead of manually adding several turbines it is also possible to load a *Layout* file. The *Layout* file should contain for each turbine its X,Y and Z position as well as the turbine name. When adding turbines via a *Layout* the currently selected turbine is addes for each line within the *Layout* file. See an exemplary *Layout* file below:
-
-.. code-block:: console
-
-	XPos [m]	YPos [m]	ZPos[m]		Name
-	0		100		0		Turbine_1
-	200		-200		0		Turbine_2
-	-200		0		0		Turbine_3
-	
-Within the *Simulation Definition ASCII Files* a multi-turbine simulation is defined by encapsulating each turbine object by *TURB_X* and *END_TURB_X* where *X* is the turbine number staring from 1. See an example below.
-
-.. code-block:: console
-
-	----------------------------------------QBlade Simulation Definition File------------------------------------------
-	Generated with : QBlade IH v2.0.5.1_dev_alpha windows
-	Archive Format: 310007
-	Time : 16:25:09
-	Date : 17.01.2023
-
-	----------------------------------------Object Name-----------------------------------------------------------------
-	New_Turbine_Simulation                   OBJECTNAME         - the name of the simulation object
-
-	----------------------------------------Simulation Type-------------------------------------------------------------
-	0                                        ISOFFSHORE         - use a number: 0 = onshore; 1 = offshore
-
-	----------------------------------------Turbine Parameters---------------------------------------------------------
-	multiple turbines can be added by adding multiple definitions encapsulated with TURB_X and END_TURB_X, where X must start at 1
-
-	TURB_1
-		FairWind_F100-10_Turb/FairWind_F100-10_Turb.trb TURBFILE           - the turbine definition file that is used for this simulation
-		FairWind_F100-10_Turb                TURBNAME           - the (unique) name of the turbine in the simulation (results will appear under this name)
-		0.00                                 INITIAL_YAW        - the initial turbine yaw in [deg]
-		0.00                                 INITIAL_PITCH      - the initial collective blade pitch in [deg]
-		270.00                               INITIAL_AZIMUTH    - the initial azimuthal rotor angle in [deg]
-		1                                    STRSUBSTEP         - the number of structural substeps per timestep (usually 1)
-		5                                    RELAXSTEPS         - the number of initial static structural relaxation steps
-		1                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
-		69.323                               RPMPRESCRIBED      - the prescribed rotor RPM [-]
-		5                                    STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
-		0                                    MODNEWTONITER      - use the modified newton iteration?
-		0.00                                 GLOBPOS_X          - the global x-position of the turbine [m]
-		0.00                                 GLOBPOS_Y          - the global y-position of the turbine [m]
-		0.00                                 GLOBPOS_Z          - the global z-position of the turbine [m]
-											 EVENTFILE          - the file containing fault event definitions (leave blank if unused)
-											 LOADINGFILE        - the loading file name (leave blank if unused)
-											 SIMFILE            - the simulation file name (leave blank if unused)
-											 MOTIONFILE         - the prescribed motion file name (leave blank if unused)
-	END_TURB_1
-
-	TURB_2
-		FairWind_F100-10_Turb/FairWind_F100-10_Turb.trb TURBFILE           - the turbine definition file that is used for this simulation
-		Turbine1                             TURBNAME           - the (unique) name of the turbine in the simulation (results will appear under this name)
-		0.00                                 INITIAL_YAW        - the initial turbine yaw in [deg]
-		0.00                                 INITIAL_PITCH      - the initial collective blade pitch in [deg]
-		270.00                               INITIAL_AZIMUTH    - the initial azimuthal rotor angle in [deg]
-		1                                    STRSUBSTEP         - the number of structural substeps per timestep (usually 1)
-		5                                    RELAXSTEPS         - the number of initial static structural relaxation steps
-		1                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
-		69.323                               RPMPRESCRIBED      - the prescribed rotor RPM [-]
-		5                                    STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
-		0                                    MODNEWTONITER      - use the modified newton iteration?
-		0.00                                 GLOBPOS_X          - the global x-position of the turbine [m]
-		100.00                               GLOBPOS_Y          - the global y-position of the turbine [m]
-		0.00                                 GLOBPOS_Z          - the global z-position of the turbine [m]
-											 EVENTFILE          - the file containing fault event definitions (leave blank if unused)
-											 LOADINGFILE        - the loading file name (leave blank if unused)
-											 SIMFILE            - the simulation file name (leave blank if unused)
-											 MOTIONFILE         - the prescribed motion file name (leave blank if unused)
-	END_TURB_2
-
-	TURB_3
-		FairWind_F100-10_Turb/FairWind_F100-10_Turb.trb TURBFILE           - the turbine definition file that is used for this simulation
-		Turbine2                             TURBNAME           - the (unique) name of the turbine in the simulation (results will appear under this name)
-		0.00                                 INITIAL_YAW        - the initial turbine yaw in [deg]
-		0.00                                 INITIAL_PITCH      - the initial collective blade pitch in [deg]
-		270.00                               INITIAL_AZIMUTH    - the initial azimuthal rotor angle in [deg]
-		1                                    STRSUBSTEP         - the number of structural substeps per timestep (usually 1)
-		5                                    RELAXSTEPS         - the number of initial static structural relaxation steps
-		1                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
-		69.323                               RPMPRESCRIBED      - the prescribed rotor RPM [-]
-		5                                    STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
-		0                                    MODNEWTONITER      - use the modified newton iteration?
-		200.00                               GLOBPOS_X          - the global x-position of the turbine [m]
-		-200.00                              GLOBPOS_Y          - the global y-position of the turbine [m]
-		0.00                                 GLOBPOS_Z          - the global z-position of the turbine [m]
-											 EVENTFILE          - the file containing fault event definitions (leave blank if unused)
-											 LOADINGFILE        - the loading file name (leave blank if unused)
-											 SIMFILE            - the simulation file name (leave blank if unused)
-											 MOTIONFILE         - the prescribed motion file name (leave blank if unused)
-	END_TURB_3
-
-Multi-Turbine Global Moorings
-=============================
-
-.. admonition:: QBlade-EE
-
-   This feature is only available in the Enterprise Edition of QBlade.
-
-For multi-turbine simulations it is also possible to define a global mooring system. A global mooring system can be defined as an interconnection between different turbines (or floaters) in a multi-turbine simulation. In the example shown below a mooring system is defined that connects **Joint 1 of Turbine 1** (JNT_1_1) to **Joint 1 of Turbine 2** (JNT_1_2). In general, the global mooring system definition needs to contain a **MOORELEMENTS** table, a **MOORMEMBERS** table, and a **HYDROMEMBERCOEFF** table, following the same methodology as the mooring line definitions for turbine substructures, described in :ref:`Cable Elements, Ground-Fixing and Station-Keeping Parameters`.
-
-.. code-block:: console
-
-	1.0 	BUOYANCYTUNER
-
-	HYDROMEMBERCOEFF
-	CoeffID	CdN	CaN	CpN	MCFC
-	1	2.0 	0.8	1.0	0	
-
-	MOORELEMENTS
-	ID	Dens.[kg/m^3]	Area[m^2]	Iyy[m^4]	EMod[N/m^4]	RDp.[-]	Dia[m]
-	1	2.35723E+04	4.6084E-03	3.7601E-03	1.6353E+11	0.015	0.0766
-
-	MOORMEMBERS
-	ID	CONN_1	CONN_2	Len.[m]	MoorID 	HyCoID	IsBuoy	MaGrID	ElmDsc	Name
-	1	JNT_1_1	JNT_2_1	835.5	1	1	1	0	30	Mooring1
-
-Multi-Threaded Batch Analysis
-=============================
-
-.. admonition:: QBlade-EE
-
-   This feature is only available in the Enterprise Edition of QBlade.
-
-
-Multiple simulations can be evaluated in a parallel batch queue through the dialog *Menu->Turbine Simulation->Multi-Threaded Batch Analysis*. The simulations are selected from a list in the dialog (see :numref:`fig-multi_batch`). After choosing the number of parallel threads the batch analysis starts by clicking the *Start Batch* button.
-
-.. _fig-multi_batch:
-.. figure:: multi_batch.png
-   :align: center
-   :alt: The Multi-Threaded Batch Analysis Dialog.
-
-   The Multi-Threaded Batch Analysis Dialog.
-
-
 Simulation Definition ASCII File
 ================================
 
 Simulation objects can be exported into the text based ``.sim`` format. When a simulation object is exported into the ``.sim`` format, the associated turbine ``.trb`` file is automatically generated and exported. See an exemplary ``.sim`` file below:
 
 .. code-block:: console
+	:caption: : A simulation definition ASCII file
 
 	----------------------------------------QBlade Simulation Definition File------------------------------------------
 	Generated with : QBlade IH v2.0.2_alpha windows
@@ -558,6 +399,295 @@ Simulation objects can be exported into the text based ``.sim`` format. When a s
 	1                                        STOREBLADE         - should the local aerodynamic blade data be stored (0 = OFF; 1 = ON)
 	1                                        STORESTRUCT        - should the structural data be stored (0 = OFF; 1 = ON)
 	0                                        STOREHYDRO         - should the controller data be stored (0 = OFF; 1 = ON)
+	0                                        STORECONTROLLER    - should the controller data be stored (0 = OFF; 1 = ON)
+	----------------------------------------Modal Analysis Parameters--------------------------------------------------
+	0                                        CALCMODAL          - perform a modal analysis after the simulation has completed (only for single turbine simulations)
+	0.00000                                  MINFREQ            - store Eigenvalues, starting with this frequency
+	0.00000                                  DELTAFREQ          - omit Eigenvalues that are closer spaced than this value
+
+Multi Turbine Simulation Setup
+==============================
+
+.. admonition:: QBlade-EE
+
+   This feature is only available in the Enterprise Edition of QBlade.
+   
+.. _fig-multi_turbines:
+.. figure:: multi_turbines.png
+   :align: center
+   :alt: The multi turbine section in the simulation definition dialog.
+   
+   The multi-turbine section in the simulation definition dialog.
+
+   
+To define a simulation containing multiple turbines the user needs to activate the multiple turbines option in the simulation dialog (see :fig:'fig-multi_turbines`). After the option has been set to *On* turbines can be added by clicking the *Add* button. The currently selected turbine definition, with all parameters that are currently selected in the dialog, is then added to the list of turbines. Instead of manually adding several turbines it is also possible to load a *Layout* file. The *Layout* file should contain for each turbine its X,Y and Z position as well as the turbine name. When adding turbines via a *Layout* the currently selected turbine is added for each line within the *Layout* file. See an exemplary *Layout* file below:
+
+.. code-block:: console
+	:caption: : An exemplary turbine layout file
+
+	XPos [m]	YPos [m]	ZPos[m]		Name
+	0		100		0		Turbine_1
+	200		-200		0		Turbine_2
+	-200		0		0		Turbine_3
+	
+Furthermore, it is also possible to add a **global mooring system** to a multi turbine simulation. More information on this is found in the section :ref:`Multi Turbine Global Mooring System`.
+
+Multi Turbine Global Mooring System
+===================================
+
+.. admonition:: QBlade-EE
+
+   This feature is only available in the Enterprise Edition of QBlade.
+   
+.. _fig-global-mooring:
+.. figure:: global_mooring.png
+   :align: center
+   :alt: A global mooring definition, connecting two turbines in a multi turbine simulation.
+   
+   A global mooring definition, connecting two turbines in a multi turbine simulation.
+
+For multi-turbine simulations it is also possible to define a global mooring system. A global mooring system can be defined as an interconnection between different turbines (or floaters) in a multi-turbine simulation. In the example shown below a mooring system is defined that connects **Joint 43 of Turbine 1** (JNT_1_43) to **Joint 43 of Turbine 2** (JNT_1_43). In general, the global mooring system definition can contain a **MOORELEMENTS** table, a **MOORMEMBERS** table, and a **HYDROMEMBERCOEFF** table, following the same methodology as the mooring line definitions for turbine substructure.
+
+Furthermore, it is also possible to include **SUBMEMBERS**, **SUBELEMENTS**, **SUBCONSTRAINTS** and  **NLSPRINGDAMPERS** and **MOORLOADS** in the same way as described in the :ref:`Substructure Definition`.
+
+The simulation data that is stored from the global mooring system can be viewed in the *Simulation Time Graph*.
+
+The global mooring system definition file shown below is used to setup the mooring conficuration that is shown in :numref:`fig-global-mooring`.
+
+.. code-block:: console
+	:caption: : A global mooring system definition interconnecting two turbines.
+	
+	true	ISFLOATING								
+	100	ADVANCEDBUOYANCY
+
+	1.00	STIFFTUNER
+	1.00	MASSTUNER				
+	1.00	BUOYANCYTUNER
+
+	SUBJOINTS
+	JointID	JointX	JointY	JointZ
+	1	0.00000	0.00000	-10.00000
+	2	0.00000	0.00000	10.00000
+	3	0.00000	0.00000	-13.00000
+
+	SUBELEMENTSRIGID
+	ElemID	BMASSD	DIAMETER
+	1	10000	5.5
+	2	100000	5.5
+
+	HYDROJOINTCOEFF
+	CoeffID	JointID	CdA	CaA	CpA																	
+	1	2	4.8	1.0	1.0
+	2	3	4.8	1.0	1.0
+
+	SUBMEMBERS
+	MemID	Jnt1ID	Jnt2ID	ElmID	ElmRot	HyCoID	IsBuoy	MaGrID	FldArea	ElmDsc	Name	(optional)
+	1	1	2	1	0	1	1	0	0	2	Main_Colum
+	2	1	3	2	0	1	1	0	0	2	Main_Column2									
+
+	HYDROMEMBERCOEFF
+	CoeffID	CdN	CaN	CpN	MCFC
+	1	2.0	0.8	1.0	0
+
+	MOORELEMENTS
+	ID	Dens.[kg/m^3]	Area[m^2]	Iyy[m^4]	EMod[N/m^4]	RDp.[-]	Dia[m]	
+	1	2.35723E+04	4.6084E-03	3.7601E-03	1.6353E+11	0.015	0.0766	
+	2	6.35723E+04	4.6084E-03	3.7601E-04	1.6353E+10	0.005	0.0766
+
+	MOORMEMBERS
+	ID	CONN_1		CONN_2	Len.[m]	MoorID	HyCoID	IsBuoy	MaGrID	ElmDsc	Name
+	1	JNT_1_43	JNT_3	270	1	1	1	0	30	Mooring1
+	2	JNT_2_43	JNT_3	270	1	1	1	0	30	Mooring2
+	3	JNT_1_1		JNT_2_1	700	2	1	1	0	30	Power
+
+	MOORLOADS
+	3	150	180	16000
+	3	520	550	16000
+
+	RGBCOLOR
+	255	0	0
+
+	-------------------------------	DATA OUTPUT TYPES -------------------------					
+	true	FOR_OUT	
+	true	ROT_OUT
+	true	MOM_OUT
+	true	DEF_OUT	
+	true	POS_OUT
+	true	VEL_OUT	
+	true	ACC_OUT
+	true	LVE_OUT
+	true	LAC_OUT
+
+	-------------------------------	SENSORS	------------------------------------					
+	SUB_1_0.5
+	MOO_1_0.2
+
+Multi-Threaded Batch Analysis
+=============================
+
+.. admonition:: QBlade-EE
+
+   This feature is only available in the Enterprise Edition of QBlade.
+
+.. _fig-multi-batch-menu:
+.. figure:: multi_batch_menu.png
+   :align: center
+   :scale: 70%
+   :alt: The multi-threaded batch menu option.
+
+   The multi-threaded batch menu option.
+
+Multiple simulations can be evaluated in a parallel batch queue through the dialog *Menu->Turbine Simulation->Multi-Threaded Batch Analysis*. The simulations are selected from a list in the dialog (see :numref:`fig-multi_batch`). After choosing the number of parallel threads the batch analysis starts by clicking the *Start Batch* button.
+
+.. _fig-multi_batch:
+.. figure:: multi_batch.png
+   :align: center
+   :scale: 80%
+   :alt: The multi-threaded batch analysis dialog.
+
+   The multi-threaded batch analysis dialog.
+
+Multi Turbine Simulation Definition ASCII File
+==============================================
+	
+Within the *Simulation Definition ASCII Files* a multi-turbine simulation is defined by encapsulating each turbine object by *TURB_X* and *END_TURB_X* where *X* is the turbine number staring from 1. An example for a multi turbine simulation definition ASCII file that also contains a global mooring system is shown below.
+
+.. code-block:: console
+	:caption: : A multi turbine simulation definition file
+
+	----------------------------------------QBlade Simulation Definition File------------------------------------------
+	Generated with : QBlade IH v2.0.6_beta_dev windows
+	Archive Format: 310012
+	Time : 19:16:58
+	Date : 18.05.2023
+
+	----------------------------------------Object Name-----------------------------------------------------------------
+	New_Turbine_Simulation                   OBJECTNAME         - the name of the simulation object
+
+	----------------------------------------Simulation Type-------------------------------------------------------------
+	1                                        ISOFFSHORE         - use a number: 0 = onshore; 1 = offshore
+
+	----------------------------------------Turbine Parameters---------------------------------------------------------
+	multiple turbines can be added by adding multiple definitions encapsulated with TURB_X and END_TURB_X, where X must start at 1
+
+	TURB_1
+	    NREL_5MW_OC4_SEMI_RWT/NREL_5MW_OC4_SEMI_RWT.trb TURBFILE           - the turbine definition file that is used for this simulation
+	    NREL_5MW_OC4_SEMI_RWT                TURBNAME           - the (unique) name of the turbine in the simulation (results will appear under this name)
+	    0.00                                 INITIAL_YAW        - the initial turbine yaw in [deg]
+	    0.00                                 INITIAL_PITCH      - the initial collective blade pitch in [deg]
+	    0.00                                 INITIAL_AZIMUTH    - the initial azimuthal rotor angle in [deg]
+	    1                                    STRSUBSTEP         - the number of structural substeps per timestep (usually 1)
+	    5                                    RELAXSTEPS         - the number of initial static structural relaxation steps
+	    0                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
+	    4.000                                RPMPRESCRIBED      - the prescribed rotor RPM [-]
+	    10                                   STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
+	    1                                    MODNEWTONITER      - use the modified newton iteration?
+	    300.00                               GLOBPOS_X          - the global x-position of the turbine [m]
+	    0.00                                 GLOBPOS_Y          - the global y-position of the turbine [m]
+	    0.00                                 GLOBPOS_Z          - the global z-position of the turbine [m]
+	    0.00                                 GLOBROT_X          - the global x-rotation of the turbine [deg]
+	    0.00                                 GLOBROT_Y          - the global y-rotation of the turbine [deg]
+	    0.00                                 GLOBROT_Z          - the global z-rotation of the turbine [deg]
+						 EVENTFILE          - the file containing fault event definitions (leave blank if unused)
+						 LOADINGFILE        - the loading file name (leave blank if unused)
+						 SIMFILE            - the simulation file name (leave blank if unused)
+						 MOTIONFILE         - the prescribed motion file name (leave blank if unused)
+	    0.00                                 FLOAT_SURGE        - the initial floater surge [m]
+	    0.00                                 FLOAT_SWAY         - the initial floater sway [m]
+	    0.00                                 FLOAT_HEAVE        - the initial floater heave [m]
+	    0.00                                 FLOAT_ROLL         - the initial floater roll [deg]
+	    0.00                                 FLOAT_PITCH        - the initial floater pitch [deg]
+	    0.00                                 FLOAT_YAW          - the initial floater yaw [deg]
+	END_TURB_1
+
+	TURB_2
+	    NREL_5MW_OC4_SEMI_RWT-2/NREL_5MW_OC4_SEMI_RWT-2.trb TURBFILE           - the turbine definition file that is used for this simulation
+	    NREL_5MW_OC4_SEMI_RWT-2              TURBNAME           - the (unique) name of the turbine in the simulation (results will appear under this name)
+	    180.00                               INITIAL_YAW        - the initial turbine yaw in [deg]
+	    0.00                                 INITIAL_PITCH      - the initial collective blade pitch in [deg]
+	    0.00                                 INITIAL_AZIMUTH    - the initial azimuthal rotor angle in [deg]
+	    1                                    STRSUBSTEP         - the number of structural substeps per timestep (usually 1)
+	    5                                    RELAXSTEPS         - the number of initial static structural relaxation steps
+	    0                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
+	    4.000                                RPMPRESCRIBED      - the prescribed rotor RPM [-]
+	    10                                   STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
+	    1                                    MODNEWTONITER      - use the modified newton iteration?
+	    -300.00                              GLOBPOS_X          - the global x-position of the turbine [m]
+	    0.00                                 GLOBPOS_Y          - the global y-position of the turbine [m]
+	    0.00                                 GLOBPOS_Z          - the global z-position of the turbine [m]
+	    0.00                                 GLOBROT_X          - the global x-rotation of the turbine [deg]
+	    0.00                                 GLOBROT_Y          - the global y-rotation of the turbine [deg]
+	    0.00                                 GLOBROT_Z          - the global z-rotation of the turbine [deg]
+						 EVENTFILE          - the file containing fault event definitions (leave blank if unused)
+						 LOADINGFILE        - the loading file name (leave blank if unused)
+						 SIMFILE            - the simulation file name (leave blank if unused)
+						 MOTIONFILE         - the prescribed motion file name (leave blank if unused)
+	    0.00                                 FLOAT_SURGE        - the initial floater surge [m]
+	    0.00                                 FLOAT_SWAY         - the initial floater sway [m]
+	    0.00                                 FLOAT_HEAVE        - the initial floater heave [m]
+	    0.00                                 FLOAT_ROLL         - the initial floater roll [deg]
+	    0.00                                 FLOAT_PITCH        - the initial floater pitch [deg]
+	    180.00                               FLOAT_YAW          - the initial floater yaw [deg]
+	END_TURB_2
+
+	----------------------------------------Simulation Settings-------------------------------------------------------
+	0.050000                                 TIMESTEP           - the timestep size in [s]
+	800                                      NUMTIMESTEPS       - the number of timesteps
+	20.000                                   RAMPUP             - the rampup time for the structural model
+	0.000                                    ADDDAMP            - the initial time with additional damping
+	100.000                                  ADDDAMPFACTOR      - for the additional damping time this factor is used to increase the damping of all components
+	0.000                                    WAKEINTERACTION    - in case of multi-turbine simulation the wake interaction start at? [s]
+
+	----------------------------------------Wind Input-----------------------------------------------------------------
+	0                                        WNDTYPE            - use a number: 0 = steady; 1 = windfield; 2 = hubheight
+						 WNDNAME            - filename of the turbsim input file or hubheight file (with extension), leave blank if unused
+	0                                        STITCHINGTYPE      - the windfield stitching type; 0 = periodic; 1 = mirror
+	1                                        WINDAUTOSHIFT      - the windfield shifting automatically based on rotor diameter; 0 = false; 1 = true
+	0.00                                     SHIFTTIME          - the windfield is shifted by this time if WINDAUTOSHIFT = 0
+	10.00                                    MEANINF            - the mean inflow velocity, overridden if a windfield or hubheight file is use
+	0.00                                     HORANGLE           - the horizontal inflow angle
+	0.00                                     VERTANGLE          - the vertical inflow angle
+	0                                        PROFILETYPE        - the type of wind profile used (0 = Power Law; 1 = Logarithmic)
+	0.000                                    SHEAREXP           - the shear exponent if using a power law profile, if a windfield is used these values are used to calculate the mean wake convection velocities
+	0.010                                    ROUGHLENGTH        - the roughness length if using a log profile, if a windfield is used these values are used to calculate the mean wake convection velocities
+	0.00                                     DIRSHEAR           - a value for the directional shear in deg/m
+	77.60                                    REFHEIGHT          - the reference height, used to contruct the BL profile
+
+	----------------------------------------Ocean Depth, Waves and Currents------------------------------------------- 
+	the following parameters only need to be set if ISOFFSHORE = 1
+	200.00                                   WATERDEPTH         - the water depth
+	New_Wave.lwa                             WAVEFILE           - the path to the wave file, leave blank if unused
+	1                                        WAVESTRETCHING     - the type of wavestretching, 0 = vertical, 1 = wheeler, 2 = extrapolation, 3 = none
+	10000.00                                 SEABEDSTIFF        - the vertical seabed stiffness [N/m^3]
+	0.50                                     SEABEDDAMP         - a damping factor for the vertical seabed stiffness evaluation, between 0 and 1 [-]
+	0.00                                     SEABEDSHEAR        - a factor for the evaluation of shear forces (friction), between 0 and 1 [-]
+	0.00                                     SURF_CURR_U        - near surface current velocity [m/s]
+	0.00                                     SURF_CURR_DIR      - near surface current direction [deg]
+	30.00                                    SURF_CURR_DEPTH    - near surface current depth [m]
+	0.00                                     SUB_CURR_U         - sub surface current velocity [m/s]
+	0.00                                     SUB_CURR_DIR       - sub surface current direction [deg]
+	0.14                                     SUB_CURR_EXP       - sub surface current exponent
+	0.00                                     SHORE_CURR_U       - near shore (constant) current velocity [m/s]
+	0.00                                     SHORE_CURR_DIR     - near shore (constant) current direction [deg]
+
+	----------------------------------------Global Mooring System------------------------------------------------------
+	mooring.txt                              MOORINGSYSTEM      - the path to the global mooring system file, leave blank if unused
+
+	----------------------------------------Environmental Parameters---------------------------------------------------
+	1.22500                                  DENSITYAIR         - the air density [kg/m^3]
+	0.000016470                              VISCOSITYAIR       - the air kinematic viscosity 
+	1025.00000                               DENSITYWATER       - the water density [kg/m^3]
+	0.000001307                              VISCOSITYWATER     - the water kinematic viscosity [m^2/s]
+	9.806650000                              GRAVITY            - the gravity constant [m/s^2]
+
+	----------------------------------------Output Parameters----------------------------------------------------------
+	0                                        STOREREPLAY        - store a replay of the simulation: 0 = off, 1 = on (warning, large memory will be required)
+	20.000                                   STOREFROM          - the simulation stores data from this point in time, in [s]
+	1                                        STOREAERO          - should the aerodynamic data be stored (0 = OFF; 1 = ON)
+	0                                        STOREBLADE         - should the local aerodynamic blade data be stored (0 = OFF; 1 = ON)
+	1                                        STORESTRUCT        - should the structural data be stored (0 = OFF; 1 = ON)
+	1                                        STORESIM           - should the simulation (performance) data be stored (0 = OFF; 1 = ON)
+	1                                        STOREHYDRO         - should the controller data be stored (0 = OFF; 1 = ON)
 	0                                        STORECONTROLLER    - should the controller data be stored (0 = OFF; 1 = ON)
 	----------------------------------------Modal Analysis Parameters--------------------------------------------------
 	0                                        CALCMODAL          - perform a modal analysis after the simulation has completed (only for single turbine simulations)

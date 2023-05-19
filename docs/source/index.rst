@@ -8,9 +8,9 @@ QBlade Documentation
 ====================
 
 QBlade :footcite:p:`Marten19` is a state of the art multi-physics code, covering the complete range of aspects required for the aero-servo-hydro-elastic simulation of horizontal, or vertical axis wind turbines. 
-QBlade is being developed since 2010 at the Technical University of Berlin, and is realized as a modular implementation of highly efficient multi-fidelity aerodynamic, structural dynamic and hydrodynamic solvers in a modern, object oriented C++ framework.  
+This software, developed since 2010, is realized as a modular implementation of highly efficient multi-fidelity aerodynamic, structural dynamic and hydrodynamic solvers in a modern, object oriented C++ framework.  
 
-QBlade leverages the current computer architecture by thoroughly utilizing CPU (via OpenMP) and GPU (via OpenCL) parallelization techniques for a high numerical performance. 
+We leverage the current computer architecture by thoroughly utilizing CPU (via OpenMP) and GPU (via OpenCL) parallelization techniques for a high numerical performance. 
 QBlade is a platform independent software, and can be deployed on workstations or clusters running Windows, Unix or MacOS based operating systems. 
 The software is equipped with an intuitive graphical user interface that aids the user during the whole wind turbine design process. 
 All turbine and simulation details are readily available to be accessed and modified in a logical well-structured and tested interface. 
@@ -25,9 +25,9 @@ This results in a more accurate and detailed spatial and temporal representation
 This allows to assess wind turbine wake interaction, accurately accounts for the aerodynamics of oscillating floating wind turbine structures and explicitly resolves unsteady vertical axis wind turbine wake dynamics (see :footcite:t:`Balduzzi2017b`). 
 As an alternative with lower computational demand the aerodynamics of horizontal-axis wind turbines can be simulated using an unsteady polar-BEM implementation (see :footcite:t:`polarBEM`).
 
-The structural dynamics in QBlade are modeled in a true multi-body formulation. The sub components of the multi-body model are made up of rigid- or flexible nonlinear Euler beam elements in a corotational formulation. 
-For floating offshore simulations QBlade integrates cable elements in the absolute nodal coordinate formulation (ANCF) which meet the requirements to effectively model the nonlinear dynamics of complex mooring systems.
-Both bottom-fixed and floating offshore wind turbine systems can be modeled in QBlade. 
+The structural dynamics are modeled in a true multi-body formulation. The sub components of the multi-body model are made up of rigid- or flexible nonlinear Euler beam elements in a corotational formulation. 
+For floating offshore simulations we have integrated cable elements in the absolute nodal coordinate formulation (ANCF) which meet the requirements to effectively model the nonlinear dynamics of complex mooring systems.
+Both bottom-fixed and floating offshore wind turbine systems can be modeled. 
 
 The hydrodynamic loads on the wind turbine’s substructure are calculated either via the potential flow theory, the Morison equation based strip theory or a user defined combination of the two. 
 The integrated potential flow approach also includes the higher order slow drift forces obtained from quadratic transfer functions. QBlade integrates with potential flow data from common software such as the WAMIT, NEMOH or similar toolboxes.
