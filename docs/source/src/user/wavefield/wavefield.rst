@@ -106,10 +106,9 @@ Either a unidirectional irregular wave (Single Dir) or multidirectional wave (Co
 .. _fig-irregular-multi-constrained-wave:
 .. figure:: irregular_multi_constrained_wave.png
     :align: center
-    :scale: 50%
-    :alt: Visualization of a 30m constrained wave within an irregular wavefield
+    :alt: A 30m constrained wave embedded in an irregular multi-directional wavefield.
 
-    Visualization of a 30m constrained wave within an irregular wavefield.
+    A 30m constrained wave embedded in an irregular multi-directional wavefield.
 
 QBlade also allows to embed a constrained wave into an irregular wavefield. This process is based on the *NewWave* method of Taylor :footcite:`Taylor97` and follows the implementation that is as laid out in :footcite:t:`RecFAST`. The main use of this functionality is to reduce the required simulation time until a *design wave* event occurs. The extreme wave that is embedded hereby is conditioned on the underlying wave spectrum and is indistinguishable from a naturally occurring extreme wave.
 
