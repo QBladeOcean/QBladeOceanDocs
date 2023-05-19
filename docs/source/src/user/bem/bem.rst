@@ -20,7 +20,7 @@ This section gives insight into the three submodules *Rotor BEM*, *Characteristi
 Rotor BEM
 ---------
 In the *Rotor BEM* submodule, the user can carry out rotor blade simulations over a range of tip speed ratios (TSRs). A rotor simulation can only be defined when at
-least one rotor blade is present in the database (see :ref:`Blade Design Module`). When defining a rotor simulation in the *Analysis Settings* box, the user can select the desired corrections (:ref:`Corrections`) to
+least one rotor blade is present in the database (see :ref:`Blade Design Overview`). When defining a rotor simulation in the *Analysis Settings* box, the user can select the desired corrections (:ref:`Corrections`) to
 the BEM algorithm and the simulation parameters. Once a simulation is defined, the user can select a range of TSRs, and the incremental step for the simulation.
 
 A rotor simulation is always carried out with dimensionless arguments. The freestream velocity is assumed to be uniform and the rotor radius is normalized for
