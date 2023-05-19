@@ -122,10 +122,4 @@ Software in Loop Interface (SIL)
 
    interfaces/inloop
    
-Ensemble Graphs and Campbell Graphs
-***********************************
-.. toctree::
-   :maxdepth: 1
-	
-   advancedgraphs/ensemble
-   advancedgraphs/campbell
+
