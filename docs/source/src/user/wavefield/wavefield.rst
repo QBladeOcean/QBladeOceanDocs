@@ -106,6 +106,7 @@ Either a unidirectional irregular wave (Single Dir) or multidirectional wave (Co
 .. _fig-irregular-multi-constrained-wave:
 .. figure:: irregular_multi_constrained_wave.png
     :align: center
+    :scale: 50%
     :alt: A 30m constrained wave embedded in an irregular multi-directional wavefield.
 
     A 30m constrained wave embedded in an irregular multi-directional wavefield.
