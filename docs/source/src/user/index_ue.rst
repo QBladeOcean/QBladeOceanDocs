@@ -86,6 +86,7 @@ Wind Turbine Simulation
    :maxdepth: 1
    
    simulation/simulation
+   simulation/cutplanes
 
 Windfield Generation
 ********************

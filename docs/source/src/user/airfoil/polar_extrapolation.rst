@@ -108,6 +108,7 @@ This is achieved by selecting the *360 Polar* menu option.
 When a ``.plr`` file is imported and no airfoil, as specified in the file, exists an airfoil with the thickness as defined with the parameter *THICKNESS* is automatically created during loading. An exemplary ``.plr`` file is shown below:
 
 .. code-block:: console
+   	:caption: : An exemplary QBlade multi-RE polar file
 
 	----------------------------------------QBlade Multi RE Polar File--------------------------------------------------
 	Generated with : QBlade CE v 2.0 windows-pre-release

@@ -20,8 +20,8 @@ Wake Type
 
 Here the user can choose between the **Free Vortex Wake** or the **Unsteady BEM** aerodynamic model. The **Unsteady BEM** model can only be used with **HAWT** turbine definitions.
 
-Unsteady BEM Parameters
------------------------
+Unsteady BEM
+------------
 
 - **Azimuthal Polar Grid Discretization**: The polar grid is discretized into the chosen number of azimuthal sections. A value of 1 is equal to the BEM without a polar grid.
 - **Include Tip Loss**: This activates the classical BEM tip loss correction to account for a finite number of blades, see :footcite:t:`Glauert1935`. 
@@ -30,8 +30,8 @@ Unsteady BEM Parameters
 The theory of the unsteady polar BEM is briefly described in :ref:`Polar Grid`.
 
 
-Free Vortex Wake Parameters
----------------------------
+Free Vortex Wake
+----------------
 
 Wake Modelling
 --------------
