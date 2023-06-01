@@ -1,5 +1,5 @@
-ATEFlap Dynamic Stall Model
-===========================
+ATEFlap Model
+=============
 
 
 To account for dynamic stall and unsteady aerodynamics the ATEFlap :footcite:`Bergami2012` model for 2D airfoil behavior has been integrated to be used with :doc:`../lifting_line/lifting_line` simulations. 
@@ -179,12 +179,6 @@ The total drag is then computed as the sum of these contributions:
 	\begin{align}
 			Cd = Cd^{eff}+Cd_{ind}+Cd_{ind}^\beta+Cd_{ind}^f.
 	\end{align}
-
-
-Moment
--------
-
-Will soon be updated!
 
 
 .. More details about the implementation and validation of the unsteady aerodynamics model can be found in the publication of Wendler et al. :footcite:`Wendler2016`. 
