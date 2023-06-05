@@ -21,6 +21,31 @@ It is possible to connect the substructure either to the tower bottom, torquetub
     :alt: Three different substructures defined in QBlade.
 
     Three different substructures (in yellow) connected to the tower bottom (grey).
+    
+Modeling Options for an Offshore Substructure
+---------------------------------------------
+
+When it comes to modeling the hydrodynamics and structural dynamics of an offshore substructure, there are several options to consider. This section is meant to give an overview on how different aspects can be modeled:
+
+Substructure Mass and Inertia
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The substructure is typically composed of interconnected members and joints (see :ref:`General Topology of a Substructure`). These members can be modeled as either flexible (with associated stiffness, mass, etc.) or rigid (with or without mass). If the members have nonzero mass properties, the substructure's mass and inertia are explicitly included. Alternatively, the complete substructure's mass can be represented using a 6x6 mass matrix, known as *lumped mass* (see :ref:`Lumped Mass, Inertia and Hydrodynamic Forces`).
+
+Substructure Buoyancy
+^^^^^^^^^^^^^^^^^^^^^
+
+Similar to mass and inertia, substructure buoyancy can be modeled explicitly or in a lumped linearized manner. Explicit modeling involves enabling the buoyancy calculation for each member based on its submerged part in the :code:`SUBMEMBERS` table (see :ref:`Substructure Members`). Explicity buoyancy applies buoyancy forces locally to each member. In the lumped approach, a 6x6 hydrodynamic stiffness matrix is defined to represent the substructure's buoyancy restoring forces and moments (see :ref:`Lumped Mass, Inertia and Hydrodynamic Forces`). This linearized hydrodynamic stiffness matrix is valid for small rotations and translations of the substructure.
+
+Substructure Hydrodynamics
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The hydrodynamic forces acting on a substructure can be evaluated by means of linear potential flow theory or the Morison equation. When the Morison Equation is used (see :ref:`Morison Equation-Related Parameters`) Morison coefficients are assigned to each substructure member and the resulting forces (based on local wave and floater kinematics) are applied locally to each member. Alternatively, a linear potential flow solver (such as WAMIT, NEMOH, or ANSYS AQWA) can generate databases representing lumped hydrodynamic forces acting on the substructure (see :ref:`Linear Potential Flow-Related Parameters`).
+
+Different Scenarios
+^^^^^^^^^^^^^^^^^^^
+
+It is possible to combine different approaches mentioned above. A common mix involves using linear potential flow hydrodynamics along with the Morison equation to account for viscous hydrodynamic drag. If obtaining distributed loads for substructure components is important, hydrodynamic forces should be distributed as well (Morison equation with explicit buoyancy modeling), and the substructure members should be modeled as flexible elements. By carefully selecting and combining these modeling options, a comprehensive understanding of the hydrodynamics and structural dynamics of an offshore substructure can be achieved.
 
 Keywords and Tables
 -------------------
