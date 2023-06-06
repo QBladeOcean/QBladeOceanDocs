@@ -186,17 +186,17 @@ Nacelle Drag Model
 	:caption: : Nacelle drag
 
 	------------------------------- NACELLE DRAG ------------------------------
-	0.0    		NACCDX - Downwind distance from the tower-top to the nacelle CD (m) (HAWT only)
-	0.0      	NACCDY - Lateral  distance from the tower-top to the nacelle CD (m) (HAWT only)
-	1.75   		NACCDZ - Vertical distance from the tower-top to the nacelle CD (m) (HAWT only)
+	10.0    	NACCAX - Downwind distance from the tower-top to the nacelle CD (m) (HAWT only)
+	0.0      	NACCAY - Lateral  distance from the tower-top to the nacelle CD (m) (HAWT only)
+	1.75   		NACCAZ - Vertical distance from the tower-top to the nacelle CD (m) (HAWT only)
 	15    		NACARX - Downwind area of the nacelle (m^2) (HAWT only)
 	90      	NACARY - Lateral  area of the nacelle (m^2) (HAWT only)
 	60   		NACARZ - Vertical area of the nacelle (m^2) (HAWT only)
-	15    		NACCDX - Downwind drag coefficient of the nacelle (-) (HAWT only)
-	90      	NACCDY - Lateral  area of the nacelle (m^2) (HAWT only)(HAWT only)
-	60   		NACCDZ - Vertical area of the nacelle (m^2) (HAWT only)(HAWT only)
+	1.2    		NACCDX - Downwind drag coefficient of the nacelle (-) (HAWT only)
+	1.2      	NACCDY - Lateral drag coefficient of the nacelle (-) (HAWT only)
+	1.2   		NACCDZ - Vertical drag coefficient of the nacelle (-) (HAWT only)
 	
-The nacelle drag model is optional. If no nacelle drag is defined no nacelle drag is applied. The nacelle drag can only be used with HAWT turbine definitions. The model defined a center of drag (NACCD) and three nacelle areas (NACAR) with three nacelle drag coefficients (NACCD). The total acting nacelle drag force in all directions is then summed up and applied at the center of drag (NACCD).
+The nacelle drag model is optional. If no nacelle drag is defined no nacelle drag is applied. The nacelle drag can only be used with HAWT turbine definitions. The model defined a center of drag (NACCA) and three nacelle areas (NACAR) with three nacelle drag coefficients (NACCD). The total acting nacelle drag force in all directions is then summed up and applied at the center of drag (NACCD).
 
 Drivetrain Parameters
 ^^^^^^^^^^^^^^^^^^^^^
