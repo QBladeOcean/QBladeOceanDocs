@@ -67,8 +67,8 @@ Blade and Rotor BEM Analysis
 
    bem/bem
 
-Wind Turbine Definition
-***********************
+Wind Turbine Design
+*******************
 .. toctree::
    :maxdepth: 1
 
