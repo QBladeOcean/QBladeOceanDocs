@@ -23,14 +23,14 @@ Coordinate Systems
 
    coordinates/coordinates
    
-HAWT, VAWT and PROP Mode
+HAWT, VAWT and PROP Design Modes
 ************************
 .. toctree::
    :maxdepth: 1
 
    hawtvawtprop/hawtvawtprop
 
-Airfoil Import and Generation
+Airfoil Generation and Import
 *****************************
 
 .. toctree::
@@ -39,8 +39,8 @@ Airfoil Import and Generation
    airfoil/airfoil
    
 
-Airfoil Analysis
-****************
+Airfoil Analysis and Polar Generation
+*************************************
 .. toctree::
    :maxdepth: 1
    
@@ -60,8 +60,8 @@ Blade and Rotor Design
 
    blade/blade
 
-Blade and Rotor BEM Analysis
-****************************
+Blade and Rotor BEM Simulation
+******************************
 .. toctree::
    :maxdepth: 1
 
