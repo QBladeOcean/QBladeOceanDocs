@@ -60,6 +60,7 @@ Interface Function Definitions
 	void advanceTurbineSimulation();
 
 	void storeProject(char *str);
+	void setLogFile(char *str);
 	void closeInstance();
 
 	void loadTurbulentWindBinary(char *str);
@@ -120,6 +121,9 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 :code:`void storeProject(char *str)`
 	This functions stores a project file. The file location has to be passed as a *char pointer*. File names can be passed as absolute or as relative paths.
+	
+:code:`void setLogFile(char *str)`
+	This functions sets the path to a log file that will be created to store the dobug output. This is helpful when accessing the SIL interface from a tool that does not display standard output.
 
 :code:`void closeInstance()`
 	This function closes the instance of QBlade and frees the memory.
