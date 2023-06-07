@@ -24,7 +24,7 @@ Coordinate Systems
    coordinates/coordinates
    
 HAWT, VAWT and PROP Design Modes
-************************
+********************************
 .. toctree::
    :maxdepth: 1
 
