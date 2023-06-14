@@ -18,7 +18,7 @@ QBlade 2.0.6.1 beta
  * fixed issue with turbine sorting for multi turbine simulations
 
 QBlade 2.0.6.0 beta
------------------
+-------------------
 
 **Substructure**
 
@@ -170,6 +170,6 @@ QBlade 2.0.4.1 alpha
  * Improved behavior of FoilTable when Foil selection is changed
 
 QBlade 2.0.4.0 alpha
-------------------
+--------------------
 
  * This is the first public release of QBlade CE. Be aware that this is an alpha release which will be revisioned after the first user feedback arrives and incompatibilities and errors are fixed.

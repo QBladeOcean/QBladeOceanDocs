@@ -797,10 +797,13 @@ The locations at which data is recorded for the substructure is also controlled 
 The logic of defining an output is as follows:
 
 :code:`SUB_<MemID>_<RelPos>`
- is the keyword used for setting an output of the submember with the ID number = <MemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Joint1ID) to 1 (= the postion of Joint2ID).
+ is the keyword used for setting an output of a member from the the :code:`SUBMEMBERS` table with the ID number = <MemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Joint1ID) to 1 (= the postion of Joint2ID). When an output sensor is placed at a member hydrodynamic loads are displayed in the *Hydrodynamic Time Graph* and internal structural loads are displayed in the *Structural Time Graph*.
 
 :code:`MOO_<MMemID>_<RelPos>`
- is the keyword used for setting an output of the cable member with the ID number = <MMemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Conn1) to 1 (= the postion of Conn2).
+ is the keyword used for placing a sensor on the cable member with the ID number = <MMemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Conn1) to 1 (= the postion of Conn2).
+ 
+:code:`CST_<CstID>`
+ is the keyword used for placing a sensor on the constraint from the :code:`SUBCONSTRAINTS` table with the ID number = <CstID>. The internal loads (force and torque) in the internal constraint coordinate system are then displayed in the *Structural Time Graph*.
  
 Exemplary Substructure File
 ---------------------------
