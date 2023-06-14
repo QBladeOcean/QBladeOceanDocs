@@ -122,5 +122,12 @@ Software in Loop Interface (SIL)
    :maxdepth: 1
 
    interfaces/inloop
+
+Changelog
+*********
+.. toctree::
+   :maxdepth: 1
+
+   changelog/changelog
    
 

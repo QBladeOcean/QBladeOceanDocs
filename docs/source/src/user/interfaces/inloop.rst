@@ -81,6 +81,7 @@ Interface Function Definitions
 	void getTowerBottomLoads_at_num(double *loads, int num);
 	void getTurbineOperation_at_num(double *vars, int num);
 	double getCustomData_at_num(char *str, double pos, int num);
+	double getCustomSimulationData(char *str);
 
 
 Interface Function Documentation
@@ -299,8 +300,10 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 
 :code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
-	This function can be used to access the current value from an arbitrary simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' cariable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg]`, 0.85,0)
-
+	This function can be used to access the current value from an arbitrary turbine simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' cariable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg]`, 0.85,0)
+	
+:code:`double getCustomSimulationData(char *str)`
+	This function can be used to access the current value from an arbitrary simulation time graph variable in QBlade. 
 
 
 Python Example: Running the QBlade Library
@@ -423,6 +426,10 @@ The script *QBladeLibrary.py* defines the class *QBladeLibrary* and loads the sh
 		self.getCustomData_at_num = self.lib.getCustomData_at_num
 		self.getCustomData_at_num.argtypes = [c_char_p, c_double, c_int]
 		self.getCustomData_at_num.restype = c_double
+		
+		self.getCustomSimulationData = self.lib.getCustomSimulationData
+		self.getCustomSimulationData.argtype = c_char_p
+		self.getCustomSimulationData.restype = c_double
 
 		self.getWindspeed = self.lib.getWindspeed
 		self.getWindspeed.argtypes = [c_double, c_double, c_double, c_double * 3]
@@ -726,6 +733,10 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 		
 		function output = getCustomData_at_num(obj,var,i,j)
 		    output = calllib('QBLIB','getCustomData_at_num',var,i,j);
+		end
+		
+		function output = getCustomSimulationData(obj,var)
+		    output = calllib('QBLIB','getCustomSimulationData',var);
 		end
 		
 	    end

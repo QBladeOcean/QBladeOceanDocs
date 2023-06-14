@@ -1,7 +1,7 @@
 Extracting Wake Data with Cut-Planes
 ====================================
 
-When a simulation of a :ref:`Wind Turbine Definition` with a :ref:`Free Vortex Wake` has been performed it is possible to extract velocity distributions from the simulation.
+When a simulation of a :ref:`Wind Turbine Design` with a :ref:`Free Vortex Wake` has been performed it is possible to extract velocity distributions from the simulation.
 
 .. _fig-wake_data:
 .. figure:: wake_data.png
