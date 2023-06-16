@@ -11,7 +11,7 @@ QBlade allows the integration of  standard wind turbine controllers to perform a
     :align: center
     :alt: Controller Interaction with QBlade.
 
-    Controller interaction with QBlade: For each time step, QBlade passes the sensor input and retrieves the control actions demanded from the controller in a predetermined exchange array.
+    Controller interaction with QBlade: For each time step, QBlade passes the sensor input and retrieves the control actions demanded from the controller in a predetermined swap array.
 
 Several commonly used controller interfaces are compatible with QBlade. The different types of controller interfaces that QBlade is compatible with are:
 
@@ -23,7 +23,7 @@ Since QBlade is compiled as a 64bit software it is **only possible to call 64bit
 
 An example for a DTU-style controller is the :footcite:t:`DTUWEC` controller. An example for the TUB-Style controller is the TUB Controller presented in :footcite:t:`Perez-Becker2021`. The QBlade release contains pre-compiled ROSCO, DTU and TUB Controllers.  
 
-For these commonly used interfaces the data that is passed between the controller and the simulation in QBlade and its position in the exchange array that is used for this communication is already predefined. This means that there are fixed array positions for data such as torque, rpm, pitch angles and tower top accelerations. The specific data that is communicated and its position depends on the controller interface definition and is different between the BLADED-style, DTU-style and TUB-style interfaces.
+For these commonly used interfaces the data that is passed between the controller and the simulation in QBlade and its position in the swap array that is used for this communication is already predefined. This means that there are fixed array positions for data such as torque, rpm, pitch angles and tower top accelerations. The specific data that is communicated and its position depends on the controller interface definition and is different between the BLADED-style, DTU-style and TUB-style interfaces.
  
 External Library Interface
 --------------------------
@@ -39,7 +39,7 @@ Adding a Controller or an External Library to a Turbine Definition
 
 A controller library can be included in a turbine definition by selecting the library in the dialog shown in :numref:`fig-controller_dialog`. Depending on which controller interface type is used the appropriate option has to be selected. Furthermore, a controller parameter file has to be selected and loaded by the user. The parameter file is stored in the QBlade project and can be edited by the user once loaded. This if for example useful for setting up an identical turbine with a modified controller parameter (i.e. for control parameter tuning). Controller parameter files edited within QBlade can also be exported to ASCII format. 
 
-Any number of custom external libraries can be loaded in the lower part of the dialog shown in :numref:`fig-controller_dialog`. When loading a custom library the user also has to specify the function name that should be called by QBlade as well as the exchange array size that will be used for communication between the library and QBlade. Each external library received an integer identifier, which is later used to pass and receive data to and from its swap array.
+Any number of custom external libraries can be loaded in the lower part of the dialog shown in :numref:`fig-controller_dialog`. When loading a custom library the user also has to specify the function name that should be called by QBlade as well as the swap array size that will be used for communication between the library and QBlade. Each external library received an integer identifier, which is later used to pass and receive data to and from its swap array.
 
 .. _fig-controller_dialog:
 .. figure:: controller_dialog.png
@@ -62,7 +62,7 @@ Below is an example for the *Turbine Controllers* and *External Libraries* secti
 	----------------------------------------External Libraries-----------------------------------------------------------
 	type2_dll                                LIBFILE_1          - the library file name, WITHOUT file ending (.dll or .so )
 	update2                                  LIBFUNCTION_1      - the libary function name that should be called every timestep
-	100                                      LIBARRAYSIZE_1     - the library exchange array size for data exchange
+	100                                      LIBARRAYSIZE_1     - the library swap array size for data exchange
 
 **IMPORTANT**: 
 
@@ -73,11 +73,11 @@ Below is an example for the *Turbine Controllers* and *External Libraries* secti
 Passing Custom Data to a Controller
 -----------------------------------
 
-In addition to the standard predefined sensor information that is passed between QBlade and the controller, the user can add additional sensors to the exchange array. This is useful for the development of specialized controllers that rely on unconventional sensorial input. Depending on the controller format chosen, different positions of the exchange array will be unoccupied. 
+In addition to the standard predefined sensor information that is passed between QBlade and the controller, the user can add additional sensors to the swap array. This is useful for the development of specialized controllers that rely on unconventional sensorial input. Depending on the controller format chosen, different positions of the swap array will be unoccupied. 
 
 **IMPORTANT**: The user should know which array entries are unused before adding custom sensors. Otherwise, using this option will lead to unwanted turbine behavior!
 
-To add custom sensors to the exchange array of a *Predefined Controller*, the following table needs to be added to the controller parameter file, the substructure file or the structural model main file (up to the user to decide what is most convenient). The search order in the files is:
+To add custom sensors to the swap array of a *Predefined Controller*, the following table needs to be added to the controller parameter file, the substructure file or the structural model main file (up to the user to decide what is most convenient). The search order in the files is:
 
  1. structural main file
  2. substructure file
