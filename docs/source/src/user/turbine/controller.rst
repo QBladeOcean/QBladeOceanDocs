@@ -210,12 +210,12 @@ The example below shows the source code of a simple external controller library 
 		sprintf(message_out,"First call, do some initialization things! Timestep = %f",avrSwap[1]);
 		firstCall = false;
 	    }
-	    else{
-		//this is an example how some value is computed from the data in the swap array and then 
-		//returned in the same swap array at position [50]
-		sprintf(message_out,"Successive call, do some calculation things! Time = %f",avrSwap[0]);
-		avrSwap[50] = avrSwap[0]*(-1.0);
-	    }
+	    
+	    //this is an example how some value is computed from the data in the swap array and then 
+	    //returned in the same swap array at position [50]
+	    sprintf(message_out,"Successive call, do some calculation things! Time = %f",avrSwap[0]);
+	    avrSwap[50] = avrSwap[0]*(-1.0);
+	    
 	}
 
 	//this function should have the same name as the function above with "_message" appended to it
