@@ -107,15 +107,13 @@ Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its po
 :code:`SUBJOINTS`
  Defines a table that is used to place spatial joints that help define the members of the substructure. Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the Cartesian coordinates of the joint (in m). The origin is the seabed if :code:`ISFLOATING` is false and the MSL if :code:`ISFLOATING` is true. 
  
- The values X1, Y1, Z1, X2, Y2 and Z2 are optional and can be used to define the local coordinate axes of the joint. X1, Y1 and Z1 are defining the vector of the joints local X-Axis (in global coordinates). X2, Y2 and Z2 define the joints Y-Axis (in global coordinates). The Z-Axis is then constructed to define a right-hand coordinate system. The standard joint orientation is X1, Y1, Z1 = (1,0,0) and X2, Y2, Z2 = (0,1,0). If the user wants to define joint orientations they have to be defined for each joint in the table.
- 
  The table is structured as follows:
 
  .. code-block:: console 
-	:caption: : The SUBJOINTS table
+	:caption: : The SUBJOINTS table, no orientation defined
 
 	SUBJOINTS 	
-	JntID JntX	  JntY	     JntZ	  X1      Y1      Z1      X2      Y2      Z2
+	JntID JntX[m]	  JntY[m]     JntZ[m]	  X1      Y1      Z1      X2      Y2      Z2
 	 1     0.00000     0.00000   -20.00000    1.00    0.00    0.00    0.00    1.00    0.00
 	 2     0.00000     0.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
 	 3    14.43376    25.00000   -14.00000    1.00    0.00    0.00    0.00    1.00    0.00
@@ -136,6 +134,68 @@ Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its po
 	18     4.04145    19.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
 	19   -18.47520     6.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
 	20   -18.47520    -6.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
+
+:code:`SUBJOINTS` (orientation defined by y- and y-axes)
+ Defines a table that is used to place spatial joints that help define the members of the substructure. Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the Cartesian coordinates of the joint (in m). The origin is the seabed if :code:`ISFLOATING` is false and the MSL if :code:`ISFLOATING` is true. 
+ 
+ The values X1, Y1, Z1, X2, Y2 and Z2 are optional and can be used to define the local coordinate axes of the joint. X1, Y1 and Z1 are defining the vector of the joints local X-Axis (in global coordinates). X2, Y2 and Z2 define the joints Y-Axis (in global coordinates). The Z-Axis is then constructed to define a right-hand coordinate system. The standard joint orientation is X1, Y1, Z1 = (1,0,0) and X2, Y2, Z2 = (0,1,0). If the user wants to define joint orientations they have to be defined for each joint in the table.
+ 
+ The table is structured as follows:
+
+ .. code-block:: console 
+	:caption: : The SUBJOINTS table, with orientations defined by x- and y-axes
+
+	SUBJOINTS 	
+	JntID JntX[m]	  JntY[m]     JntZ[m]	  X1      Y1      Z1      X2      Y2      Z2
+	 1     0.00000     0.00000   -20.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 2     0.00000     0.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 3    14.43376    25.00000   -14.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 4    14.43376    25.00000    12.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 5   -28.86751     0.00000   -14.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 6   -28.86751     0.00000    12.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 7    14.43376   -25.00000   -14.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 8    14.43376   -25.00000    12.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	 9    14.43375    25.00000   -20.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	10   -28.86750     0.00000   -20.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	11    14.43375   -25.00000   -20.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	12     9.23760    22.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	13   -23.67130     3.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	14   -23.67130    -3.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	15     9.23760   -22.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	16    14.43375   -19.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	17    14.43375    19.00000    10.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	18     4.04145    19.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	19   -18.47520     6.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	20   -18.47520    -6.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
+	
+:code:`SUBJOINTS` (orientation defined by Euler angles))
+ An alternative way to define the orientation of the substructure joints is to define the orientation of each joint by means of three consecutive Euler rotations around the global coordinate system. The first rotation is performed around the global X-axis, the second rotation around the global Y-axis and the third rotation around the global Z-axis. The last three columns are also optional, if not defined the orientation of each joint is the same as the global coordinate system.
+ 
+ .. code-block:: console 
+	:caption: : The SUBJOINTS table, with orientation defined by Euler angles
+
+	SUBJOINTS 	
+	JntID JntX[m]	  JntY[m]     JntZ[m]	  	RotX[deg]    	RotY[deg]    	RotZ[deg]
+	 1     0.00000     0.00000   -20.00000		0.00		0.00		0.00
+	 2     0.00000     0.00000    10.00000		0.00    	0.00		0.00
+	 3    14.43376    25.00000   -14.00000		0.00    	0.00		0.00
+	 4    14.43376    25.00000    12.00000		0.00    	0.00		0.00
+	 5   -28.86751     0.00000   -14.00000		0.00    	0.00		0.00
+	 6   -28.86751     0.00000    12.00000		0.00    	0.00		0.00
+	 7    14.43376   -25.00000   -14.00000		0.00    	0.00		0.00
+	 8    14.43376   -25.00000    12.00000		0.00    	0.00		0.00
+	 9    14.43375    25.00000   -20.00000		0.00    	0.00		0.00
+	10   -28.86750     0.00000   -20.00000		0.00    	0.00		0.00
+	11    14.43375   -25.00000   -20.00000		0.00    	0.00		0.00
+	12     9.23760    22.00000    10.00000		0.00    	0.00		0.00
+	13   -23.67130     3.00000    10.00000		0.00    	0.00		0.00
+	14   -23.67130    -3.00000    10.00000		0.00    	0.00		0.00
+	15     9.23760   -22.00000    10.00000		0.00    	0.00		0.00
+	16    14.43375   -19.00000    10.00000		0.00    	0.00		0.00
+	17    14.43375    19.00000    10.00000		0.00    	0.00		0.00
+	18     4.04145    19.00000   -17.00000		0.00    	0.00		0.00
+	19   -18.47520     6.00000   -17.00000		0.00    	0.00		0.00
+	20   -18.47520    -6.00000   -17.00000		0.00    	0.00		0.00
 	
 :code:`JOINTOFFSET`
  Defines a table that can be used to apply a global offset to the positions of all :code:`SUBJOINTS`. Note that the offset is only applied to the joints and not the mass and hydro reference points defined in :ref:`StrDef_LPFT`.
@@ -347,17 +407,27 @@ The transition piece is the reference position in the substructure definition th
 	
  Note: for the 1st :code:`TP_INTERFACE_POS_<X>` the numbering **_1** can be omitted, so TP1 can be defined by the keyword :code:`TP_INTERFACE_POS`. This is also true for the definitions of all following reference points.
 
-:code:`TP_ORIENTATION_<X>`
+:code:`TP_ORIENTATION_<X>` (orientation defined by x- and y -axes)
  Defines the orientation of the tower base or RNA coordinate system which is connected to the :code:`TP_INTERFACE_POS_<X>` by defining its :math:`X_t`- and :math:`Y_t`-Axis in the global coordinate system. The first row defines the X-axis (:math:`X_{tp}`) orientation and the second row defines the Y-axis (:math:`Y_{tp}`) orientation of the transition piece coordinate system. 
  If :code:`TP_ORIENTATION_<X>` is not specified the default values are :math:`X_{tp}=(1,0,0)` and :math:`Y_{tp}=(0,1,0)`, so the tower base coordinate system is aligned with the global coordinate system. The :math:`Z_t`-Axis is evaluated from the cross-product of :math:`X_t` and :math:`Y_t`.
 
    .. code-block:: console
-   	:caption: : The TP_ORIENTATION table
+   	:caption: : The TP_ORIENTATION 2x3 table
 
 	TP_ORIENTATION
 	X[m]		Y[m]		Z[m]
 	1 		0 		0
 	0 		1 		0
+	
+:code:`TP_ORIENTATION_<X>` (orientation defined by Euler angles)
+ An alternative way of defining the orientation of the tower base or RNA is to specify the orientation by means of three Euler angles. Starting from the global coordinate system three consecutive Euler rotations are performed, first around the global X, second around the global Y and third around the global Z axis.  
+
+   .. code-block:: console
+   	:caption: : The TP_ORIENTATION 1x3 table
+
+	TP_ORIENTATION
+	Rot_X[deg]	Rot_Y[deg]	Rot_Z[deg]
+	30 		0 		0
 	
 Lumped Mass, Inertia and Hydrodynamic Forces
 --------------------------------------------
