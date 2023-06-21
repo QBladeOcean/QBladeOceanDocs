@@ -1,7 +1,18 @@
+QBlade 2.0.6.3 beta
+-------------------
+
+ * fixed issue where for certains node/member arrangements a substructure could be over-constrained
+ * fixed issue where for a substructure only turbine definition NaN inertia values were shown in model overview
+ * fixed automatic scene scaling for displaced substructure-only configurations
+ * orientations of subjoints and the transition piece can now also be defined by means of consecutive Euler rotations
+ * optimizations of OpenCl particle kernels (QBlade-EE)
+ * fixed crash of modal analysis of substructure-only configurations (QBlade-EE)
+ * fixed issue where the multi-turbine (.mta) ASCII import could crash if some files were missing (QBlade-EE)
+
 QBlade 2.0.6.2 beta
 -------------------
 
- * added total morison force to output for substructure members in hydrodyn. time graphs
+ * added total Morison force to output for substructure members in hydrodynamic time graphs
  * fixed some small issues with the openCl device selection when not in the GUI mode (CLI or SIL)
  * fixed normal calculation for .stl blade export at blade hub and tip end faces
  * added an optional export filter to rearrange/filter the export files that are generated
