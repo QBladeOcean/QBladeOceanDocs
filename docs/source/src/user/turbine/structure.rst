@@ -430,7 +430,7 @@ The forces and moments that obtained from a structural body are the **internal s
 Blade, Strut and Tower Structural Data Tables
 ---------------------------------------------
 
-The cross-sectional beam properties of the blade, tower and strut bodies have to be defined in the form of structural data tables. The definition of the table entries are found in :ref:`Structural Data Tables Column Definition`. An exemplary structural blade data table is shown below:
+The cross-sectional beam properties of the blade, tower and strut bodies have to be defined in the form of structural data tables. The definition of the table entries are found in :ref:`Blade / Strut Structural Data Table Columns` and :ref:`Tower / Torquetube Structural Data Table Columns`. An exemplary structural blade data table is shown below:
 
 .. code-block:: console
 	:caption: : Exemplary blade structural data file
@@ -536,12 +536,76 @@ This cross sectional coordinate system in **ONLY** used for the definition of th
 
 For all other structural bodies (tower, torquetube, substructure) the coordinate system in which the cross sectional structural properties are defined coincides with the local body coordinate system (see :ref:`Local Blade Coordinate System`).
 
-Structural Data Tables Column Definition
-----------------------------------------
+Blade / Strut Structural Data Table Columns
+-------------------------------------------
+
+The following table gives an overview of the entries of the structural data table for blades and struts:
+
+.. table:: Blade / Strut Cross Sectional Beam Properties
+	:widths: 10 20 30 10
+
+	======== ==================== ========================================= =======
+	Col. Nr. Name                 Explanation                               Unit
+	======== ==================== ========================================= =======
+	1        Length               Curved length distance from the first     -
+				      body node normalized by the body length        
+	-------- -------------------- ----------------------------------------- -------
+	2        Mass density         Mass per unit length                      kg/m
+	-------- -------------------- ----------------------------------------- -------
+	3        Bend. stiff. X       Bending Stiffness around :math:`X_{ce}`   Nm^2
+				      (:math:`EI_{xx}`)         
+	-------- -------------------- ----------------------------------------- ------- 
+	4        Bend. stiff. Y       Bending Stiffness around :math:`Y_{ce}`   Nm^2
+				      (:math:`EI_{yy}`)  
+	-------- -------------------- ----------------------------------------- ------- 
+	5        Axial stiff.         Longitudinal Stiffness                    N
+				      (:math:`EA`)                   
+	-------- -------------------- ----------------------------------------- ------- 
+	6        Tors. stiff.         Torsional Stiffness                       Nm^2
+				      (:math:`GJ`)                   
+	-------- -------------------- ----------------------------------------- ------- 
+	7        Shear stiff.         Shear Stiffness                           N
+				      (:math:`GA`) (not used with Euler beams)     
+	-------- -------------------- ----------------------------------------- ------- 
+	8        Str. pitch           Structural pitch angle between reference  deg
+				      :math:`X` and :math:`X_{ce}` axis         
+	-------- -------------------- ----------------------------------------- ------- 
+	9        Shear factor X       Shear factor for force in principal       -
+				      bending axis :math:`X_{ce}`  
+	-------- -------------------- ----------------------------------------- ------- 
+	10       Shear factor Y       Shear factor for force in principal       -
+				      bending axis :math:`Y_{ce}`
+	-------- -------------------- ----------------------------------------- ------- 
+	11       Radius of gyration X Norm. radius of inertia corresponding to  %chord
+				      a rotation around :math:`X_{ce}`   
+	-------- -------------------- ----------------------------------------- ------- 
+	12       Radius of gyration Y Norm. radius of inertia corresponding to  %chord
+				      a rotation around :math:`Y_{ce}`    
+	-------- -------------------- ----------------------------------------- ------- 
+	13       Center of mass X     Norm. center of mass position :math:`X`   %chord           
+	-------- -------------------- ----------------------------------------- ------- 
+	14       Center of mass Y     Norm. center of mass position :math:`Y`   %chord
+	-------- -------------------- ----------------------------------------- ------- 
+	15       Center of elast. X   Norm. center of elasticity position       %chord
+				      :math:`X`
+	-------- -------------------- ----------------------------------------- ------- 
+	16       Center of elast. Y   Norm. center of elasticity position       %chord
+				      :math:`Y`
+	-------- -------------------- ----------------------------------------- ------- 
+	17       Center of shear X    Norm. center of shear position :math:`X`  %chord
+	-------- -------------------- ----------------------------------------- ------- 
+	18       Center of shear Y    Norm. center of shear position :math:`Y`  %chord
+	-------- -------------------- ----------------------------------------- ------- 
+	19       Damping Coefficient  **(optional)** This column allows to        -
+				      assign distributed Rayleigh beta coeff.
+	======== ==================== ========================================= =======  
+	
+Tower / Torquetube Structural Data Table Columns
+------------------------------------------------
 
 The following table gives an overview of the entries of the structural data table:
 
-.. table:: Cross Sectional Beam Properties
+.. table:: Tower / Torquetube Cross Sectional Beam Properties
 	:widths: 10 20 30 10
 
 	======== ==================== ========================================= =======
@@ -598,8 +662,12 @@ The following table gives an overview of the entries of the structural data tabl
 	-------- -------------------- ----------------------------------------- ------- 
 	19       Diameter             Cross section diameter                    m
 	-------- -------------------- ----------------------------------------- ------- 
-	20       Drag                 Drag coefficient for aerodynamic drag     -                                                                                                              
-	======== ==================== ========================================= =======  
+	20       Drag                 **(optional)** Drag coefficient for         -      
+				      aerodynamic drag
+	-------- -------------------- ----------------------------------------- ------- 
+	21       Damping Coefficient  **(optional)** This column allows to        -
+				      assign distributed Rayleigh beta coeff.
+	======== ==================== ========================================= ======= 
 
 Cable Definition File
 ---------------------
