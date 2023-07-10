@@ -143,6 +143,7 @@ In this section special events, external loading, prescribed motion and prescrib
 * **External Loading File**: A user defined loading timeseries can be applied to the turbine during simulation via this file format, multiple loading timeseries may be appended into a single file. The nomenclature in the file is as follows:
 
 .. code-block:: console
+	:caption: : The scheme of an external loading file
 
 	<SensorName> <localflag>
 	<time1> <fx1> <fy1> <fz1> <mx1> <my1> <mz1>
@@ -150,11 +151,22 @@ In this section special events, external loading, prescribed motion and prescrib
 	
 Sensor naming is the same as in the main file for the sensor outputs (see :ref:`Loading Data and Sensor Locations`) The local flag (local, global) defined if the loads are applied in the :ref:`Global Coordinate System` or in the :ref:`Local Body Coordinate Systems` or :ref:`Local Sensor Coordinate Systems`. QBlade interpolates linearly the loads between time stamps. External load time series for multiple sensors can be appended into a single file.
 
+This exemplary file applies an impulsive load of 1e7 N along the global x-direction to the tower at 50% height. The loads are interpolated in time, so the x-loading rises from 0 N at 19.8s linearly to 1e7 N at 20s and drops of to 0 N at 20.2s:
+
+.. code-block:: console
+	:caption: : An exemplary external loading file that applies an impulsive load at 20s to the tower
+
+	TWR_0.5	false	
+	19.8	0	0	0	0	0	0	
+	20	1e8	0	0	0	0	0	
+	20.2	0	0	0	0	0	0
+
 * **Simulation Input File**:
 
 The turbine operation can be prescribed using a file of the following format. *Turbine definition* with or without a structural definition can be subjected to prescribed operation. QBlade interpolates linearly the loads between time stamps.
 
 .. code-block:: console
+	:caption: : An exemplary simulation input file
 
 	Time	RPM	Yaw	PitchB1	PitchB2	...	PitchBN	AFC1_B1 AFC2_B2	...	AFCN_BN
 	0	1	11	0	0	...	0	0	0	...	0	
@@ -172,22 +184,23 @@ The turbine operation can be prescribed using a file of the following format. *T
 
 * **Prescribed Motion File**
 
-The turbine translation and rotation can be prescribed using a file of the following format. *Turbine definition* with or without a structural definition can be subjected to prescribed operation. QBlade interpolates linearly the loads between time stamps. The translation and rotation is applied to the "ground" to which a bottom fixed turbine is directly connected. If a floating wind turbine is simulated the prescribed motion will only affect elements that are constrained to the seabed (typically the mooring line anchors). By using the keyword *CONSTRAINEDFLOATER* in the turbine substructure definition it is also possible to prescribe the translation/rotation of the floater directly.
+The translation and rotation of the ground, where the tower bottom of the wind turbine is constrained, can be prescribed using a prescribed motion file of the following format. The translation and rotation is applied to the "ground" to which a bottom fixed turbine is directly connected. If a floating wind turbine is simulated the prescribed motion will only affect elements that are constrained to the seabed (typically the mooring line anchors). By using the keyword *CONSTRAINEDFLOATER* in the turbine substructure definition it is also possible to prescribe the translation/rotation of the floater directly.
 
 .. code-block:: console
+	:caption: : An exemplary prescribed motion file
 
-	Time	RPM	Yaw	PitchB1	PitchB2	PitchB3
-	0	1	11	0	0	0
-	5	2	11	0	0	0
-	10	4	11	0	5	0
-	15	7	11	0	10	0
-	20	11	11	0	17	0
-	25	12	11	0	27	0
-	30	13	11	0	40	10
-	35	12	11	0	40	20
-	40	11	11	0	40	30
-	45	11	11	0	40	40
-	50	11	11	0	40	40
+	Time	TransX	TransY	TransZ	RotX	RotY	RotZ
+	0	1	11	0	0	0	0	
+	5	2	11	0	0	0	0	
+	10	4	11	0	5	0	0	
+	15	7	11	0	10	0	0	
+	20	11	11	0	17	0	0	
+	25	12	11	0	27	0	0	
+	30	13	11	0	40	10	10	
+	35	12	11	0	40	20	20	
+	40	11	11	0	40	30	30	
+	45	11	11	0	40	40	40	
+	50	11	11	0	40	40	40	
 
 
 Multi Turbine Simulations
