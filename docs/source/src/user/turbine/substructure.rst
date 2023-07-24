@@ -525,15 +525,17 @@ The connection to the ground is handled differently for floating and fixed-botto
 It can be either a rigid connection or a connection via a system of non-linear springs and dampers. These latter elements are defined with the keywords :code:`NLSPRINGDAMPERS` and optionally :code:`SPRINGDAMPK`.
 
 :code:`MOORELEMENTS` 
- is a table that contains the structural parameters of the flexible cable elements of the substructure such as mooring lines. Each row defines one set of parameters and has 6 values. These are the mooring element ID number, the mass per length [kg/m], bending stiffness around y or x in [Nm^2], the axial stiffness in [N], the mass proportional Rayleigh damping coefficient and a hydrodynamic diameter in [m], which is used during buoyancy and Morison force evaluations.
+ is a table that contains the structural parameters of the flexible cable elements of the substructure such as mooring lines. Each row defines one set of parameters and has 6 values. These are the mooring element ID number, the mass per length [kg/m], bending stiffness around y or x in [Nm^2], the axial stiffness in [N], a structural (longitudinal) damping coefficient and a hydrodynamic diameter in [m], which is used during buoyancy and Morison force evaluations.
 
  .. code-block:: console
    	:caption: : The MOORELEMENTS table
 
 	MOORELEMENTS
 	MooID	MASS_[kg/m]	EIy_[N.m^2]	EA_[N]		DAMP_[-]	DIA_[m]
-	1	1.086306E+02	6.148892E+08	7.536117E+08	0.015		0.077
-	2	2.013616E+02	4.234759E+08	8.513517E+08	0.015		0.137
+	1	1.086306E+02	6.148892E+08	7.536117E+08	0.001		0.077
+	2	2.013616E+02	4.234759E+08	8.513517E+08	0.001		0.137
+	
+ In some cases, if a too large alpha damping coefficient is used for a mooring line element, the simulation can become unstable. In most cases, damping may be set to zero for the mooring lines.
 
 :code:`MOORMEMBERS`
  is a table that contains the information of the cable members (such as the mooring lines). Each row defines one cable member and has 10 entries. The first entry is the ID number of the cable member. The next two entries are the connection points of the cable member. There are several ways of defining the connection points. These are:
@@ -637,7 +639,6 @@ Nonlinear Spring and Damper Constraints
 
 :code:`SPRINGDAMPK`
  is an optional proportionality constant to add a damping value to the spring elements. If this keyword is used, then all of the spring elements defined in :code:`NLSPRINGDAMPERS` are treated as spring-damping systems. The additional damping coefficients are calculated using the following approach: :math:`D_i`  = :code:`SPRINGDAMPK` :math:`\cdot K_i`.  This keyword does not affect the 'damp' elements defined in :code:`NLSPRINGDAMPERS`.
-
 
 Hydrodynamic Modeling of a Substructure
 ---------------------------------------
@@ -1095,7 +1096,7 @@ An exemplary substructure file for the OC4 Semi-Submersible floater is shown bel
 
 	MOORELEMENTS
 	MooID	MASS_[kg/m]	EIy_[N.m^2]	EA_[N]		DAMP_[-]	DIA_[m]
-	1	1.086306E+02	6.148892E+08	7.536117E+08	0.015		0.077
+	1	1.086306E+02	6.148892E+08	7.536117E+08	0.001		0.077
 
 	MOORMEMBERS
 	ID	CONN_1				CONN_2			Len.[m]	MoorID 	HyCoID	IsBuoy	MaGrID	ElmDsc	Name
