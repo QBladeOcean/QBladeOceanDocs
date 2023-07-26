@@ -499,7 +499,7 @@ The cross-sectional beam properties of the blade, tower and strut bodies have to
 	R	G	B
 	220	220	220
 	
-* :code:`RAYLEIGHDMP`: defines a stiffness proportional Rayleigh damping coefficient (see :ref:`Structural (Rayleigh) Damping`). The parameters :code:`STIFFTUNER` and :code:`MASSTUNER` can be used to tune the global stiffness or mass properties of the data table through a multiplication by this factor. The keyword :code:`RGBCOLOR` defines the rgb values that are used to color the structural body during the 3D visualization. 
+* :code:`RAYLEIGHDMP`: defines a stiffness proportional Rayleigh damping coefficient (see :ref:`Structural Damping`). The parameters :code:`STIFFTUNER` and :code:`MASSTUNER` can be used to tune the global stiffness or mass properties of the data table through a multiplication by this factor. The keyword :code:`RGBCOLOR` defines the rgb values that are used to color the structural body during the 3D visualization. 
 
 The keyword :code:`DISC` controls the discretization of the body into structural nodes. The following options are available:
 
