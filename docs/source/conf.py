@@ -51,8 +51,6 @@ numfig = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
-#html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
 html_theme_path = ['_themes']
 html_logo = 'images/q_logo_black.png'
