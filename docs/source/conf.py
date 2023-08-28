@@ -24,6 +24,7 @@ author = 'D. Marten, J. Saverin, R. Behrens de Luna, S. Perez-Becker'
 # The full version, including alpha/beta/rc tags
 release = '2.0.6'
 
+import sphinx_rtd_theme
 
 # -- General configuration ---------------------------------------------------
 
