@@ -499,7 +499,7 @@ The cross-sectional beam properties of the blade, tower and strut bodies have to
 	R	G	B
 	220	220	220
 	
-* :code:`RAYLEIGHDMP`: defines a stiffness proportional Rayleigh damping coefficient (see :ref:`Structural (Rayleigh) Damping`). The parameters :code:`STIFFTUNER` and :code:`MASSTUNER` can be used to tune the global stiffness or mass properties of the data table through a multiplication by this factor. The keyword :code:`RGBCOLOR` defines the rgb values that are used to color the structural body during the 3D visualization. 
+The keyword :code:`RAYLEIGHDMP`: defines a stiffness proportional Rayleigh damping coefficient (see :ref:`Structural (Rayleigh) Damping`). The parameters :code:`STIFFTUNER` and :code:`MASSTUNER` can be used to tune the global stiffness or mass properties of the data table through a multiplication by this factor. The keyword :code:`RGBCOLOR` defines the rgb values that are used to color the structural body during the 3D visualization. 
 
 The keyword :code:`DISC` controls the discretization of the body into structural nodes. The following options are available:
 
@@ -508,6 +508,15 @@ The keyword :code:`DISC` controls the discretization of the body into structural
 * :code:`aero DISC`: The discretization is carried out after the discretization in the aerodynamic blade data table (only for blade bodies).
 
 The keyword :code:`ADDMASS_<pos>` can be used to add a mass at the normalized position *<pos>*. :code:`ADDMASS_<pos>` can be followed by up to 7 numeric values (at least one) to assign mass and rotational inertia properties. For example: :code:`ADDMASS_0.2 10 1 2 3 4 5 6` adds a mass of 10kg at the normalized position of 0.2. The following numbers assign the rotational inertia in local body coordinates: *Ixx = 1, Iyy = 2, Izz = 3, Ixy = 4, Ixz = 5, Iyz = 6*. 
+
+Keywords for the Modeling of Marine Hydrokinetic Turbines
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The keyword :code:`ADDEDMASSCOEFF` can be used to assign an added mass coefficient to the blade. This can be useful when modeling marine hydrokinetic turbines (MHK). This coefficient is used in the Morison-style hydrodynamic inertia force and added-mass force calculation.
+
+The keyword :code:`DYNPRESSURECOEFF` can be used to assign a dynamic pressure coefficient to the blade. This can be useful when modeling marine hydrokinetic turbines (MHK). This coefficient is used in the Morison-style hydrodynamic inertia force calculation.
+
+The keyword :code:`ISBUOYANCY` is used to turn on the buoyancy calculation for the structure it is assigned to. The buoyancy force is acting on the cross sectional area of a blade or tower section.
 
 Structural (Rayleigh) Damping
 -----------------------------
