@@ -1,5 +1,10 @@
+jinja
 sphinx-rtd-theme
-sphinx_rtd_theme
+pillow
+mock
+alabaster
+commonmark 
+recommonmark 
 sphinxcontrib.bibtex
 sphinx_copybutton
 
