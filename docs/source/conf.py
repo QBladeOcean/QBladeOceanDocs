@@ -54,7 +54,7 @@ numfig = True
 #
 #html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
-html_theme_path = ['_themes', ]
+html_theme_path = ['_themes']
 html_logo = 'images/q_logo_black.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
