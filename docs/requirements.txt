@@ -1,5 +1,5 @@
 sphinx
-sphinx_rtd_theme
+sphinx-rtd-theme==1.2.2
 sphinxcontrib.bibtex
 sphinx_copybutton
 
