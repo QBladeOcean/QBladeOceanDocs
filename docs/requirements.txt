@@ -1,4 +1,3 @@
-jinja
 sphinx-rtd-theme
 pillow
 mock
