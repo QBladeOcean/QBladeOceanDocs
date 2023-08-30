@@ -509,15 +509,6 @@ The keyword :code:`DISC` controls the discretization of the body into structural
 
 The keyword :code:`ADDMASS_<pos>` can be used to add a mass at the normalized position *<pos>*. :code:`ADDMASS_<pos>` can be followed by up to 7 numeric values (at least one) to assign mass and rotational inertia properties. For example: :code:`ADDMASS_0.2 10 1 2 3 4 5 6` adds a mass of 10kg at the normalized position of 0.2. The following numbers assign the rotational inertia in local body coordinates: *Ixx = 1, Iyy = 2, Izz = 3, Ixy = 4, Ixz = 5, Iyz = 6*. 
 
-Keywords for the Modeling of Marine Hydrokinetic Turbines
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The keyword :code:`ADDEDMASSCOEFF` can be used to assign an added mass coefficient to the blade. This can be useful when modeling marine hydrokinetic turbines (MHK). This coefficient is used in the Morison-style hydrodynamic inertia force and added-mass force calculation.
-
-The keyword :code:`DYNPRESSURECOEFF` can be used to assign a dynamic pressure coefficient to the blade. This can be useful when modeling marine hydrokinetic turbines (MHK). This coefficient is used in the Morison-style hydrodynamic inertia force calculation.
-
-The keyword :code:`ISBUOYANCY` is used to turn on the buoyancy calculation for the structure it is assigned to. The buoyancy force is acting on the cross sectional area of a blade or tower section.
-
 Structural (Rayleigh) Damping
 -----------------------------
 
