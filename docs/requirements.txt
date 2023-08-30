@@ -1,9 +1,4 @@
 sphinx-rtd-theme
-pillow
-mock
-alabaster
-commonmark 
-recommonmark 
 sphinxcontrib.bibtex
 sphinx_copybutton
 
