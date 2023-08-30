@@ -7,9 +7,9 @@ Marine Hydrokinetic Turbines
     :scale: 40%
     :alt: A MHK turbine designed in QBlade.
 
-    A MHK turbine designed in QBlade.
+    A marine hydrokinetic turbine designed in QBlade.
 
-QBlade also provides the capability to model Marine Hydrokinetic (MHK) Turbines, incorporating factors such as buoyancy, added mass, and inertia forces. Properly and consistently modeling these effects requires following a specific set of steps. This section presents an overview of these steps:
+QBlade also provides the capability to model Marine Hydrokinetic (MHK) Turbines that are operating in water instead of air. When changing from air to water factors such as buoyancy, added mass, and inertia forces become increasingly important. Properly and consistently modeling these effects requires following a specific set of steps which are presented in the sections below.
 
 
 Simulation Settings for MHK Turbines
