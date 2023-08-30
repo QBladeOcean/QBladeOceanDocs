@@ -1,5 +1,5 @@
-Marine Hydrokinetic Turbines (MHK)
-----------------------------------
+Marine Hydrokinetic Turbines 
+----------------------------
 
 .. _fig-mhk_turbine:
 .. figure:: mhk_turbine.png
@@ -9,7 +9,7 @@ Marine Hydrokinetic Turbines (MHK)
 
     A MHK turbine designed in QBlade.
 
-QBlade also provides the capability to model Marine Hydrokinetic Turbines (MHK), incorporating factors such as buoyancy, added mass, and inertia forces. Properly and consistently modeling these effects requires following a specific set of steps. This section presents an overview of these steps:
+QBlade also provides the capability to model Marine Hydrokinetic (MHK) Turbines, incorporating factors such as buoyancy, added mass, and inertia forces. Properly and consistently modeling these effects requires following a specific set of steps. This section presents an overview of these steps:
 
 
 Simulation Settings for MHK Turbines
@@ -21,15 +21,15 @@ MHK turbines are treated as if the were *onshore* turbines within the modeling f
  * Change the **Air Density** value to the respective value for water.
  * Change the **Kinematic Viscosity Air** value to the value for water.
 
-Structural Model Settings for MHK Turbines
-******************************************
+Substructure Model Settings for MHK Turbines
+********************************************
 
 In the :ref:`Substructure Definition` section, **Morison Coefficients** and **Buoyancy** can be assigned to various components of the substructure, following the usual procedure. In this context the whole substructure (and turbine) is considered to be *submerged*. In a simulation resembling an onshore scenario, these coefficients will be used in conjunction with the **Air Density** value that was previously replaced with the value for water.
 
-To assign **Added Mass** and **Dynamic Pressure** coefficients to the :ref:`Blade, Strut and Tower Structural Data Tables`, specific keywords can simply be added to the structural data table files associated with these components. Additionally, it's possible to activate **Buoyancy** for these components using a dedicated keyword. Below are the relevant keywords explained:
+Blade and Tower Model Settings for MHK Turbines
+***********************************************
 
-Keywords for the Modeling of Marine Hydrokinetic Turbines
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To assign **Added Mass** and **Dynamic Pressure** coefficients to the :ref:`Blade, Strut and Tower Structural Data Tables`, specific keywords can simply be added to the structural data table files associated with these components. Additionally, it's possible to activate **Buoyancy** for these components using a dedicated keyword. Below are the relevant keywords explained:
 
 The keyword :code:`ADDEDMASSCOEFF` is employed to assign an added mass coefficient to the blade. This coefficient becomes valuable when modeling marine hydrokinetic turbines (MHK), contributing to the calculation of hydrodynamic inertia force and added-mass force in a Morison-style approach.
 
