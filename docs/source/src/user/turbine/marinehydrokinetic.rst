@@ -26,7 +26,7 @@ Structural Model Settings for MHK Turbines
 
 In the :ref:`Substructure Definition` section, **Morison Coefficients** and **Buoyancy** can be assigned to various components of the substructure, following the usual procedure. In this context the whole substructure (and turbine) is considered to be *submerged*. In a simulation resembling an onshore scenario, these coefficients will be used in conjunction with the **Air Density** value that was previously replaced with the value for water.
 
-To assign **Added Mass** and **Dynamic Pressure** coefficients to the :ref:`Blade, Strut and Tower Structural Data Tables`, specific keywords can simply be added to the structural data table files associated with these components. Additionally, it's possible to activate Buoyancy for these components using a dedicated keyword. Below are the relevant keywords explained:
+To assign **Added Mass** and **Dynamic Pressure** coefficients to the :ref:`Blade, Strut and Tower Structural Data Tables`, specific keywords can simply be added to the structural data table files associated with these components. Additionally, it's possible to activate **Buoyancy** for these components using a dedicated keyword. Below are the relevant keywords explained:
 
 Keywords for the Modeling of Marine Hydrokinetic Turbines
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
