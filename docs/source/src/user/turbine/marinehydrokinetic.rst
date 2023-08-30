@@ -21,11 +21,6 @@ MHK turbines are treated as if the were *onshore* turbines within the modeling f
  * Change the **Air Density** value to the respective value for water.
  * Change the **Kinematic Viscosity Air** value to the value for water.
 
-Substructure Model Settings for MHK Turbines
-********************************************
-
-In the :ref:`Substructure Definition` section, **Morison Coefficients** and **Buoyancy** can be assigned to various components of the substructure, following the usual procedure. In this context the whole substructure (and turbine) is considered to be *submerged*. In a simulation resembling an onshore scenario, these coefficients will be used in conjunction with the **Air Density** value that was previously replaced with the value for water.
-
 Blade and Tower Model Settings for MHK Turbines
 ***********************************************
 
@@ -53,3 +48,8 @@ The keyword :code:`ISBUOYANCY` activates buoyancy calculations for the structure
 	:caption: : Exemplary Buoyancy Keyword use
 	
 	true ISBUOYANCY
+	
+Substructure Model Settings for MHK Turbines
+********************************************
+
+In the :ref:`Substructure Definition` section, **Morison Coefficients** and **Buoyancy** can be assigned to various components of the substructure, following the usual procedure (see :ref:`Morison Equation-Related Parameters`). In this context the whole substructure (and turbine) is considered to be *submerged* in water. During the simulation of an *onshore* installed turbine, these coefficients will be used in conjunction with the **Air Density** value that was previously replaced with the value for water (see :ref:`Simulation Settings for MHK Turbines`).
