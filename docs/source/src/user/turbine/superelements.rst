@@ -1,5 +1,5 @@
-Superelements
--------------
+Substructure Superelements
+--------------------------
 
 Craig-Bampton (CB) superelements are a reduction technique used in structural analysis to efficiently model complex systems while retaining their essential dynamic behavior. The CB method involves dividing a large finite element model into smaller substructures, each known as a superelement. These superelements are interconnected through shared degrees of freedom (DOFs) along the interface, see also :footcite:`Branlard2020` .
 

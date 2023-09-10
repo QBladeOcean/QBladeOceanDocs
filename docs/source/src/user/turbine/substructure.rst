@@ -876,6 +876,9 @@ The logic of defining an output is as follows:
 :code:`CST_<CstID>`
  is the keyword used for placing a sensor on the constraint from the :code:`SUBCONSTRAINTS` table with the ID number = <CstID>. The internal loads (force and torque) in the internal constraint coordinate system are then displayed in the *Structural Time Graph*.
  
+:code:`JNT_<JntID>`
+ is the keyword used for placing a sensor on a joint from the :code:`SUBJOINTS` table with the ID number = <JntID>. The position and rotation of the joint in absolute coordinates are displayed in the *Structural Time Graph*.
+ 
 Exemplary Substructure File
 ---------------------------
 

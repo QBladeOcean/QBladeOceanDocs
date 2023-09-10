@@ -76,6 +76,7 @@ Wind Turbine Design
    turbine/aerodynamic
    turbine/structure
    turbine/substructure
+   turbine/superelements
    turbine/marinehydrokinetic
    turbine/controller
    turbine/turbineexport

@@ -68,6 +68,7 @@ Interface Function Definitions
 
 	void setPowerLawWind(double windspeed, double horAngle, double vertAngle, double shearExponent, double referenceHeight);
 	void setDebugInfo(bool isDebug);
+	void setGranularDebug(bool dStr, bool dSim, bool dTurb, bool dCont, bool dSer);
 	void setTimestepSize(double timestep);
 	void setRPMPrescribeType_at_num(int type, int num);
 	void setRampupTime(double time);
@@ -161,6 +162,15 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 :code:`void setDebugInfo(bool isDebug)`
 	This function enables the debug output if set to true.
+	
+:code:`void setGranularDebug(bool dStr, bool dSim, bool dTurb, bool dCont, bool dSer)`
+	This function enables a granular debug output.
+	
+	* dStr: enable structural model debug info
+	* dSim: enable simulation debug info
+	* dTurb: enable turbine debug info
+	* dCont: enable controller debug info
+	* dSer: enable serializer debug info
 
 :code:`void setTimestepSize(double timestep)`
 	This function can be used to set the timestep size (in [s]) if the user wants to change this value from the project or simulation definition file. It needs to be called before :code:`initializeSimulation()`.
@@ -507,6 +517,10 @@ The script *QBladeLibrary.py* defines the class *QBladeLibrary* and loads the sh
 		self.setDebugInfo = self.lib.setDebugInfo
 		self.setDebugInfo.argtype = c_bool
 		self.setDebugInfo.restype = c_void_p
+		
+		self.setGranularDebug = self.lib.setGranularDebug
+		self.setGranularDebug.argtypes = [c_bool, c_bool, c_bool, c_bool, c_bool]
+		self.setGranularDebug.restype = c_void_p
 
 		self.setControlVars_at_num = self.lib.setControlVars_at_num
 		self.setControlVars_at_num.argtypes = [c_double * 5, c_int]
@@ -687,6 +701,10 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 		    calllib('QBLIB', 'setDebugInfo', isDebug);
 		end
 		
+		function setGranularDebug(obj,dStr,dSim,dTurb,dCont,dSer)
+		calllib('QBLIB', 'setGranularDebug',dStr,dSim,dTurb,dCont,dSer);
+		end
+		
 		function setTimestepSize(obj,timestep)
 		    calllib('QBLIB', 'setTimestepSize', timestep);
 		end
@@ -720,7 +738,7 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 		end
 		
 		function getWindspeedArray(obj,posx,posy,posz,velx,vely,velz,arraySize)
-			calllib('QBLIB', 'getWindspeedArray',posx,posy,posz,velx,vely,velz,arraySize);
+		    calllib('QBLIB', 'getWindspeedArray',posx,posy,posz,velx,vely,velz,arraySize);
 		end
 		
 		function getTowerBottomLoads_at_num(obj,loads,num)
