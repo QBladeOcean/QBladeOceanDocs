@@ -392,7 +392,7 @@ Furthermore, it is possible to **overwrite** the mass, stiffness or damping matr
 Recommended Timesteps and Modal Frequencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After a superelement has been defined in a :ref:Substructure Definition` File in QBlade the user can inquire information about the superelement in the *Structural Model Info* window (see :numref:`fig-superelement-info`). 
+After a superelement has been defined in a :ref:`Substructure Definition` File in QBlade the user can inquire information about the superelement in the *Structural Model Info* window (see :numref:`fig-superelement-info`). 
 
 .. _fig-superelement-info:
 .. figure:: superelement_info.png
