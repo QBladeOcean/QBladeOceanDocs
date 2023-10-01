@@ -116,7 +116,7 @@ The following exemplary matrices for the OC4 Jacket superelement are taken from 
 	0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00  7.97634193e+03
 
 :code:`SUPELEM_DAMP_<X>`
- is the keyword for the **optional** damping matrix. The matrix needs to be square and needs to have a minimum size of 6x6. <X> specifies the global ID of this superelement definition. _<X> can be omitted for the first superelement. The damping matrix is only optional, superelement damping can also be assigned through Rayleigh damping coefficients or a critical damping of certain modes (see :ref:`Superelement Damping`).
+ is the keyword for the **optional** damping matrix. The matrix needs to be square and needs to have a minimum size of 6x6. <X> specifies the global ID of this superelement definition. _<X> can be omitted for the first superelement. The damping matrix is only optional, superelement damping can also be assigned through Rayleigh damping coefficients or a critical damping of certain modes (see :ref:`Superelement Damping`). If Rayleigh damping is specified, or critical damping is assigned this matrix is overwritten with the damping evaluated through Rayleigh damping.
  
    .. code-block:: console
    	:caption: : An exemplary damping matrix for a superelement (size 31x31)
@@ -157,7 +157,7 @@ The following exemplary matrices for the OC4 Jacket superelement are taken from 
 Superelement Damping
 ^^^^^^^^^^^^^^^^^^^^
 
-All following keywords are **optional**, if no damping matrix is assigned and none of the following keywords are used no damping will be present in the superelement.
+All following keywords are **optional**, if no damping matrix is assigned and none of the following keywords are used no damping will be present in the superelement. If a damping matrix has been assigned manually and Rayleigh damping is specified through the keywords below, the manually assigned damping matrix will be overwritten with the newly evaluated (Rayleigh) damping matrix.
 
 :code:`SUPELEM_ALPHA_<X>`
  is the keyword to define the mass-proportional Rayleigh damping alpha coefficient.
@@ -227,7 +227,7 @@ The following parameters are optional, and as default all *Craig-Bampton* (CB) m
 :code:`SUPELEM_INIT_CB_<X>`
  this keyword specifies for which CB modes boundary conditions should be set. The CB mode numbering here is unaffected from the removal oif CB modes via the keyword :code:`SUPELEM_INACTIVE_CB<X>`.
  
-  .. code-block:: console
+ .. code-block:: console
 	:caption: : SUPELEM_INIT_CB example, to specify initial conditions for the CB modes 11 12 and 13
 	
 	11 12 13 SUPELEM_INIT_CB
@@ -269,7 +269,16 @@ What this example also shows is that it is possible to use a single superelement
 Assigning Loads to Superelements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^	
 
-Loads can be assigned to a superelement using the *External Loading File* format (see :ref:`Turbine Behavior`). In this context it is important to note the **Constraint ID** with which a superelement is identified. 
+Loads can be assigned to a superelement using the *External Loading File* format (see :ref:`Turbine Behavior`). In this context it is important to note the **Constraint ID** with which a superelement is identified.
+
+Furthermore, it is possible to **overwrite** the mass, stiffness or damping matrices in an *External Loading File*. This is useful so that superelement dynamics can be tailored individually on a per- Design Load Case basis, where the superelement dynamics might be dependent on the seastate or other factors. Below is a list of the keywords that are automatically detected in an *External Loading File*. The keywords themselves have been explained in the previous sections of the superelement descriptions.
+
+ * :code:`SUPELEM_MASS_<X>`
+ * :code:`SUPELEM_STIFF_<X>`
+ * :code:`SUPELEM_DAMP_<X>`
+ * :code:`SUPELEM_ALPHA_<X>`
+ * :code:`SUPELEM_BETA_<X>`
+ * :code:`SUPELEM_CRIT_DAMPING_<X>`
 
 To assign a load to a superelement the keyword :code:`CST_<X>_FEXT` needs to be followed by a matrix with the time dependen loading data, where the **<X>** is the constraint ID of the superelement constraint. In the following matrix, the first column needs to be time in [s] in ascending order. QBlade will interpolate loads linearly between the given timestamps. The following column are for the modal loading data, the first six columns for the *Guyan* modes, followed by the columns for the *Craig-Bampton* modes. The last column can optionally contain wave elevation data.
 
@@ -378,16 +387,6 @@ To assign a load to a superelement the keyword :code:`CST_<X>_FEXT` needs to be 
 	4.9000	5.17625493E+004	3.71970882E+004	5.44123134E+003	1.04738959E+006	-8.35669827E+005	1.49224648E+005	1.00409364E+002	1.74363614E+002	-3.79064798E+001	-6.78284540E+001	-1.45524464E+002	1.35920759E+002	4.16319223E+001	1.50036088E+002	1.83957287E+001	2.77957942E+001	2.51811085E+001	2.54011727E+002	7.89907763E+001	2.06554334E+001	-3.34164448E+002	4.41275903E+000	2.59449363E+001	-1.69546053E+002	5.58971270E+000	7.76464694E+000	-3.15790674E+001	-2.64961960E+001	2.31144671E+001	3.81409200E+002	1.43436173E+000	
 	4.9500	5.18552058E+004	3.81506405E+004	4.57575928E+003	1.06912646E+006	-8.29295394E+005	1.50446390E+005	9.96649919E+001	1.91733048E+002	-3.73635737E+001	-6.48017007E+001	-1.03835063E+002	9.04457613E+001	3.57870066E+001	9.81970511E+001	1.30723871E+001	2.53236104E+001	2.85606159E+001	2.32111769E+002	6.20642374E+001	1.58961484E+001	-3.12701950E+002	-2.19123370E+000	2.50219840E+001	-1.53621682E+002	1.81765815E+000	3.41591141E+000	-3.69786969E+001	-1.73727364E+001	2.23934913E+001	3.55523539E+002	1.67960606E+000	
 	5.0000	5.14407056E+004	4.00472145E+004	3.26677953E+003	1.11580135E+006	-8.14793492E+005	1.51127321E+005	9.54288831E+001	2.15319278E+002	-3.73765274E+001	-6.35154562E+001	-5.28052023E+001	4.96009071E+001	3.82950123E+001	4.25087436E+001	5.83417398E+000	2.22953573E+001	3.54797187E+001	2.12877709E+002	4.66542570E+001	1.44630631E+001	-2.94992066E+002	-9.43587080E+000	2.55519193E+001	-1.40552145E+002	6.54934111E-001	-3.50135696E+000	-4.02913590E+001	-1.03901617E+001	2.32202765E+001	3.35255856E+002	1.78431583E+000	
-	
-
-Furthermore, it is possible to **overwrite** the mass, stiffness or damping matrices in an *External Loading File*. This is useful so that superelement dynamics can be tailored individually on a per- Design Load Case basis, where the superelement dynamics might be dependent on the seastate or other factors. Below is a list of keywords that are automatically detected in an *External Loading File*.
-
- * :code:`SUPELEM_MASS_<X>`
- * :code:`SUPELEM_STIFF_<X>`
- * :code:`SUPELEM_DAMP_<X>`
- * :code:`SUPELEM_ALPHA_<X>`
- * :code:`SUPELEM_BETA_<X>`
- * :code:`SUPELEM_CRIT_DAMPING_<X>`
  
 Recommended Timesteps and Modal Frequencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
