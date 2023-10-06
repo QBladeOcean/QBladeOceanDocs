@@ -1,5 +1,5 @@
-Structural Model Definition
-===========================
+Structural Turbine Design
+=========================
 
 A structural turbine model in QBlade is defined by a set of ASCII input files that describe the overall dimensions of the turbine and the structural properties of the various turbine components. *Structural properties* in this sense relates broadly to the mass, inertia, stiffness and damping properties that are required by the structural simulation engine to resolve the structural dynamics. In most cases these structural properties need to be obtained from specialized software, for example software that is build to design a structural blade layout and can generate the cross-sectional mass, stiffness and damping properties that are required to setup a structural model in QBlade. An overview of the how the turbine structure is modeled through the integration of Project-CHRONO in QBlade can be found in the section: :ref:`Multi Body Beam Formulation`. 
 

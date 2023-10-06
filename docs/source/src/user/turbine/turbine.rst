@@ -1,5 +1,5 @@
-Wind Turbine Definition Overview
-================================
+Overview
+========
 
 .. _fig-turbine-module:
 .. figure:: turbine_module.png
@@ -49,26 +49,5 @@ Turbine Version Info
 --------------------
 
 - **Version Info**: Adds an info string to this turbine object that can be used to annotate changes to the model or revisions of the turbine design.
-
-
-Turbine Geometry
-----------------
-
-If no structural model is defined for this turbine object the turbine geometry is defined here. If a structural model is defined the geometry is defined within the structural model files.
-    
-- **Rotor Overhang**: Sets the rotor overhang of the turbine object (see :numref:`fig-turbine-geometry`)
-- **Tower Height**: Definition of the tower height.
-- **Tower Top/Bottom Radius**: Defined the tower top and bottom radius. A linear interpolation is applied for all tower stations in between.
-- **Rotor Shaft Tilt Angle**: Sets the rotor shaft tilt angle (see :numref:`fig-turbine-geometry`).
-- **Rotor Cone Angle**: Sets the rotor cone angle (see :numref:`fig-turbine-geometry`).
-
-
-.. _fig-turbine-geometry:
-.. figure:: turbine_geometry.png
-    :align: center
-    :scale: 60%
-    :alt: Definition of turbine geometry parameters.
-    
-    Definition of turbine geometry parameters.
     
 .. footbibliography::

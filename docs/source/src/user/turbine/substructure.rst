@@ -1,5 +1,5 @@
-Substructure Definition
-=======================
+Substructure Design
+===================
 
 Substructure Overview
 ---------------------

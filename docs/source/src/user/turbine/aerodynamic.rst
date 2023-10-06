@@ -1,5 +1,27 @@
-Aerodynamic Turbine Parameters
-==============================
+Aerodynamic Turbine Design
+==========================
+
+This section covers all options that are related to the aerodynamic modelling of a turbine design. Covering wake models, dynamic stall models, geometry parameters and blade discretization.
+
+Turbine Geometry
+----------------
+
+If no structural model is defined for this turbine object the turbine geometry is defined here. If a structural model is defined the geometry is defined within the structural model files.
+    
+- **Rotor Overhang**: Sets the rotor overhang of the turbine object (see :numref:`fig-turbine-geometry`)
+- **Tower Height**: Definition of the tower height.
+- **Tower Top/Bottom Radius**: Defined the tower top and bottom radius. A linear interpolation is applied for all tower stations in between.
+- **Rotor Shaft Tilt Angle**: Sets the rotor shaft tilt angle (see :numref:`fig-turbine-geometry`).
+- **Rotor Cone Angle**: Sets the rotor cone angle (see :numref:`fig-turbine-geometry`).
+
+
+.. _fig-turbine-geometry:
+.. figure:: turbine_geometry.png
+    :align: center
+    :scale: 60%
+    :alt: Definition of turbine geometry parameters.
+    
+    Definition of turbine geometry parameters.
 
 Aerodynamic Discretization
 --------------------------
@@ -23,6 +45,11 @@ Here the user can choose between the **Free Vortex Wake** or the **Unsteady BEM*
 Unsteady BEM
 ------------
 
+The :ref:`Blade Element Momentum Method` in QBlade is the default modeling option for HAWT (Horizontal Axis Wind Turbines). It has a large computational efficiency and good accuracy in most cases. The Unsteady BEM cannot be used to model VAWT (Vertical Axis Wind Turbines). To model a VAWT the :ref:`Free Vortex Wake` method must be used.
+
+Unsteady BEM Options
+--------------------
+
 - **Azimuthal Polar Grid Discretization**: The polar grid is discretized into the chosen number of azimuthal sections. A value of 1 is equal to the BEM without a polar grid.
 - **Include Tip Loss**: This activates the classical BEM tip loss correction to account for a finite number of blades, see :footcite:t:`Glauert1935`. 
 - **Convergence Acceleration Time**: The time lag constants in the unsteady BEM implementation are increased by a factor of 20 during the time span entered by the user. This enables a much faster convergence of the unsteady BEM towards a steady operational point.
@@ -32,6 +59,8 @@ The theory of the unsteady polar BEM is briefly described in :ref:`Polar Grid`.
 
 Free Vortex Wake
 ----------------
+
+The :ref:`Lifting Line Free Vortex Wake` method in QBlade yields an improved accuracy over the Unsteady BEM method, especially for unsteady operating conditions, such as changing inflow speed or direction or floating wind turbines, that are subjected to wave forces. This increased fidelity however comes at an increased computational cost. Furthermore, the number of settings that are required to setup this method is significantly larger than the BEM settings. All LLFVW modeling options are detailed in the following.
 
 Wake Modelling
 --------------
