@@ -285,7 +285,7 @@ Tower Parameters
 	OC3_Sparbuoy_Tower.str		TWRFILE - Name of file containing properties for the tower
 	OC3_Sparbuoy_Sub_LPMD.str	SUBFILE	 - Name of the substructure file
 	
-The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Definition`.
+The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Design`.
 
 VAWT Specific Parameters
 ------------------------
