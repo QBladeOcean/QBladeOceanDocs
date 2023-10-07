@@ -1,6 +1,13 @@
 Substructure Design
 ===================
 
+.. _fig-substruc-structures:
+.. figure:: substructures.png
+    :align: center
+    :alt: Three different substructures defined in QBlade.
+
+    Three different substructures (in yellow) connected to the tower bottom (grey).
+
 Substructure Overview
 ---------------------
 
@@ -14,13 +21,6 @@ Optionally, a substructure definition can be added to the structural model of a 
 To add a substructure to a turbine definition you need to add the filename of the substructure definition followed by the keyword :code:`SUBFILE` anywhere within the main structural input file. 
 
 It is possible to connect the substructure either to the tower bottom, torquetube bottom or directly to the rotor nacelle assembly (RNA) of a turbine definition. If the main structural input file contains a :code:`TWRFILE` the transition piece of the substructure (:code:`TP_INTERFACE_POS`) is automatically connected to the tower bottom. If the substructure contains no :code:`TWRFILE` keyword the transition piece is connected to the rotor nacelle assembly (RNA).
-
-.. _fig-substruc-structures:
-.. figure:: substructures.png
-    :align: center
-    :alt: Three different substructures defined in QBlade.
-
-    Three different substructures (in yellow) connected to the tower bottom (grey).
     
 Modeling Options for an Offshore Substructure
 ---------------------------------------------
