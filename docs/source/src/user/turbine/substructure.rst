@@ -651,7 +651,7 @@ The second option is to model the hydrodynamic forces using a linear potential f
 
 QBlade allows the user to combine elements from the :doc:`../../theory/hydrodynamics/lpft/lpft` and :doc:`../../theory/hydrodynamics/me/me` hydrodynamic models freely. The user should be careful when setting up the substructure in QBlade so that the model remains consistent.
 
-A typical mix between the Morison equation and potential flow theory is to have all hydrodynamic forces be evaluated by a linear potential flow database and use the Morison question to compute the hydrodynamic drag force, which is missing from the potential flow theory due to its assumption of inviscid flow.
+A typical mix between the Morison equation and potential flow theory is to have all hydrodynamic forces be evaluated by a linear potential flow database and use the Morison equation to compute the hydrodynamic drag force, which is missing from the potential flow theory due to its assumption of inviscid flow.
 
 Morison Equation-Related Parameters
 -----------------------------------

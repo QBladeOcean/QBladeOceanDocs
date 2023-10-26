@@ -1,7 +1,7 @@
 Validation Tests for Potential Flow Models with Morison Drag (LPMD)
 ====================================================================
 The linear potential flow model in QBlade (QB) (see :doc:`../../../theory/hydrodynamics/lpft/lpft`) was validated in a series of test load cases using two different turbine models: a spar buoy and a semisubmersible.
-The linear potential flow model was enhanced with quadratic drag forces via the Morision equation (see :doc:`../../../theory/hydrodynamics/me/me`) and is termed LPMD in this document.
+The linear potential flow model was enhanced with quadratic drag forces via the Morison equation (see :doc:`../../../theory/hydrodynamics/me/me`) and is termed LPMD in this document.
 The load cases were chosen with increasing complexity to make sure the individual modules were working correctly. 
 
 The results were validated against the open-source aero-hydro-elastic code OpenFAST (OF) :footcite:`OpenFAST` (version 2.5.0). 
