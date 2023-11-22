@@ -110,7 +110,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 
 :code:`void advanceController_at_num(double *vars, int num = 0)`
-	This function advancess the controller dll of the selected turbine (argument *num*). The controller outputs are automatically applied to the turbine actuators and to the generator. The controller ouputs are also returned in the *vars* array:
+	This function advances the controller shared library that is assigned to the selected turbine (argument *num*). When calling this function the controller outputs (gen. torque, blade pitch, etc.) are automatically applied to the turbine (no need to call :code:`void setControlVars_at_num(double *vars, int num = 0)`). The controller outputs are also returned in the *vars* array, and can be processed further:
 	
 	* vars[0] = generator torque [Nm]
 	* vars[1] = yaw angle [deg]
@@ -194,7 +194,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	This function sets the turbine tower bottom x, y and z position [m], and xrot, yrot zrot rotation [deg]. It can be called before :code:`initializeSimulation()` if the turbine position should be offset initially or during the simulation loop if it should be changed dynamically, for example during cosimulation with a hydrodynamics software that models the floater.
 
 :code:`void setControlVars_at_num(double *vars, int num = 0)`
-	This function applies the control actions of the selected turbine (argument *num*) for torque, pitch and yaw angle. If it is called after the function :code:`advanceController()` the control actions from the controller can be overwritten (or modified). The following data needs to be passed in the array *vars*.
+	This function applies the control actions to the selected turbine (argument *num*) for torque, pitch and yaw angle. If it is called after the function :code:`advanceController()` the control actions from the controller are overwritten (in this way the controll actions can also be modified). The following data needs to be passed in the array *vars*.
 	
 	* vars[0] = generator torque [Nm];
 	* vars[1] = yaw angle [deg];
@@ -262,7 +262,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	This function can be used to obtain the loads at the bottom of the tower. The main purpose of this is to be used in conjunction with the :code:`setTurbinePosition_at_num()` function for force/position cosimilation with a hydrodynamics solver that is modeling the floater.
 
 :code:`void getTurbineOperation_at_num(double *vars, int num = 0)`
-	This function returns typically useful turbine operational parameters of the selected turbine (argument *num*). The data is returned in the array *vars* which has the following content:
+	This function returns useful turbine operational parameters from the selected turbine (argument *num*). Typically, this data is used to feed the logic of a supervisory wind turbine controller. The data is returned in the array *vars* which has the following content:
 	
 	* vars[0] = rotational speed [rad/s]
 	* vars[1] = power [W]
@@ -310,10 +310,10 @@ In the following, the functionality that is exported from the QBlade dll or shar
 
 
 :code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
-	This function can be used to access the current value from an arbitrary turbine simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' cariable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg]`, 0.85,0)
+	This function can be used to access the current value from an arbitrary turbine simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' variable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg], 0.85,0)`.
 	
 :code:`double getCustomSimulationData(char *str)`
-	This function can be used to access the current value from an arbitrary simulation time graph variable in QBlade. 
+	This function can be used to access the current value from an arbitrary *simulation time graph* variable in QBlade. 
 
 
 Python Example: Running the QBlade Library
