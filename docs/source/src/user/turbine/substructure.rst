@@ -874,7 +874,7 @@ The logic of defining an output is as follows:
  is the keyword used for placing a sensor on the cable member with the ID number = <MMemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Conn1) to 1 (= the postion of Conn2). When an output sensor is placed at a mooring line hydrodynamic loads are displayed in the *Hydrodynamic Time Graph* and internal structural loads are displayed in the *Structural Time Graph*.
  
 :code:`CST_<CstID>`
- is the keyword used for placing a sensor at the constraint from the :code:`SUBCONSTRAINTS` table with the ID number = <CstID>. The internal loads (force and torque) in the constraint coordinate system and in the global coordinate system are then displayed in the *Structural Time Graph*.
+ is the keyword used for placing a sensor at the constraint from the :code:`SUBCONSTRAINTS` table with the ID number = <CstID>. The internal constraint loads (force and torque) in the constraint coordinate system and in the global coordinate system are then displayed in the *Structural Time Graph*. The constraint coordinate system originates at the position of JointID1 and has the axes orientation of the joint (JntCon), transition piece (TpCon) or ground (GrdCon) that JointID1 is connected to (see :ref:`Substructure Constraints`).
  
 :code:`JNT_<JntID>`
  is the keyword used for placing a sensor on a joint from the :code:`SUBJOINTS` table with the ID number = <JntID>. The position and rotation of the joint in absolute coordinates are displayed in the *Structural Time Graph*.
