@@ -392,9 +392,11 @@ The Transition Piece
 The transition piece is the reference position in the substructure definition that defines the interface between the turbine definition and the substructure. It is possible to connect the substructure either to the tower bottom, to the torquetube bottom or directly to the rotor nacelle assembly (RNA) of a turbine definition. If the main structural input file contains a :code:`TWRFILE` the transition piece of the substructure (:code:`TP_INTERFACE_POS`) is automatically connected to the tower bottom. If the substructure contains no :code:`TWRFILE` keyword the transition piece is connected to the rotor nacelle assembly (RNA). Through the :code:`SUBCONSTRAINTS` table joints (and their connected members) can be connected to the transition piece. 
 
 :code:`TP_INTERFACE_POS_<X>`
- Defines the (x,y,z) coordinates (in m) of the position of the transition piece location of the substructure. It is defined as the point where the substructure is connected to the tower base of the wind turbine. 
- * For floating substructures it is defined in (x,y,z) [m] from the MSL = (0,0,0). 
- * For bottom fixed substructures, it is defined from the seabed. 
+ Defines the (x,y,z) coordinates (in m) of the position of the transition piece location of the substructure. It is defined as the point where the substructure is connected to the tower base of the wind turbine.
+
+  - For floating substructures it is defined in (x,y,z) [m] from the MSL = (0,0,0). 
+  - For bottom fixed substructures, it is defined from the seabed.
+ 
  Note that the inertia and hydrodynamic reference points (:code:`REF_COG_POS` and :code:`REF_HYDRO_POS`) are always automatically constrained to this point (see :ref:`StrDef_LPFT`). There can be several transition piece points. Further points are then defined by adding additional keywords where an underscore and a number is added to the keyword (e.g. :code:`TP_INTERFACE_POS_2`). This allows the user to define additional inertia and hydrodynamic reference points (see :ref:`StrDef_LPFT`). If a multi-rotor wind turbine is simulated the TP_INTERFACE_POS_1 would automatically connect to the tower bottom of turbine 1, TP_INTERFACE_POS_2 would automatically connect to the tower bottom of turbine 2 and so on.All transition piece points can be constrained to a joint of the substructure in the :code:`SUBCONSTRAINTS` table.  
  The structure of the table is:
 
