@@ -453,7 +453,7 @@ The script *QBladeLibrary.py* defines the class *QBladeLibrary* and loads the sh
 		self.storeProject.argtype = c_char_p
 		self.storeProject.restype = c_void_p
 		
-		self.setLibraryPath = self.lib.createInstance
+		self.setLibraryPath = self.lib.setLibraryPath
 		self.setLibraryPath.argtype = c_char_p
 		self.setLibraryPath.restype = c_void_p
 		
