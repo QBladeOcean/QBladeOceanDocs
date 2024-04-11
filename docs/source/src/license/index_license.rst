@@ -8,3 +8,4 @@ License Info
    license_docs
    license_ce
    license_ee
+   license_files

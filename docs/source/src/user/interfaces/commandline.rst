@@ -7,9 +7,9 @@ CLI Overview
    
 QBlade-EE can also be executed in a command line interface (CLI). The main purpose of QBlade's CLI is to batch-process large sets of simulations in parallel while reducing any computational overhead from the GUI. When processing large sets of simulations a single instance of QBlade will act as the *thread manager*, in charge of creating new QBlade instances for each simulation that is evaluated and queuing these simulations over all available threads. This approach has the advantage of being highly robust, as if one simulation crashes for any reason it wont affect any other simulation and the batch run will still complete without the need for user intervention. This section details the functionality of the QBlade CLI and its options. 
 
-To start QBlade in CLI mode simply call QBlade's executable from the command line while adding the parameter :code:`-cmd` to indicate that instead of starting QBlade in GUI mode it will be operated in CLI mode. 
+To start QBlade in CLI mode simply call QBlade's executable from the command line while adding the parameter :code:`-cli` to indicate that instead of starting QBlade in GUI mode it will be operated in CLI mode. 
 
-:code:`QBladeEE -cmd`
+:code:`QBladeEE -cli`
 	
 If the command above is executed, QBlade prints out the following information on the screen::
 
@@ -34,13 +34,13 @@ If the command above is executed, QBlade prints out the following information on
 	Set the parallel threads by passing -tXX to the CLI, where -t1 is the default
 	--------------------------------------------------------------------------------------------
 
-	Missing arguments - type 'QBlade -cmd help' for a list of options!
+	Missing arguments - type 'QBlade -cli help' for a list of options!
 	
 Since no options have been passed in this example of executing the CLI, the program is exiting without any actions. However, some useful information has already been printed on screen. This includes the **OpenCL Devices** as they have been detected by QBlade and the total number of **CPU Cores** that could be found on the machine. This information is useful when evaluating large sets of simulations to inform QBlade which OpenCL device to use and how many simulations should be evaluated in parallel.
 	
-The available functionality of the QBlade CLI can be viewed by adding :code:`help` (note that the minus sign is not required when adding the :code:`help` command, while it is mandatory when adding :code:`-cmd`).
+The available functionality of the QBlade CLI can be viewed by adding :code:`help` (note that the minus sign is not required when adding the :code:`help` command, while it is mandatory when adding :code:`-cli`).
 
-:code:`QBladeEE -cmd help`
+:code:`QBladeEE -cli help`
 	
 This command prints out an overview of all CLI functionality::
 
@@ -49,32 +49,31 @@ This command prints out an overview of all CLI functionality::
 	!! CLI options can be given in any order !!
 	!! Multiple files and/or directories can be specified with a single CLI call!!
 	!! All directories must be input as an ABSOLUTE path !!
-
+	
 	List of CLI Options:
-
+	
 	help                      - list CLI options
-	-dXX                      - choose compute device XX for wake calculations (XX must be an integer)
-	-gXX                      - choose opencl group size XX for wake calculations (XX must be an integer)
-	-tXX                      - choose the number of threads XX for parallel batch evaluation (XX must be an integer)
+	-dX                       - choose compute device X for wake calculations (X must be an integer)
+	-gX                       - choose opencl group size X for wake calculations (X must be an integer)
+	-tX                       - choose the number X of paraleel simulation threads used during batch evaluation (X must be an integer)
+	-oX                       - choose the number X of OMP threads used in each of the parallel simulation threads (X must be an integer)
 	\directory\simulation.sim - evaluates the simulation definition '\directory\simulation.sim' and save it as *.qpr1
 	\directory\project.qpr    - evaluates the project '\directory\project.qpr' and save it as .qpr1
-	\directory\cutplane.cut   - evaluates the cut-plane definition '\directory\cutplane.cut' during all .sim or .qpr evaluations
 	\directory                - sets the WORKING_DIR, multiple working directories may be defined
 	all_sim                   - batch evaluate all .sim files in all WORKING_DIR(s) and saves them as *.qpr1
 	all_qpr                   - batch evaluate all .qpr files in all WORKING_DIR(s) and save them as *.qpr1
-	all_cut                   - evaluate all cut-plane definition(s) in all WORKING_DIR(s) during the evaluation of simulations
 	no_save                   - simulations are not stored after .sim or .qpr files or cutplanes (using post_cut) have been evaluated
 	remove_wind               - remove the windfield file (.bts) after a simulation definition (.sim) is evaluated
-	skip                      - skip evaluation of .qpr and .sim files if a .qpr1 file exists; .sim files that were already exported; cut-planes if a .qpr2 exists
+	skip                      - skip evaluation of .qpr and .sim files if a .qpr1 file exists or .sim files that were already exported
 	exp_h2bin                 - adds HAWC2BINARY format to auto-export and post-export formats
 	exp_h2ascii               - adds HAWC2ASCII format to auto-export and post-export formats (only if HAWC2BINARY is not exported)
 	exp_ascii                 - adds ASCII format to auto-export and post-export formats
-	exp_fastbin		  - adds FAST BINARY format to auto-export and post-export formats
-	\directory\filter.flt     - sets a filter for the generation of all auto-export and post-export formats
+	exp_fastbin               - adds FAST BINARY format to auto-export and post-export formats
 	exp_cut_txt               - adds cut-plane txt format to auto-export and post-export formats
 	exp_cut_vtu               - adds cut-plane vtu format to auto-export and post-export formats
-	post_exp                  - export results and cut-planes from all FINISHED .qpr, .qpr1 and qpr2 files in all WORKING_DIR(s)
-	post_cut                  - calculate and export cut planes from all FINISHED .qpr and .qpr1 files in all WORKING_DIR(s), then saves the projects as *.qpr2
+	\directory\filter.flt     - sets a filter for the generation of all auto-export and post-export formats
+	post_exp                  - export results and cut-planes from all FINISHED .qpr and .qpr1 files in all WORKING_DIR(s)
+	dlc_gen                   - create simulations from a dlc table definition. requires the filename of the dlc definition(s) (must have .dlc ending) and an export directory
 	--------------------------------------------------------------------------------------------
 	
 CLI Functionality
@@ -93,7 +92,11 @@ In this section the different CLI options are briefly explained.
 :code:`-t`
 
 	This parameter sets how many parallel instances of QBlade should be started when evaluating a batch of simulations. The default values is 1. To specify 12 parallel threads you would pass the parameter :code:`-t12`.
+	
+:code:`-o`
 
+	This parameter sets how many openMp threads should be used for each parallel instance of QB. This is specifically important to fine tune the performance of QB instances in a cloud-computing environment.
+	
 :code:`c:\directory\simulation.sim`
 	
 	Passing the absolute location of a :ref:`Simulation Definition ASCII File` (\*.sim) as one of the parameters adds this simulation definition to the list of simulations that will be evaluated. Multiple simulation definitions may be added during a single CLI call. Finished simulation definitions are stored as **.qpr1**, to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
@@ -101,10 +104,6 @@ In this section the different CLI options are briefly explained.
 :code:`c:\directory\project.qpr`
 
 	Passing the absolute location of a QBlade Project File (\*.qpr) adds all simulation definitions within this project to the list of simulations that will be evaluated. Multiple project files may be added during a single CLI call. Finished project files are stored as ***.qpr1**,  to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
-
-:code:`c:\directory\cutplane.cut`
-	
-	When passing the absolute location of a cut-pLane definition (\*.cut) this Cut-Plane Definition is added to the list of cut-plane definitions that will be calculated for all simulations that are evaluated. Multiple cut-plane definitions may be added during a single CLI call.
 
 :code:`c:\directory\ `
 	
@@ -117,10 +116,6 @@ In this section the different CLI options are briefly explained.
 :code:`all_qpr`
 	
 	Adding the parameter :code:`all_qpr` causes QBlade to add **all \*.qpr files from to all WORKING_DIR(s)** to the list of projects that will be evaluated.
-
-:code:`all_cut`
-	
-	Adding the parameter :code:`all_cut` causes QBlade to add **all \*.cut files from to all WORKING_DIR(s)** to the list of cut-plane definitions that will be calculated for all simulations that are evaluated.
 
 :code:`no_save`
 	
@@ -166,16 +161,16 @@ In this section the different CLI options are briefly explained.
 	
 	The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
 
-:code:`post_cut`
-	
-	The parameter :code:`post_cut` causes QBlade to automatically calculate all cut-plane definitions from the cut-plane definition list for all finished project files (\*.qpr, \*.qpr1) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Cut-planes are exported in all formats that have been added to the export format list.
+:code:`dlc_gen`
+	This call allows to create simulations from a dlc table definition. It requires the filename of the dlc definitionto end with the *.dlc* file ending. Furthermore, an output directory needs to be specified, in which the simulation are created.
+
 
 Sample CLI Call to Start a Batch Run
 ************************************
 
 The following call is an example for a CLI call of QBlade to evaluate and automatically export a batch of simulation definition files located in the folder c:\\simulations\\.
 
-	:code:`QBladeEE -cmd -d1 -g64 -t12 c:\simulations\ all_sim exp_h2bin remove_wind skip`
+	:code:`QBladeEE -cli -d1 -g64 -t12 c:\simulations\ all_sim exp_h2bin remove_wind skip`
 	
 After this CLI call QBlade will evaluate all simulation definitions (:code:`all_sim`) located in c:\\simulations\\ over 12 parallel threads (:code:`-t12`). OpenCL device 1 will be used (:code:`-d1`) with a work-group size of 64 (:code:`-g64`). The simulation results will automatically be exported to the HAWC2 binary format (:code:`exp_h2bin`). Simulations that have already been evaluated previously will be skipped (:code:`skip`) and the automatically generated binary wind fields will be removed after a simulation is finished (:code:`remove_wind`). After executing this call the following info is printed out on the screen::
 
