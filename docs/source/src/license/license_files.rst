@@ -1,5 +1,5 @@
-License Files
-=============
+Floating and Node-Locked License Files
+======================================
 
 Commercial licenses of **QBlade Enterprise Edition** are implemented through license files. There are two types of license files: floating and node-locked.
 
