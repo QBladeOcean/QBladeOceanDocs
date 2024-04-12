@@ -27,6 +27,7 @@ Instances where QBlade-EE, once activated, crashes leading to a non-release of a
 Resolving OpenSSL Issues
 ^^^^^^^^^^^^^^^^^^^^^^^^
 On certain Windows machines, the SIL (dll) version of QBlade-EE may encounter issues with initializing the OpenSSL libraries. If this problem arises, it can typically be resolved by running the Python or Matlab script with administrator privileges. To do this, start the command prompt or shell as an administrator.  
+
 Node-Locked License Files
 -------------------------
 
