@@ -24,9 +24,22 @@ Instances where QBlade-EE, once activated, crashes leading to a non-release of a
 :code:`QBladeEE -cli LICENSE_DEBUG`
   Activates a debug mode providing detailed insights into the license activation and troubleshooting process.
   
-Resolving OpenSSL Issues
-^^^^^^^^^^^^^^^^^^^^^^^^
-On certain Windows machines, the SIL (dll) version of QBlade-EE may encounter issues with initializing the OpenSSL libraries. If this problem arises, it can typically be resolved by running the Python or Matlab script with administrator privileges. To do this, start the command prompt or shell as an administrator.  
+Resolving OpenSSL Issues on Windows
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On certain Windows machines, the SIL (dll) version of QBlade-EE may encounter issues with initializing the OpenSSL libraries. These problems typically arise when the system cannot locate the necessary OpenSSL libraries in the QBlade directory. To fix this, you can add the QBlade directory to the system's PATH variable with the following steps:
+
+#. **Open the Start Search Bar**: Type "System Environment Variables" and select "Edit the system environment variables" from the search results.
+
+#. **System Properties Window**: In the System Properties window, click the "Environment Variables" button near the bottom of the Advanced tab.
+
+#. **Edit the PATH Variable**: In the Environment Variables window, scroll to find the 'Path' variable under the 'System variables' section and select it. Then click 'Edit...'.
+
+#. **Add QBlade Directory**: In the Edit Environment Variable window, click 'New' and paste the full path to the QBlade directory where the OpenSSL libraries (libssl-1_1-x64.dll and libcrypto-1_1-x64.dll) are located.
+
+#. **Save and Exit**: Click 'OK' to close each window, ensuring your changes are saved.
+
+After completing these steps, restart Windows to allow the changes to take effect. This should resolve the issue with initializing the OpenSSL libraries in QBlade's SIL interface.
 
 Node-Locked License Files
 -------------------------
