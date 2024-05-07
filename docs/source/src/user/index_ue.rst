@@ -53,8 +53,8 @@ Polar Extrapolation
 
    airfoil/polar_extrapolation
 
-Blade and Rotor Design
-**********************
+Aerodynamic Blade and Rotor Design
+**********************************
 .. toctree::
    :maxdepth: 1
 
@@ -75,12 +75,19 @@ Wind Turbine Design
    turbine/turbine
    turbine/aerodynamic
    turbine/structure
-   turbine/substructure
-   turbine/superelements
    turbine/marinehydrokinetic
    turbine/controller
    turbine/turbineexport
    turbine/multi_turbine
+   
+Substructure Design
+*******************
+.. toctree::
+   :maxdepth: 1
+
+   turbine/beamtypes
+   turbine/substructure
+   turbine/superelements
 
 Wind Turbine Simulation
 ***********************
