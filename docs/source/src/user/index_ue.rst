@@ -67,25 +67,24 @@ Blade and Rotor BEM Simulation
 
    bem/bem
 
-Wind Turbine Design
-*******************
+Wind Turbine Modeling
+*********************
 .. toctree::
    :maxdepth: 1
 
    turbine/turbine
    turbine/aerodynamic
    turbine/structure
-   turbine/marinehydrokinetic
    turbine/controller
+   turbine/marinehydrokinetic
    turbine/turbineexport
    turbine/multi_turbine
    
-Substructure Design
-*******************
+Substructure Modeling
+*********************
 .. toctree::
    :maxdepth: 1
 
-   turbine/beamtypes
    turbine/substructure
    turbine/superelements
 

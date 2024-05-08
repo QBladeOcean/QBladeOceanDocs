@@ -85,7 +85,7 @@ A plot of these parameters, as generated for a NACA 4412 profile are shown in :n
 	
 Dynamic Polar Sets
 ---------------------------
-In QBlade dynamic polar sets can be used to model the changing states of flow control devices, such as trailing edge flaps. Dynamic polar sets allow to store polars that represents a series of states. For example: for a flap each state would correspond to a certain flap deflection angle. For each state multiple polars, covering a range of Reynolds numbers, may be stored. A dynamic polar set can then be assigned to an active element in the :ref:`Blade and Rotor Design`. The different states can then later be activated by the :ref:`Turbine Controller Libraries` or the Actuator Control Panel. 
+In QBlade dynamic polar sets can be used to model the changing states of flow control devices, such as trailing edge flaps. Dynamic polar sets allow to store polars that represents a series of states. For example: for a flap each state would correspond to a certain flap deflection angle. For each state multiple polars, covering a range of Reynolds numbers, may be stored. A dynamic polar set can then be assigned to an active element in the Blade Design Module (see :ref:`Active Elements and Blade Damage`). The different states can then later be activated by the :ref:`Wind Turbine Controllers` or the Actuator Control Panel. 
 
 :numref:`fig-dynset` shows the dialog to create dynamic polar sets.
 

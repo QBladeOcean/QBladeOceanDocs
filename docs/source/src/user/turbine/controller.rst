@@ -1,5 +1,5 @@
-Turbine Controller Libraries
-============================
+Wind Turbine Controllers
+========================
 
 Predefined Controller Interfaces
 --------------------------------

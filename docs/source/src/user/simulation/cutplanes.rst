@@ -1,7 +1,7 @@
 Extracting Wake Data with Cut-Planes
 ====================================
 
-When a simulation of a :ref:`Wind Turbine Design` with a :ref:`Free Vortex Wake` has been performed it is possible to extract velocity distributions from the simulation.
+When a simulation of a wind turbine with the :ref:`Free Vortex Wake` model, or the :ref:`Dynamic Wake Meandering Model` has been performed it is possible to extract velocity distributions from the simulation.
 
 .. _fig-wake_data:
 .. figure:: wake_data.png
@@ -45,31 +45,33 @@ An exemplary cut-plane definition file is shown below.
    	:caption: : An exemplary cut-plane definition file
 
 	---------------------------------QBlade Cut Plane Definition File-------------------------------------
-	Generated with : QBlade EE v2.0.6.1_beta windows
-	Archive Format: 310012
-	Time : 17:14:48
-	Date : 31.05.2023
+	Generated with : QBlade IH v2.0.7-release_candidate_beta windows
+	Archive Format: 310023
+	Time : 15:49:33
+	Date : 08.05.2024
 
-	----------------------------------------------Data----------------------------------------------------
-	112.097                                 XPOS                
+	----------------------------------------------Plane Description---------------------------------------
+	exportPlane                             NAME                
+	-5.000                                  XPOS                
 	0.000                                   YPOS                
-	150.195                                 ZPOS                
+	90.000                                  ZPOS                
 
 	0.000                                   XROT                
-	90.000                                  YROT                
+	0.000                                   YROT                
 	0.000                                   ZROT                
 
-	302.425                                 LENGTH              
-	302.425                                 WIDTH               
+	157.500                                 LENGTH              
+	157.500                                 WIDTH               
 
-	200                                     XRES                
-	200                                     YRES                
+	250                                     XRES                
+	250                                     YRES                
 
-	false                                   ALL                 
-	false                                   AVERAGE             
+	20000                                   TIMESTEP            
+
+	false                                   ALLSTEPS            
 	1                                       MODULUS             
-	400                                     TIMESTEP     
-
 	
+
+
 .. footbibliography::
 

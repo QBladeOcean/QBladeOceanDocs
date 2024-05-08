@@ -1,5 +1,5 @@
-Structural Turbine Design
-=========================
+Structural Modeling
+###################
 
 A structural turbine model in QBlade is defined by a set of ASCII input files that describe the overall dimensions of the turbine and the structural properties of the various turbine components. *Structural properties* in this sense relates broadly to the mass, inertia, stiffness and damping properties that are required by the structural simulation engine to resolve the structural dynamics. In most cases these structural properties need to be obtained from specialized software, for example software that is build to design a structural blade layout and can generate the cross-sectional mass, stiffness and damping properties that are required to setup a structural model in QBlade. An overview of the how the turbine structure is modeled through the integration of Project-CHRONO in QBlade can be found in the section: :ref:`Multi Body Beam Formulation`. 
 
@@ -25,10 +25,13 @@ An overview of the file structure of the structural model definition files is sh
 
 .. _StrDef_MainFile:
 
-Main Definition File
---------------------
+Main Structural Definition File
+===============================
 
 Within the main definition file the overall dimensions of the wind turbine are defined. Furthermore, nacelle mass and inertia and drivetrain properties are defined here. The main input file also contains the file locations of the structural data tables that define the detailed structural properties of the blades, tower and the torquetube (for a VAWT turbine). An overview of important parameters that define the turbine geometry and dimensions is shown in :numref:`fig-struct_hawt` and :numref:`fig-struct_vawt`.
+
+Exemplary Main File
+-------------------
 
 An exemplary main structural input file for the NREL 5MW HAWT wind turbine is shown below and will be discussed in more detail in the following:
 
@@ -285,7 +288,7 @@ Tower Parameters
 	OC3_Sparbuoy_Tower.str		TWRFILE - Name of file containing properties for the tower
 	OC3_Sparbuoy_Sub_LPMD.str	SUBFILE	 - Name of the substructure file
 	
-The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Design`.
+The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Modeling`.
 
 VAWT Specific Parameters
 ------------------------
@@ -339,7 +342,7 @@ Cable Parameters
 	------------------------------- BLDDE CABLES (VAWT only) ------------------
 	cable.dat		CABFILE - file containing the definitions of cables
 	
-An exemplary cable definition file is shown here: :ref:`Cable Definition File`.
+An exemplary cable definition file is shown here: :ref:`Cable Structural Data File`.
 	
 Loading Data and Sensor Locations
 ---------------------------------
@@ -348,17 +351,15 @@ Loading Data and Sensor Locations
 	:caption: : Output data definition and sensor locations
 
 	------------------------------- DATA OUTPUT TYPES -------------------------
-	true			FOR_OUT - store (local) forces at all chosen locations 
-	true			ROT_OUT - store (local) body rotations at all chosen locations 
-	true			MOM_OUT - store (local) moments at all chosen locations 
-	true			DEF_OUT - store (local) deflections at all chosen locations 
-	true			POS_OUT - store (global) positions at all chosen locations 
-	true			VEL_OUT - store (global) velocities at all chosen locations 
-	true			ACC_OUT - store (global) accelerations at all chosen locations
-	true			LVE_OUT - store (local) velocities at all chosen locations
-	true			LAC_OUT - store (local) accelerations at all chosen locations
+	true			FOR_OUT - store forces at all sensor locations 
+	true			DEF_OUT - store deflections at all sensor locations 
+	true			POS_OUT - store positions at all sensor locations 
+	true			VEL_OUT - store velocities at all sensor locations 
+	true			ACC_OUT - store accelerations at all sensor locations 
+	true			STR_OUT - store element strain at all sensor locations 
+	true			AER_OUT - store aerodynamic data at all sensor locations 
 
-	------------------------------- DATA OUTPUT LOCATIONS ---------------------
+------------------------------- SENSOR OUTPUT LOCATIONS -------------------
 	any number, or zero, user defined positions can be chosen as output locations. 
 	Locations can be assigned at any of the following components: blades, struts, tower 
 	and guy cables. See the following examples for the used nomenclature:
@@ -411,29 +412,52 @@ Furthermore data is automatically stored at each inter body connection of the mo
 **X l For. STR_2_2 - BLD_2 z=27.5m**
 	This example defines the local reaction force at the connection between the top strut of blade 2 and blade 2, given for the local X axis of the strut. 
 
-Nine different data types can be specified to be stored (true) or not (false) at all locations that are specified or automatically generated. These are:
+Seven different data types can be specified to be stored (true) or not (false) at all locations that are specified or automatically generated. It is recommended to only activate the sensor output that are required for the particular analysis to reduce the overall memory requirements and size of project and data files generated by QBlade. The different types of data that can be stored for each sensor are:
 
-* *true / false* :code:`FOR_OUT`: Store the local forces for all locations
-* *true / false* :code:`MOM_OUT`: Store the local moments for all locations
-* *true / false* :code:`DEF_OUT`: Store the local deflections for all locations
-* *true / false* :code:`ROT_OUT`: Store the local accumulated rotations at all chosen locations
-* *true / false* :code:`POS_OUT`: Store the global positions for all locations
-* *true / false* :code:`VEL_OUT`: Store the global velocities for all locations
-* *true / false* :code:`ACC_OUT`: Store the global accelerations for all locations
-* *true / false* :code:`LVE_OUT`: Store the local velocities for all locations
-* *true / false* :code:`LAC_OUT`: Store the local accelerations for all locations
+true			FOR_OUT - store forces at all sensor locations 
+true			DEF_OUT - store deflections at all sensor locations 
+true			POS_OUT - store positions at all sensor locations 
+true			VEL_OUT - store velocities at all sensor locations 
+true			ACC_OUT - store accelerations at all sensor locations 
+true			STR_OUT - store element strain at all sensor locations 
+true			AER_OUT - store aerodynamic data at all sensor locations 
 
 The forces and moments that obtained from a structural body are the **internal shear forces and bending moments**. However, the forces and moments given at an inter body connection can be interpreted as the **reaction forces and moments** acting on the constraint. For an overview of the coordinate systems / conventions in which the simulation results are stored see the section: :ref:`Coordinate Systems`.
 
-.. _StrDef_BladeTower:
 
-Blade, Strut and Tower Structural Data Tables
----------------------------------------------
+Structural Definition of Bodies
+===============================
 
-The cross-sectional beam properties of the blade, tower and strut bodies have to be defined in the form of structural data tables. The definition of the table entries are found in :ref:`Blade / Strut Structural Data Table Columns` and :ref:`Tower / Torquetube Structural Data Table Columns`. An exemplary structural blade data table is shown below:
+For an aeroelastic wind turbine setup, each body in the multi-body setup is defined by its own structural data table. These datatables contain the crosssectional, structural information that is required to setup the beam elements, which make up a structural body. The structural bodies that can be defined with structural datatables are: **blades**, **struts**, **tower**, **torquetube**, **cable elements** and the **substructure**. Different types of elements can be used to setup these structural bodies. The different element types are briefly explained below:
+
+Euler-Bernoulli Beam
+--------------------
+
+Euler-Bernoulli beams are the most basic type of beams in QBlade. These beams rely on the thin beam theory and thus do not consider shear forces. They are been implemented using a corotational approach, which enables the handling of large deflections and displacements.
+
+Timoshenko Beam
+---------------
+
+Timoshenko beams represent a more advanced beam model in QBlade compared to Euler-Bernoulli beams. These beams incorporate the effects of shear deformation, making them suitable for a wider range of bodies. Similar to Euler-Bernoulli beams, Timoshenko beams are implemented with a corotational formulation to accommodate large displacements and deflections while providing a more accurate representation of the beam's behavior.
+
+Timoshenko Beam FPM
+-------------------
+
+Timoshenko beams with a Fully Populated Stiffness Matrix (FPM) represent the most sophisticated and versatile beam model in QBlade. Timoshenko FPM beams take into account also off-diagonal coupling effects, such as bend-twist coupling, which is particularly important for an accurate modeling of very large blades. The Timoshenko FPM element is reserved to be used excludively to model rotor blades or struts.
+
+ANCF Cable Element
+------------------
+
+The ANCF Cable element in QBlade is used for an efficient simulation of slender, cable like structures such as mooring lines and blade cables. These elements utilize Absolute Nodal Coordinate Formulation to obtain accurate and efficient results for complex mooring system configurations or tower guywires (see :ref:`Cable Structural Data File` and :ref:`Cable Elements and Ground-Fixing`).
+
+
+Blade, Strut and Tower Structural Data Files
+============================================
+
+The cross-sectional beam properties of the blade, tower and strut bodies have to be defined in the form of structural data tables. The definition of the table entries are found in :ref:`Blade and Strut Euler Bernoulli and Timoshenko Datatable`, :ref:`Blade and Strut Timoshenko FPM Datatable` and :ref:`Tower and Torquetube Euler Bernoulli and Timoshenko Datatable`. An exemplary structural blade data table for a Timoshenko Beam is shown below:
 
 .. code-block:: console
-	:caption: : Exemplary blade structural data file
+	:caption: : Exemplary blade structural data file for a Timoshenko beam
 
 	0.0024		RAYLEIGHDMP
 	1.00		STIFFTUNER
@@ -499,7 +523,7 @@ The cross-sectional beam properties of the blade, tower and strut bodies have to
 	R	G	B
 	220	220	220
 	
-The keyword :code:`RAYLEIGHDMP`: defines a stiffness proportional Rayleigh damping coefficient (see :ref:`Structural (Rayleigh) Damping`). The parameters :code:`STIFFTUNER` and :code:`MASSTUNER` can be used to tune the global stiffness or mass properties of the data table through a multiplication by this factor. The keyword :code:`RGBCOLOR` defines the rgb values that are used to color the structural body during the 3D visualization. 
+The keyword :code:`RAYLEIGHDMP`: defines a stiffness proportional Rayleigh damping coefficient (see :ref:`Damping of Structural Bodies`). The parameters :code:`STIFFTUNER` and :code:`MASSTUNER` can be used to tune the global stiffness or mass properties of the data table through a multiplication by this factor. The keyword :code:`RGBCOLOR` defines the rgb values that are used to color the structural body during the 3D visualization. 
 
 The keyword :code:`DISC` controls the discretization of the body into structural nodes. The following options are available:
 
@@ -509,34 +533,19 @@ The keyword :code:`DISC` controls the discretization of the body into structural
 
 The keyword :code:`ADDMASS_<pos>` can be used to add a mass at the normalized position *<pos>*. :code:`ADDMASS_<pos>` can be followed by up to 7 numeric values (at least one) to assign mass and rotational inertia properties. For example: :code:`ADDMASS_0.2 10 1 2 3 4 5 6` adds a mass of 10kg at the normalized position of 0.2. The following numbers assign the rotational inertia in local body coordinates: *Ixx = 1, Iyy = 2, Izz = 3, Ixy = 4, Ixz = 5, Iyz = 6*. 
 
-Structural (Rayleigh) Damping
------------------------------
 
-A Rayleigh damping coefficient can be set for each structural data table by using the keyword :code:`RAYLEIGHDMP`. This keyword defined the *stiffness proportional* Rayleigh damping coefficient :math:`\beta`:
+Blade and Strut Euler Bernoulli and Timoshenko Datatable
+--------------------------------------------------------
 
-:math:`C=beta*K`, 
+The following table gives an overview of the entries of the structural data table for blades and struts. All entries reserved for modeling the shear stiffness are only used with Timoshenko beams and are simply ignored when defined for an Euler-Bernoulli beam.
 
-where :math:`C`is the damping matrix and :math:`K` the stiffness matrix. The Rayleigh damping :math:`beta` coefficient is related to the fraction of critical damping :math:`Xi` as:
-
-:math:`\zeta = \beta * \pi * f`, or 
-
-:math:`\beta = \frac{\zeta}{\Pi * f}`.
-
-Rayleigh damping is not constant, but varies with frequency. Typically, Rayleigh damping is set for the first natural frequency of a component. Optionally, it is also possible to assign a nonuniformly distributed :math:`\beta` coefficient via the structural datatables (see :ref:`Blade / Strut Structural Data Table Columns`).  
-
-Blade / Strut Structural Data Table Columns
--------------------------------------------
-
-The following table gives an overview of the entries of the structural data table for blades and struts:
-
-.. table:: Blade / Strut Cross Sectional Beam Properties
+.. table:: Blade / Strut Cross Sectional Beam Properties for Euler-Bernoulli Beams
 	:widths: 10 20 30 10
 
 	======== ==================== ========================================= =======
 	Col. Nr. Name                 Explanation                               Unit
 	======== ==================== ========================================= =======
-	1        Length               Curved length distance from the first     -
-				      body node normalized by the body length        
+	1        Length               Norm. curved length                       -
 	-------- -------------------- ----------------------------------------- -------
 	2        Mass density         Mass per unit length                      kg/m
 	-------- -------------------- ----------------------------------------- -------
@@ -586,10 +595,117 @@ The following table gives an overview of the entries of the structural data tabl
 	-------- -------------------- ----------------------------------------- ------- 
 	19       Damping Coefficient  **(optional)** This column allows to        -
 				      assign distributed Rayleigh beta coeff.
-	======== ==================== ========================================= =======  
-	
-Tower / Torquetube Structural Data Table Columns
-------------------------------------------------
+	======== ==================== ========================================= ======= 
+
+
+Blade and Strut Timoshenko FPM Datatable
+----------------------------------------
+
+The following table gives an overview of the entries of the structural data table for blades and struts:
+
+.. table:: Blade / Strut Cross Sectional Beam Properties for Timoshenko FPM Beams
+	:widths: 10 20 30 10
+
+	======== ==================== ========================================= =======
+	Col. Nr. Name                 Explanation                               Unit
+	======== ==================== ========================================= =======
+	1        Length               Norm. curved length                       -
+	-------- -------------------- ----------------------------------------- -------
+	2        Beam offset X        Offset in local x-direction (norm with c) -
+	-------- -------------------- ----------------------------------------- -------
+	3        Beam offset Y        Offset in local y-direction (norm with c) -
+	-------- -------------------- ----------------------------------------- ------- 
+	4        Pitch                Structural pitch, applied to matrix       deg
+	-------- -------------------- ----------------------------------------- ------- 
+	5        K11                  (1,1) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- ------- 
+	6        K12                  (1,2) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	7        K13                  (1,3) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	8        K14                  (1,4) entry for the stiffness matrix      Nm
+	-------- -------------------- ----------------------------------------- -------
+	9        K15                  (1,5) entry for the stiffness matrix      Nm
+	-------- -------------------- ----------------------------------------- -------
+	10       K16                  (1,6) entry for the stiffness matrix      Nm
+	-------- -------------------- ----------------------------------------- -------
+	11       K22                  (2,2) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	12       K23                  (2,3) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	13       K24                  (2,4) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	14       K25                  (2,5) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	15       K26                  (2,6) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	16       K33                  (3,3) entry for the stiffness matrix      N
+	-------- -------------------- ----------------------------------------- -------
+	17       K34                  (3,4) entry for the stiffness matrix      Nm
+	-------- -------------------- ----------------------------------------- -------
+	18       K35                  (3,5) entry for the stiffness matrix      Nm
+	-------- -------------------- ----------------------------------------- -------
+	29       K36                  (3,6) entry for the stiffness matrix      Nm
+	-------- -------------------- ----------------------------------------- -------
+	20       K44                  (4,4) entry for the stiffness matrix      Nm^2
+	-------- -------------------- ----------------------------------------- -------
+	21       K45                  (4,5) entry for the stiffness matrix      Nm^2
+	-------- -------------------- ----------------------------------------- -------
+	22       K46                  (4,6) entry for the stiffness matrix      Nm^2
+	-------- -------------------- ----------------------------------------- -------
+	23       K55                  (5,5) entry for the stiffness matrix      Nm^2
+	-------- -------------------- ----------------------------------------- -------
+	24       K56                  (5,6) entry for the stiffness matrix      Nm^2
+	-------- -------------------- ----------------------------------------- -------
+	25       K66                  (6,6) entry for the stiffness matrix      Nm^2
+	-------- -------------------- ----------------------------------------- -------
+	26       M11                  (1,1) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- ------- 
+	27       M12                  (1,2) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	28       M13                  (1,3) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	29       M14                  (1,4) entry for the mass matrix           kgm
+	-------- -------------------- ----------------------------------------- -------
+	30       M15                  (1,5) entry for the mass matrix           kgm
+	-------- -------------------- ----------------------------------------- -------
+	31       M16                  (1,6) entry for the mass matrix           kgm
+	-------- -------------------- ----------------------------------------- -------
+	32       M22                  (2,2) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	33       M23                  (2,3) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	34       M24                  (2,4) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	35       M25                  (2,5) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	36       M26                  (2,6) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	37       M33                  (3,3) entry for the mass matrix           kg
+	-------- -------------------- ----------------------------------------- -------
+	38       M34                  (3,4) entry for the mass matrix           kgm
+	-------- -------------------- ----------------------------------------- -------
+	39       M35                  (3,5) entry for the mass matrix           kgm
+	-------- -------------------- ----------------------------------------- -------
+	40       M36                  (3,6) entry for the mass matrix           kgm
+	-------- -------------------- ----------------------------------------- -------
+	41       M44                  (4,4) entry for the mass matrix           kgm^2
+	-------- -------------------- ----------------------------------------- -------
+	42       M45                  (4,5) entry for the mass matrix           kgm^2
+	-------- -------------------- ----------------------------------------- -------
+	43       M46                  (4,6) entry for the mass matrix           kgm^2
+	-------- -------------------- ----------------------------------------- -------
+	44       M55                  (5,5) entry for the mass matrix           kgm^2
+	-------- -------------------- ----------------------------------------- -------
+	45       M56                  (5,6) entry for the mass matrix           kgm^2
+	-------- -------------------- ----------------------------------------- -------
+	46       M66                  (6,6) entry for the mass matrix           kgm^2
+	======== ==================== ========================================= ======= 
+
+
+
+Tower and Torquetube Euler Bernoulli and Timoshenko Datatable
+-------------------------------------------------------------
 
 The following table gives an overview of the entries of the structural data table:
 
@@ -599,8 +715,7 @@ The following table gives an overview of the entries of the structural data tabl
 	======== ==================== ========================================= =======
 	Col. Nr. Name                 Explanation                               Unit
 	======== ==================== ========================================= =======
-	1        Length               Curved length distance from the first     -
-				      body node normalized by the body length        
+	1        Length               Norm. curved length                       -
 	-------- -------------------- ----------------------------------------- -------
 	2        Mass density         Mass per unit length                      kg/m
 	-------- -------------------- ----------------------------------------- -------
@@ -656,9 +771,9 @@ The following table gives an overview of the entries of the structural data tabl
 	21       Damping Coefficient  **(optional)** This column allows to        -
 				      assign distributed Rayleigh beta coeff.
 	======== ==================== ========================================= ======= 
-
-Cable Definition File
----------------------
+	
+Cable Structural Data File
+==========================
 
 .. code-block:: console
 	:caption: : Exemplary cable definition data file
@@ -687,13 +802,65 @@ Cable Definition File
 
 Cables can be defined between blades (BLD), struts (STR), the tower (TWR), torquetube (TRQ) or the ground (GRD).
 
-Cross Sectional Blade Coordinate System
----------------------------------------
+:code:`CABDAMP`
+ In some cases, if the alpha damping coefficient of a cable element (CABELEMENTS) is too large, a simulation can become unstable. Therefore, be default the damping coefficient of the cable elements is not applied. If the user wishes to activate the axial damping of mooring lines and guy cables, the keyword :code:`CABDAMP` must be set to true.
+ 
+ .. code-block:: console
+   	:caption: : Activating axial cable damping for all CABELEMENTS be setting the keyword CABDAMP
+
+	true CABDAMP
+
+Damping of Structural Bodies
+============================
+
+Two different damping models exists, which can be used to define the damping properties of a structural body. 
+
+Isotropic Rayleigh Damping
+--------------------------
+
+A single Rayleigh damping coefficient can be set for each structural data table by using the keyword :code:`RAYLEIGHDMP`. This keyword defined the *stiffness proportional* Rayleigh damping coefficient :math:`\beta`. The :math:`\beta` coefficient is applied to each degree of freedom of the structural body:
+
+:math:`C=beta*K`, 
+
+where :math:`C`is the damping matrix and :math:`K` the stiffness matrix. The Rayleigh damping :math:`beta` coefficient is related to the fraction of critical damping :math:`Xi` as:
+
+:math:`\zeta = \beta * \pi * f`, or 
+
+:math:`\beta = \frac{\zeta}{\pi * f}`.
+
+Rayleigh damping is not constant, but varies with frequency. Typically, Rayleigh damping is set for the first natural frequency of a component. Optionally, it is also possible to assign a nonuniformly distributed :math:`\beta` coefficient via the structural datatables (see :ref:`Blade and Strut Euler Bernoulli and Timoshenko Datatable`). 
+
+Anisotropic Rayleigh Damping
+----------------------------
+
+For a more detailed definition of the damping properties of a structural body the anisotropic damping model is recommended. This damping model allows to define different damping properties for the different degreed of freedom (or modes) of a structural body. The anisotropic damping of a body is defined by at least four parameters (and an optional fifth parameter), followed by the keyword :code:`RAYLEIGHDMP_ANISO`.
+
+.. code-block:: console
+	:caption: : Exemplary definition of anisotropic damping properties in a structural data file.
+	
+	0.004048 0.003153 0.00027325 0.00000 0.00000 RAYLEIGHDMP_ANISO	
+
+The five parameters are related to the anisotropic damping in the following way:
+
+ * **1:** The stiffness proportional :math:`\beta` Rayleigh damping coefficient for bending about the local y-axis (flapwise) or shear along the local x-axis.
+ * **2:** The stiffness proportional :math:`\beta` Rayleigh damping coefficient for bending about the local x-axis (edgewise) or shear along the local y-axis.
+ * **3:** The stiffness proportional :math:`\beta` Rayleigh damping coefficient for bending about the local z-axis (torsion).
+ * **4:** The stiffness proportional :math:`\beta` Rayleigh damping coefficient along the local z-axis (elongation).
+ * **5:** (optional) A mass proportional :math:`\alpha` Rayleigh damping coefficient, applied to all degrees of freedom (0.00 as default).
+ 
+In the same way as the isotropic stiffness proportional Rayleigh damping coefficients, the Rayleigh damping :math:`beta` coefficients are related to the fraction of critical damping :math:`Xi` of the related mode shape as:
+
+:math:`\zeta = \beta * \pi * f`, or 
+
+:math:`\beta = \frac{\zeta}{\pi * f}`.
+
+Cross Sectional Coordinate Systems
+==================================
 
 The local cross-sectional coordinate system for the definition of the blade and strut structural data table is shown in :numref:`fig-crossection`.
 
 .. _fig-crossection:
-.. figure:: crossection.png
+.. figure:: crosssection.png
     :align: center
     :alt: Visualization of the local coordinate system that is used to define the cross sectional beam properties of blades and struts.
     
@@ -715,4 +882,3 @@ This cross sectional coordinate system in **ONLY** used for the definition of th
 For all other structural bodies (tower, torquetube, substructure) the coordinate system in which the cross sectional structural properties are defined coincides with the local body coordinate system (see :ref:`Local Blade Coordinate System`).
 
 .. footbibliography::
-

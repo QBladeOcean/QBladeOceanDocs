@@ -1,5 +1,5 @@
-Aerodynamic Turbine Design
-==========================
+Aerodynamic Modeling
+====================
 
 This section covers all options that are related to the aerodynamic modelling of a turbine design. Covering wake models, dynamic stall models, geometry parameters and blade discretization.
 

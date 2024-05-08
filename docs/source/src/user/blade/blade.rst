@@ -67,7 +67,7 @@ The columns of the advanced blade properties are:
 - **Position [m]** is the position of the section along the blade pitch axis (in m). It should match the position given in the basic blade properties. 
 - **X (IP) Offset [m]** is an additional offset of the blade section in the global y-direction. This is the in-plane direction.
 - **Y (OOP) Offset [m]** is an additional offset of the blade section in the global x-direction. This is the out-of-plane direction.
-- **T Axis [%c]** is the position of the thread axis as a percentage of the local chord. It is used to define the axis at which the section is rotated and also to define the position of the structural beam (see :ref:`StrDef_BladeTower`). 
+- **T Axis [%c]** is the position of the thread axis as a percentage of the local chord. It is used to define the axis at which the section is rotated and also to define the position of the structural beam (see :ref:`Cross Sectional Coordinate Systems`). 
 
 In addition to the manual blade definition option, QBlade allows for some automated setups to speed up the blade design. It has the option to automatically set the
 thread axis at the position of maximum thickness of the airfoil. It also offers the option to do a blade shape optimization so that the twist angle is optimal for a given tip speed ratio. 

@@ -1,5 +1,5 @@
-Overview
-========
+Modeling Overview
+=================
 
 .. _fig-turbine-module:
 .. figure:: turbine_module.png
@@ -25,12 +25,12 @@ In the turbine definition dialog the user can set all details of the wind turbin
 Aerodynamic only Turbine Definitions
 ------------------------------------
 
-A turbine object can either be defined with or without a structural model definition. If the turbine object is defined without a structural model it is assumed as a rigid model, and only aerodynamic forces are evaluated during a simulation. The only operational modes for a turbine object without a structural model are constant or prescribed operational speed. 
+A turbine object can either be defined with or without a structural model definition. If the turbine object is defined without a structural model it is assumed as a rigid model, and only aerodynamic forces are evaluated during a simulation. The only operational modes for a turbine object without a structural model are constant or prescribed operational speed (see :ref:`Aerodynamic Modeling`).
 
 Aeroelastic Turbine Definitions
 -------------------------------
 
-If a structural model is added to a turbine object an aeroelastic simulation can be performed. The simulation results then include gravitational, inertia, centrifugal, gyroscopic and aerodynamic forces. For turbine objects with structural model definitions a wind turbine controller may be added to the turbine definition. If a turbine object also contains a definition of a floating or bottom fixed substructure also hydrodynamic forces are evaluated during the simulation. All input parameters that for the turbine definition in QBlade are briefly described below, ordered by their appearance in the dialog. If you want to quickly find information about a specific parameter it is suggested to use the search function of this documentation.
+If a structural model (see :ref:`Structural Modeling`) is added to a turbine object an aeroelastic simulation can be performed. The simulation results then include gravitational, inertia, centrifugal, gyroscopic and aerodynamic forces. For turbine objects with structural model definitions a wind turbine controller may be added to the turbine definition (see :ref:`Wind Turbine Controllers`). If a turbine object also contains a definition of a floating or bottom fixed substructure (see :ref:`Substructure Modeling`) also hydrodynamic forces are evaluated during the simulation. All input parameters of a turbine definition in QBlade are described in the following sections of this documentation, ordered by their appearance in the dialog. If you want to quickly find information about a specific parameter it is suggested to use the **search functionality** of this online documentation.
 
 General Turbine Parameters
 ==========================
