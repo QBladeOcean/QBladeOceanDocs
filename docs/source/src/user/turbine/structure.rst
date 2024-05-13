@@ -459,11 +459,12 @@ The cross-sectional beam properties of the blade, tower and strut bodies have to
 .. code-block:: console
 	:caption: : Exemplary blade structural data file for a Timoshenko beam
 
-	0.0024		RAYLEIGHDMP
-	1.00		STIFFTUNER
-	1.00		MASSTUNER
-
-	20		DISC
+	0.0024	RAYLEIGHDMP
+	
+	0	INTPTYPE 0-LINEAR; 1-AKIMA; 2-HERMITE; 3-C2SPLINE
+	1	BEAMTYPE 0-EULER; 1-TIMOSHENKO; 2-TIMOSHENKO_FPM
+	1	DISCTYPE 0-LINEAR; 1-COSINE; 2-STRUCT; 3-AERO
+	60	DISC
 
 	ADDMASS_0.50 0.00 - add a point mass at relative position 0.50 with 0.00kg mass
 
@@ -525,11 +526,13 @@ The cross-sectional beam properties of the blade, tower and strut bodies have to
 	
 The keyword :code:`RAYLEIGHDMP`: defines a stiffness proportional Rayleigh damping coefficient (see :ref:`Damping of Structural Bodies`). The parameters :code:`STIFFTUNER` and :code:`MASSTUNER` can be used to tune the global stiffness or mass properties of the data table through a multiplication by this factor. The keyword :code:`RGBCOLOR` defines the rgb values that are used to color the structural body during the 3D visualization. 
 
-The keyword :code:`DISC` controls the discretization of the body into structural nodes. The following options are available:
+The keyword :code:`INTPTYPE` controls the interpolation of the cross-sectional quantities between the user specified data table and the structural elements. Options are: 0-LINEAR; 1-AKIMA; 2-HERMITE; 3-C2SPLINE
 
-* :code:`<num> DISC`: Discretization into <num> equally spaced (along the curved length) structural nodes.
-* :code:`struct DISC`: The discretization is carried out after the discretization in the structural data table.
-* :code:`aero DISC`: The discretization is carried out after the discretization in the aerodynamic blade data table (only for blade bodies).
+The keyword :code:`BEAMTYPE` sets the type of structural beam, based on which the structural datatable is interpreted. Options are: 0-EULER; 1-TIMOSHENKO; 2-TIMOSHENKO_FPM. Please note that the user defined datatable has to match the selected beam type (see :ref:`Blade and Strut Euler Bernoulli and Timoshenko Datatable` and :ref:`Blade and Strut Timoshenko FPM Datatable`)
+
+The keyword :code:`DISCTYPE` controls the discretization type of the structural body. Options are: 0-LINEAR; 1-COSINE; 2-STRUCT; 3-AERO. LINEAR is the standard linear discretization, based over the number of nodes specified by the keyword :code:`<num> DISC`. COSINE is a cosine distribution based on the number of nodes specified by the keyword :code:`<num> DISC`. STRUCT discretizes the structural body based on the structural data table. AERO discretizes the structural body based on the discretization of the aerodynamic blade design.
+
+The keyword :code:`<num> DISC` controls the number of structural nodes that are distributed over the length of the body:
 
 The keyword :code:`ADDMASS_<pos>` can be used to add a mass at the normalized position *<pos>*. :code:`ADDMASS_<pos>` can be followed by up to 7 numeric values (at least one) to assign mass and rotational inertia properties. For example: :code:`ADDMASS_0.2 10 1 2 3 4 5 6` adds a mass of 10kg at the normalized position of 0.2. The following numbers assign the rotational inertia in local body coordinates: *Ixx = 1, Iyy = 2, Izz = 3, Ixy = 4, Ixz = 5, Iyz = 6*. 
 
