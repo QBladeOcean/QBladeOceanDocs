@@ -198,6 +198,158 @@ The input parameters are described in detail in the following section.
  * **Shear Exponent**: Specifies the shear exponent of the aforementioned shear layer model (if exponential model chosen).
  * **Roughness Length**: Specifies the reference height of the aforementioned shear layer model (if logarithmic model chosen).   
  
+Importing Turbulent Wind Fields
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. _fig-import-wind:
+.. figure:: import_menu.png
+    :align: center
+    :scale: 75%
+    :alt: Import options in the wind field menu.
+
+    Import options in the wind field menu.
+    
+It is also possible to import externally generated three dimensional wind fields into QBlade, see :numref:`fig-import-wind`. Wind fields can be imported in three ways:
+
+Binary Wind Field File
+**********************
+A wind field file in binary format (.bts) (see TurbSim Users Guide :footcite:`TurbSimGuide`) can be imported by simply reading the .bts file.
+
+Mann Model File
+***************
+A Mann box can be imported through the Mann (.man) file format, shown below. 
+
+If the parameter **IMPORTBOX** is set to *false*, QBlade will automatically generate a Mann wind box with the parameters specified in the .man file. 
+
+If the parameter **IMPORTBOX** is set to *true*, QBlade will search for the (possibly externally generated) files:
+
+ * *PREFIX* _u.bin
+ * *PREFIX* _v.bin
+ * *PREFIX* _z.bin
+
+An import the velocity components from these binary files directly.
+
+.. code-block:: console
+	:caption: : Exemplary Mann (.man) format file
+
+	----------------------------------------QBlade Mann Box Definition File--------------------------------------------
+	Generated with : QBlade IH v2.0.7-release_candidate_beta windows
+	Archive Format: 310023
+	Time : 17:12:23
+	Date : 15.05.2024
+
+	----------------------------------------Parameters-----------------------------------------------------------------
+	Windfield                                PREFIX             - prefix of the .bin and other files generated
+	0                                        IMPORTBOX          - false: generate new box from parameters; true: try to find and read .bin files with prefix
+
+	120.000                                  HEIGHTBOX          - height of the mann box center in [m]
+	1024.000                                 XDIM_BOX           - length of the mann box in [m]
+	240.000                                  YDIM_BOX           - width of the mann box in [m]
+	240.000                                  ZDIM_BOX           - height of the mann box in [m]
+	1024                                     NX_BOX             - number of points along length, must be power of 2 [-]
+	32                                       NY_BOX             - number of points along width, must be power of 2 [-]
+	32                                       NZ_BOX             - number of points along width, must be power of 2 [-]
+
+	120.000                                  REFHEIGHT          - reference height for the BL profile in [m]
+	0                                        PROFILETYPE        - BL profile type: 0- power law; 1 - logarithmic
+	0.200                                    PROFILEPARAM       - power law exponent or roughness length
+
+	0.203                                    ALPHA_EPSILON      - Mann alpha-epsilon parameter
+	29.400                                   L_MANN             - Mann length scale [m]
+	3.900                                    GAMMA              - Mann gamma parameter
+	12345                                    SEED               - turbulent seed
+
+	10.000                                   WINDSPEED          - hub-height average wind speed
+	20.960                                   TURBULENCE         - turbulence intensity
+	1                                        TURB_SCALING       - enable turbulent scaling: 0 - OFF; 1 - ON
+	1                                        HF_CORRECTION      - enable high frequency correction: 0 - OFF; 1 - ON
+
+	1.000                                    X_FACTOR           - scaling factor for x-variance
+	0.800                                    Y_FACTOR           - scaling factor for y-variance
+	0.500                                    Z_FACTOR           - scaling factor for z-variance
+ 
+TurbSim Input File
+******************
+A TurbSim input file may be directly opened in QBlade. The input file (.inp) will then automatically be communicated to the TurbSim binary and the corresponding wind field is imported.
+
+.. code-block:: console
+	:caption: : Exemplary TurbSim Input (.ipt) file
+	
+	!TurbSim Input File. Valid for TurbSim from OpenFAST v2.4.0. Generated with QBlade QBlade IH v2.0.7-release_candidate_beta windows on 15.05.2024 at 17:22:58
+
+	---------Runtime Options-----------------------------------
+	False               Echo            - Echo input data to <RootName>.ech (flag)
+	12345               RandSeed1       - First random seed  (-2147483648 to 2147483647) 
+	RANLUX              RandSeed2       - Second random seed (-2147483648 to 2147483647) for intrinsic pRNG, or an alternative pRNG: "RanLux" or "RNSNLW"
+	False               WrBHHTP         - Output hub-height turbulence parameters in binary form?  (Generates RootName.bin)
+	False               WrFHHTP         - Output hub-height turbulence parameters in formatted form?  (Generates RootName.dat)
+	False               WrADHH          - Output hub-height time-series data in AeroDyn form?  (Generates RootName.hh)
+	True                WrADFF          - Output full-field time-series data in TurbSim/AeroDyn form? (Generates Rootname.bts)
+	False               WrBLFF          - Output full-field time-series data in BLADED/AeroDyn form?  (Generates RootName.wnd)
+	False               WrADTWR         - Output tower time-series data? (Generates RootName.twr)
+	False               WrFMTFF         - Output full-field time-series data in formatted (readable) form?  (Generates RootName.u, RootName.v, RootName.w)
+	False               WrACT           - Output coherent turbulence time steps in AeroDyn form? (Generates RootName.cts)
+	True                Clockwise       - Clockwise rotation looking downwind? (used only for full-field binary files - not necessary for AeroDyn)
+	0                   ScaleIEC        - Scale IEC turbulence models to exact target standard deviation? [0=no additional scaling; 1=use hub scale uniformly; 2=use individual scales]
+
+	--------Turbine/Model Specifications-----------------------
+	24                  NumGrid_Z       - Vertical grid-point matrix dimension
+	24                  NumGrid_Y       - Horizontal grid-point matrix dimension
+	0.1000              TimeStep        - Time step [seconds]
+	63.0000             AnalysisTime    - Length of analysis time series [seconds] (program will add time if necessary: AnalysisTime = MAX(AnalysisTime, usableTimeLabel+GridWidth/MeanHHWS) )
+	63.0000             usableTimeLabel      - Usable length of output time series [seconds] (program will add GridWidth/MeanHHWS seconds)
+	120.0001            HubHt           - Hub height [m] (should be > 0.5*GridHeight)
+	240.00              GridHeight      - Grid height [m] 
+	240.00              GridWidth       - Grid width [m] (should be >= 2*(RotorRadius+ShaftLength))
+	0.0                 VFlowAng        - Vertical mean flow (uptilt) angle [degrees]
+	0.0                 HFlowAng        - Horizontal mean flow (skew) angle [degrees]
+
+	--------Meteorological Boundary Conditions-------------------
+	"IECKAI"            TurbModel       - Turbulence model ("IECKAI"=Kaimal, "IECVKM"=von Karman, "GP_LLJ", "NWTCUP", "SMOOTH", "WF_UPW", "WF_07D", "WF_14D", "TIDAL", or "NONE")
+	"unused"            UserFile        - Name secondary input file for user-defined spectra or time series inputs
+	"1-ED3"             IECstandard     - Number of IEC 61400-x standard (x=1,2, or 3 with optional 61400-1 edition number (i.e. "1-Ed2") )
+	"A"                 IECturbc        - IEC turbulence characteristic ("A", "B", "C" or the turbulence intensity in percent) ("KHTEST" option with NWTCUP model, not used for other models)
+	"NTM"               IEC_WindType    - IEC turbulence type ("NTM"=normal, "xETM"=extreme turbulence, "xEWM1"=extreme 1-year wind, "xEWM50"=extreme 50-year wind, where x=wind turbine class 1, 2, or 3)
+	2.00                ETMc            - IEC Extreme Turbulence Model "c" parameter [m/s]
+	default             ProfileType     - Wind profile type ("JET";"LOG"=logarithmic;"PL"=power law;"H2L"=Log law for TIDAL spectral model;"IEC"=PL on rotor disk, LOG elsewhere; or "default")
+	"unused"            ProfileFile -     Name of the file that contains user-defined input profiles
+	120.00              RefHt           - Height of the reference wind speed [m]
+	10.00               URef            - Mean (total) wind speed at the reference height [m/s] (or "default" for JET wind profile)
+	default             ZJetMax         - Jet height [m] (used only for JET wind profile, valid 70-490 m)
+	default             PLExp           - Power law exponent [-] (or "default")  
+	default             Z0              - Surface roughness length [m] (or "default")
+
+	--------Non-IEC Meteorological Boundary Conditions------------
+	default             Latitude        - Site latitude [degrees] (or "default")
+	0.05                RICH_NO         - Gradient Richardson number 
+	default             UStar           - Friction or shear velocity [m/s] (or "default")
+	default             ZI              - Mixing layer depth [m] (or "default")
+	default             PC_UW           - Hub mean u'w' Reynolds stress (or "default")
+	default             PC_UV           - Hub mean u'v' Reynolds stress (or "default")
+	default             PC_VW           - Hub mean v'w' Reynolds stress (or "default")
+
+	--------Spatial Coherence Parameters----------------------------
+	default             SCMod1          - u-component coherence model ("GENERAL","IEC","API","NONE", or "default")
+	default             SCMod2          - v-component coherence model ("GENERAL","IEC","API","NONE", or "default")
+	default             SCMod3          - w-component coherence model ("GENERAL","IEC","API","NONE", or "default")
+	default             InCDec1         - u-component coherence parameters [-, m^-1] ("a b" in quotes or "default")
+	default             InCDec2         - v-component coherence parameters [-, m^-1] ("a b" in quotes or "default")
+	default             InCDec3         - w-component coherence parameters [-, m^-1] ("a b" in quotes or "default")
+	default             CohExp          - Coherence exponent for general model [-] (or "default")
+
+	--------Coherent Turbulence Scaling Parameters-------------------
+	"path/to/coh_events/eventdata"  CTEventPath     - Name of the path where event data files are located
+	"Random"            CTEventFile     - Type of event files ("LES", "DNS", or "RANDOM")
+	true                Randomize       - Randomize the disturbance scale and locations? (true/false)
+	 1.0                DistScl         - Disturbance scale (ratio of wave height to rotor disk). (Ignored when Randomize = true.)
+	 0.5                CTLy            - Fractional location of tower centerline from right (looking downwind) to left side of the dataset. (Ignored when Randomize = true.)
+	 0.5                CTLz            - Fractional location of hub height from the bottom of the dataset. (Ignored when Randomize = true.)
+	30.0                CTStartTime     - Minimum start time for coherent structures in RootName.cts [seconds]
+
+	==================================================
+	NOTE: Do not add or remove any lines in this file!
+	==================================================
+
 Uniform Wind Field 
 ------------------
 A uniform wind field is specified directly within the *Wind Input Type* of the turbine simulation dialogue, shown in :numref:`fig-wind-pane` (see :doc:`../simulation/simulation`).
@@ -218,6 +370,7 @@ Hub Height File
 The user has more modelling freedom when a hub-height wind file is used. This type of file can either be created manually or by using the IEC wind tool :footcite:`IECwindtool`. This allows the specification of the velocity field at the hub height as a function of time. QBlade interpolates the time between the starting time of the file and the point where the predefined wind velocity profile (EOG in this case) should start. If the user specified simulation time exceeds the ending time in the hub-height file, QBlade will create a constant wind field with the parameters from the last entry of the hub-height file until the end of the simulation. An exemplary hubheight input file that described an extreme operating gust (EOG) at 20m/s is shown below:
 
 .. code-block:: console
+	:caption: : Exemplary Hub Height Format file
 
 	Time	Wind	Horiz.	Vert.	LinH.	Vert.	LinV.	Gust
 		Speed	Dir	Speed	Shear	Shear	Shear	Speed
