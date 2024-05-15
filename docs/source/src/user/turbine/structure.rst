@@ -869,7 +869,7 @@ The local cross-sectional coordinate system for the definition of the blade and 
     
     Visualization of the local coordinate system that is used to define the cross sectional beam properties of blades and struts.
     
-This cross sectional coordinate system in **ONLY** used for the definition of the **blade** and **strut** sectional structural properties! This cross sectional blade or strut coordinate system does **NOT** coincide with the local blade coordinate system (see :ref:`Local Blade Coordinate System`). The local blade (and strut) coordinate system follows the DNVGL definition :footcite:`dnvgl`. The sectional coordinate system shown in :numref:`fig-crossection` differs from the local body coordinate system (:numref:`fig-crossection_body`) in the following way: 
+**Please note**: this cross sectional coordinate system is **ONLY** used for the definition of the **blade** and **strut** sectional structural properties! This cross sectional blade or strut coordinate system does **NOT** coincide with the local blade coordinate system (see :ref:`Local Blade Coordinate System`), which is used to report the loading data of the blade or strut. The local blade (and strut) coordinate system, used to report loads, follows the DNVGL definition :footcite:`dnvgl`. The local body coordinate system (:numref:`fig-crossection_body`) differs from the cross-sectional coordinate system shown in :numref:`fig-crossection` in the following way: 
 
 * the **local blade X-axis** points in the direction of the **cross sectional Y-axis**.
 * the **local blade Y-Axis** points in the direction **opposite the cross sectional X-axis**.

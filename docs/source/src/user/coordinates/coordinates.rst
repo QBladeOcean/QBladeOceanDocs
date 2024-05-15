@@ -27,6 +27,13 @@ Local Blade Coordinate System
 
 For the rotor blades and struts the x-axis is oriented normal to the chord, pointing towards the suction side, the y-axis is oriented in the chord wise direction, pointing towards the trailing edge and the z-axis points along the principal beam direction to form a right handed coordinate system. If the rotor is constructed to rotate in the reverse direction the y-axis is pointing towards the leading edge instead.
 
+.. _fig-bladecoord:
+.. figure:: blade_cross_section.png
+    :align: center
+    :alt: The local blade coordinate system.
+    
+    The local blade coordinate system.
+
 Local Tower Coordinate System
 -----------------------------
 
