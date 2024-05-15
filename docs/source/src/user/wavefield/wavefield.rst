@@ -27,8 +27,8 @@ Finally, the *Equal Energy Directional Discretization* box lets the user define 
 
     The wave generator dialog in QBlade.
 
-Regular Wave
-------------
+Regular Linear Wave
+-------------------
 
 .. _fig-regular-wave:
 .. figure:: regular_wave.png
@@ -38,24 +38,51 @@ Regular Wave
 
     Visualization of a regular wave.
 
-To generate a regular wave, the wave type *Single Wave* has to be chosen in the *Linear Waves* dialogue. 
+To generate a regular wave, the wave type *Regular Linear* has to be chosen in the *Linear Wave* dialogue. 
 The user now has the option to characterize the single wave train with the remaining available inputs. 
 These parameters define the shape and direction of an Airy wave (see :ref:`Linear Wave Theory`).
 
 **Main Parameters**
 
-* **Time Offset**: Time shift of the generated wave signal.
-* **Significant Wave Height**: Height of wave train to be generated (directly linked to amplitude).
-* **Significant Wave Amplitude**: Amplitude of the wave (directly linked to wave height).
-* **Peak Period**: Period of the wave (directly linked to wave frequency).
-* **Peak Frequency**: Frequency of the wave (directly linked to the wave period).
+* **Time Offset**: Time shift of the generated wave signal
+* **Significant Wave Height**: Height of wave train to be generated (directly linked to amplitude)
+* **Significant Wave Amplitude**: Amplitude of the wave (directly linked to wave height)
+* **Peak Period**: Period of the wave (directly linked to wave frequency)
+* **Peak Frequency**: Frequency of the wave (directly linked to the wave period)
 
 **Equal Energy Directional Discretization**
 
-* **Principal Wave Direction**: Incoming wave direction.
+* **Principal Wave Direction**: Incoming wave direction
 
-Irregular Wave
---------------
+Regular Nonlinear Wave
+----------------------
+
+.. _fig-regular-wave:
+.. figure:: regular_nonlinear_wave.png
+    :align: center
+    :scale: 50%
+    :alt: Visualization of a regular nonlinear wave
+
+    Visualization of a regular nonlinear wave.
+
+To generate a regular nonlinear wave, the wave type *Regular Nonlinear* has to be chosen in the *Linear Wave* dialogue. The user now has the option to characterize the nonlinear wave with the remaining available inputs. These parameters define the shape and direction of a nonlinear Streamfunction Wave. The Streamfunction waves are automatically generated using the `CN-Stream <https://github.com/LHEEA/CN-Stream>`_ library from LHEAA (see the work of G. Ducrozet et al. :footcite:`cnstream`)
+
+**Main Parameters**
+
+* **Time Offset**: Time shift of the generated wave signal
+* **Significant Wave Height**: Height of wave train to be generated (directly linked to amplitude)
+* **Significant Wave Amplitude**: Amplitude of the wave (directly linked to wave height)
+* **Peak Period**: Period of the wave (directly linked to wave frequency)
+* **Peak Frequency**: Frequency of the wave (directly linked to the wave period)
+
+**Equal Energy Directional Discretization**
+
+* **Principal Wave Direction**: Incoming wave direction
+
+**Please note** that nonlinear waves cannot be used to obtain hydrodynamic forces from :ref:`Linear Potential Flow Theory` , but are only suited to model :ref:`Morison Equation` based hydrodynamic forces.
+
+Irregular Linear Wave
+---------------------
 
 .. _fig-irregular-wave:
 .. figure:: irregular_wave.png
@@ -65,17 +92,17 @@ Irregular Wave
 
     Visualization of an irregular wave.
 
-To generate an irregular wave, the wave type *Spectrum* has to be chosen. The user is now given the option to characterize the wave with the remaining available inputs. In addition to the wave train characterization discussed above, spectra discretization options can be specified.
+To generate an irregular wave, the wave type *Irregular Linear* has to be chosen. The user is now given the option to characterize the wave with the remaining available inputs. In addition to the wave train characterization discussed above, spectra discretization options can be specified.
 
 **Main Parameters**
 
-* **Time Offset**: Time shift of the generated wave signal.
-* **Significant Wave Height**: Wave height defining shape of the wave spectrum (directly linked to amplitude).
-* **Significant Wave Amplitude**: Wave amplitude defining shape of the wave spectrum (directly linked to height).
-* **Peak Period**: Peak period of the wave spectrum (directly linked to wave frequency).
-* **Peak Frequency**: Peak frequency of the wave spectrum (directly linked to the wave period).
-* **Automatic Gamma**: Automatic or manual definition of peak shape factor of the spectrum.
-* **Automatic Sigma**: Automatic or manual definition of the spectral width parameter.
+* **Time Offset**: Time shift of the generated wave signal
+* **Significant Wave Height**: Wave height defining shape of the wave spectrum (directly linked to amplitude)
+* **Significant Wave Amplitude**: Wave amplitude defining shape of the wave spectrum (directly linked to height)
+* **Peak Period**: Peak period of the wave spectrum (directly linked to wave frequency)
+* **Peak Frequency**: Peak frequency of the wave spectrum (directly linked to the wave period)
+* **Automatic Gamma**: Automatic or manual definition of peak shape factor of the spectrum
+* **Automatic Sigma**: Automatic or manual definition of the spectral width parameter
 
 **Frequency Discretization**
 
@@ -115,10 +142,36 @@ QBlade also allows to embed a constrained wave into an irregular wavefield. This
 
 It is highly suggested to use an *Equal Frequency* discretization, with sufficient wave trains when embedding a constrained wave.
 
-* **Wave Elevation**: The elevation of the embedded wave.
-* **At Time**: The time at which the extreme wave occurs.
+* **Wave Elevation**: The elevation of the embedded wave
+* **At Time**: The time at which the extreme wave occurs
 * **At X Position**: The X position at which the extreme wave occurs
 * **At Y Position**: The Y position at which the extreme wave occurs
+
+Furthermore, it is possible to *copy-paste* a nonlinear regular wave over the constrained wave. This process is carried out in a similar way as described in the work by P. J. Rainey at al. :footcite:`Rainey_2007`. It is only possible to copy-paste a nonlinear wave over a constrained wave in a unidirectional wavefield. The user has to specify the following parameters of the embedded nonlinear wave:
+
+* **Nonlinear Wave Height**: The wave height of the pasted nonlinear wave
+* **Nonlinear Wave Period**: The period of the nonlinear wave
+
+**Please note** that the *Nonlinear Wave Height* parameter is not the same as the *Wave Elevation* parameter that was specified for the constrained wave. The actual wave elevation of the pasted nonlinear wave also depends on other factors, such as the water depth.
+
+.. _fig-pasted-wave:
+.. figure:: pasted_wave.png
+    :align: center
+    :alt: An example of a nonlinear regular wave, pasted over a linear constrained wave in an irregular unidirectional wavefield.
+
+    An example of a nonlinear regular wave, pasted over a linear constrained wave in an irregular unidirectional wavefield.
+    
+.. _fig-nonlinear-pasted-wave:
+.. figure:: nonlinear_pasted_wave.png
+    :align: center
+    :scale: 50%
+    :alt: Timetrace of wave elevation of the pasted nonlinear regular wave (in red), pasted over a linear constrained wave (in blue).
+
+    Timetrace of wave elevation of the pasted nonlinear regular wave (in red), pasted over a linear constrained wave (in blue).
+    
+Nonlinear wave models in offshore wind turbine simulations offer enhanced accuracy by more realistically representing extreme sea states and complex wave interactions. The technique of pasting nonlinear waves into linear seas enables precise analysis of specific severe wave conditions without requiring extensive simulations to encounter such events naturally. This leads to more accurate predictions of structural loads, crucial for ensuring the safety and structural integrity of turbines, and facilitates more robust turbine design and risk assessment under challenging conditions.
+
+**Please note** that nonlinear waves cannot be used to obtain hydrodynamic forces from :ref:`Linear Potential Flow Theory` , but are only suited to model :ref:`Morison Equation` based hydrodynamic forces.
 
 Import Components
 -----------------
@@ -158,26 +211,26 @@ An exemplary ``.lwa`` file is shown below:
 	:caption: : A wave exported in ASCII format
 
 	----------------------------------------QBlade Wave Definition File-------------------------------------------------
-	Generated with : QBlade CE v 2.0 windows-pre-release
-	Archive Format: 310001
-	Time : 21:17:57
-	Date : 14.06.2022
+	Generated with : QBlade IH v2.0.7-release_candidate_beta windows
+	Archive Format: 310023
+	Time : 15:05:06
+	Date : 15.05.2024
 
 	----------------------------------------Object Name-----------------------------------------------------------------
-	Jonswap_Wave                             OBJECTNAME         - the name of the linear wave definition object
+	Pasted-Nonlinear-Wave                    OBJECTNAME         - the name of the linear wave definition object
 
 	----------------------------------------Main Parameters-------------------------------------------------------------
 	0.000                                    TIMEOFFSET         - the time offset from t=0s [s]
-	3                                        WAVETYPE           - wave type: 0 = TIMESERIES, 1 = COMPONENT, 2 = SINGLE, 3 = JONSWAP, 4 = ISSC, 5 = TORSETHAUGEN, 6 = CUSTOM
+	3                                        WAVETYPE           - wave type: 0=TIMESERIES, 1=COMPONENT, 2=SINGLE, 3=JONSWAP, 4=ISSC, 5=TORSETHAUGEN, 6=CUSTOM, 7=STREAMFUNCTION
 	8.100                                    SIGHEIGHT          - the significant wave height (Hs) [m]
 	12.700                                   PEAKPERIOD         - the peak period (Tp) [s]
-	1                                        AUTOGAMMA          - use gamma according to IEC (bool): 0 = OFF, 1 = ON (JONSWAP & TORSE only)
+	true                                     AUTOGAMMA          - use gamma according to IEC (bool): 0 = OFF, 1 = ON (JONSWAP & TORSE only) [bool]
 	1.000                                    GAMMA              - custom gamma (JONSWAP & TORSE only)
-	1                                        AUTOSIGMA          - use sigmas according to IEC (JONSWAP & TORSE only)
+	true                                     AUTOSIGMA          - use sigmas according to IEC (JONSWAP & TORSE only) [bool]
 	0.070                                    SIGMA1             - sigma1 (JONSWAP & TORSE only)
 	0.090                                    SIGMA2             - sigma1 (JONSWAP & TORSE only)
 	0                                        DOUBLEPEAK         - if true a double peak TORSETHAUGEN spectrum will be created, if false only a single peak (TORSE only)
-	1                                        AUTOORCHI          - automatic OCHI-HUBBLE parameters from significant wave height (OCHI only)
+	true                                     AUTOORCHI          - automatic OCHI-HUBBLE parameters from significant wave height (OCHI only) [bool]
 	0.077                                    MODFREQ1           - modal frequency 1, must be "< modalfreq1 * 0.5" (OCHI only)
 	0.133                                    MODFREQ2           - modal frequency 2, should be larger than 0.096 (OCHI only)
 	6.804                                    SIGHEIGHT1         - significant height 1, should be larger than height 2 (OCHI only)
@@ -186,12 +239,12 @@ An exemplary ``.lwa`` file is shown below:
 	0.932                                    LAMBDA2            - peak shape 2 (OCHI only)
 
 	----------------------------------------Frequency Discretization ---------------------------------------------------
-	0                                        DISCTYPE           - frequency discretization type: 0 = equal energy; 1 = equal frequency
-	1                                        AUTOFREQ           - use automatic frequency range (f_in = 0.5*f_p, f_out = 10*f_p)
+	1                                        DISCTYPE           - frequency discretization type: 0 = equal energy; 1 = equal frequency
+	true                                     AUTOFREQ           - use automatic frequency range (f_in = 0.5*f_p, f_out = 10*f_p) [bool]
 	0.039                                    FCUTIN             - cut-in frequency
 	0.787                                    FCUTOUT            - cut-out frequency
 	0.050                                    MAXFBIN            - maximum freq. bin width [Hz]
-	320                                      NUMFREQ            - the number of frequency bins
+	3020                                     NUMFREQ            - the number of frequency bins
 	65535                                    RANDSEED           - the seed for the random phase generator range [0-65535]
 
 	----------------------------------------Directional Discretization (Equal Energy)-----------------------------------
@@ -202,11 +255,16 @@ An exemplary ``.lwa`` file is shown below:
 	32                                       NUMDIR             - the number of directional bins
 
 	----------------------------------------Embedded Constrained Wave --------------------------------------------------
-	0                                        EMBEDWAVE          - add a constrained wave (bool), 0 = OFF, 1 = ON
-	10.00                                    EMBEDELEV          - the wave elevation of the embedded wave [m]
+	true                                     EMBEDWAVE          - add a constrained wave [bool]
+	16.00                                    EMBEDELEV          - the wave elevation of the embedded wave [m]
 	0.00                                     EMBEDTIME          - the time at which the embedded wave occurs [s]
 	0.00                                     EMBEDXPOS          - the x-position at which the embedded wave occurs [m]
 	0.00                                     EMBEDYPOS          - the y-position at which the embedded wave occurs [m]
+	true                                     PASTESTREAM        - paste a streamfunction wave over the embedded linear wave [bool]
+	23.00                                    SIGHEIGHTSTREAM    - the significant height of the streamfunction wave [m]
+	12.70                                    PERIODSTREAM       - the period of the stremfunction wave [s]
+
+
 
 Merged Waves
 ------------
