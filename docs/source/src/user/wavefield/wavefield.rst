@@ -57,7 +57,7 @@ These parameters define the shape and direction of an Airy wave (see :ref:`Linea
 Regular Nonlinear Wave
 ----------------------
 
-.. _fig-regular-wave:
+.. _fig-regular-nonlinear-wave:
 .. figure:: regular_nonlinear_wave.png
     :align: center
     :scale: 50%

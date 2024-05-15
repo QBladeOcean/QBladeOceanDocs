@@ -8,26 +8,34 @@ Wind Field Generator Overview
 
     The wind field creation symbol in the QBlade main tool bar. 
 
-If a time domain simulation is being carried out, a wind field can be defined and added to the simulation.
-This provides important information for the calculation of aerodynamic quantities. 
-Three types of wind fields can be generated for use in QBlade. These are described individually below.
+The Wind Field Generator in QBlade is essential for defining the atmospheric conditions affecting the turbine during simulations. This section provides an overview of how to generate different types of wind fields, including turbulent, uniform, and hub-height wind fields, each crucial for various simulation scenarios. Below, we describe the options available for each type of wind field and guide you through the settings and parameters necessary to tailor the wind conditions to your specific simulation needs.
 
 Turbulent Wind Field 
 --------------------
-The final type of wind file which can be set up is a three dimensional, fully turbulent wind field.
+
+.. _fig-turb-field:
+.. figure:: windfield.png
+    :align: center
+    :scale: 50%
+    :alt: A turbulent wind field generated in QBlade.
+
+    A turbulent wind field generated in QBlade.
+
+This section describes the process of generating a three-dimensional, fully turbulent wind field. Turbulent wind fields are essential for simulating real-world atmospheric conditions and assessing turbine performance under variable wind speeds and directions.
+
 This can be either generated through the *Wind Input Type* button of the turbine simulation dialogue, as shown in :numref:`fig-wind-pane` or by directly generating this within the
 turbulent wind module, shown in :numref:`fig-wind-module`. 
 
 Three different options, to generate a three dimensional, fully turbulent wind field exist in QBlade.
 
-* **TurbSim**: Generates the wind field uwing NREL's TurbSim binary (see B. J. Jonkman :footcite:`TurbSimGuide`).
+* **TurbSim**: Generates the wind field using NREL's TurbSim binary (see B. J. Jonkman :footcite:`TurbSimGuide`).
 * **Mann**: Generates the wind field using DTU`s Mann generator (see J. Mann :footcite:`mann1998`).
 * **Veers**: Generates the wind field after the Veers algorithm (see P. S. Veers :footcite:`veers1988`).  
 
-TurbSim Windfields
-^^^^^^^^^^^^^^^^^^
+TurbSim Wind Fields
+^^^^^^^^^^^^^^^^^^^
 	
-When a new TurbSim wind fild is created, a range of parameters must be specified as shown by the wind field generator dialogue in :numref:`fig-turb-dia`.
+When a new TurbSim wind field is created, a range of parameters must be specified as shown by the wind field generator dialogue in :numref:`fig-turb-dia`.
 After these have been selected, clicking on the *Create* button automatically passes the information to the TurbSim program :footcite:`TurbSimGuide`.
 The TurnSim binary is automatically called by QBlade, and after creation the wind field is automatically imported, so that no additional user input is required.
 The input parameters are described in detail in the following section. 
@@ -36,9 +44,9 @@ The input parameters are described in detail in the following section.
 .. figure:: turbsim_dialog.png
     :align: center
     :scale: 75%
-    :alt: Turb sim windfield dialogue in QBlade.
+    :alt: Turb sim wind field dialogue in QBlade.
 
-    Turb sim windfield dialogue in QBlade.
+    Turb sim wind field dialogue in QBlade.
 
 **Main Parameters**
 
@@ -83,10 +91,10 @@ The input parameters are described in detail in the following section.
  * **Remove TurbSim Files**: If checked, the TurbSim files generated and subsequently read by QBlade, are automatically deleted.
  * **Close Console**: If checked, the console which is called to generate the TurbSim file is automatically closed upon completion of TurbSim file generation. 
     
-Mann Windfields
-^^^^^^^^^^^^^^^
+Mann Wind Fields
+^^^^^^^^^^^^^^^^
 	
-When a new Mann wind fild is created, a range of parameters must be specified as shown by the wind field generator dialogue in :numref:`fig-mann-dia`.
+When a new Mann wind field is created, a range of parameters must be specified as shown by the wind field generator dialogue in :numref:`fig-mann-dia`.
 After these have been selected, clicking on the *Create* button automatically passes the information to `DTU's Mann 64bit Turbulence Generator <https://www.hawc2.dk/install/standalone-mann-generator>`_.
 The Mann binary is automatically called by QBlade, and after creation the wind field is automatically imported, so that no additional user input is required. **Please note** that the Mann 64bit generator currently is only available for Windows operating systems.
 The input parameters are described in detail in the following section. 
@@ -95,9 +103,9 @@ The input parameters are described in detail in the following section.
 .. figure:: mann_dialog.png
     :align: center
     :scale: 75%
-    :alt: Mann windfield dialogue in QBlade.
+    :alt: Mann wind field dialogue in QBlade.
 
-    Mann windfield dialogue in QBlade.
+    Mann wind field dialogue in QBlade.
 
 **Main Parameters**
 
@@ -150,10 +158,10 @@ The input parameters are described in detail in the following section.
  * **Y-Scale Factor**: Scales the transversal turbulence along the y-axis to the IEC turbulence, mutiplied by this value.
  * **Z-Scale Factor**: Scales the transversal turbulence along the z-axis to the IEC turbulence, mutiplied by this value.
 
-Veers Windfields
-^^^^^^^^^^^^^^^^
+Veers Wind Fields
+^^^^^^^^^^^^^^^^^
 	
-When a new Veers wind fild is created, a range of parameters must be specified as shown by the wind field generator dialogue in :numref:`fig-veers-dia`.
+When a new Veers wind field is created, a range of parameters must be specified as shown by the wind field generator dialogue in :numref:`fig-veers-dia`.
 After these have been selected, clicking on the *Create* button automatically generates a wind field using the Veers method build into QBlade (see P. Veers :footcite:`veers1988`).
 The input parameters are described in detail in the following section. 
 
@@ -161,9 +169,9 @@ The input parameters are described in detail in the following section.
 .. figure:: veers_dialog.png
     :align: center
     :scale: 75%
-    :alt: Veers windfield dialogue in QBlade.
+    :alt: Veers wind field dialogue in QBlade.
 
-    Veers windfield dialogue in QBlade.
+    Veers wind field dialogue in QBlade.
 
 **Main Parameters**
 
