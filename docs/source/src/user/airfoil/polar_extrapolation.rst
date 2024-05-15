@@ -85,7 +85,14 @@ A plot of these parameters, as generated for a NACA 4412 profile are shown in :n
 	
 Dynamic Polar Sets
 ---------------------------
-In QBlade dynamic polar sets can be used to model the changing states of flow control devices, such as trailing edge flaps. Dynamic polar sets allow to store polars that represents a series of states. For example: for a flap each state would correspond to a certain flap deflection angle. For each state multiple polars, covering a range of Reynolds numbers, may be stored. A dynamic polar set can then be assigned to an active element in the Blade Design Module (see :ref:`Active Elements and Blade Damage`). The different states can then later be activated by the :ref:`Wind Turbine Controllers` or the Actuator Control Panel. 
+In QBlade dynamic polar sets can be used to model the changing states of flow control devices, such as trailing edge flaps. Dynamic polar sets allow to store polars that represents a series of states. For example: for a flap each state would correspond to a certain flap deflection angle. For each state multiple polars, covering a range of Reynolds numbers, may be stored. A dynamic polar set can then be assigned to an active element in the Blade Design Module (see :ref:`Active Elements and Blade Damage`). The different states can then later be switched by the :ref:`Wind Turbine Controllers` or the **Actuator Control Options Panel**, see :numref:`fig-actuator-control-panel`. 
+
+.. _fig-actuator-control-panel:
+.. figure:: actuator_control_panel.png
+    :align: center
+    :alt: The actuator control panel, found in the Dock of the Simulation Module
+
+    The actuator control panel, found in the Dock of the Simulation Module
 
 :numref:`fig-dynset` shows the dialog to create dynamic polar sets.
 
@@ -99,11 +106,20 @@ In QBlade dynamic polar sets can be used to model the changing states of flow co
 Import and Export of 360 Polars
 -------------------------------------------------
 
-Much as is the case with non extrapolated polars, a range of import and export options exist so that external sources and files may be used to define 360 :math:`^\text{o}` polars within QBlade. 
-This is achieved by selecting the *360 Polar* menu option.
+.. _fig-yaml-import-polars:
+.. figure:: yaml_import_polar.png
+    :align: center
+    :alt: Import Options for 360 Polars
+
+    Import Options for 360 Polars
+
+QBlade allows to import and export 360 Polar objects in a series of formats. The import/export options are located in the menu item *360 Polar*, see :numref:`fig-yaml-import-polars`.
+QBlade is currently capable of importing and exporting 360 Polars in the following formats:
 
 * **Plain text format:** These include either AeroDyn V13 files or XFoil formats (see :doc:`../airfoil/airfoil`)
 * **Multi Re polar file:** The ``.plr`` format is the main format to import or export polar data. It can also be used to import polar data that is defined over a range of Reynolds numbers.
+* **WindIO Yaml:** Imports all polars from a `WindIO Yaml <https://windio.readthedocs.io/en/latest/>`_ turbine definition file (import only)
+
 	
 When a ``.plr`` file is imported and no airfoil, as specified in the file, exists an airfoil with the thickness as defined with the parameter *THICKNESS* is automatically created during loading. An exemplary ``.plr`` file is shown below:
 

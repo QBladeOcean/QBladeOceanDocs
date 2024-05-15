@@ -97,12 +97,20 @@ different airfoils and polars, even multi-polar sets. QBlade will interpolate al
 Importing and Exporting Blade Definitions
 -----------------------------------------
 
-QBlade allows to import and export blade definitions in a series of formats. The import/export options are located in the menu item *Blade Design*.
+.. _fig-blade-yaml-import:
+.. figure:: yaml_import_blade.png
+    :align: center
+    :alt: Blade Definition Import Options
+
+    Blade Definition Import Options
+
+QBlade allows to import and export blade definitions in a series of formats. The import/export options are located in the menu item *Blade Design*, see :numref:`fig-blade-yaml-import`.
 QBlade is currently capable of importing blade definitions in the following formats:
 
 - QBlade blade format (``.bld``),
 - Blade geometry in QBlade, AeroDyn and WT_perf format,
 - AeroDyn V15 full blade definition,
+- `WindIO Yaml <https://windio.readthedocs.io/en/latest/>`_ Definition
 
 
 QBlade is currently capable of exporting blade definitions in the following formats:
