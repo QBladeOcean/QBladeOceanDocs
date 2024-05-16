@@ -1,8 +1,5 @@
 Wind Turbine Controllers
-========================
-
-Predefined Controller Interfaces
---------------------------------
+------------------------
 
 QBlade allows the integration of  standard wind turbine controllers to perform aero-servo-hydro-elastic simulations. This is realized via the coupling to a dynamic link library (.dll) which is called every time step by QBlade to update control actions performed on the wind turbine. This is shown in :numref:`fig-controller-interaction`.
 

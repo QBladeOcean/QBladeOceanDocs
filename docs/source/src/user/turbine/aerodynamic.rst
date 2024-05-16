@@ -56,6 +56,30 @@ Unsteady BEM Options
 
 The theory of the unsteady polar BEM is briefly described in :ref:`Polar Grid`.
 
+Dynamic Wake Meandering Parameters
+----------------------------------
+
+DWM Wake Settings
+*****************
+
+- **Total Wake Length (in D) [-]**: This parameter sets the total wake length of the DWM model, normalized by rotor diameter.
+- **Number of Wake Planes [-]**: The total number of wake planes that is spread out over the total wake length. If the *Total Wake Length* would be 10 and the *Number of Wake Planes* 20, then the wake planes would be :math:`\frac{10D}{20}=0.5D` apart.
+- **Max Wake Plane Width (in D) [-]**: This specifies the max. diameter of the wake planes. If *Max Wake Plane Width* = 3, then the wake plane would cover 3 rotor diameters.
+- **Wake Plane Update Dist. (in D) [-]**: After each wake plane was propagated by this distance, normalized by rotor diameter, its velocity distribution is updated (evolve step).
+- **Yaw Deflection Factor [1/deg]**: Is a parameter for the yaw deflection correction, scaled with yaw error and normalized downstream distance.
+- **Tilt Deflection Factor**: Is a parameter for the tilt deflection correction, scaled with tilt error and normalized downstream distance.
+- **Include Rotor Tilt**: If deactivated, the rotor tilt error does not cause a vertical deflection of the wake planes.
+
+DWM Wake Plane Settings
+***********************
+
+- **Wake Plane Radial Disc. [-]**: Specifies with how many points the wake plane is discretized over its width (*Max Wake Plane Width*).
+- **C Meander, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the meandering (in plane) components during the propagation step.
+- **C Advect, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the advection (out of plane) component during the propagation step.
+- **Polar Grid Measurement Points [-]**: The number of points distributed over the polar grid (for meandering and advection calculation) at which velocities are evaluated during the averaging step.
+
+DWM Added Turbulence Settings
+*****************************
 
 Free Vortex Wake
 ----------------

@@ -75,11 +75,17 @@ Wind Turbine Modeling
    turbine/turbine
    turbine/aerodynamic
    turbine/structure
-   turbine/controller
    turbine/marinehydrokinetic
    turbine/turbineexport
    turbine/multi_turbine
+
+Controller Modeling
+*******************
+.. toctree::
+   :maxdepth: 1
    
+   turbine/controller
+  
 Substructure Modeling
 *********************
 .. toctree::

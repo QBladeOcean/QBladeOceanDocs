@@ -12,13 +12,22 @@ A new wind turbine can be defined, or an existing turbine can be edited in the *
 
 The Turbine Definition Dialog
 -----------------------------
+    
+.. _fig-turb_dialog1:
+.. figure:: turbine_dialog1.png
+   :align: center
+   :scale: 45%
+   :alt: The turbine definition dialog showing unsteady BEM options.
 
-.. _fig-turbine-dialog:
-.. figure:: turbine_dialog.png
-    :align: center
-    :alt: The turbine definition dialog in QBlade.
+   The turbine definition dialog showing unsteady BEM, and Dynamic Wake Meandering (DWM) options (click to enlarge).
+   
+.. _fig-turb_dialog2:
+.. figure:: turbine_dialog2.png
+   :align: center
+   :scale: 45%
+   :alt: The turbine definition dialog showing LLFVW options (click to enlarge).
 
-    The turbine definition dialog in QBlade.
+   The turbine definition dialog showing LLFVW options (click to enlarge).
     
 In the turbine definition dialog the user can set all details of the wind turbine that should be modeled. In the following all parameters and entries of this dialog are explained. 
 

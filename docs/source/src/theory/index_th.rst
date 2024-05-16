@@ -7,6 +7,7 @@ Aerodynamics
    :maxdepth: 1
 
    aerodynamics/bem/bem
+   aerodynamics/dwm/dwm
    aerodynamics/lifting_line/lifting_line
    aerodynamics/dynamic_stall/index_dynamicstall	
    aerodynamics/secondary_effects/index_secondary

@@ -294,6 +294,17 @@ A modal analysis may be performed at the end of a simulation run, based on the l
 * **Perform Modal Analysis at end**: Toggles if a modal analysis is performed at the end of the simulation.
 * **Search From Min. Freq.**: Only modeshapes with an Eigen frequency above this value are stored.
 * **Delta Freq.**: Only modeshapes that are spaced apart by this value are stored.
+* **Number Modes**: The number of modes (starting from the lowest frequency) that will be stored.
+
+Dynamic Wake Meandering
+-----------------------
+
+Here the user can choose which wake summation method shall be applied to overlapping wakes of the :ref:`Dynamic Wake Meandering Model`. The different options are:
+
+* **Dominant Wake*: The combined wake velocity is equal to the velocity of the wake with the largest velocity deficit (induction)
+* **Sum of Squares**: The wake induced velocities are summed up by the sum of squares method.
+* **Vector Sum**: The wake induced velocities are summed up by linear vector addition.
+
 
 Ice Throw Simulation
 --------------------
