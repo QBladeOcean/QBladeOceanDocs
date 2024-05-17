@@ -1,4 +1,4 @@
-Dynamic Wake Meandering Model`
+Dynamic Wake Meandering Model
 -----------------------------
 
 The Dynamic Wake Meandering (DWM) model in QBlade represents an approach to simulating the wake behind a wind turbine rotor, when its aerodynamics are simulated with the unsteady BEM theory. The DWM model captures the essential dynamics of wind turbine wakes, providing a robust framework for analyzing how wakes influence the operation and loads on downstream turbines. The DWM model is able to simulate wake behavior quickly and accurately, making it an ideal tool for investigations into wind park layout or control optimization.

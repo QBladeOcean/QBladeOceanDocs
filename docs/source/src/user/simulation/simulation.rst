@@ -301,7 +301,7 @@ Dynamic Wake Meandering
 
 Here the user can choose which wake summation method shall be applied to overlapping wakes of the :ref:`Dynamic Wake Meandering Model`. The different options are:
 
-* **Dominant Wake*: The combined wake velocity is equal to the velocity of the wake with the largest velocity deficit (induction)
+* **Dominant Wake**: The combined wake velocity is equal to the velocity of the wake with the largest velocity deficit (induction)
 * **Sum of Squares**: The wake induced velocities are summed up by the sum of squares method.
 * **Vector Sum**: The wake induced velocities are summed up by linear vector addition.
 

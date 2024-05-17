@@ -77,9 +77,30 @@ DWM Wake Plane Settings
 - **C Meander, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the meandering (in plane) components during the propagation step.
 - **C Advect, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the advection (out of plane) component during the propagation step.
 - **Polar Grid Measurement Points [-]**: The number of points distributed over the polar grid (for meandering and advection calculation) at which velocities are evaluated during the averaging step.
+- **Polar Grid Measurement Points [-]**: The number of points distributed over the polar grid (for meandering and advection calculation) at which velocities are evaluated during the averaging step.
+- **Polar Grid Weighting [-]**: Specified the weighting function for the polar grid points, used during velocity averaging.
+- **Rotor Low Pass Filter Freq. [Hz]**: The cut-off (corner) frequency :math:`f_c` of a low pass time filter to obtain rotor conditions (thrust, yaw, etc.), implemented as :math:`x_{lp,t} = x_{lp,t-1} \cdot e^{-2\pi f_c} + (1-e^{-2\pi f_c}) \cdot x_t`.
+- **Thrust Coefficient Ct [-]**: The thrust coefficient can be obtained automatically from the local rotor conditions (*auto*) or manually, as a user input (*manual*).
+- **Turbulence Intensity [-]**: The turbulence intensity can be obtained automatically from the inflowconditions (*auto*) or manually, as a user input (*manual*).
+- **Viscosity Model**: The viscosity model that is used during the wake plane update (evolution) calculations, options are *MADSEN, LARSEN, IEC, KECK*..
+- **Boundary Condition**: The boundary condition model that is used to generate the velocity distribution of the rotor fixed wake plane, options are *NONE, MADSEN, IEC, KECK*.
 
 DWM Added Turbulence Settings
 *****************************
+
+A small scale three dimensional turbulence windfield may be used to introduce wake added turbulence into the flowfield. The adde turbulence wind field should have a unit variance and isotropic turbulence. It is introduced into the wake plane velocity field by a weighting factor km:
+
+
+:math:`T_{added}(\vec{x},t) = k_m \cdot T_{field}(\vec{x},t)`
+
+
+:math:`k_m(x,r) = |(1-U(x,r))|\cdot k_{m1}+|\frac{\delta U(x,r)}{\delta r}|\cdot k_{m2}`
+
+
+- **Enable Added Turbulence**: This activates the added turbulence model
+- **Added Turbulence km1 [-]**: A tunable parameter in the formula for the weighting factor km
+- **Added Turbulence km2 [-]**: A tunable parameter in the formula for the weighting factor km
+- **Added Turbulence Box**: The windfield that is used to provide the turbulence, should be of unit variance and isotropic turbulence.
 
 Free Vortex Wake
 ----------------
