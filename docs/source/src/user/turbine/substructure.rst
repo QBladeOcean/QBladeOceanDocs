@@ -711,7 +711,7 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	:caption: : The HYDROMEMBERCOEFF table
 
 	HYDROMEMBERCOEFF
-	CoeffID	CdN	CaN	CpN	MCFC CdL (optional)
+	CoeffID	CdN	CaN	CpN	MCFC	CdL (optional)
 	1	2.0 	0.8	1.0	1	0
 	2	0.63	0.0	0.0	1	0
 	3	0.56	0.0	0.0	0	0
