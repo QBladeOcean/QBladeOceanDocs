@@ -25,7 +25,7 @@ Benefits of the Sequential Approach:
 Superelement Definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-QBlade allows to define an arbitrary number of superelements within a :ref:`Substructure Input File` which, in the same way as :ref:`Nonlinear Spring and Damper Constraints`, can be assigned to connect two joints or to connect a joint to the ground. A typical application of a superelement would be for it to replace the explicit structural beam model of a jacket substructure. 
+QBlade allows to define an arbitrary number of superelements within a substructure input file (see :ref:`Substructure Overview`) which, in the same way as :ref:`Nonlinear Spring and Damper Constraints`, can be assigned to connect two joints or to connect a joint to the ground. A typical application of a superelement would be for it to replace the explicit structural beam model of a jacket substructure. 
 
 In QBlade, a superelement is defined by a stiffness matrix K, a mass matrix M and *optionally* a damping matrix C. These matrices are defined by using the a set of keywords. If multiple superelements should be defined within a single substructure definition each keyword needs to be appended with the global superelement definition ID (:code:`SUPELEM_MASS_2`, :code:`SUPELEM_STIFF_2` and :code:`SUPELEM_DAMP_2`). If only a single superelement is used the global definition ID **_<X>** can optionally be omitted. It is important to note that the global definition ID **_<X>** needs to be appended to every keyword that describes a superelement definition. So to use two different superelement definitions, a :code:`SUPELEM_MASS_1` and :code:`SUPELEM_MASS_2` matrix is required, etc. Also, please note that a single superelement definition can be used in multiple constraints via the :code:`SUBCONSTRAINTS` table. A superelement constraint is then identified by its constraint ID.
 
@@ -391,7 +391,7 @@ To assign a load to a superelement the keyword :code:`CST_<X>_FEXT` needs to be 
 Recommended Timesteps and Modal Frequencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After a superelement has been defined in a :ref:`Substructure Input File` in QBlade the user can inquire information about the superelement in the *Structural Model Info* window (see :numref:`fig-superelement-info`). 
+After a superelement has been defined in a substructure input file (see :ref:`Substructure Overview`) in QBlade the user can inquire information about the superelement in the *Structural Model Info* window (see :numref:`fig-superelement-info`). 
 
 .. _fig-superelement-info:
 .. figure:: superelement_info.png

@@ -448,7 +448,7 @@ Timoshenko beams with a Fully Populated Stiffness Matrix (FPM) represent the mos
 ANCF Cable Element
 ------------------
 
-The ANCF Cable element in QBlade is used for an efficient simulation of slender, cable like structures such as mooring lines and blade cables. These elements utilize Absolute Nodal Coordinate Formulation to obtain accurate and efficient results for complex mooring system configurations or tower guywires (see :ref:`Cable Structural Data File` and :ref:`Cable Elements and Ground-Fixing`).
+The ANCF Cable element in QBlade is used for an efficient simulation of slender, cable like structures such as mooring lines and blade cables. These elements utilize Absolute Nodal Coordinate Formulation to obtain accurate and efficient results for complex mooring system configurations or tower guywires (see :ref:`Cable Structural Data File` and :ref:`Mooring Elements and Ground-Constraints`).
 
 
 Blade, Strut and Tower Structural Data Files
