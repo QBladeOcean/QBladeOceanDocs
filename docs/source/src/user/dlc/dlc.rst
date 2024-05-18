@@ -71,7 +71,7 @@ In this section the user can choose how the ramp-up phase should be handled (see
 Simulation Event(Fault) Settings
 --------------------------------
 
-If a specific event (such as shut-down, start-up, emergency brake, grid loss, etc.) should be included in the simulation the event definition file can be added to the simulation. Simulation events, and how they are defined, are detailed here: :ref:`Turbine Behavior`.
+If a specific event (such as shut-down, start-up, emergency brake, grid loss, etc.) should be included in the simulation the event definition file can be added to the simulation. Simulation events, and how they are defined, are detailed here: :ref:`Turbine Events and Operation`.
 
 Structural Sim Settings
 -----------------------

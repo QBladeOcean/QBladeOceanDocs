@@ -829,7 +829,7 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 Linear Potential Flow-Related Parameters
 ----------------------------------------
 
-QBlade supports any number of linear potential flow bodies as part of a substructure definition, where each potential flow body is related to a transition piece :code:`TP_INTERFACE_POS_<X>`. In order to include multiple bodies, each body has to have its own set of keywords. With the exception of the first body, additional bodies are defined by adding an underscore and a number after the keyword. So, for example, if a substructure has two bodies that use the linear potential flow theory, the second body would be defined by adding a second transition piece point :code:`TP_INTERFACE_POS_2` with its corresponding inertia point denoted as :code:`REF_COG_POS_2`, a mass matrix denoted as :code:`SUB_MASS_2` and so on. 
+QBlade supports any number of linear potential flow bodies as part of a substructure definition, where each potential flow body is related to a transition piece :code:`TP_INTERFACE_POS_<X>`. In order to include multiple bodies, each body has to have its own set of keywords. With the exception of the first body, additional bodies are defined by adding an underscore and a number after the keyword. So, for example, if a substructure has two bodies that use the linear potential flow theory, the second body would be defined by adding a second transition piece point :code:`TP_INTERFACE_POS_2` with its corresponding hydrodynamic reference point :code:`REF_HYDRO_POS_2`, the inertia point :code:`REF_COG_POS_2`, a mass matrix denoted as :code:`SUB_MASS_2` and so on (see the section: :ref:`Lumped Mass, Inertia and Hydrodynamic Forces`). 
 
 The keywords that are used to read in the linear potential flow databases for radiation, excitation, difference and sum frequency loads, or hydrodynamic stiffness are detailed below:
 
@@ -847,7 +847,7 @@ Defining a Potential Flow Body
 	0		0		-10.00
 
 :code:`POT_HST_FILE_<X>`
- defines the file where the hydrodynamic stiffness matrix is stored from a WAMIT calculation. If this keyword is used then the hydrodynamic stiffness matrix :code:`SUB_HYDROSTIFFNESS_<X>` is populated with data from the file and any potential user defined stiffness matrix is overwritten.
+ defines the file where the hydrodynamic stiffness matrix is stored from a WAMIT calculation. If this keyword is used then the hydrodynamic stiffness matrix :code:`SUB_HYDROSTIFFNESS_<X>` is populated with data from the file, overwriting any user-defined stiffness matrix.
 
 :code:`POT_RAD_FILE_<X>`
  defines the file where the radiation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file. QBlade currently supports radiation files in the WAMIT, NEMOH and BEMUse formats.
@@ -892,9 +892,16 @@ Defining a Potential Flow Body
 NOBODY > 1 Feature
 ^^^^^^^^^^^^^^^^^^
 
-QBlade includes the capability to include multiple bodies (NBODY>1 feature of WAMIT) that interact hydrodynamically and mechanically. Each body can oscillate independently with up to six degrees of freedom. The principal extension for multibody interactions with waves is to increase the maximum number of degrees of freedom from 6 for a single body to 6N for N bodies, where N is the number of bodies. 
+.. _fig-substruct-nbody3:
+.. figure:: nbody_3.png
+    :align: center
+    :alt: Example of NBODY = 3.
 
-:code`POT_NBODY_<X>`
+    NBODY=3, 6 DOF's are assigned to each of the three cylinders.
+
+QBlade includes the capability to include multiple bodies (NBODY>1 feature of WAMIT) that interact hydrodynamically and mechanically. Each body can oscillate independently with up to six degrees of freedom. This extension increases the maximum number of degrees of freedom from 6 for a single body to 6N for N bodies.
+
+:code:`POT_NBODY_<X>`
  specifies the number of hydrodynamic bodies. Each body is associated with 6 DOF's. By default, NBODY is equal to 1. To use NBODY>1, the potential flow files must contain the data for the additional DOF. If NBODY=3, then the data for 18 DOF's is required.
  
  .. code-block:: console
