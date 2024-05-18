@@ -269,7 +269,7 @@ What this example also shows is that it is possible to use a single superelement
 Assigning Loads to Superelements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^	
 
-Loads can be assigned to a superelement using the *External Loading File* format (see :ref:`Turbine Behavior`). In this context it is important to note the **Constraint ID** with which a superelement is identified.
+Loads can be assigned to a superelement using the *External Loading File* format (see :ref:`Turbine Events and Operation`). In this context it is important to note the **Constraint ID** with which a superelement is identified.
 
 Furthermore, it is possible to **overwrite** the mass, stiffness or damping matrices in an *External Loading File*. This is useful so that superelement dynamics can be tailored individually on a per- Design Load Case basis, where the superelement dynamics might be dependent on the seastate or other factors. Below is a list of the keywords that are automatically detected in an *External Loading File*. The keywords themselves have been explained in the previous sections of the superelement descriptions.
 

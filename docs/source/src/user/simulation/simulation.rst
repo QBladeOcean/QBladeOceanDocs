@@ -125,8 +125,8 @@ Structural Simulation Settings
 * **Include Aero Forces & Moments**: Toggles if aerodynamic forces are projected onto  the structural model definition.
 * **Include Hydro Forces & Moments**: Toggles if hydrodynamic forces are projected onto  the structural model definition.
 
-Turbine Behavior
-----------------
+Turbine Events and Operation
+----------------------------
 
 In this section special events, external loading, prescribed motion and prescribed operation can be defined for a *turbine definition*. Below exemplary files are shown for each file type:
 

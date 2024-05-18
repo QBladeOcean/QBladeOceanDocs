@@ -829,8 +829,25 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 Linear Potential Flow-Related Parameters
 ----------------------------------------
 
-It should be noted that QBlade supports multiple linear potential flow bodies as part of a substructure definition.
-In order to include multiple bodies, each body has to have its own set of keywords. The required keywords lie between the entries :code:`REF_COG_POS` and :code:`POT_EXC_FILE` that are listed in the following. With the exception of the first body, additional bodies are defined by adding an underscore and a number after the keyword. So, for example, if a substructure has two bodies that use the linear potential flow theory, the second body would be defined by adding a second transition piece point :code:`TP_INTERFACE_POS_2`  with its corresponding inertia point denoted as :code:`REF_COG_POS_2`, a mass matrix denoted as :code:`SUB_MASS_2` and so on. 
+QBlade supports any number of linear potential flow bodies as part of a substructure definition, where each potential flow body is related to a transition piece :code:`TP_INTERFACE_POS_<X>`. In order to include multiple bodies, each body has to have its own set of keywords. With the exception of the first body, additional bodies are defined by adding an underscore and a number after the keyword. So, for example, if a substructure has two bodies that use the linear potential flow theory, the second body would be defined by adding a second transition piece point :code:`TP_INTERFACE_POS_2` with its corresponding inertia point denoted as :code:`REF_COG_POS_2`, a mass matrix denoted as :code:`SUB_MASS_2` and so on. 
+
+The keywords that are used to read in the linear potential flow databases for radiation, excitation, difference and sum frequency loads, or hydrodynamic stiffness are detailed below:
+
+Defining a Potential Flow Body
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:code:`REF_HYDRO_POS_<X>`
+ defines the position at which the potential flow loads (hydro stiffness, radiation, excitation, sum frequency and difference frequency) are applied. This is also the position at which wave elevations, positions are accelerations are obtained. As detailed in the section :ref:`Lumped Mass, Inertia and Hydrodynamic Forces`, this reference position is automatically constrained with the transition piece`:code:`TP_INTERFACE_<X>`.
+ 
+ .. code-block:: console
+   	:caption: : The REF_HYDRO_POS_1 table
+
+	REF_HYDRO_POS_1 
+	X[m]		Y[m]		Z[m]
+	0		0		-10.00
+
+:code:`POT_HST_FILE_<X>`
+ defines the file where the hydrodynamic stiffness matrix is stored from a WAMIT calculation. If this keyword is used then the hydrodynamic stiffness matrix :code:`SUB_HYDROSTIFFNESS_<X>` is populated with data from the file and any potential user defined stiffness matrix is overwritten.
 
 :code:`POT_RAD_FILE_<X>`
  defines the file where the radiation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file. QBlade currently supports radiation files in the WAMIT, NEMOH and BEMUse formats.
@@ -840,9 +857,63 @@ In order to include multiple bodies, each body has to have its own set of keywor
   
 :code:`POT_DIFF_FILE_<X>`
  defines the file where the second-order difference-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file.  QBlade currently supports difference-frequency files only in the WAMIT format.
+ 
+:code:`DIFF_CUTOFF_L_<X>`
+ Specifies the low cut-off frequency for the difference QTFs. Intended to speed up the QTF evaluations.
+ 
+:code:`DIFF_CUTOFF_H_<X>`
+ Specifies the high cut-off frequency for the difference QTFs. Intended to speed up the QTF evaluations.
+ 
+:code:`DIFF_INACTIVE_DOF_<X>`
+ this keyword can be used to define a list of DOFs for which the difference QTF will not be evaluated. Intended to speed up the QTF evaluations.
+ 
+ .. code-block:: console
+   	:caption: : The DIFF_INACTIVE_DOF keyword to deactivate the DOFs 1 and 4 from the difference QTF evaluation
 
+	1 4 DIFF_INACTIVE_DOF
+ 
 :code:`POT_SUM_FILE_<X>`
  defines the file where the second-order sum-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file.  QBlade currently supports sum-frequency files only in the WAMIT format.
+ 
+:code:`SUM_CUTOFF_L_<X>`
+ Specifies the low cut-off frequency for the sum QTFs. Intended to speed up the QTF evaluations.
+ 
+:code:`SUM_CUTOFF_H_<X>`
+ Specifies the high cut-off frequency for the sum QTFs. Intended to speed up the QTF evaluations.
+ 
+:code:`SUM_INACTIVE_DOF_<X>`
+ this keyword can be used to define a list of DOFs for which the sum QTF will not be evaluated. Intended to speed up the QTF evaluations.
+ 
+ .. code-block:: console
+   	:caption: : The SUM_INACTIVE_DOF keyword to deactivate the DOFs 1 and 4 from the sum QTF evaluation
+
+	1 4 SUM_INACTIVE_DOF
+	
+NOBODY > 1 Feature
+^^^^^^^^^^^^^^^^^^
+
+QBlade includes the capability to include multiple bodies (NBODY>1 feature of WAMIT) that interact hydrodynamically and mechanically. Each body can oscillate independently with up to six degrees of freedom. The principal extension for multibody interactions with waves is to increase the maximum number of degrees of freedom from 6 for a single body to 6N for N bodies, where N is the number of bodies. 
+
+:code`POT_NBODY_<X>`
+ specifies the number of hydrodynamic bodies. Each body is associated with 6 DOF's. By default, NBODY is equal to 1. To use NBODY>1, the potential flow files must contain the data for the additional DOF. If NBODY=3, then the data for 18 DOF's is required.
+ 
+ .. code-block:: console
+   	:caption: : The POT_NBODY keyword to use three NBODYs
+
+	3 POT_NBODY
+
+By default, the hydrodynamic loads are applied at the :code:`REF_HYDRO_POS`. When using multiple hydrodynamic bodies, such :math:`N = 3`, the hydrodynamic forces should be applied to different parts of the substructure. For this purpose the hydrodynamic loads of a particluar body can be assigned to a substructure joint:
+
+:code:`POT_NBODY_NODES_<X>`
+ specifies the list of joint id's at which the hydrodynamic loads are applied. This keyword can also be used to apply the hydrodynamic loads of a single NBODY to a custom substructure joint (by default the hydrodynamic loads are applied to the :code:`REF_HYDRO_POS_<X>`).
+ 
+ .. code-block:: console
+   	:caption: : The POT_NBODY_NODES keyword to assign the hydrodynamic loads of three bodies to joint id's 2, 4 and 6
+
+	2 4 6 POT_NBODY_NODES
+
+Common Potential Flow Keywords
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 :code:`USE_RADIATION`
  is a flag that enables the calculation of the radiation loads on all potential flow bodies. (true or false)
@@ -878,11 +949,17 @@ In order to include multiple bodies, each body has to have its own set of keywor
 
 :code:`USE_SUM_FREQS`
  is a flag that enables the (full field QTF) calculation of the sum-frequency loads on all potential flow bodies. (true or false)
+ 
+
+ 
+
+
 
 :code:`UNITLENGTH_WAMIT`
  Enables to specify a WAMIT unit length different than 1.0, if not specified 1.0 is the default value.
+ 
+ 
 
-.. _StrDef_Mooring:
 
 Miscellaneous Substructure Parameters
 -------------------------------------
@@ -901,7 +978,7 @@ The following keywords can be used to define different properties and modeling o
  Sets the sub-discretization length for mooring lines in contact with the seabed, in [m]. A value of 1 means that when a mooring line element is in contact with the seabed the mooring element will be discretized into elements of 1m length for which the contact forces will be evaluated. The default value is 2.
 
 :code:`CONSTRAINEDFLOATER`
- A flag that if set to true constrains the floater. A constrained floater can be subjected to a prescribed motion via a *Prescribed Motion File* (see :ref:`Turbine Behavior`).
+ A flag that if set to true constrains the floater. A constrained floater can be subjected to a prescribed motion via a *Prescribed Motion File* (see :ref:`Turbine Events and Operation`).
 
 :code:`BUOYANCYTUNER`
  A multiplication factor that affects the calculation of the explicit buoyancy forces. Buoyancy caused by the linear hydrodynamic stiffness matrix is not affected by this factor.
