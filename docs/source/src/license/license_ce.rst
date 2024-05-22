@@ -27,7 +27,7 @@ license, or if you are uncertain about whether your intended use falls under
 this license's scope, please contact the QBlade authors at info@qblade.org 
 or visit our website at https://qblade.org for further guidance.
 
- In addition to the terms and conditions specified above, QBlade Community 
+In addition to the terms and conditions specified above, QBlade Community 
 Edition (QBlade-CE) also functions as an evaluation version for QBlade Enterprise 
 Edition (QBlade-EE). Commercial users are hereby granted permission to use 
 QBlade-CE for a reasonably limited period of time solely for the purpose of 
@@ -110,7 +110,7 @@ above, provided that you also meet all of these conditions:
 
     a) You must cause the modified files to carry prominent notices
     stating that you changed the files, the nature of the changes and 
-	the date of any change.
+    the date of any change.
 
     b) You must cause any work that you distribute or publish, that in
     whole or in part contains or is derived from the Program or any
@@ -130,7 +130,7 @@ entire whole, and thus to each and every part regardless of who wrote it.
 that is otherwise reliant on, or is based on the Program, then the
 distribution of the whole package, including but not restricted to the
 independent section, must be on the unmodified terms of this License,
-regadless of who the author of the included sections was.)
+regardless of who the author of the included sections was.)
 
 Thus, it is not the intent of this section to claim rights or contest
 your rights to work written entirely by you; rather, the intent is to
@@ -152,8 +152,8 @@ Sections 2 and 3 above provided that you also do one of the following:
 
     b) Accompany it with a written offer, valid for at least three
     years, to give any third party, for a fee for a fee no greater than 
-	your incurred costs of physically performing the distribution, a 
-	complete machine-readable copy of the corresponding source code, to be
+    your incurred costs of physically performing the distribution, a 
+    complete machine-readable copy of the corresponding source code, to be
     distributed under the terms of Sections 2 and 3 above on a medium
     customarily used for software interchange; or,
 
