@@ -1,3 +1,91 @@
+QBlade 2.0.7 beta
+-----------------
+
+**Structural Dynamics**
+
+ * Added Timoshenko Beams
+ * Added Timoshenko FPM 6x6 Beams
+ * Added Anisotropic damping model
+ * Added nonlinear stiffness model for mooring lines (to model polyester and nylon ropes)
+ * Added calculation of blade mass inertia matrix to *Struct Model info* * Added strain to structural sensor outputs
+ * Added strain to structural sensor outputs
+ * Added function to automatically export 6x6 blade structural property tables from windIO yaml files
+ * Added NLDATA<X> tables to define nonlinear distributions (stress/strain, displacement/force, etc...) 
+ * Removed first force value for y=0 from nonlinear spring/damper tables
+ * Distributed blade added masses now included in blade COG and inertia calculations in *Struct Model info*
+ * Structural blade and strut beams are now always placed at the user defined elastic center
+ * The reference position of the local section coordinate system is now the pitch axis
+ * Constraints are now defined in the coordinate system of Joint1ID, except for constraints to the fixed ground
+ * Improved modal analysis and Campbell diagram functionality (QB-EE only)
+ * Can now visualize real, imag, mag, and phase values after a modal analysis (QB-EE only)
+ * Fixed evaluation of global rotation displacement for reversed rotors
+ * Changed: now NACCM, NACINER and HUBINER can be directly specified within one line (6 entries for inertia, 3 for CM position)
+ * Old keywords NACCMX, NACCMZ, NACYINER are still accepted, but should be replaced eventually
+ * Fixed issue where external loading data was not assigned for substructure joints
+ * Fixed issue where external loading was not correctly assigned when a substructure only was simulated
+ 
+**Aerodynamics**
+
+ * Added Dynamic Wake Meandering (DWM) model (mash up between Fast.Farm and HAWC2Farm models)
+ * Added axial, tangential, and radial aerodynamic force to *Structural Time Graphs*
+ * Added adaptive relaxation to speed up gamma bound fixed point iteration
+ * Added *Aerodynamic Strut Graph* type to visualize distribution of aerodynamic variables over struts (VAWT only)
+ * Finished first working version of WindIO YAML import for airfoil, polars, and blades
+ * Fixed vortex line core growth model, now correctly working with time offset
+ * Fixed UBEM to work properly for reversed rotors
+ * Fixed issue with the reprojection of the moment coefficient before applying NC, attached flow, or DS corrections
+ * Fixed behavior of the tower shadow model in certain conditions
+
+**Hydrodynamics**
+
+ * Added functionality for one-sided Morison drag for improved low-frequency excitation predictions
+ * Added functionality to assign frequency-filtered axial drag coefficients for improved low-frequency excitation predictions
+ * Added NBODY>1 feature of WAMIT to substructure definitions for multiple interacting hydro bodies
+ * Added tangential cable drag coefficient, as optional column in HYDROMEMBERCOEFF tables
+ * Added options to deactivate individual QTF DOF's (DIFF_INACTIVE_DOF, SUM_INACTIVE_DOF)
+ * Changed the sign for the definition of the misalignement between wind and waves, when specified via a DLC table
+ * Fixed issue in the mooring system where buoyancy wasn't accounted for
+ * Fixed issue with turbine global position and water depth for offshore bottom-fixed turbines
+ * Fixed issue with read-in functions for RAD and EXC potflow files (incompatible with Windcrete dataset)
+ 
+**Wave Generation**
+
+ * Added nonlinear streamfunction waves and constrained streamfunction waves
+ * Added functionality to paste streamfunction waves over constrained newWaes
+ * Added display variable at instantaneous sea level (ISL)
+ * Changed regular linear waves to now start with a phase shift of 90°
+ * Changed random number generation to be consistent across different platforms, e.g. Unix/Windows, using Mersenne Twister engine
+ 
+**Wind Generation**
+
+ * Added Mann turbulence generator
+ * Added Mann generator option to create an "added turbulence" windfield for DWM model
+ * Added option to create and export windfields from simulations
+ * Improved behavior of WindFieldGenerator to better conform to IEC standards
+ * Changed random number generation to be consistent across different platforms, e.g. Unix/Windows, using Mersenne Twister engine
+
+**Control Systems**
+
+ * Updated DTU controller to employ original source code and location of the wpData file(s)
+ * Changed CpCtCq file of ROSCO controller to be defined relative to the controller library
+ * Fixed issue regarding an incompatibility with older ROSCO controller versions
+
+**General Improvements**
+
+ * Improved computational speed for QBlade-CE (~2-3x)
+ * Improved stability and numerous bug fixes
+ * Finished import/export functionality for wind farm layouts (QB-EE only)
+ * In DLC definition files a cell (or entry) beginning with a hashtag (#) is ignored now (QB-EE only)
+ * Added new interpolation functions HERMITE, C2 splines and Akima (for structural properties and blade geometry)
+ * Added functionality to specify the constrained DoF's between struts and blades and struts and the torquetube (VAWT)
+ * Added visualization of IEA reference coordinate systems to QSimulation module
+ * Polar Cl and Cn slopes are now obtained via linear regression
+ * Added libxlnt to read data directly from excel documents
+ * Added functionality so that "submerged" rotors in an "offshore" simulation get the water velocity, density, and viscosity as inputs for "aerodynamic" load calculations, this enables combined wind-hydro turbine simulations
+ * Fixed issue in the DLL interface where advanceStructure() and AdvanceAero() were called in the wrong order
+ * Fixed issue in cut-plane import/export related to timesteps when QSim had "store from time" enabled
+ * Fixed issue where STORE_SIM was not recognized during ASCII simulation import
+
 QBlade 2.0.6.3 beta
 -------------------
 
@@ -28,8 +116,8 @@ QBlade 2.0.6.1 beta
  * in BEM/DMS analysis power is now always displayed as kW
  * fixed issue with turbine sorting for multi turbine simulations
 
-QBlade 2.0.6.0 beta
--------------------
+QBlade 2.0.6 beta
+-----------------
 
 **Substructure**
 
@@ -91,8 +179,8 @@ QBlade 2.0.5.1 alpha
  * from now on the version stringis part of the binary files to better distinguish them
  * improved custom data aquisition for python and matlab (SIL) interfaces
 
-QBlade 2.0.5.0 alpha
---------------------
+QBlade 2.0.5 alpha
+------------------
 
  * added blade force in X_c and X_b coordinate systems to the standard outputs
  * added functionality to the assignement of nonlinear springs and dampers for substructures
@@ -180,7 +268,7 @@ QBlade 2.0.4.1 alpha
  * Fixed issue with virtual camber transformation, where values were not read from dialog
  * Improved behavior of FoilTable when Foil selection is changed
 
-QBlade 2.0.4.0 alpha
---------------------
+QBlade 2.0.4 alpha
+------------------
 
  * This is the first public release of QBlade CE. Be aware that this is an alpha release which will be revisioned after the first user feedback arrives and incompatibilities and errors are fixed.

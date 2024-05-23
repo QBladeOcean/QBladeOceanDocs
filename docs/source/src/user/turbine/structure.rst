@@ -182,6 +182,18 @@ Mass and Inertia Parameters
 	
 In this section of the input file mass and inertia properties are assigned to the nacelle and the hub. It should be noted here that the parameter :code:`HUBINER` should only account for the rotational inertia of the hub itself, and not account for the inertia of the rotor blades as this is explicity included through the finite element model. 
 
+Mass and Inertia Parameters Extended
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:code:`NACCM`
+ this (alternative) keyword can be used to set the center of mass of the nacelle in a single line by specifying the x, y and z positions before or after the keyword.
+ 
+:code:`NACINER`
+ this (alternative) keyword can be used to define the full inertia matrix of the nacelle (applied at the nacelle CM. Six values can be specified to define the XX, YY, ZZ, XY, XZ and YZ inertia of the nacelle.
+
+:code:`HUBINER`
+ this (alternative) keyword can be used to define the full inertia matrix of the hub (applied at the hub position. Six values can be specified to define the XX, YY, ZZ, XY, XZ and YZ inertia of the hub.
+
 Nacelle Drag Model
 ^^^^^^^^^^^^^^^^^^
 
