@@ -311,6 +311,33 @@ Strut Parameters
 	strutF100.dat		STRTFILE_1 - Name of file containing properties for strut1 (if blade has struts)
 	strutF100.dat		STRTFILE_2 - Name of file containing properties for strut2 (if blade has struts)
 	
+One structural properties table is defined for each strut. This table is used for the corresponding strut on each blade. So if there are three blades the parameter :code`STRTFILE_1` specifies the properties of strut 1 on each of the three blades. 
+
+Strut Constraint Table
+^^^^^^^^^^^^^^^^^^^^^^
+
+In some cases, the user may want to specify a special constraint for the connection between the strut and the blade, or the strut and the torquetube, for example to model a hinge or similar. By default, each strut is connected rigidly to the blade and the torquetube. The :code:`STRUT_BLADE_CONSTRAINTS` and :code:`STRUT_TORQUETUBE_CONSTRAINTS` tables can be used to control the constrained degrees of freedom between struts, blades and the torquetube. The DOFs are defined in the local coordinate system of the corresponding strut.
+
+.. code-block:: console
+	:caption: : The STRUT_BLADE_CONSTRAINTS table
+	
+	STRUT_BLADE_CONSTRAINTS
+	STR_ID	BLD_ID	DoF_X	DoF_Y	DoF_Z	DoF_rX	DoF_rY	DoF_rZ
+	1	1	1	1	1	1	0	1
+	1	2	1	1	1	1	0	1
+	
+This exemplary table models a hinge connection between strut 1 and blade 1 and strut 1 and blade 2, where the rotational degree of freedom around the local y-axis of the strut is not constrained.
+
+.. code-block:: console
+	:caption: : The STRUT_TORQUETUBE_CONSTRAINTS table
+	
+	STRUT_TORQUETUBE_CONSTRAINTS
+	STR_ID	BLD_ID	DoF_X	DoF_Y	DoF_Z	DoF_rX	DoF_rY	DoF_rZ
+	1	1	1	1	1	1	0	1
+	1	2	1	1	1	1	0	1
+	
+This exemplary table models a hinge connection between strut 1 and the torquetube and strut 1 and the torquetube, where the rotational degree of freedom around the local y-axis of the strut is not constrained.
+	
 Tower and Torquetube Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	
@@ -332,6 +359,8 @@ Tower and Torquetube Parameters
 	40.853			BLDCONN - Absolute height position, starting after rotor clearance, of blade of the rigid blade torque tube connection 2 in [m] (VAWT only)
 
 	15.635			RTRCLEAR - Rotor clearance	
+	
+See :numref:`fig-struct_vawt` for a visual explanation of each parameter.
 
 Cable Parameters
 ^^^^^^^^^^^^^^^^

@@ -463,6 +463,11 @@ When multiple members are connected to the same joint these members are *rigidly
  **Connections to the Tower Top**
   Connections to the tower top are realized in a similar way as connections to the torquetube top. By adding 100 into column *TpCon*. So to connect to the tower top of turbine 1 insert 101 in column *TpCon*.
 
+.. admonition:: Changes to in SUBCONSTRAINTS QBlade 2.0.7
+   :class: important
+   
+   In QBlade versions prior to 2.0.7 the constraint degrees of freedom were always defined in the coordinate system of the object to which Jnt1ID was constrained, e.g. Joint2ID, the transition piece or the ground. From QBlade 2.0.7 on the coordinate system for the constraint is now that of Jnt1ID, except when Jnt1ID is connected to the ground. In the latter case the coordinate system that is used is the global coordinate system.
+
 The Transition Piece
 --------------------
 
@@ -725,7 +730,22 @@ Nonlinear Spring and Damper Constraints
 
 :code:`SPRINGDAMPK`
  is an optional proportionality constant to add a damping value to the spring elements. If this keyword is used, then all of the spring elements defined in :code:`NLSPRINGDAMPERS` are treated as spring-damping systems. The additional damping coefficients are calculated using the following approach: :math:`D_i`  = :code:`SPRINGDAMPK` :math:`\cdot K_i`.  This keyword does not affect the 'damp' elements defined in :code:`NLSPRINGDAMPERS`.
- 
+
+.. admonition:: Changes to in NLSPRINGDAMPERS QBlade 2.0.7
+   :class: important
+   
+   From QBlade 2.0.7, the :code:`NLSPINGDAMPERS` table has been slightly modified. In Previous versions the coefficient for :math:`x=0` was specified by the user in column 3 of the table. In the new table format column 3 is now removed and the force/dsplacement, or force/velocity, relationship is always going through the origin at :math:`x_0/v_0 = 0` and :math:`K/D(x_0/v_0) = 0`. This implies that in order to continue to use a :code:`NLSPINGDAMPERS` table from a QBlade version prior 2.0.7 the 3rd column has to be removed. The old table format is shown below for reference:
+   
+    .. code-block:: console
+   	:caption: : The old NLSPRINGDAMPERS table, **not working anymore!!**
+   	
+   	NLSPRINGDAMPERS
+   	ElemID  Type    Coefficient (for x = 0) Coefficient & Displacement/Velocity Sets (for NL springs, dampers)
+   	1       spring  0.000E+00       1.000   1.160E+06
+   	2       spring  0.000E+00       1.000   9.000E+06
+   	3       spring  0.000E+00       1.000   2.090E+07
+   	4       spring  0.000E+00       1.000   3.560E+07
+
 Nonlinear Data Tables
 ---------------------
 

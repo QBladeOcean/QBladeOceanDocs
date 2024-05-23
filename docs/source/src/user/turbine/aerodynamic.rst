@@ -45,7 +45,7 @@ Here the user can choose between the **Free Vortex Wake** or the **Unsteady BEM*
 Unsteady BEM
 ------------
 
-The :ref:`Blade Element Momentum Method` in QBlade is the default modeling option for HAWT (Horizontal Axis Wind Turbines). It has a large computational efficiency and good accuracy in most cases. The Unsteady BEM cannot be used to model VAWT (Vertical Axis Wind Turbines). To model a VAWT the :ref:`Free Vortex Wake` method must be used.
+The :ref:`Blade Element Momentum Method` in QBlade is the default modeling option for HAWT (Horizontal Axis Wind Turbines). It has a low computational cost and good accuracy in most cases. The Unsteady BEM cannot be used to model VAWT (Vertical Axis Wind Turbines). To model a VAWT the :ref:`Free Vortex Wake` method must be used.
 
 Unsteady BEM Options
 --------------------
@@ -101,6 +101,11 @@ A small scale three dimensional turbulence windfield may be used to introduce wa
 - **Added Turbulence km1 [-]**: A tunable parameter in the formula for the weighting factor km
 - **Added Turbulence km2 [-]**: A tunable parameter in the formula for the weighting factor km
 - **Added Turbulence Box**: The windfield that is used to provide the turbulence, should be of unit variance and isotropic turbulence.
+
+.. admonition:: Info
+   :class: important
+   
+	This section will be expanded in the near future...
 
 Free Vortex Wake
 ----------------
