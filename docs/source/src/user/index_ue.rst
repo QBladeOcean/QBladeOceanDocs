@@ -23,8 +23,8 @@ Coordinate Systems
 
    coordinates/coordinates
    
-HAWT, VAWT and PROP Design Modes
-********************************
+HAWT, VAWT and PROP Modes
+*************************
 .. toctree::
    :maxdepth: 1
 
@@ -39,48 +39,60 @@ Airfoil Generation and Import
    airfoil/airfoil
    
 
-Airfoil Analysis and Polar Generation
-*************************************
+Airfoil Analysis with XFoil
+***************************
 .. toctree::
    :maxdepth: 1
    
    airfoil/airfoil_analysis
 
-Polar Extrapolation
-*******************
+360° Polar Extrapolation
+************************
 .. toctree::
    :maxdepth: 1
 
    airfoil/polar_extrapolation
 
-Blade and Rotor Design
-**********************
+Aerodynamic Blade Design
+************************
 .. toctree::
    :maxdepth: 1
 
    blade/blade
 
-Blade and Rotor BEM Simulation
-******************************
+Steady BEM Simulation
+*********************
 .. toctree::
    :maxdepth: 1
 
    bem/bem
 
-Wind Turbine Design
-*******************
+Wind Turbine Modeling
+*********************
 .. toctree::
    :maxdepth: 1
 
    turbine/turbine
    turbine/aerodynamic
    turbine/structure
-   turbine/substructure
-   turbine/superelements
    turbine/marinehydrokinetic
-   turbine/controller
    turbine/turbineexport
    turbine/multi_turbine
+
+Controller Modeling
+*******************
+.. toctree::
+   :maxdepth: 1
+   
+   turbine/controller
+  
+Substructure Modeling
+*********************
+.. toctree::
+   :maxdepth: 1
+
+   turbine/substructure
+   turbine/superelements
 
 Wind Turbine Simulation
 ***********************

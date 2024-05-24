@@ -1,5 +1,5 @@
-Aerodynamic Turbine Design
-==========================
+Aerodynamic Modeling
+====================
 
 This section covers all options that are related to the aerodynamic modelling of a turbine design. Covering wake models, dynamic stall models, geometry parameters and blade discretization.
 
@@ -45,7 +45,7 @@ Here the user can choose between the **Free Vortex Wake** or the **Unsteady BEM*
 Unsteady BEM
 ------------
 
-The :ref:`Blade Element Momentum Method` in QBlade is the default modeling option for HAWT (Horizontal Axis Wind Turbines). It has a large computational efficiency and good accuracy in most cases. The Unsteady BEM cannot be used to model VAWT (Vertical Axis Wind Turbines). To model a VAWT the :ref:`Free Vortex Wake` method must be used.
+The :ref:`Blade Element Momentum Method` in QBlade is the default modeling option for HAWT (Horizontal Axis Wind Turbines). It has a low computational cost and good accuracy in most cases. The Unsteady BEM cannot be used to model VAWT (Vertical Axis Wind Turbines). To model a VAWT the :ref:`Free Vortex Wake` method must be used.
 
 Unsteady BEM Options
 --------------------
@@ -56,6 +56,56 @@ Unsteady BEM Options
 
 The theory of the unsteady polar BEM is briefly described in :ref:`Polar Grid`.
 
+Dynamic Wake Meandering Parameters
+----------------------------------
+
+DWM Wake Settings
+*****************
+
+- **Total Wake Length (in D) [-]**: This parameter sets the total wake length of the DWM model, normalized by rotor diameter.
+- **Number of Wake Planes [-]**: The total number of wake planes that is spread out over the total wake length. If the *Total Wake Length* would be 10 and the *Number of Wake Planes* 20, then the wake planes would be :math:`\frac{10D}{20}=0.5D` apart.
+- **Max Wake Plane Width (in D) [-]**: This specifies the max. diameter of the wake planes. If *Max Wake Plane Width* = 3, then the wake plane would cover 3 rotor diameters.
+- **Wake Plane Update Dist. (in D) [-]**: After each wake plane was propagated by this distance, normalized by rotor diameter, its velocity distribution is updated (evolve step).
+- **Yaw Deflection Factor [1/deg]**: Is a parameter for the yaw deflection correction, scaled with yaw error and normalized downstream distance.
+- **Tilt Deflection Factor**: Is a parameter for the tilt deflection correction, scaled with tilt error and normalized downstream distance.
+- **Include Rotor Tilt**: If deactivated, the rotor tilt error does not cause a vertical deflection of the wake planes.
+
+DWM Wake Plane Settings
+***********************
+
+- **Wake Plane Radial Disc. [-]**: Specifies with how many points the wake plane is discretized over its width (*Max Wake Plane Width*).
+- **C Meander, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the meandering (in plane) components during the propagation step.
+- **C Advect, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the advection (out of plane) component during the propagation step.
+- **Polar Grid Measurement Points [-]**: The number of points distributed over the polar grid (for meandering and advection calculation) at which velocities are evaluated during the averaging step.
+- **Polar Grid Measurement Points [-]**: The number of points distributed over the polar grid (for meandering and advection calculation) at which velocities are evaluated during the averaging step.
+- **Polar Grid Weighting [-]**: Specified the weighting function for the polar grid points, used during velocity averaging.
+- **Rotor Low Pass Filter Freq. [Hz]**: The cut-off (corner) frequency :math:`f_c` of a low pass time filter to obtain rotor conditions (thrust, yaw, etc.), implemented as :math:`x_{lp,t} = x_{lp,t-1} \cdot e^{-2\pi f_c} + (1-e^{-2\pi f_c}) \cdot x_t`.
+- **Thrust Coefficient Ct [-]**: The thrust coefficient can be obtained automatically from the local rotor conditions (*auto*) or manually, as a user input (*manual*).
+- **Turbulence Intensity [-]**: The turbulence intensity can be obtained automatically from the inflowconditions (*auto*) or manually, as a user input (*manual*).
+- **Viscosity Model**: The viscosity model that is used during the wake plane update (evolution) calculations, options are *MADSEN, LARSEN, IEC, KECK*..
+- **Boundary Condition**: The boundary condition model that is used to generate the velocity distribution of the rotor fixed wake plane, options are *NONE, MADSEN, IEC, KECK*.
+
+DWM Added Turbulence Settings
+*****************************
+
+A small scale three dimensional turbulence windfield may be used to introduce wake added turbulence into the flowfield. The adde turbulence wind field should have a unit variance and isotropic turbulence. It is introduced into the wake plane velocity field by a weighting factor km:
+
+
+:math:`T_{added}(\vec{x},t) = k_m \cdot T_{field}(\vec{x},t)`
+
+
+:math:`k_m(x,r) = |(1-U(x,r))|\cdot k_{m1}+|\frac{\delta U(x,r)}{\delta r}|\cdot k_{m2}`
+
+
+- **Enable Added Turbulence**: This activates the added turbulence model
+- **Added Turbulence km1 [-]**: A tunable parameter in the formula for the weighting factor km
+- **Added Turbulence km2 [-]**: A tunable parameter in the formula for the weighting factor km
+- **Added Turbulence Box**: The windfield that is used to provide the turbulence, should be of unit variance and isotropic turbulence.
+
+.. admonition:: Info
+   :class: important
+   
+	This section will be expanded in the near future...
 
 Free Vortex Wake
 ----------------

@@ -5,36 +5,39 @@ Academic Public License
 -----------------------
 
 .. centered:: **Academic Public license**
-.. centered:: (QBlade CE License v1.0)
+.. centered:: (QBlade CE License v1.1)
 
 .. centered::Preamble
 
-This license contains the terms and conditions of using QBlade Community 
-Edition (QBlade-CE) in noncommercial settings: at academic institutions for
-teaching and research use and for personal or educational purposes. You will
-find that this license provides noncommercial users of QBlade-CE with rights 
-that are similar to the well-known GNU General Public License, yet it retains 
-the possibility for QBlade-CE authors to financially support the development 
-by selling commercial licenses. In fact, if you intend to use QBlade-CE in a
-"for-profit" environment, where research is conducted to develop or enhance
-a product, is used in a commercial service offering, or when a commercial 
-entity uses QBlade-CE to participate in government-funded, EU-funded, military 
-or similar research projects, then you need to obtain a commercial license to 
-be used with the Enterprise Edition of QBlade (QBlade-EE). In that case, or 
-if you are unsure, please contact the authors (info@qblade.org) or visit 
-www.qblade.org to inquire about commercial licenses. 
+This license outlines the terms and conditions for the non-commercial use 
+of QBlade Community Edition (QBlade-CE), specifically tailored for academic 
+institutions and individuals engaged in teaching, research, and personal or 
+educational purposes. Users of QBlade-CE under this license are granted rights 
+similar to those in the GNU General Public License (GPL) for non-commercial 
+purposes. This license allows for the use of QBlade-CE at no cost in the 
+specified non-commercial settings. Commercial usage of QBlade requires a 
+separate commercial license. This includes, but is not limited to, usage in 
+for-profit environments where research is conducted to develop or enhance 
+products, commercial service offerings, and use by or in collaboration with 
+commercial entities in government-funded, EU-funded, military, or similar 
+research projects. Joint research projects with commercial entities are also 
+prohibited under this license and require transitioning to the Enterprise 
+Edition of QBlade (QBlade-EE). For information on obtaining a commercial 
+license, or if you are uncertain about whether your intended use falls under 
+this license's scope, please contact the QBlade authors at info@qblade.org 
+or visit our website at https://qblade.org for further guidance.
 
-In addition to the terms and conditions of this license, that are mentioned 
-above, QBlade-CE also serves as an evaluation version for QBlade-EE, thus 
-permission is granted to commercial users to use QBlade-CE for a reasonably 
-limited period of time for the purpose of evaluating its usefulness for a 
-particular purpose. However, during this limited evaluation period permission 
-is not granted to directly apply or use QBlade-CE in the context of a commercial 
-task or project.
+In addition to the terms and conditions specified above, QBlade Community 
+Edition (QBlade-CE) also functions as an evaluation version for QBlade Enterprise 
+Edition (QBlade-EE). Commercial users are hereby granted permission to use 
+QBlade-CE for a reasonably limited period of time solely for the purpose of 
+evaluating its suitability for their needs. It is important to note that during 
+this evaluation period, QBlade-CE may not be directly applied or used in any 
+commercial task or project.
 
 What are the rights given to noncommercial users? Similarly to GPL, you
 have the right to use the software, to distribute copies, to receive source
-code, to change the software and distribute your modifications or the
+code, to change the software and distribute your modifications of the
 modified software. Also similarly to the GPL, if you distribute verbatim or
 modified copies of this software, they must be distributed under this
 license.
@@ -55,7 +58,6 @@ and collaboration channels of open source development.
 
 The precise terms and conditions for using, copying, distribution and
 modification follow.
-
 
 .. centered:: ACADEMIC PUBLIC LICENSE
 
@@ -82,15 +84,16 @@ Each licensee is addressed as "you".
 noncommercial purposes, including teaching and academic research at
 universities, colleges and other educational institutions and personal
 non-profit purposes. For using the Program for commercial purposes,
-including but not restricted to consulting activities, design of commercial
-hardware or software networking products, and joint research with a
-commercial entity, government-funded, EU-funded, military or similar
-research projects, you have to contact the Author or visit www.qblade.org
-for an appropriate license. Permission is also granted to use the Program
-for a reasonably limited period of time for the purpose of evaluating its
-usefulness for a particular purpose. However, during this limited evaluation 
-period permission is not granted to directly apply or use QBlade-CE in the 
-context of a commercial task or project.
+including but not limited to consulting activities, design of commercial
+hardware or software networking products, or any form of commercial 
+collaboration, including joint research with a commercial entity, 
+government-funded, EU-funded, military or similar research projects, 
+explicit commercial licensing is required. You have to contact the Author 
+or visit https://qblade.org for an appropriate license. Permission is also 
+granted to use the Program for a reasonably limited period of time for the 
+purpose of evaluating its usefulness for a particular purpose. However, 
+during this limited evaluation period permission is not granted to apply 
+or use QBlade-CE in the context of a commercial task or project.
 
 2. You may copy and distribute verbatim copies of the Program's
 source code as you receive it, in any medium, provided that you
@@ -106,7 +109,8 @@ distribute such modifications or work under the terms of Section 2
 above, provided that you also meet all of these conditions:
 
     a) You must cause the modified files to carry prominent notices
-    stating that you changed the files and the date of any change.
+    stating that you changed the files, the nature of the changes and 
+    the date of any change.
 
     b) You must cause any work that you distribute or publish, that in
     whole or in part contains or is derived from the Program or any
@@ -126,7 +130,7 @@ entire whole, and thus to each and every part regardless of who wrote it.
 that is otherwise reliant on, or is based on the Program, then the
 distribution of the whole package, including but not restricted to the
 independent section, must be on the unmodified terms of this License,
-regadless of who the author of the included sections was.)
+regardless of who the author of the included sections was.)
 
 Thus, it is not the intent of this section to claim rights or contest
 your rights to work written entirely by you; rather, the intent is to
@@ -147,9 +151,9 @@ Sections 2 and 3 above provided that you also do one of the following:
     2 and 3 above on a medium customarily used for software interchange; or,
 
     b) Accompany it with a written offer, valid for at least three
-    years, to give any third party, for a charge no more than your
-    cost of physically performing source distribution, a complete
-    machine-readable copy of the corresponding source code, to be
+    years, to give any third party, for a fee for a fee no greater than 
+    your incurred costs of physically performing the distribution, a 
+    complete machine-readable copy of the corresponding source code, to be
     distributed under the terms of Sections 2 and 3 above on a medium
     customarily used for software interchange; or,
 
@@ -206,12 +210,12 @@ conditions are imposed on you (whether by court order, agreement or
 otherwise) that contradict the conditions of this License, they do not
 excuse you from the conditions of this License.  If you cannot
 distribute so as to satisfy simultaneously your obligations under this
-License and any other pertinent obligations, then as a consequence you
-may not distribute the Program at all.  For example, if a patent
-license would not permit royalty-free redistribution of the Program by
-all those who receive copies directly or indirectly through you, then
-the only way you could satisfy both it and this License would be to
-refrain entirely from distribution of the Program.
+License and any other pertinent obligations, then you must not distribute 
+the Program at all. For example, if a patent license would not permit 
+royalty-free redistribution of the Program by all those who receive copies 
+directly or indirectly through you, then the only way you could satisfy 
+both it and this License would be to refrain entirely from distribution 
+of the Program.
 
 If any portion of this section is held invalid or unenforceable under
 any particular circumstance, the balance of the section is intended to
@@ -223,8 +227,9 @@ certain countries either by patents or by copyrighted interfaces, the
 original copyright holder who places the Program under this License
 may add an explicit geographical distribution limitation excluding
 those countries, so that distribution is permitted only in or among
-countries not thus excluded.  In such case, this License incorporates
-the limitation as if written in the body of this License.
+countries not thus excluded by the original copyright holder. In such 
+case, this License incorporates the limitation as if written in the 
+body of this License.
 
 .. centered:: NO WARRANTY
 

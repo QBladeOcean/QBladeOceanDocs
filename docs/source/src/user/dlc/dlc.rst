@@ -71,7 +71,7 @@ In this section the user can choose how the ramp-up phase should be handled (see
 Simulation Event(Fault) Settings
 --------------------------------
 
-If a specific event (such as shut-down, start-up, emergency brake, grid loss, etc.) should be included in the simulation the event definition file can be added to the simulation. Simulation events, and how they are defined, are detailed here: :ref:`Turbine Behavior`.
+If a specific event (such as shut-down, start-up, emergency brake, grid loss, etc.) should be included in the simulation the event definition file can be added to the simulation. Simulation events, and how they are defined, are detailed here: :ref:`Turbine Events and Operation`.
 
 Structural Sim Settings
 -----------------------
@@ -94,8 +94,6 @@ Offshore DLC Generation in the GUI
 When IEC **61400-3-1** or **61400-3-2** is selected in the *IEC Design Load Case Generator* dialog, the user is asked to choose a *Wave Template* and to provide a *DLC List*, while the *DLC Parameter Range* section is hidden from view. The *Wave Template* is a *Linear Wave Object* in QBlade, which serves as the template for this particular DLC. E.g. the wave template contains information about the the spectrum, spectral discretization etc. and only the key parameters for wave height, wave period or wave direction will be adjusted for each simulation definition that will be generated from the Design Load Case Generator. The data table that is required then contains all information about the parameter variations for this DLC (that was previously input into the *Parameter Range* section). 
 
 The format of the DLC table that is required is equivalent as described in :ref:`DLC Generation via Spreadsheets`, with the exception that the entries for a few columns in this table are not required, while others can be filled in automatically by QBlade according to the respective IEC standard. 
-
-**Please note, when working with a spreadsheet tool:** When importing a DLC table it is not possible to directly import an Excel or other spreadsheet formatted file. Instead, the table within the spreadsheet must be copy/pasted into a plain text file, with or without the header. This text file can then be imported. 
 
 The table columns that are not required and must be filled out with the keyword *none* are:
 
@@ -171,9 +169,7 @@ Alternatively, to using the GUI based dialog, DLC's may also be generated, based
 
    Closeup view of a DLC spreadsheet showing the different column entries. An exemplary spreadsheet Excel file can be downloaded here: https://qblade.org/assets/DLC_Table.xlsx.
 
-The general methodology, when generating DLC's via a spreadsheet, is to define simulation definition (.sim), wind (.inp) and wave (.lwa) template files and only to define and modify the variable parameters in a spreadsheet. When the spreadsheet is finished and all entries are defined it is possible to either import all defined simulation into QBlade as *Simulation Definition Objects* or to automatically generate *Simulation Definition ACII Files* from the spreadsheet.
-
-**Please note, when working with a spreadsheet tool:** When importing a DLC table it is not possible to directly import an Excel or other spreadsheet formatted file. Instead, the table within the spreadsheet must be copy/pasted into a plain text file, with or without the header. This text file can then be imported. 
+The general methodology, when generating DLC's via a spreadsheet, is to define simulation definition (.sim), wind (.inp) and wave (.lwa) template files and only to define and modify the variable parameters in a spreadsheet. When the spreadsheet is finished and all entries are defined it is possible to either import all defined simulation into QBlade as *Simulation Definition Objects* or to automatically generate *Simulation Definition ACII Files* from the spreadsheet. 
 
 The definition of a single simulation requires 33 entries (columns) in a spreadsheet. The different entries are explained in detail in the following. If an entry should not be defined please insert *none* into the respective column. Only spreadsheet lines with 33 columns are identified during import.
 
@@ -250,8 +246,6 @@ DLC Generation via Spreadsheets
 
 Once all DLC's have been defined in the spreadsheet the simulations can either be imported into QBlade or exported as *Simulation Definition ASCII Files*. For either of those options the spreadsheet table containing all columns and rows, excluding any header, has to be pasted into an ASCII file, see the code-block below for an example.
 
-**Please note, when working with a spreadsheet tool:** When importing a DLC table it is not possible to directly import an Excel or other spreadsheet formatted file. Instead, the table within the spreadsheet must be copy/pasted into a plain text file, with or without the header. This text file can then be imported. 
-
 .. code-block:: console
 
 	QB_HEXAFLOAT_LC12_s0_ws5_hs1_tp6_mis-30_i0_y0		2200	Hexafloat_Template.sim	none	5	0	0	0.14	0	DLC1.2_NTM.inp	250	1	6	-30		0	0.lwa	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
@@ -281,9 +275,7 @@ Now the easiest way to generate all simulations defined in the table above is to
 Importing DLC's from a Spreadsheet
 ----------------------------------
 
-To import all simulation defined in a DLC table into QBlade's GUI simply enter the Simulation module and select *Import Simulations from a DLC Table*.
-
-**Please note, when working with a spreadsheet tool:** When importing a DLC table it is not possible to directly import an Excel or other spreadsheet formatted file. Instead, the table within the spreadsheet must be copy/pasted into a plain text file, with or without the header. This text file can then be imported. 
+To import all simulation defined in a DLC table into QBlade's GUI simply enter the Simulation module and select *Import Simulations from a DLC Table*. 
 
 .. _fig-dlc_imp:
 .. figure:: import_DLC.png
@@ -297,8 +289,6 @@ Exporting DLC's from a Spreadsheet
 ----------------------------------
 
 To export all simulation defined in a DLC table into *Simulation Definition ASCII Files* for batch evaluation in QBlade's CLI (see :ref:`Sample CLI Call to Start a Batch Run`) select *Generate (.sim) Files from a DLC Table*.
-
-**Please note, when working with a spreadsheet tool:** When importing a DLC table it is not possible to directly import an Excel or other spreadsheet formatted file. Instead, the table within the spreadsheet must be copy/pasted into a plain text file, with or without the header. This text file can then be imported. 
 
 .. _fig-dlc_exp:
 .. figure:: export_DLC.png

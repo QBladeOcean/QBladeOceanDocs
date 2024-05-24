@@ -1,5 +1,5 @@
-Documentation License
-=====================
+QBlade Docs License
+===================
 
 CC BY-NC-ND 4.0
 ---------------
