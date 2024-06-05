@@ -37,7 +37,7 @@ The hydrodynamic loads on the wind turbine’s substructure are calculated eithe
     Different wind turbine types modelled with QBlade.
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
 
 
    QBlade Documentation <https://docs.qblade.org>

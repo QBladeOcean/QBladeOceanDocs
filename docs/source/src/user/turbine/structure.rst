@@ -143,7 +143,7 @@ An exemplary main structural input file for the NREL 5MW HAWT wind turbine is sh
 The different sections of the structural model input file will now be briefly discussed.
 
 HAWT Turbine Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 .. _fig-struct_hawt:
 .. figure:: hawt_geom.png
@@ -165,7 +165,7 @@ HAWT Turbine Configuration
 In this section of the file the main geometrical turbine parameters are defined. These parameters are equivalent to the parameters discussed in :ref:`Turbine Geometry`.
 
 Mass and Inertia Parameters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------
 
 .. code-block:: console
 	:caption: : Mass and inertia parameters
@@ -195,7 +195,7 @@ Mass and Inertia Parameters Extended
  this (alternative) keyword can be used to define the full inertia matrix of the hub (applied at the hub position. Six values can be specified to define the XX, YY, ZZ, XY, XZ and YZ inertia of the hub.
 
 Nacelle Drag Model
-^^^^^^^^^^^^^^^^^^
+------------------
 
 .. code-block:: console
 	:caption: : Nacelle drag
@@ -214,7 +214,7 @@ Nacelle Drag Model
 The nacelle drag model is optional. If no nacelle drag is defined no nacelle drag is applied. The nacelle drag can only be used with HAWT turbine definitions. The model defined a center of drag (NACCA) and three nacelle areas (NACAR) with three nacelle drag coefficients (NACCD). The total acting nacelle drag force in all directions is then summed up and applied at the center of drag (NACCD).
 
 Drivetrain Parameters
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 .. code-block:: console
 	:caption: : Drivetrain parameters
@@ -241,7 +241,7 @@ The drivetrain is parameterized by the main shaft torsional stiffness and dampin
     
 
 Brake Model Parameters
-^^^^^^^^^^^^^^^^^^^^^^    
+----------------------    
 
 .. code-block:: console
 	:caption: : Brake model parameters
@@ -262,7 +262,7 @@ The brake in QBlade is defined as shown above. The brake is parameterized with a
     An overview of the brake model in QBlade.
     
 Modeling Sensor Errors
-^^^^^^^^^^^^^^^^^^^^^^  
+----------------------  
 
 .. code-block:: console	
 	:caption: : Sensor errors
@@ -276,7 +276,7 @@ Modeling Sensor Errors
 Sensor errors are defined for each blade pitch bearing sensor and the yaw bearing sensor. These errors are simply added to the corresponding signals as an offset.
 
 Blade Parameters
-^^^^^^^^^^^^^^^^
+----------------
 
 .. code-block:: console
 	:caption: : Blade parameters
@@ -290,7 +290,7 @@ Blade Parameters
 The location of the structural data tables for the blades is defined by the keywords shown above. The number of blades is defined by the parameter :code:`NUMBLD`, this value overrides the number of blades that is defined in the turbine definition dialog. For each blade a keyword :code:`BLDFILE_X` is searched for where the filename of the blade data table is defined. Different blade data tables can be assigned to each individual blade.
 
 Tower Parameters
-^^^^^^^^^^^^^^^^
+----------------
 
 .. code-block:: console
 	:caption: : Tower parameters
@@ -386,7 +386,7 @@ Cable Parameters
 An exemplary cable definition file is shown here: :ref:`Cable Structural Data File`.
 	
 Loading Data and Sensor Locations
----------------------------------
+=================================
 
 .. code-block:: console
 	:caption: : Output data definition and sensor locations
@@ -400,7 +400,7 @@ Loading Data and Sensor Locations
 	true			STR_OUT - store element strain at all sensor locations 
 	true			AER_OUT - store aerodynamic data at all sensor locations 
 
-------------------------------- SENSOR OUTPUT LOCATIONS -------------------
+	------------------------------- SENSOR OUTPUT LOCATIONS -------------------
 	any number, or zero, user defined positions can be chosen as output locations. 
 	Locations can be assigned at any of the following components: blades, struts, tower 
 	and guy cables. See the following examples for the used nomenclature:
