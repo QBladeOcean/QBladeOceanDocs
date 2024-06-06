@@ -642,6 +642,12 @@ The following table gives an overview of the entries of the structural data tabl
 	======== ==================== ========================================= ======= 
 
 
+The radius of gyration :math:`r_g` is related to the moment of inertia (:math:`I_{xx}`, or :math:`I_{yy}`) in the following way:
+
+:math:`r_{g,x} = \sqrt{\frac{I_{xx}}{m}} = \sqrt{\frac{I_x}{A}}`
+
+Please not the the radius of gyration in the structural datatable furthermore is normalized by the local chord of the blade.
+
 Blade and Strut Timoshenko FPM Datatable
 ----------------------------------------
 
@@ -815,7 +821,13 @@ The following table gives an overview of the entries of the structural data tabl
 	21       Damping Coefficient  **(optional)** This column allows to        -
 				      assign distributed Rayleigh beta coeff.
 	======== ==================== ========================================= ======= 
-	
+
+The radius of gyration :math:`r_g` is related to the moment of inertia (:math:`I_{xx}`, or :math:`I_{yy}`) in the following way:
+
+:math:`r_{g,x} = \sqrt{\frac{I_{xx}}{m}} = \sqrt{\frac{I_x}{A}}`
+
+Please not the the radius of gyration in the structural datatable furthermore is normalized by the local diameter of the tower or torquetube.
+
 Cable Structural Data File
 ==========================
 
