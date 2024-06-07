@@ -101,6 +101,15 @@ Wind Turbine Simulation
    
    simulation/simulation
    simulation/cutplanes
+   simulation/advancedgraphs
+   
+Multi Turbine Simulation
+************************
+.. toctree::
+   :maxdepth: 3
+   
+   simulation/multiturbine
+
 
 Windfield Generation
 ********************
