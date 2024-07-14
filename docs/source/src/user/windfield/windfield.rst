@@ -233,37 +233,45 @@ An import the velocity components from these binary files directly.
 	:caption: : Exemplary Mann (.man) format file
 
 	----------------------------------------QBlade Mann Box Definition File--------------------------------------------
-	Generated with : QBlade IH v2.0.7-release_candidate_beta windows
-	Archive Format: 310023
-	Time : 17:12:23
-	Date : 15.05.2024
-
+	Generated with : QBlade EE v2.0.7.4_beta windows
+	Archive Format: 310024
+	Time : 13:53:10
+	Date : 14.07.2024
+	
 	----------------------------------------Parameters-----------------------------------------------------------------
 	Windfield                                PREFIX             - prefix of the .bin and other files generated
-	0                                        IMPORTBOX          - false: generate new box from parameters; true: try to find and read .bin files with prefix
-
+	false                                    IMPORTBOX          - false: generate new box from parameters; true: try to find and read .bin files with prefix
+	
 	120.000                                  HEIGHTBOX          - height of the mann box center in [m]
-	1024.000                                 XDIM_BOX           - length of the mann box in [m]
+	630.000                                  XDIM_BOX           - length of the mann box in [m]
 	240.000                                  YDIM_BOX           - width of the mann box in [m]
 	240.000                                  ZDIM_BOX           - height of the mann box in [m]
-	1024                                     NX_BOX             - number of points along length, must be power of 2 [-]
+	631                                      NX_BOX             - number of points along length, must be power of 2 [-]
 	32                                       NY_BOX             - number of points along width, must be power of 2 [-]
 	32                                       NZ_BOX             - number of points along width, must be power of 2 [-]
-
+	
 	120.000                                  REFHEIGHT          - reference height for the BL profile in [m]
 	0                                        PROFILETYPE        - BL profile type: 0- power law; 1 - logarithmic
 	0.200                                    PROFILEPARAM       - power law exponent or roughness length
-
-	0.203                                    ALPHA_EPSILON      - Mann alpha-epsilon parameter
-	29.400                                   L_MANN             - Mann length scale [m]
-	3.900                                    GAMMA              - Mann gamma parameter
+	
+	0.0660                                   ALPHA_EPSILON      - Mann alpha-epsilon parameter
+	29.4000                                  L_MANN             - Mann length scale [m]
+	3.9000                                   GAMMA              - Mann gamma parameter
 	12345                                    SEED               - turbulent seed
-
+	
 	10.000                                   WINDSPEED          - hub-height average wind speed
-	20.960                                   TURBULENCE         - turbulence intensity
-	1                                        TURB_SCALING       - enable turbulent scaling: 0 - OFF; 1 - ON
-	1                                        HF_CORRECTION      - enable high frequency correction: 0 - OFF; 1 - ON
-
+	
+	1                                        IEC_STANDARD       - IEC standard 61400- (1, 2 or 3)
+	NTM                                      IEC_WINDTYPE       - IEC wind type (NTM, ETM, EWM1, EWM50 or ADDTURB
+	16.000                                   IEC_IREF           - IEC I_ref value [-]
+	10.000                                   IEC_VAVE           - IEC V_ave value [m/s]
+	50.000                                   IEC_VREF           - IEC V_ref value [m/s]
+	5.600                                    IEC_B              - IEC b value (or a in 61400-2) [m/s]
+	2.000                                    IEC_ETMC           - IEC ETM c value [m/s]
+	
+	true                                     TURB_SCALING       - enable turbulent scaling: 0 - OFF; 1 - ON
+	true                                     HF_CORRECTION      - enable high frequency correction: 0 - OFF; 1 - ON
+	
 	1.000                                    X_FACTOR           - scaling factor for x-variance
 	0.800                                    Y_FACTOR           - scaling factor for y-variance
 	0.500                                    Z_FACTOR           - scaling factor for z-variance

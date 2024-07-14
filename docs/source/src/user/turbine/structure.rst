@@ -328,7 +328,7 @@ One structural properties table is defined for each strut. This table is used fo
 Strut Constraint Table
 ^^^^^^^^^^^^^^^^^^^^^^
 
-In some cases, the user may want to specify a special constraint for the connection between the strut and the blade, or the strut and the torquetube, for example to model a hinge or similar. By default, each strut is connected rigidly to the blade and the torquetube. The :code:`STRUT_BLADE_CONSTRAINTS` and :code:`STRUT_TORQUETUBE_CONSTRAINTS` tables can be used to control the constrained degrees of freedom between struts, blades and the torquetube. The DOFs are defined in the local coordinate system of the corresponding strut.
+In some cases, the user may want to specify a special constraint for the connection between the strut and the blade, or the strut and the torquetube, for example to model a hinge or similar. By default, each strut is connected rigidly to the blade and the torquetube. The :code:`STRUT_BLADE_CONSTRAINTS` and :code:`STRUT_TORQUETUBE_CONSTRAINTS` tables can be used to control the constrained degrees of freedom between struts, blades and the torquetube. By default, the DOFs are defined in the local coordinate system of the corresponding strut. Optionally, by adding an additional 9th column to the table and setting its value to 1, the local coordinate system of the blade or torquetube is used to setup the constraint.
 
 .. code-block:: console
 	:caption: : The STRUT_BLADE_CONSTRAINTS table
@@ -338,7 +338,7 @@ In some cases, the user may want to specify a special constraint for the connect
 	1	1	1	1	1	1	0	1
 	1	2	1	1	1	1	0	1
 	
-This exemplary table models a hinge connection between strut 1 and blade 1 and strut 1 and blade 2, where the rotational degree of freedom around the local y-axis of the strut is not constrained.
+This exemplary table models a hinge connection between strut 1 and blade 1 and strut 1 and blade 2, where the rotational degree of freedom around the local y-axis of the strut is not constrained. 
 
 .. code-block:: console
 	:caption: : The STRUT_TORQUETUBE_CONSTRAINTS table
