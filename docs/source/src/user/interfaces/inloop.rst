@@ -328,30 +328,49 @@ After the QBlade library has been loaded a simulation object is imported and a s
 .. code-block:: python
 	:linenos:
 	:caption: : sampleScript.py
-	:emphasize-lines: 1, 2, 5
 	
+	import os
+	import sys
 	from ctypes import *
 	from QBladeLibrary import QBladeLibrary
-
+	
+	
+	# Define the directory where the QBlade library is located
+	dll_directory = "../"
+	
+	# Search for library files matching the pattern QBlade*.dll or QBlade*.so
+	dll_files = [f for f in os.listdir(dll_directory) if (f.startswith('QBlade') and (f.endswith('.dll') or f.endswith('.so')))]
+	
+	# Check if any matching files are found
+	if not dll_files:
+		print('No matching QBlade*.dll or QBlade*.so files found in the specified directory:',os.path.abspath(dll_directory))
+		sys.exit(1)  # Exit the script with a non-zero status to indicate an error
+	
+	# Use the first matching file
+	dll_file_path = os.path.join(dll_directory, dll_files[0])
+	
+	# Display the selected shared library file
+	print(f'Using shared library file: {dll_file_path}')
+	
 	#loading the QBlade library from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
-	QBLIB = QBladeLibrary("../QBladeCE_2.0.6.dll")    
-
+	QBLIB = QBladeLibrary(dll_file_path)    
+	
 	#creation of a QBlade instance from the library
 	QBLIB.createInstance(1,32)
-
+	
 	#loading a project or sim-file, in this case the DTU_10MW_Demo project or simulation definition file
 	#QBLIB.loadSimDefinition(b"./DTU_10MW_Demo.sim") #uncomment this line to load a simulation definition file
 	QBLIB.loadProject(b"./NREL_5MW_Sample.qpr") 
-
+	
 	#initializing the sim and ramp-up phase, call before starting the simulation loop
 	QBLIB.initializeSimulation()
-
+	
 	#we will run the simulation for 500 steps before storing the results
 	number_of_timesteps = 500
-
+	
 	#start of the simulation loop
 	for i in range(number_of_timesteps):
-
+	
 		#advance the simulation
 		QBLIB.advanceTurbineSimulation() 	
 		
@@ -371,7 +390,7 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		#example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
 		windspeed = (c_double * 3)(0,0,0) 
 		QBLIB.getWindspeed(-50,0,100,windspeed)
-
+		
 		#assign the c-type double array 'ctr_vars' with length [5], initialized with zeros
 		ctr_vars = (c_double * 5)(0); 
 		#advance the turbine controller and store the controller signals in the array 'ctr_vars'
@@ -382,17 +401,15 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		
 		#print out a few of the recorded data, in this case torque, tower bottom force along z (weight force) and rpm
 		print("Time:","{:3.2f}".format(time),"   Windspeed:","{:2.2f}".format(windspeed[0]),"  Torque:","{:1.4e}".format(ctr_vars[0]),"    RPM:","{:2.2f}".format(rpm),"   Pitch:","{:2.2f}".format(ctr_vars[2]),"   AoA at 85%:","{:2.2f}".format(AoA))
-
-
-
+	
 	#the simulation loop ends here after all 'number_of_timesteps have been evaluated
 		
 	#storing the finished simulation in a project as DTU_10MW_Demo_finished.qpr, you can open this file to view the results of the simulation inside QBlade's GUI
 	QBLIB.storeProject(b"./NREL_5MW_Sample_completed.qpr")
-
+	
 	#closing the QBlade instance to free memory
 	QBLIB.closeInstance()
-
+	
 	#unloading the QBlade library
 	del QBLIB.lib 
 	
@@ -410,16 +427,16 @@ The script *QBladeLibrary.py* defines the class *QBladeLibrary* and loads the sh
 
 	class QBladeLibrary:
 
-	    def __init__(self, shared_lib_path):
+		def __init__(self, shared_lib_path):
 		
 		try:
-		    self.lib = CDLL(shared_lib_path)
-		    print("Successfully loaded ", shared_lib_path)
+			self.lib = CDLL(shared_lib_path)
+			print("Successfully loaded ", shared_lib_path)
 		except Exception as e:
-		    print("Could not load the file ", shared_lib_path)
-		    print(e)
-		    return
-		    
+			print("Could not load the file ", shared_lib_path)
+			print(e)
+			return
+		
 		#setting the library Path, so that the Library knows about its location!
 		self.lib.setLibraryPath(shared_lib_path.encode('utf-8')) #setting the library Path, so that the DLL knows about its location!
 
@@ -545,30 +562,48 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 .. code-block:: matlab
 	:linenos:
 	:caption: : sampleScript.m
-	:emphasize-lines: 6
 	
+	%%
 	clear all
 	close all 
 	clc
-
-	% create an object of the class 'QBladeLibrary' that contains all interface functions
-	QBLIB = QBladeLibrary('../QBladeCE_2.0.6.dll');
-
+	
+	% Define the directory where QBlade DLL files are located and search for DLL 
+	% files matching the pattern QBlade*.dll
+	dllDirectory = '../';
+	dllFiles = dir(fullfile(dllDirectory, 'QBlade*.dll'));
+	soFiles = dir(fullfile(dllDirectory, 'QBlade*.sao'));
+	sharedLibFiles = [dllFiles; soFiles];
+	
+	if isempty(sharedLibFiles)
+		fprintf('No matching QBlade*.dll files or QBlade*.so found in the specified directory.');
+		return;
+	end
+		
+	% Use the first matching dll file and print out its name
+	sharedLibFilePath = fullfile(dllDirectory, sharedLibFiles(1).name);
+	fprintf('Using DLL file: %s\n', sharedLibFilePath);
+	
+	% create an object of the class 'QBladeLibrary' that contains all interface
+	% functions
+	QBLIB = QBladeLibrary(sharedLibFilePath);
+	
 	QBLIB.createInstance(1,32);
-
-	% since matlab is unable to display the console output from the library, we store the output in a log file
+	
+	% since matlab is unable to display the console output from the library, we
+	% store the output in a log file
 	QBLIB.setLogFile('./LogFile.txt')
-
+	
 	QBLIB.loadProject('NREL_5MW_Sample.qpr')
-
+	
 	QBLIB.initializeSimulation()
-
+	
 	number_of_timesteps = 500; 
 	
 	f = waitbar(0,'Initializing Simulation') ;
-
+	
 	for i = 1:1:number_of_timesteps
-	    
+		
 		%advance the simulation
 		QBLIB.advanceTurbineSimulation()
 		
@@ -586,11 +621,11 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 		rpm = QBLIB.getCustomData_at_num('Rotational Speed [rpm]',0,0);
 		t = QBLIB.getCustomData_at_num('Time [s]',0,0);  %example how to extract the variable 'Time' by name from the simulation
 		AoA = QBLIB.getCustomData_at_num('Angle of Attack at 0.25c (at section) Blade 1 [deg]',0.85,0); %example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
-	
+		
 		%example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
 		windspeed = libpointer('doublePtr',zeros(3,1)); 
 		QBLIB.getWindspeed(-50,0,100,windspeed);
-	
+		
 		%assign the c-type double array 'ctr_vars' with length [5], initialized with zeros
 		ctr_vars = libpointer('doublePtr',zeros(5,1));
 		%advance the turbine controller and store the controller signals in the array 'ctr_vars'
@@ -600,19 +635,18 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 		QBLIB.setControlVars_at_num(ctr_vars,0)
 		
 		fprintf('Time: %3.2f	Windspeed: %2.2f    Torque: %1.4e	RPM: %2.2f	Pitch: %2.2f    AoA at 85%%: %2.2f\n',t,windspeed.Value(1),ctr_vars.Value(1),rpm,ctr_vars.Value(3),AoA);
-		
+	
 		waitbar(i/number_of_timesteps,f,'QBlade Simulation Running')
-
+	
 	end
-
+	
 	close(f)
-
+	
 	QBLIB.storeProject('./NREL_5MW_Sample_completed.qpr')
-
+	
 	QBLIB.closeInstance()
-
+	
 	QBLIB.unload()
-
 
 
 Matlab Example: Definition of the QBladeLibrary Class
