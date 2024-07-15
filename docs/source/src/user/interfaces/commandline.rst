@@ -45,7 +45,7 @@ The available functionality of the QBlade CLI can be viewed by adding :code:`hel
 This command prints out an overview of all CLI functionality::
 
 	**************************************** Help **********************************************
-
+	
 	!! CLI options can be given in any order !!
 	!! Multiple files and/or directories can be specified with a single CLI call!!
 	!! All directories must be input as an ABSOLUTE path !!
@@ -71,9 +71,9 @@ This command prints out an overview of all CLI functionality::
 	exp_fastbin               - adds FAST BINARY format to auto-export and post-export formats
 	exp_cut_txt               - adds cut-plane txt format to auto-export and post-export formats
 	exp_cut_vtu               - adds cut-plane vtu format to auto-export and post-export formats
-	\directory\filter.flt     - sets a filter for the generation of all auto-export and post-export formats
 	post_exp                  - export results and cut-planes from all FINISHED .qpr and .qpr1 files in all WORKING_DIR(s)
-	dlc_gen                   - create simulations from a dlc table definition. requires the filename of the dlc definition(s) (must have .dlc ending) and an export directory
+	flt=\directory\filter.*   - sets a filter file for the generation of all auto-export and post-export formats
+	dlc=\directory\dlc.*      - create simulations from the dlc table (dlc.*). requires a WORKING_DIR in which the simulations are created
 	--------------------------------------------------------------------------------------------
 	
 CLI Functionality
@@ -161,9 +161,13 @@ In this section the different CLI options are briefly explained.
 	
 	The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
 
-:code:`dlc_gen`
-	This call allows to create simulations from a dlc table definition. It requires the filename of the dlc definitionto end with the *.dlc* file ending. Furthermore, an output directory needs to be specified, in which the simulation are created.
+:code:`dlc=\directory\dlc.*`
+	
+	This call allows to create simulations from a dlc table definition. It requires the filename of the dlc definition. Furthermore, a WORKING_DIR in which the simulations are created is required.
 
+:code:`dlc=\directory\dlc.*`
+	
+	This sets a filter file that is applied during the generation of all auto-export and post-export files.
 
 Sample CLI Call to Start a Batch Run
 ************************************
