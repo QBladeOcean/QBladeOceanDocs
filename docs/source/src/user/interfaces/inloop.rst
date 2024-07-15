@@ -339,7 +339,7 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	dll_directory = "../"
 	
 	# Search for library files matching the pattern QBlade*.dll or QBlade*.so
-	dll_files = [f for f in os.listdir(dll_directory) if (f.startswith('QBlade') and (f.endswith('.dll') or f.endswith('.so')))]
+	dll_files = [f for f in os.listdir(dll_directory) if 'QBlade' in f and ('.dll' in f or '.so' in f)]
 	
 	# Check if any matching files are found
 	if not dll_files:
@@ -353,7 +353,7 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	print(f'Using shared library file: {dll_file_path}')
 	
 	#loading the QBlade library from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
-	QBLIB = QBladeLibrary(dll_file_path)    
+	QBLIB = QBladeLibrary(dll_file_path)      
 	
 	#creation of a QBlade instance from the library
 	QBLIB.createInstance(1,32)
@@ -568,12 +568,11 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 	close all 
 	clc
 	
-	% Define the directory where QBlade DLL files are located and search for DLL 
-	% files matching the pattern QBlade*.dll
-	dllDirectory = '../';
-	dllFiles = dir(fullfile(dllDirectory, 'QBlade*.dll'));
-	soFiles = dir(fullfile(dllDirectory, 'QBlade*.sao'));
-	sharedLibFiles = [dllFiles; soFiles];
+	
+	% Find all files containing 'QBlade' and either '.dll' or '.so' in their names
+	libSearchDirectory = '../';
+	sharedLibFiles = dir(fullfile(libSearchDirectory, '*QBlade*'));
+	sharedLibFiles = sharedLibFiles(contains({sharedLibFiles.name}, {'.dll', '.so'}));
 	
 	if isempty(sharedLibFiles)
 		fprintf('No matching QBlade*.dll files or QBlade*.so found in the specified directory.');
@@ -581,7 +580,7 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 	end
 		
 	% Use the first matching dll file and print out its name
-	sharedLibFilePath = fullfile(dllDirectory, sharedLibFiles(1).name);
+	sharedLibFilePath = fullfile(libSearchDirectory, sharedLibFiles(1).name);
 	fprintf('Using DLL file: %s\n', sharedLibFilePath);
 	
 	% create an object of the class 'QBladeLibrary' that contains all interface
