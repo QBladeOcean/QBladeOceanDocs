@@ -174,7 +174,7 @@ Sample CLI Call to Start a Batch Run
 
 The following call is an example for a CLI call of QBlade to evaluate and automatically export a batch of simulation definition files located in the folder c:\\simulations\\.
 
-	:code:`QBladeEE -cli -d1 -g64 -t12 c:\simulations\ all_sim exp_h2bin remove_wind skip`
+	:code:`QBladeEE -cli -d1 -g64 -t12 c:\\simulations all_sim exp_h2bin remove_wind skip`
 	
 After this CLI call QBlade will evaluate all simulation definitions (:code:`all_sim`) located in c:\\simulations\\ over 12 parallel threads (:code:`-t12`). OpenCL device 1 will be used (:code:`-d1`) with a work-group size of 64 (:code:`-g64`). The simulation results will automatically be exported to the HAWC2 binary format (:code:`exp_h2bin`). Simulations that have already been evaluated previously will be skipped (:code:`skip`) and the automatically generated binary wind fields will be removed after a simulation is finished (:code:`remove_wind`). After executing this call the following info is printed out on the screen::
 
