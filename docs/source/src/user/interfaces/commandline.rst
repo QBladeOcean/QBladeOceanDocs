@@ -69,6 +69,7 @@ This command prints out an overview of all CLI functionality::
 	exp_h2ascii               - adds HAWC2ASCII format to auto-export and post-export formats (only if HAWC2BINARY is not exported)
 	exp_ascii                 - adds ASCII format to auto-export and post-export formats
 	exp_fastbin               - adds FAST BINARY format to auto-export and post-export formats
+	exp_modal                 - exports modal frequencies (if a modal analysis was performed) during auto-export and post-export
 	exp_cut_txt               - adds cut-plane txt format to auto-export and post-export formats
 	exp_cut_vtu               - adds cut-plane vtu format to auto-export and post-export formats
 	post_exp                  - export results and cut-planes from all FINISHED .qpr and .qpr1 files in all WORKING_DIR(s)
@@ -148,6 +149,10 @@ In this section the different CLI options are briefly explained.
 :code:`\directory\filter.flt`
 	
 	Passing the absolute location of a result filter file. All export files that will be generated contain only the variables defined in the filter file. Each line in the filter file specifies a single variable name. The variable names in the filter file need to correspond to the exact name of the variable as it is shown in QBlade's graphs.
+	
+:code:`exp_modal`
+	
+	The parameter :code:`exp_modal` exports modal frequencies during auto_exp and post_exp exports. The modal frequencies are only exported if the simulation contains the results of a modal analysis. The exported modal frequencies are stored in a file with the appendix *_modal.txt*.
 
 :code:`exp_cut_txt`
 	
