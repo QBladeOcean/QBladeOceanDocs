@@ -25,7 +25,7 @@ This feature allows to generate a DLC object, which contains the definitions of 
 .. _fig-dlc_diag:
 .. figure:: dlc_diag.png
    :align: center
-   :scale: 50%
+   :scale: 30%
    :alt: The DLC generator dialog (click to enlarge).
 
    The DLC generator dialog (click to enlarge).
@@ -51,7 +51,7 @@ In this section the user can choose the wind model for the setup of the DLC. Typ
 Turbulent Grid Parameters
 -------------------------
 
-The turbulent wind fields that are required for some DLC's are generated automatically by TurbSim and imported into QBlade if required. The spatial and temporal discretization, the wind field dimensions and the reference height can be chosen in this section.
+The turbulent wind fields that are required for some DLC's are generated automatically by TurbSim or the Mann generator and imported into QBlade if required. The spatial and temporal discretization, the wind field dimensions and the reference height can be chosen in this section.
 
 Environmental Vars
 ------------------
@@ -91,7 +91,7 @@ In this section the user can choose from which timestep and what kind of data sh
 Offshore DLC Generation in the GUI
 ----------------------------------
 
-When IEC **61400-3-1** or **61400-3-2** is selected in the *IEC Design Load Case Generator* dialog, the user is asked to choose a *Wave Template* and to provide a *DLC List*, while the *DLC Parameter Range* section is hidden from view. The *Wave Template* is a *Linear Wave Object* in QBlade, which serves as the template for this particular DLC. E.g. the wave template contains information about the the spectrum, spectral discretization etc. and only the key parameters for wave height, wave period or wave direction will be adjusted for each simulation definition that will be generated from the Design Load Case Generator. The data table that is required then contains all information about the parameter variations for this DLC (that was previously input into the *Parameter Range* section). 
+When IEC **61400-3-1** or **61400-3-2** is selected in the *IEC Design Load Case Generator* dialog, the user is asked to choose a *Wave Template* and to provide a *DLC List*, while the *DLC Parameter Range* section is hidden from view. The *Wave Template* is a *Linear Wave Object* in QBlade, which serves as the template for this particular DLC. E.g. the wave template contains information about the spectrum, spectral discretization etc. and only the key parameters for wave height, wave period or wave direction will be adjusted for each simulation definition that will be generated from the Design Load Case Generator. The data table that is required then contains all information about the parameter variations for this DLC (that was previously input into the *Parameter Range* section). 
 
 The format of the DLC table that is required is equivalent as described in :ref:`DLC Generation via Spreadsheets`, with the exception that the entries for a few columns in this table are not required, while others can be filled in automatically by QBlade according to the respective IEC standard. 
 
@@ -177,7 +177,7 @@ The definition of a single simulation requires 33 entries (columns) in a spreads
 
 2 **Simulation Length** : The length of the timeseries in [s].
 
-3 **Master Simulation** : The path to a simulation definition template. A relative path based on the spreadsheet location can be used. This needs to be a *Simulation Definition ASCII File* with all associated files (.trb, plr, .bla, etc.). In this template all fixed varuiables that are not defined in one of the spreadsheet columns can be set.
+3 **Master Simulation** : The path to a simulation definition template. A relative path based on the spreadsheet location can be used. This needs to be a *Simulation Definition ASCII File* with all associated files (.trb, plr, .bla, etc.). In this template all fixed variables that are not defined in one of the spreadsheet columns can be set.
 
 4 **Events** : The (absolute or relative) path to an event definition file. If no event should be simulation insert the word *none*.  
 
@@ -201,7 +201,7 @@ The definition of a single simulation requires 33 entries (columns) in a spreads
 
 14 **Significant Wave Period (Tp)** : The significant wave period in [s].
 
-15 **Wave Misalignement** : The misalignement between wind and waves in [°]. The wave direction is calculated so that the wave is misaligned from the wind by the user specified value as a positive rotation around the global z-axis.
+15 **Wave Misalignment** : The misalignment between wind and waves in [°]. The wave direction is calculated so that the wave is misaligned from the wind by the user specified value as a positive rotation around the global z-axis.
 
 15 **Wave Seed** : The seed that is used by the wave generator during the generation of wave timeseries from wave spectra.
 
@@ -223,11 +223,11 @@ The definition of a single simulation requires 33 entries (columns) in a spreads
 
 24 **Near Shore Current Direction** : The direction of the near shore current in [°], see :ref:`Currents`.
 
-25 **Intial Rotor Yaw** : The intial rotor yaw of the turbine at the beginning of the simulation, in [°]
+25 **Initial Rotor Yaw** : The initial rotor yaw of the turbine at the beginning of the simulation, in [°]
 
-26 **Intial Rotor Azimuth** : The intial rotor azimuthal angle of the turbine at the beginning of the simulation, in [°]
+26 **Initial Rotor Azimuth** : The initial rotor azimuthal angle of the turbine at the beginning of the simulation, in [°]
 
-27 **Intial Rotor Pitch** : The intial collective rotor pitch angle at the beginning of the simulation, in [°]
+27 **Initial Rotor Pitch** : The initial collective rotor pitch angle at the beginning of the simulation, in [°]
 
 28 **Initial FLoater X Position** : The initial position of the floating wind turbine in X-direction, in [m]
 

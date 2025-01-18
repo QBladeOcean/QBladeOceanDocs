@@ -60,7 +60,12 @@ Each of the modules in QBlade is equipped with custom graphs that are used to pl
 Each graph can be customized individually. When closing a QBlade session all graph customizations are stored and are reloaded when QBlade is started again. The user can interact with a graph in the following ways:
 
 - **Pan**: Hold down the left mouse key to pan the graph
-- **Zoom**: Use the mouse wheel to zoom a graph. Holding down the *Y* or *X* key on the keybord allows to only zoom the x- or y-axis.
+- **Zoom**: Use the mouse wheel to zoom a graph. Holding down the *Y* or *X* key on the keyboard allows to only zoom the x- or y-axis.
+
+Graph Types
+***********
+
+The results from various types of analysis are presented in different graph types. Most module have their analysis results spread out over several graph types. The data is arranged over different types of graphs due to the underlying differences in structure. A *blade graph* for instance contains all results distributed over a rotor blade. A *time graph* contains the results for each timestep and a *PSD graph* contains the results in the frequency domain. The graph type can quickly be changed in the :ref:`Graph Context Menu`. After a graph type is changed the currently available variables can be shown by double clicking on the graph (see :ref:`Variables & Styles and Axes`).
 
 Graph Context Menu
 ******************
@@ -72,14 +77,17 @@ Graph Context Menu
 
    The Graph Context Menu.
    
-The *Graph Context Menu* contains two sections, separated by a horizontal line. The bottom section can be used to change the *Graph Type*. Depending on the module several different graph types are available. 
-The top part of the *Graph Context Menu* is the same for all modules. The functionality is described below:
+The *Graph Context Menu* contains three sections. The bottom section can be used to change the :ref:`Graph Types`. Depending on the module several different :ref:`Graph Types` are available. 
+The top parts of the :ref:`Graph Context Menu` is the same for all modules. This functionality is related to the data shown in the graph and the visibility of the curves within a graph.
+
+* **Reset Graph Scales**: The graph scales are adapted to best fit the currently shown curves
+* **Disable Auto Graph Scales**: Disables the automatic graph scaling, the graph scaling is frozen until this option is deselected again.
+* **Show Graph Data Statistics**: Show the min, max, mean, range, stdDev, variance and DEL's for all time series shown in a graph.
+* **copy Graph Data to Clipboard**: The data of the displayed curves is copied to the clipboard, to facilitate simple copy/paste data transfer.
+* **Export Graph Data to File**: The curves displayed in the currently selected graph are exported to a ``.txt`` file.
 
 * **Show All Curves**: All data objects or simulations are displayed in the graph.
 * **Show Current Curve Only**: Only the currently selected object curve is shown in the graph, all other object curves are hidden.
-* **Reset Graph Scales**: The graph scales are adapted to best fit the currently shown curves
-* **No Automatic Scaling**: Disables the automatic graph scaling, the graph scaling is frozen until this option is deselected again.
-* **Export Graph**: The curves displayed in the currently selected graph are exported to a ``.txt`` file.
 
 Variables & Styles and Axes
 ***************************
@@ -114,11 +122,11 @@ Curve Styles
 
    The Curve Styles Menu.
    
-When in the *Graph View* of a module the *Curve Styles* box is visible in the *Dock Widget*. The *Curve Styles* menu is used to set the appearance of the data curve of an object. By clicking on the colored line box the curve color, curve style and curve width can be changed by the user. Furthermore, the following options are avaliable:
+When in the *Graph View* of a module the *Curve Styles* box is visible in the *Dock Widget*. The *Curve Styles* menu is used to set the appearance of the data curve of an object. By clicking on the colored line box the curve color, curve style and curve width can be changed by the user. Furthermore, the following options are available:
 
 * **Highlight**: If this checkbox is ticked the currently selected object will be highlighted by increasing the width of the associated curve.
 * **Show**: This checkbox toggles the visibility of the curve.
-* **Curve**: This toggles if the curve is diaplyed.
+* **Curve**: This toggles if the curve is displayed.
 * **Points**: This toggles if the individual data points are displayed.
 
 Graph Layout

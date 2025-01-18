@@ -1,7 +1,7 @@
 Turbine Definition ASCII File
 =============================
 
-Turbine objects can be exported as a QBlade project file (``.qpr``) or into the text based ``.trb`` format. When a turbine object is exported into the ``.trb`` format, the associated blade (``.bld``) file is automatically created. Furthermore, the structural definition files (if the turbine has a structural model) and the controller parameters are also auomatically placed into the folder structure See an exemplary ``.trb`` file below:
+Turbine objects can be exported as a QBlade project file (``.qpr``) or into the text based ``.trb`` format. When a turbine object is exported into the ``.trb`` format, the associated blade (``.bld``) file is automatically created. Furthermore, the structural definition files (if the turbine has a structural model) and the controller parameters are also automatically placed into the folder structure See an exemplary ``.trb`` file below:
 
 .. code-block:: console
 
@@ -31,7 +31,7 @@ Turbine objects can be exported as a QBlade project file (``.qpr``) or into the 
 	0.0000                                   CLEARANCE          - the rotor clearance to ground [m] (VAWT only)
 	0.0000                                   XTILT              - the rotor x-tilt angle [deg] (VAWT only)
 	0.0000                                   YTILT              - the rotor y-tilt angle [deg] (VAWT only)
-	126.0000                                 TOWERHEIGHT        - the tower heigh [m]
+	126.0000                                 TOWERHEIGHT        - the tower height [m]
 	1.8000                                   TOWERTOPRAD        - the tower top radius [m]
 	2.5200                                   TOWERBOTRAD        - the tower bottom radius [m]
 
@@ -59,7 +59,7 @@ Turbine objects can be exported as a QBlade project file (``.qpr``) or into the 
 	1.00                                     WAKERELAXATION     - the wake relaxation factor [0-1]
 	1.00                                     FIRSTWAKEROW       - first wake row length [-]
 	200000                                   MAXWAKESIZE        - the maximum number of wake elements [-]
-	100                                      MAXWAKEDIST        - the maxmimum wake distance from the rotor plane (normalized by dia) [-]
+	100                                      MAXWAKEDIST        - the maximum wake distance from the rotor plane (normalized by dia) [-]
 	0.00100                                  WAKEREDUCTION      - the wake reduction factor [-]
 	0                                        WAKELENGTHTYPE     - the wake length type (0 = counted in rotor revolutions, 1 = counted in time steps)
 	1000000.00                               CONVERSIONLENGTH   - the wake conversion length (to particles) [-]
@@ -74,7 +74,7 @@ Turbine objects can be exported as a QBlade project file (``.qpr``) or into the 
 	----------------------------------------Vortex Core Parameters------------------------------------------------------
 	Only used if waketype = 0
 	1.00                                     BOUNDCORERADIUS    - the fixed core radius of the bound blade vortex (fraction of local chord) [0-1]
-	0.05                                     WAKECORERADIUS     - the intial core radius of the free wake vortex (fraction of local chord) [0-1]
+	0.05                                     WAKECORERADIUS     - the initial core radius of the free wake vortex (fraction of local chord) [0-1]
 	800.00                                   VORTEXVISCOSITY    - the turbulent vortex viscosity
 	0                                        VORTEXSTRAIN       - calculate vortex strain 0 = OFF, 1 = ON
 	20                                       MAXSTRAIN          - the maximum element strain, before elements are removed from the wake [-]

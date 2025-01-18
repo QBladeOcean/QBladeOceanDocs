@@ -57,7 +57,13 @@ An exemplary main structural input file for the NREL 5MW HAWT wind turbine is sh
 	1.75   		NACCMZ - Vertical distance from the tower-top to the nacelle CM (m) (HAWT only)
 	2607890		NACYINER - Nacelle Yaw Inertia (kg*m^2) (HAWT only)
 	56780		HUBMASS - Hub Mass (kg)
+	0.0    		HUBCMX - Displacement of the Hub mass along the X_h axis (m) (HAWT only)
 	115926		HUBINER - Hub Inertia (kg*m^2)
+
+	------------------------------- NACELLE IMU -------------------------------
+	0.0		NACIMUX (m) (HAWT only)
+	0.0		NACIMUY (m) (HAWT only)
+	10.0		NACIMUZ (m) (HAWT only)
 
 	------------------------------- DRIVETRAIN MODEL --------------------------
 	97		GBRATIO - gearbox ratio (N)
@@ -91,15 +97,13 @@ An exemplary main structural input file for the NREL 5MW HAWT wind turbine is sh
 	OC3_Sparbuoy_Sub_LPMD.str	SUBFILE	 - Name of the substructure file
 
 	------------------------------- DATA OUTPUT TYPES -------------------------
-	true			FOR_OUT - store (local) forces at all chosen locations 
-	true			ROT_OUT - store (local) body rotations at all chosen locations 
-	true			MOM_OUT - store (local) moments at all chosen locations 
-	true			DEF_OUT - store (local) deflections at all chosen locations 
-	true			POS_OUT - store (global) positions at all chosen locations 
-	true			VEL_OUT - store (global) velocities at all chosen locations 
-	true			ACC_OUT - store (global) accelerations at all chosen locations
-	true			LVE_OUT - store (local) velocities at all chosen locations
-	true			LAC_OUT - store (local) accelerations at all chosen locations
+	true			FOR_OUT - store forces at all sensor locations 
+	true			DEF_OUT - store deflections at all sensor locations 
+	true			POS_OUT - store positions at all sensor locations 
+	true			VEL_OUT - store velocities at all sensor locations 
+	true			ACC_OUT - store accelerations at all sensor locations 
+	true			STR_OUT - store element strain at all sensor locations 
+	true			AER_OUT - store aerodynamic data at all sensor locations 
 
 	------------------------------- DATA OUTPUT LOCATIONS ---------------------
 	any number, or zero, user defined positions can be chosen as output locations. 
@@ -178,6 +182,7 @@ Mass and Inertia Parameters
 	1.75   		NACCMZ - Vertical distance from the tower-top to the nacelle CM (m) (HAWT only)
 	2607890		NACYINER - Nacelle Yaw Inertia (kg*m^2) (HAWT only)
 	56780		HUBMASS - Hub Mass (kg)
+	0.0    		HUBCMX - Displacement of the Hub mass along the X_h axis (m) (HAWT only)
 	115926		HUBINER - Hub Inertia (kg*m^2)
 	
 In this section of the input file mass and inertia properties are assigned to the nacelle and the hub. It should be noted here that the parameter :code:`HUBINER` should only account for the rotational inertia of the hub itself, and not account for the inertia of the rotor blades as this is explicity included through the finite element model. 
@@ -193,6 +198,26 @@ Mass and Inertia Parameters Extended
 
 :code:`HUBINER`
  this (alternative) keyword can be used to define the full inertia matrix of the hub (applied at the hub position. Six values can be specified to define the XX, YY, ZZ, XY, XZ and YZ inertia of the hub.
+
+Nacelle Inertia Measurement Unit (IMU)
+--------------------------------------
+This section allows the user to specify the location of the nacelle-based Inertia Measurement Unit (IMU). The IMU location is defined in the Nacelle Coordinate System (see :ref:`Local Sensor Coordinate Systems`). At this specified location, acceleration data in the Nacelle Coordinate System is recorded. 
+
+- NACIMUX: X_n position of the IMU (0 by default)
+- NACIMUY: X_n position of the IMU (0 by default)
+- NACIMUZ: X_n position of the IMU (0 by default)
+
+The recorded IMU data can serve multiple purposes:
+
+- Populating a controller swap array (see :ref:`Sending Turbine Data to a Wind Turbine Controller`).
+- Supporting other custom analyses or applications.
+- Viewing in the *Structural Time Graph* during a simulation (see :ref:`Live Results View`).
+
+The recorded acceleration data is stored under the following variable names:
+
+- X_n Nac. IMU Acc. [m^2/s]
+- Y_n Nac. IMU Acc. [m^2/s]
+- Z_n Nac. IMU Acc. [m^2/s]
 
 Nacelle Drag Model
 ------------------
@@ -328,7 +353,7 @@ One structural properties table is defined for each strut. This table is used fo
 Strut Constraint Table
 ^^^^^^^^^^^^^^^^^^^^^^
 
-In some cases, the user may want to specify a special constraint for the connection between the strut and the blade, or the strut and the torquetube, for example to model a hinge or similar. By default, each strut is connected rigidly to the blade and the torquetube. The :code:`STRUT_BLADE_CONSTRAINTS` and :code:`STRUT_TORQUETUBE_CONSTRAINTS` tables can be used to control the constrained degrees of freedom between struts, blades and the torquetube. By default, the DOFs are defined in the local coordinate system of the corresponding strut. Optionally, by adding an additional 9th column to the table and setting its value to 1, the local coordinate system of the blade or torquetube is used to setup the constraint.
+In some cases, the user may want to specify a special constraint for the connection between the strut and the blade, or the strut and the torquetube, for example to model a hinge or similar. By default, each strut is connected rigidly to the blade and the torquetube. The :code:`STRUT_BLADE_CONSTRAINTS` and :code:`STRUT_TORQUETUBE_CONSTRAINTS` tables can be used to control the constrained degrees of freedom between struts, blades and the torquetube. By default, the DOFs are defined in the local coordinate system of the corresponding strut. Optionally, by adding an additional 9th column to the table and setting its value to 1, the local coordinate system of the blade or torquetube is used to setup the constraint DOFs.
 
 .. code-block:: console
 	:caption: : The STRUT_BLADE_CONSTRAINTS table
@@ -446,12 +471,16 @@ The last part of the main structural input file deals with the definition of loa
 * :code:`TRQ_X`: Stores data for the torque tube at the normalized curved length position X
 * :code:`CAB_X_Y`: Stores data for guy cable X at the normalized curved length position Y
 
+**Auto-generated Variable Names**
+
 Furthermore data is automatically stored at each inter body connection of the model. Each inter body connection is identified by a combination of two body name tags and a z value that gives the height position at which the connection was created during the model definition. In the following two exemplary auto-generated variable names are shown and explained:
 
 **Y l Mom. TRQ - BLD_3 z=29.7m**
 	The moment around the local Y axis at the connection between the torque tube and blade 3, which was defined at a height of 29.7m. This result is given in the local coordinates of the torque tube since the TRQ tag is the first tag in the variable name.
 **X l For. STR_2_2 - BLD_2 z=27.5m**
 	This example defines the local reaction force at the connection between the top strut of blade 2 and blade 2, given for the local X axis of the strut. 
+
+**Data Types**
 
 Seven different data types can be specified to be stored (true) or not (false) at all locations that are specified or automatically generated. It is recommended to only activate the sensor output that are required for the particular analysis to reduce the overall memory requirements and size of project and data files generated by QBlade. The different types of data that can be stored for each sensor are:
 
@@ -463,8 +492,7 @@ true			ACC_OUT - store accelerations at all sensor locations
 true			STR_OUT - store element strain at all sensor locations 
 true			AER_OUT - store aerodynamic data at all sensor locations 
 
-The forces and moments that obtained from a structural body are the **internal shear forces and bending moments**. However, the forces and moments given at an inter body connection can be interpreted as the **reaction forces and moments** acting on the constraint. For an overview of the coordinate systems / conventions in which the simulation results are stored see the section: :ref:`Coordinate Systems`.
-
+The forces and moments from a structural body are **internal shear forces and bending moments**, while those at inter-body connections are **reaction forces and moments**. See :ref:`Coordinate Systems and Conventions` for more on conventions.
 
 Structural Definition of Bodies
 ===============================
@@ -489,7 +517,7 @@ Timoshenko beams with a Fully Populated Stiffness Matrix (FPM) represent the mos
 ANCF Cable Element
 ------------------
 
-The ANCF Cable element in QBlade is used for an efficient simulation of slender, cable like structures such as mooring lines and blade cables. These elements utilize Absolute Nodal Coordinate Formulation to obtain accurate and efficient results for complex mooring system configurations or tower guywires (see :ref:`Cable Structural Data File` and :ref:`Mooring Elements and Ground-Constraints`).
+The ANCF Cable element in QBlade is used for an efficient simulation of slender, cable like structures such as mooring lines and blade cables. These elements utilize Absolute Nodal Coordinate Formulation to obtain accurate and efficient results for complex mooring system configurations or tower guywires (see :ref:`Cable Structural Data File` and :ref:`Mooring Elements`).
 
 
 Blade, Strut and Tower Structural Data Files
@@ -826,10 +854,12 @@ The radius of gyration :math:`r_g` is related to the moment of inertia (:math:`I
 
 :math:`r_{g,x} = \sqrt{\frac{I_{xx}}{m}} = \sqrt{\frac{I_x}{A}}`
 
-Please not the the radius of gyration in the structural datatable furthermore is normalized by the local diameter of the tower or torquetube.
+Please note that the radius of gyration in the structural datatable furthermore is normalized by the local diameter of the tower or torquetube.
 
 Cable Structural Data File
 ==========================
+
+The cable structural data file defines the properties and connections for cable elements. Below is an exemplary cable definition data file:
 
 .. code-block:: console
 	:caption: : Exemplary cable definition data file
@@ -856,10 +886,30 @@ Cable Structural Data File
 	11	STR_1_3_1.0	TRQ_0.9631	15000		2	0.99	2	B2TieRod3
 	12	STR_2_3_1.0	TRQ_0.2839	15000		2	0.99	2	B2TieRod1
 
-Cables can be defined between blades (BLD), struts (STR), the tower (TWR), torquetube (TRQ) or the ground (GRD).
+Applying Offsets to cables
+--------------------------
+
+It is possible to assign an offset to the cable connection point if it should be displaced from the beam centerline. This offset is specified in the local coordinate system of the connected body using x, y, and z coordinates, appended after the length position. For example, `BLD_1_0.5_0_1_1` applies an offset of 1m in the local y and z directions of the blade.
+
+Below is an exemplary data file with offsets:
+
+.. code-block:: console
+    :caption: Exemplary Cable Definition Data File with Offsets
+
+    ------------------------------CABLE DATA--------------------------------
+
+    CABELEMENTS
+    CabID    MASS_[kg/m]    EIy_[N.m^2]    EA_[N]         DAMP_[-]    DIA_[m]
+    1        1.574300E+00   6.755490E+02   4.222260E+07   0.002       0.016
+    2        9.048000E-01   1.964547E+02   2.182830E+07   0.002       0.012
+
+    CABMEMBERS
+    ID    CONN_1                      CONN_2                      Tension[N]    CabID    Drag    ElmDsc    Name
+    1     STR_1_1_0.0_1.2_2.2_3.0     STR_1_1_1.0_0.5_1.2_3.0     70000         1        0       2         B1StrutBot
+    2     STR_2_1_0.0_1.2_2.2_3.0     STR_2_1_1.0_1.2_2.2_3.0     70000         1        0       2         B1StrutTop
 
 :code:`CABDAMP`
- In some cases, if the alpha damping coefficient of a cable element (CABELEMENTS) is too large, a simulation can become unstable. Therefore, be default the damping coefficient of the cable elements is not applied. If the user wishes to activate the axial damping of mooring lines and guy cables, the keyword :code:`CABDAMP` must be set to true.
+ In some cases, if the alpha damping coefficient of a cable element (CABELEMENTS) is too large, a simulation can become unstable. Therefore, by default the damping coefficient of the cable elements is not applied. If the user wishes to activate the axial damping of mooring lines and guy cables, the keyword :code:`CABDAMP` must be set to true.
  
  .. code-block:: console
    	:caption: : Activating axial cable damping for all CABELEMENTS be setting the keyword CABDAMP
@@ -889,7 +939,7 @@ Rayleigh damping is not constant, but varies with frequency. Typically, Rayleigh
 Anisotropic Rayleigh Damping
 ----------------------------
 
-For a more detailed definition of the damping properties of a structural body the anisotropic damping model is recommended. This damping model allows to define different damping properties for the different degreed of freedom (or modes) of a structural body. The anisotropic damping of a body is defined by at least four parameters (and an optional fifth parameter), followed by the keyword :code:`RAYLEIGHDMP_ANISO`.
+For a more detailed definition of the damping properties of a structural body the anisotropic damping model is recommended. This damping model allows defining different damping properties for the different degrees of freedom (or modes) of a structural body. The anisotropic damping of a body is defined by at least four parameters (and an optional fifth parameter), followed by the keyword :code:`RAYLEIGHDMP_ANISO`.
 
 .. code-block:: console
 	:caption: : Exemplary definition of anisotropic damping properties in a structural data file.

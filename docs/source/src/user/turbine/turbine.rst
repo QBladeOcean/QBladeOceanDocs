@@ -8,7 +8,7 @@ Modeling Overview
 
     The turbine module in the QBlade's main toolbar.
 
-A new wind turbine can be defined, or an existing turbine can be edited in the **Turbine definition Module** of QBlade. When a new wind turbine is defined a dialog opens where the user can specify in detail how the turbine should be modeled **aerodynamically**, **structurally** and if **controllers** should be included. 
+The Turbine Definition Module allows users to define new wind turbines or edit existing ones. When a new wind turbine is defined a dialog opens where the user can specify in detail how the turbine should be modeled **aerodynamically**, **structurally**, and whether a **controller** should be included.. 
 
 The Turbine Definition Dialog
 -----------------------------
@@ -34,7 +34,7 @@ In the turbine definition dialog the user can set all details of the wind turbin
 Aerodynamic only Turbine Definitions
 ------------------------------------
 
-A turbine object can either be defined with or without a structural model definition. If the turbine object is defined without a structural model it is assumed as a rigid model, and only aerodynamic forces are evaluated during a simulation. The only operational modes for a turbine object without a structural model are constant or prescribed operational speed (see :ref:`Aerodynamic Modeling`).
+A turbine object can either be defined with or without a structural model definition. If the turbine object is defined without a structural model, it is treated as a rigid model, and only its aerodynamic behavior is evaluated during a simulation. The only operational modes for a turbine object without a structural model are constant or prescribed operational speed (see :ref:`Aerodynamic Modeling`).
 
 Aeroelastic Turbine Definitions
 -------------------------------
@@ -50,7 +50,7 @@ Turbine Name and Rotor
 - **Turbine Name**: A unique name needs to be assigned to the turbine object.
 - **Blade Design**: Choose the aerodynamic blade design that will be used for this turbine object.
 - **Turbine Type**: Switch between a HAWT or a VAWT turbine design.
-- **Number of Blades**: Sets the numvber of blades for this rotor. This overrides the number of blades that is specified in the *Blade Design*. If the turbine is equipped with a structural model the number of blades is defined in the structural model main input file and this value is not used.
+- **Number of Blades**: Sets the number of blades for this rotor. This overrides the number of blades that is specified in the *Blade Design*. If the turbine is equipped with a structural model the number of blades is defined in the structural model main input file and this value is not used.
 - **Up- or Downwind**: Choose an up- or downwind rotor configuration (only used for HAWT turbine definitions).
 - **Rotor Rotation**: Sets the rotor rotation to standard (clockwise) or reversed (counterclockwise).
 

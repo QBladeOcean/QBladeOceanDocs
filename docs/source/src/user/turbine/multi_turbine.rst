@@ -27,6 +27,8 @@ A turbine with multiple rotors may be defined in the dialog *Menu->Turbine Defin
 * **POT_EXC_FILE_X**
 * **POT_SUM_FILE_X**
 * **POT_DIFF_FILE_X**
+* **AZIOFFSET_X**
+* **ROTFACT_X**
 
 To connect to a specific transition piece in the **SUBCONSTRAINTS** table simply use the number **X** of that transition piece in the **TrPID** column.
 
@@ -35,7 +37,29 @@ To connect to a specific transition piece in the **SUBCONSTRAINTS** table simply
     :align: center
     :alt: The Multi-Rotor Assembly Dialog.
 
-    The Multi-Rotor Assembly Dialog. 
+    The Multi-Rotor Assembly Dialog.
+
+Multi Rotor Turbine Assembly Keywords
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Two keywords can be used to specify the initial rotor position in a multi-rotor turbine assembly and the relative rotational speed of a rotor in relation to the rotational speed of the master rotor. These keywords have to be defined in the common substructure file.
+
+**AZIOFFSET_X**
+ Offsets the initial azimuthal angle of the rotor by this angle (in °).
+
+ .. code-block:: console
+ 	:caption: : AZIOFFSET
+ 	
+ 	120	AZIOFFSET_2
+
+**ROTFACT_X**
+ Sets the rotational rate of a *slave' rotor in relation to that of the *master* rotor. This value is only in effect if the simulation is performed with a fixed rotational rate (see :ref:`Rotational Speed Settings`).
+ If the simulation is carried out with a *free* rotational rate this value has no effect.
+
+ .. code-block:: console
+ 	:caption: : ROTFACT
+ 	
+ 	0.9	ROTFACT_2
+
     
 Multi Rotor Turbine Assembly ASCII File
 ***************************************

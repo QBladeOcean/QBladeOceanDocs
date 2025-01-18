@@ -72,7 +72,7 @@ It is also possible to export a cut-plane definition (see :numref:`fig-cut_plane
    :scale: 60%
    :alt: The cut-plane definition (.cut) export option.
 
-   The cut-plane definition (.cut)export option.
+   The cut-plane definition (.cut) export option.
    
 An exemplary cut-plane definition file is shown below. The parameters in the cut-plane definition are analogue to the parameters in the cut-plane dialog.
    

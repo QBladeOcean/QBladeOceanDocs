@@ -18,14 +18,11 @@ The right side of the module presents a graphical representation of the aerodyna
 The user can interact with these graphs in the same manner as with all the other graphs within QBlade (see :doc:`../guigraph/guigraph`).
 
 .. _fig-blade-overview:
-.. figure:: blade_section_overview.png
+.. figure:: dual_design.png
     :align: center
     :alt: Overview of the Blade Design Module in QBlade
 
     Overview of the blade design module in QBlade. The control dock is located on the left, the interactive 3D view in the center and the graphs on the right.  
-
-Basic Blade Design
-------------------
 
 In QBlade, the aerodynamics of a blade are defined by splitting the blade into several stations. This is shown in :numref:`fig-blade-stations`. The aerodynamic parameters are defined by the user at each station and QBlade interpolates these values between stations (i.e. over a blade element). 
 
@@ -35,6 +32,9 @@ In QBlade, the aerodynamics of a blade are defined by splitting the blade into s
     :alt: Aerodynamic Blade Definition in QBlade is done in stations.
 
     Aerodynamic blade definition in QBlade is done in stations. Values are linearly interpolated along the elements between the stations.
+
+HAWT Blade Design
+-----------------
 
 Each blade station is defined by a series of aerodynamic properties. The global blade/rotor parameters are the number of blades and the hub radius. 
 The distributed blade properties are split into basic and advanced aerodynamic blade properties.
@@ -50,8 +50,56 @@ In addition to the manual blade definition option, QBlade allows for some automa
 thread axis at the position of maximum thickness of the airfoil. It also offers the option to do a blade shape optimization so that the twist angle is optimal for a given tip speed ratio. 
 In addition the chord distribution can be optimized according to the theories of Betz and Schmitz (see :footcite:t:`Gasch2005` for details). Finally, the blade design can also be scaled to another size using different scaling methods. These include position scaling, chord scaling and twist scaling.
 
+.. _fig-blade-hawt:
+.. figure:: hawt_design.png
+    :align: center
+    :alt: The HAWT blade design module 
+
+    The HAWT blade design module  
+
+Advanced HAWT Blade Design
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The advanced blade design table can be accessed through the *Advanced Blade Design Table*, as shown in :numref:`fig-blade-advanced`.
+
+The columns of the advanced blade property table are:
+
+- **Position [m]** is the position of the station along the blade pitch axis (in m). It should match the position given in the basic blade properties. 
+- **X (IP) Offset [m]** is an additional offset of the blade station in the global y-direction. This is the in-plane direction.
+- **Y (OOP) Offset [m]** is an additional offset of the blade station in the global x-direction. This is the out-of-plane direction.
+- **P Axis [%c]** is the position of the pitch axis as a percentage of the local chord. It is used to define the axis at which the station is rotated and also to define the position of the structural beam (see :ref:`Cross Sectional Coordinate Systems`). 
+
+.. _fig-blade-advanced:
+.. figure:: advanced_design.png
+    :align: center
+    :alt: The Advanced Blade Design tab 
+
+    The Advanced Blade Design tab 
+
+VAWT Blade Design
+-----------------
+
+The VAWT blade design is analogous to the HAWT blade design module in QBlade, with the exception of the different geometrical properties the user has to define to construct a VAWT blade. These properties are:
+
+- **Height [m]** is the height position of the station (in m). 
+- **Chord [m]** is the local chord length of the blade station (in m).
+- **Radius [m]** is the local radial distance from the axis of rotation (in m).
+- **TOffset [m]** is the local tangential offset at the blade station (in m).
+- **Twist [deg]** the local twist of the blade station (in deg). 
+- **Circ [deg]** the local circumferential angle of the blade station, to be used for helical rotor designs (in m). 
+- **P Axis [%c]** is the position of the pitch axis as a percentage of the local chord. It is used to define the axis at which the station is rotated and also to define the position of the structural beam (see :ref:`Cross Sectional Coordinate Systems`). 
+- **Foil** is the airfoil object used for that station (see :doc:`../airfoil/airfoil`).
+- **Polar** is the particular polar used for this station (linked to the airfoil object).
+
+.. _fig-blade-vawt:
+.. figure:: vawt_design.png
+    :align: center
+    :alt: The VAWT blade design module 
+
+    The VAWT blade design module 
+
 Multi Polar Blade Definition
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 The extrapolated airfoil polar data used in the blade definition is always linked to an airfoil object. Several different airfoil polars can be linked to one airfoil object (e.g. for different Reynolds numbers). A blade station can also contain multiple polars for one airfoil object e.g. for different Reynolds numbers. If the blade shall have a multi-polar definition, then these need to be previously created and assigned to an airfoil object and the corresponding option has to be enabled in the blade design dock (see :numref:`fig-blade-multi`).
 
@@ -63,29 +111,10 @@ The extrapolated airfoil polar data used in the blade definition is always linke
 
     The multi Reynolds number polar option in the blade designer dock.
 
-Advanced Blade Design
+Active Blade Elements
 ---------------------
 
-The advanced blade design table can be accessed through the *Advanced Blade Design Tabl*, as shown in :numref:`fig-blade-advanced`.
-
-The columns of the advanced blade property table are:
-
-- **Position [m]** is the position of the station along the blade pitch axis (in m). It should match the position given in the basic blade properties. 
-- **X (IP) Offset [m]** is an additional offset of the blade station in the global y-direction. This is the in-plane direction.
-- **Y (OOP) Offset [m]** is an additional offset of the blade station in the global x-direction. This is the out-of-plane direction.
-- **T Axis [%c]** is the position of the thread axis as a percentage of the local chord. It is used to define the axis at which the station is rotated and also to define the position of the structural beam (see :ref:`Cross Sectional Coordinate Systems`). 
-
-.. _fig-blade-advanced:
-.. figure:: advanced_tab.png
-    :align: center
-    :alt: The Advanced Blade Design tab 
-
-    The Advanced Blade Design tab 
-
-Active Elements
-^^^^^^^^^^^^^^^
-
-QBlade can model and add active elements, such as active trailing edge flaps, to a blade definition. This is done in the advanced blade design tab, as shown in :numref:`fig-blade-advanced`. To add an active element to the blade definition, one ore more :ref:`Dynamic Polar Sets` must have been previously defined in the Polar Extrapolation Module (see: :doc:`../airfoil/polar_extrapolation`). Each active element is defined between two blade stations, where a dynamic polar set can be chosen at each blade station. Linear interpolation is used between the two :ref:`Dynamic Polar Sets`. An active element is always applied to each blade of the rotor. 
+QBlade can model and add active elements, such as active trailing edge flaps, to a blade definition. This is done in the advanced blade design tab, as shown in :numref:`fig-blade-advanced`. To add an active element to the blade definition, one or more :ref:`Dynamic Polar Sets` must have been previously defined in the Polar Extrapolation Module (see: :doc:`../airfoil/polar_extrapolation`). Each active element is defined between two blade stations, where a dynamic polar set can be chosen at each blade station. Linear interpolation is used between the two :ref:`Dynamic Polar Sets`. An active element is always applied to each blade of the rotor. 
 
 .. _fig-blade-active_elements:
 .. figure:: active_element.png
@@ -95,8 +124,8 @@ QBlade can model and add active elements, such as active trailing edge flaps, to
 
     The active element dialog.
 
-Blade Damage
-^^^^^^^^^^^^
+Blade Damage (Erosion)
+----------------------
 
 A blade damage can be added to a blade definition. This feature is intended to model *damaged* blade elements (for instance leading edge erosion effects) through a modification of the underlying polar data at certain blade stations of individual blades. The airfoil polar for the damaged blade station must be created previously in the :doc:`../airfoil/polar_extrapolation`. Similar to an active element, the blade damage is defined between two stations. These can have  different airfoils and polars, even multi-polar sets. QBlade will interpolate along the blade between the two stations with the different polars. Different to the active elements, a blade damage can be assigned to an individual blade and can thus be used to model an aerodynamic imbalance.
 

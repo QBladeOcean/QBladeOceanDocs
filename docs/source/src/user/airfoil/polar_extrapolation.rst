@@ -25,7 +25,7 @@ The generated extrapolation is visualized in the graph section to allow for opti
 The following parameters can be tuned to improve the behavior of the polar:
 
 
-* **Range of original polar:** This determine which :math:`\alpha` range of the polar is used for the interpolation.
+* **Range of original polar:** This determines which :math:`\alpha` range of the polar is used for the interpolation.
 * **CD90:** Specifies the value of the drag coefficient at :math:`\alpha = 90^\text{o}`. This also influences the lift coefficient behavior.
 * **St+, St-:** These specify the positive and negative stall :math:`\alpha` for the airfoil, respectively.
 
@@ -44,7 +44,7 @@ Montgomery Extrapolation
 ------------------------
 
 The second option available to extrapolate airfoil polar data is the Montgomery method :footcite:`Montgomerie2004c`. 
-This method is based on the assumption that the airfoil acts aerodynamically as a flat plat for high values of :math:`\alpha`. 
+This method is based on the assumption that the airfoil acts aerodynamically as a flat plate for high values of :math:`\alpha`. 
 The generated extrapolation is visualized in the graph section to allow for optimization. 
 The following parameters can be tuned to improve the behavior of the polar:
 
@@ -60,7 +60,7 @@ Once the polar is found to be suitable, this can be stored by clicking on the *S
 
 Polar Decomposition
 -------------------
-In the case that the :ref:`ATEFlap Model` dynamic stall model is to be applied for a simulation, then a decomposition of the airfoil must be carried out. This separates the the airfoil coefficients into fully attached and fully separated regimes, which are applied together with kinematic data to calculate the unsteady lift, drag or moment coefficients.
+In the case that the :ref:`ATEFlap Model` dynamic stall model is to be applied for a simulation, then a decomposition of the airfoil must be carried out. This separates the airfoil coefficients into fully attached and fully separated regimes, which are applied together with kinematic data to calculate the unsteady lift, drag or moment coefficients.
 In QBlade this decomposition is automatically performed during the polar extrapolation - or can be applied as a post processing to already extrapolated polars. 
 Once the extrapolation has been carried out, the parameters of the decomposition can be visualized. The parameters are include:
 
@@ -85,7 +85,7 @@ A plot of these parameters, as generated for a NACA 4412 profile are shown in :n
 	
 Dynamic Polar Sets
 ---------------------------
-In QBlade dynamic polar sets can be used to model the changing states of flow control devices, such as trailing edge flaps. Dynamic polar sets allow to store polars that represents a series of states. For example: for a flap each state would correspond to a certain flap deflection angle. For each state multiple polars, covering a range of Reynolds numbers, may be stored. A dynamic polar set can then be assigned to an active element in the Blade Design Module (see :ref:`Active Elements`). The different states can then later be switched by :ref:`Wind Turbine Controllers` or the **Actuator Control Options Panel**, see :numref:`fig-actuator-control-panel`. 
+In QBlade dynamic polar sets can be used to model the changing states of flow control devices, such as trailing edge flaps. Dynamic polar sets allow to store polars that represents a series of states. For example: for a flap each state would correspond to a certain flap deflection angle. For each state multiple polars, covering a range of Reynolds numbers, may be stored. A dynamic polar set can then be assigned to an active element in the Blade Design Module (see :ref:`Active Blade Elements`). The different states can then later be switched by :ref:`Wind Turbine Controllers` or the **Actuator Control Options Panel**, see :numref:`fig-actuator-control-panel`. 
 
 .. _fig-actuator-control-panel:
 .. figure:: actuator_control_panel.png

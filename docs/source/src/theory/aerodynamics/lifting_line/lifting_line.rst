@@ -4,7 +4,7 @@ In QBlade the aerodynamic forces acting on a rotor can be modeled using the Lift
 Similar to the :doc:`../bem/bem`, in the LLFVW model the blade forces are calculated using two dimensional sectional airfoil polar data. 
 The main difference is that the rotor wake, shed from the blades, is explicitly resolved.
 This is a large improvement over the commonly used :doc:`../bem/bem` style approaches, which necessitate the introduction of a large number of empirical corrections into the simulated system. 
-Modeling the wake dynamics explicitly avoids the dependency on such correction models and often lead to more physically sound results. 
+Modeling the wake dynamics explicitly avoids the dependency on such correction models and often leads to more physically sound results. 
 Simulation results are improved especially in cases where the assumptions of the :doc:`../bem/bem` are violated.
 These include unsteady operation, large blade deformations and high tip speed ratios where the turbulent wake state is approached. 
 Such conditions become more and more prevalent with the ongoing trend towards larger rotor sizes and offshore floating wind turbines.
@@ -108,7 +108,7 @@ In QBlade a simple cut-off radius is used, which is added to the denominator of 
 This is a computationally efficient implementation as the viscous core modeling is directly implemented in the calculation of the induced velocity. 
 For other vortex models a viscous parameter needs to be evaluated from the relative vortex positions in addition to the Biot-Savart equation. 
 This has a severe effect on the simulation performance, as the evaluation of the viscous parameter is carried :math:`N^2_{vortices}/2` times per time step. 
-When shed from the trailing edge of the blade, a vortex is release with an initial core-size :math:`r_c` (a value of around 10\% of local chord is proposed from experience). 
+When shed from the trailing edge of the blade, a vortex is released with an initial core-size :math:`r_c` (a value of around 10\% of local chord is proposed from experience). 
 The core-size is updated every time step according to:
 
 .. math::	

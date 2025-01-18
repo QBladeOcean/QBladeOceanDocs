@@ -13,7 +13,7 @@ For continuous operation of QBlade-EE, periodic license validation checks requir
 Debugging Floating License Activation Issues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Instances where QBlade-EE, once activated, crashes leading to a non-release of a license seat, thereby occupying a license unjustly, can arise. In such a case the :ref:`Command Line Interface (CLI)` can be used to manually free the license seat or quire additional information. The following functionality exists:
+Instances where QBlade-EE, once activated, crashes leading to a non-release of a license seat, thereby occupying a license unjustly, can arise. In such a case the :ref:`Command Line Interface (CLI)` can be used to manually free the license seat or require additional information. The following functionality exists:
 
 :code:`QBladeEE -cli GET_MACHINES`
  Through the **GET_MACHINES** argument, the application can list all currently activated machines for this floating license.
@@ -39,7 +39,13 @@ On certain Windows machines, the SIL (dll) version of QBlade-EE may encounter is
 
 #. **Save and Exit**: Click 'OK' to close each window, ensuring your changes are saved.
 
-After completing these steps, restart Windows to allow the changes to take effect. This should resolve the issue with initializing the OpenSSL libraries in QBlade's SIL interface.
+After completing these steps, restart Windows to allow the changes to take effect. This should resolve the issue with initializing the OpenSSL libraries in QBlade's SIL interface. 
+
+If the issue persists, particularly when loading the QBlade SIL interface library from Python, you can try the following additional step:
+
+#. Copy the OpenSSL-related libraries (libssl-1_1-x64.dll and libcrypto-1_1-x64.dll) directly into the Python installation folder, placing them alongside the Python executable.
+
+This workaround has proven effective in several cases and is likely related to machine-specific environment configurations. These configurations may involve conflicting or missing OpenSSL libraries within the Python environment, which prevent the proper initialization of the QBlade SIL interface.
 
 Node-Locked License Files
 -------------------------

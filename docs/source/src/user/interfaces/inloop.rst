@@ -57,7 +57,7 @@ Interface Function Definitions
 	void runFullSimulation();
 	
 	void advanceController_at_num(double *vars, int num);
-	void advanceTurbineSimulation();
+	bool advanceTurbineSimulation();
 	
 	void storeProject(char *str);
 	void exportResults(int type, char *filepath, char* filename, char *filter);
@@ -70,28 +70,31 @@ Interface Function Definitions
 	void setPowerLawWind(double windspeed, double horAngle, double vertAngle, double shearExponent, double referenceHeight);
 	void setDebugInfo(bool isDebug);
 	void setUseOpenCl(bool isOpenCl);
-	
+	void setAutoClearTemp(bool enabled);
+
 	void setGranularDebug(bool dStr, bool dSim, bool dTurb, bool dCont, bool dSer);
 	void setTimestepSize(double timestep);
 	void setRPMPrescribeType_at_num(int type, int num);
+	void setRPM_at_num(double rpm, int num);
 	void setRampupTime(double time);
 	void setInitialConditions_at_num(double yaw, double pitch, double azimuth, double rpm, int num);
 	void setTurbinePosition_at_num(double x, double y, double z, double rotx, double roty, double rotz, int num);
 	void setControlVars_at_num(double *vars, int num);
 	void setExternalAction(char *action, char *id, double val, double pos, char *dir, bool isLocal, int num);
-	
+	void setMooringStiffness(double EA, double neutralStrain, int cabID, int num);
+
 	void getWindspeed(double posx, double posy, double posz, double *velocity);
 	void getWindspeedArray(double *posx, double *posy, double *posz, double *velx, double *vely, double *velz, int arraySize);
 	void getTowerBottomLoads_at_num(double *loads, int num);
 	void getTurbineOperation_at_num(double *vars, int num);
 	double getCustomData_at_num(char *str, double pos, int num);
-	double getCustomSimulationData(char *str);
+	double getCustomSimulationTimeData(char *str);
 
 
 Interface Function Documentation
 ********************************
 
-In the following, the functionality that is exported from the QBlade dll or shared object is described and the function arguments and return types are given. ALl functions with the appendix **_at_num** affect the turbine specified by the argument **num** - this has only an effect for multi turbine simulations.
+In the following, the functionality that is exported from the QBlade dll or shared object is described and the function arguments and return types are given. All functions with the appendix **_at_num** affect the turbine specified by the argument **num** - this has only an effect for multi turbine simulations.
 
 :code:`void setLibraryPath(char *atr)`
 	This function sets the location of the QBlade dll or shared object so that the QBlade instance knows about its location. **This function must be called first** so that the QBlade instance knows about the location of associated binaries (XFoil, TurbSim) and possibly license files.
@@ -120,8 +123,8 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* vars[3] = pitch blade 2 [deg]
 	* vars[4] = pitch blade 3 [deg]
 
-:code:`void advanceTurbineSimulation()`
-	This function advances the turbine simulation for all turbines and finishes the timestep.
+:code:`bool advanceTurbineSimulation()`
+	This function advances the turbine simulation for all turbines by one (time) step. Returns *true* if the step was successful.
 
 :code:`void storeProject(char *str)`
 	This functions stores a project file. The file location has to be passed as a *char pointer*. File names can be passed as absolute or as relative paths.
@@ -190,6 +193,12 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* 1 - RPM prescribed for the whole simulation
 	* 3 - no prescribed RPM
 
+:code:`void setRPM_at_num(double rpm, int num = 0)`
+	This function can be used to change the prescribed rpm for a turbine.
+	
+	* The parameter **rpm** sets the rotational rate.
+	* The parameter **num** specifies the turbine instance for which the rpm is set.
+
 :code:`void setRampupTime(double time)`
 	This function can be used to change the ramp-up time from the value specified in the project or simulation file, call before :code:`initializeSimulation()`.
 
@@ -200,7 +209,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	This function sets the turbine tower bottom x, y and z position [m], and xrot, yrot zrot rotation [deg]. It can be called before :code:`initializeSimulation()` if the turbine position should be offset initially or during the simulation loop if it should be changed dynamically, for example during cosimulation with a hydrodynamics software that models the floater.
 
 :code:`void setControlVars_at_num(double *vars, int num = 0)`
-	This function applies the control actions to the selected turbine (argument *num*) for torque, pitch and yaw angle. If it is called after the function :code:`advanceController()` the control actions from the controller are overwritten (in this way the controll actions can also be modified). The following data needs to be passed in the array *vars*.
+	This function applies the control actions to the selected turbine (argument *num*) for torque, pitch and yaw angle. If it is called after the function :code:`advanceController()` the control actions from the controller are overwritten (in this way the control actions can also be modified). The following data needs to be passed in the array *vars*.
 	
 	* vars[0] = generator torque [Nm];
 	* vars[1] = yaw angle [deg];
@@ -219,15 +228,14 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* SETLENGTH: sets the delta Length of a cable, in [m]
 	* SETAFC: sets the state of an AFC element [-]
 	* SETTORQUE: sets the generator torque, in [Nm]
-	* SETYAW: sets the yaw angle, in [deg]
-	* SETPITCH: sets the pitch angle for BLD_X, in [deg]
+	* SETYAW: sets the yaw angle, in [rad]
+	* SETPITCH: sets the pitch angle for BLD_X, in [rad]
 	* SETBRAKE: sets the brake modulation [0-1]
 	
 	Some actions are applied to a certain location ID, indicated by the parameter **id**, the different locations are:
 	
 	* CAB_<X>: applies the action to the guycable with ID <X>. Actions on cables are: SETLENGTH, ADDMASS, ADDFORCE
 	* MOO_<X>: applies the action to the mooring line with ID <X>. Actions on moorings are: SETLENGTH, ADDMASS, ADDFORCE
-	* SMOO_<X>: applies the action to the shared mooring line with ID <X>. Actions on moorings are: SETLENGTH, ADDMASS, ADDFORCE
 	* TRQ: applies the action to the torquetube. Actions on the torquetube are: ADDFORCE, ADDTORQUE, ADDMASS
 	* BLD_<X>: applies the action to blade <X>. Actions on the blades are: ADDFORCE, ADDTORQUE, ADDMASS
 	* STR_<X>_<Y>: applies the action to strut <X> of blade <Y>. Actions on the struts are: ADDFORCE, ADDTORQUE, ADDMASS
@@ -243,8 +251,15 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* The parameter **pos** sets the normalized position [0-1] at which the mass, force or torque is applied. Only has an effect on elements, not on nodes.
 	* The parameter **dir** specifies the direction along which the force or torque is applied, options are "X", "Y", "Z".
 	* The parameter **isLocal** specifies sets whether the direction is defined in global or local (element or node) coordinates.
-	* The parameter **num** specifies the turbine instance to which the action is applied.
+	* The parameter **num** specifies the turbine instance to which the action is applied, if num is set to -1, the action is performed on the global mooring system.
+
+:code:`void setMooringStiffness(double EA, double neutralStrain, int cabID, int num)`
+	This function can be used to dynamically adjust the stiffness (EA value) and neutral strain of a mooring line. In this way a nonlinear stiffness-strain relationship can be implemented.
 	
+	* The parameter **EA**: the longitudinal stiffness value [N/m]
+	* The parameter **neutralStrain**: adjusts the cable's rest length to be force-free at this strain, based on the initial length in the MOORMEMBERS table.
+	* The parameter **cabID**: the cable id
+	* The parameter **num**: the turbine instance for which the mooring line properties are changed, use -1 to apply this to a cable from the global mooringSystem
 
 :code:`void getWindspeed(double x, double y, double z, double *velocity)`
 	This function can be called to get the current windspeed at the chosen position (x,y,z), returns the windspeed vector in the *double pointer* velocity.
@@ -315,10 +330,13 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* vars[42] = HH wind velocity z [m/s]
 
 :code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
-	This function can be used to access the current value from an arbitrary turbine simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' variable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg]", 0.85,0)`.
+	This function can be used to access the current value from an arbitrary turbine simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' variable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg]", 0.85,0)`. Choosing num == -1 allows to extract any values that are stored in the *Simulation Time Graph* (such as for the global mooring system).
 	
-:code:`double getCustomSimulationData(char *str)`
+:code:`double getCustomSimulationTimeData(char *str)`
 	This function can be used to access the current value from an arbitrary *simulation time graph* variable in QBlade. 
+	
+:code:`void setAutoClearTemp(bool enabled)`
+	This function allows to disable the automatic deletion of the TEMP folder, in which temporary controller libraries are files are stored. This automatic deletion can be problematic in case of multi-instanced SIL libraries, hence thhis function can deactivate it.
 
 
 Python Example: Running the QBlade Library
@@ -342,7 +360,14 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	# Define the directory where the QBlade library is located
 	dll_directory = "../"
 	
-	# Search for library files matching the pattern QBlade*.dll or QBlade*.so
+	# On Windows systems, we update the PATH environment variable to include the QBlade directory. 
+	# This ensures that the required SSL libraries (e.g., libssl and libcrypto) are properly located and loaded.
+	# If experiencing issues with this DLL in a Windows Python environment see:
+	# https://docs.qblade.org/src/license/license_files.html#resolving-openssl-issues-on-windows
+	if os.name == 'nt':  # 'nt' indicates Windows
+		os.environ["PATH"] = os.path.abspath(dll_directory) + ";" + os.environ.get("PATH", "")
+	
+	# Search the directory below for library files matching the pattern QBlade*.dll or QBlade*.so
 	dll_files = [f for f in os.listdir(dll_directory) if 'QBlade' in f and ('.dll' in f or '.so' in f)]
 	
 	# Check if any matching files are found
@@ -356,69 +381,73 @@ After the QBlade library has been loaded a simulation object is imported and a s
 	# Display the selected shared library file
 	print(f'Using shared library file: {dll_file_path}')
 	
-	#loading the QBlade library from the folder below the location of sampleScript.py, if calling this script not from the script folder directly you need to use an absolute path instead!
-	QBLIB = QBladeLibrary(dll_file_path)    
+	# Create an object of the class 'QBladeLibrary' that contains the API
+	QBLADE = QBladeLibrary(dll_file_path)    
 	
-	#creation of a QBlade instance from the library
-	QBLIB.createInstance(1,32)
+	# Creation of a QBlade instance from the library
+	QBLADE.createInstance(1,32)
 	
-	#loading a project or sim-file, in this case the DTU_10MW_Demo project or simulation definition file
-	#QBLIB.loadSimDefinition(b"./DTU_10MW_Demo.sim") #uncomment this line to load a simulation definition file
-	QBLIB.loadProject(b"./NREL_5MW_Sample.qpr") 
+	# Loading a project or sim-file, in this case the DTU_10MW_Demo project or simulation definition file
+	#QBLADE.loadSimDefinition(b"./DTU_10MW_Demo.sim") #uncomment this line to load a simulation definition file
+	QBLADE.loadProject(b"./NREL_5MW_Sample.qpr") 
 	
-	#initializing the sim and ramp-up phase, call before starting the simulation loop
-	QBLIB.initializeSimulation()
+	# Initializing the sim and ramp-up phase, call before starting the simulation loop
+	QBLADE.initializeSimulation()
 	
-	#we will run the simulation for 500 steps before storing the results
+	# We will run the simulation for 500 steps before storing the results
 	number_of_timesteps = 500
 	
-	#start of the simulation loop
+	# Start of the simulation loop
 	for i in range(number_of_timesteps):
 	
 		#advance the simulation
-		QBLIB.advanceTurbineSimulation() 	
+		success = QBLADE.advanceTurbineSimulation() 
 		
-		#assign the c-type double array 'loads' with length [6], initialized with zeros
+		# Check if the simulation step was successful
+		if not success:  # If success is False, exit the loop
+			print(f"Simulation failed at timestep {i}. Exiting loop.")
+			break
+		
+		# Assign the c-type double array 'loads' with length [6], initialized with zeros
 		loads = (c_double * 6)(0,0,0,0,0,0) 
-		#retrieve the tower loads and store the in the array 'loads' by calling the function getTowerBottomLoads_at_num()
-		QBLIB.getTowerBottomLoads_at_num(loads,0)
+		# Retrieve the tower loads and store the in the array 'loads' by calling the function getTowerBottomLoads_at_num()
+		QBLADE.getTowerBottomLoads_at_num(loads,0)
 		
-		#uncomment the next line to try changing the position of the turbine dynamically
-		#QBLIB.setTurbinePosition_at_num(-0.2*i,0,0,0,i*0.1,i*0.1,0) 
+		# Uncomment the next line to try changing the position of the turbine dynamically
+		#QBLADE.setTurbinePosition_at_num(-0.2*i,0,0,0,i*0.1,i*0.1,0) 
 		
-		#example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
-		rpm = QBLIB.getCustomData_at_num(b"Rotational Speed [rpm]",0,0) 
-		time = QBLIB.getCustomData_at_num(b"Time [s]",0,0) #example how to extract the variable 'Time' by name from the simulation
-		AoA = QBLIB.getCustomData_at_num(b"Angle of Attack at 0.25c (at section) Blade 1 [deg]",0.85,0) #example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
+		# Example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
+		rpm = QBLADE.getCustomData_at_num(b"Rotational Speed [rpm]",0,0) 
+		time = QBLADE.getCustomData_at_num(b"Time [s]",0,0) #example how to extract the variable 'Time' by name from the simulation
+		AoA = QBLADE.getCustomData_at_num(b"Angle of Attack at 0.25c (at section) Blade 1 [deg]",0.85,0) #example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
 		
-		#example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
+		# Example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
 		windspeed = (c_double * 3)(0,0,0) 
-		QBLIB.getWindspeed(-50,0,100,windspeed)
+		QBLADE.getWindspeed(-50,0,100,windspeed)
 		
-		#assign the c-type double array 'ctr_vars' with length [5], initialized with zeros
+		# Assign the c-type double array 'ctr_vars' with length [5], initialized with zeros
 		ctr_vars = (c_double * 5)(0); 
-		#advance the turbine controller and store the controller signals in the array 'ctr_vars'
-		QBLIB.advanceController_at_num(ctr_vars,0)
+		# Advance the turbine controller and store the controller signals in the array 'ctr_vars'
+		QBLADE.advanceController_at_num(ctr_vars,0)
 		
-		#pass the controller signals in 'ctr_vars' to the turbine by calling setControlVars_at_num(ctr_vars,0) 
-		QBLIB.setControlVars_at_num(ctr_vars,0) 
+		# Pass the controller signals in 'ctr_vars' to the turbine by calling setControlVars_at_num(ctr_vars,0) 
+		QBLADE.setControlVars_at_num(ctr_vars,0) 
 		
-		#print out a few of the recorded data, in this case torque, tower bottom force along z (weight force) and rpm
+		# Print out a few of the recorded data, in this case torque, tower bottom force along z (weight force) and rpm
 		print("Time:","{:3.2f}".format(time),"   Windspeed:","{:2.2f}".format(windspeed[0]),"  Torque:","{:1.4e}".format(ctr_vars[0]),"    RPM:","{:2.2f}".format(rpm),"   Pitch:","{:2.2f}".format(ctr_vars[2]),"   AoA at 85%:","{:2.2f}".format(AoA))
 	
-	#the simulation loop ends here after all 'number_of_timesteps have been evaluated
+	# The simulation loop ends here after all 'number_of_timesteps have been evaluated
 		
-	#storing the finished simulation in a project as NREL_5MW_Sample_completed, you can open this file to view the results of the simulation inside QBlade's GUI
-	QBLIB.storeProject(b"./NREL_5MW_Sample_completed.qpr")
+	# Storing the finished simulation in a project as NREL_5MW_Sample_completed, you can open this file to view the results of the simulation inside QBlade's GUI
+	QBLADE.storeProject(b"./NREL_5MW_Sample_completed.qpr")
 	
-	#storing the simulation results in QBlade ASCII format in the file NREL_5MW_Sample_results.txt
-	QBLIB.exportResults(0,b"./",b"NREL_5MW_Sample_results",b"")
+	# Storing the simulation results in QBlade ASCII format in the file NREL_5MW_Sample_results.txt
+	QBLADE.exportResults(0,b"./",b"NREL_5MW_Sample_results",b"")
 	
-	#closing the QBlade instance to free memory
-	QBLIB.closeInstance()
+	# Unloading the qblade library
+	QBLADE.unload() 
 	
-	#unloading the QBlade library
-	del QBLIB.lib 
+	
 	
 Python Example: Definition of the QBladeLibrary Class
 *****************************************************
@@ -430,145 +459,99 @@ The script *QBladeLibrary.py* defines the class *QBladeLibrary* and loads the sh
 	:caption: : QBladeLibrary.py
 
 	from ctypes import *
-	from sys import platform
+	from typing import Dict, Any
 	
 	class QBladeLibrary:
+		def __init__(self, shared_lib_path: str):
+			"""Initialize and load the QBlade shared library."""
+			self.lib_path = shared_lib_path
+			self.lib = None
 	
-		def __init__(self, shared_lib_path):
+			# Define all functions with argument types and return types
+			self.functions: Dict[str, Dict[str, Any]] = {
+				"createInstance": {"argtypes": [c_int, c_int], "restype": c_void_p},
+				"closeInstance": {"argtypes": None, "restype": c_void_p},
+				"loadProject": {"argtypes": [c_char_p], "restype": c_void_p},
+				"loadSimDefinition": {"argtypes": [c_char_p], "restype": c_void_p},
+				"setOmpNumThreads": {"argtypes": [c_int], "restype": c_void_p},
+				"getCustomData_at_num": {"argtypes": [c_char_p, c_double, c_int], "restype": c_double},
+				"getCustomSimulationTimeData": {"argtypes": [c_char_p], "restype": c_double},
+				"getWindspeed": {"argtypes": [c_double, c_double, c_double, POINTER(c_double * 3)], "restype": c_void_p},
+				"getWindspeedArray": {"argtypes": [POINTER(c_double), POINTER(c_double), POINTER(c_double),POINTER(c_double), POINTER(c_double), POINTER(c_double), c_int],"restype": c_void_p,},
+				"storeProject": {"argtypes": [c_char_p], "restype": c_void_p},
+				"exportResults": {"argtypes": [c_int, c_char_p, c_char_p, c_char_p], "restype": c_void_p},
+				"setLibraryPath": {"argtypes": [c_char_p], "restype": c_void_p},
+				"setLogFile": {"argtypes": [c_char_p], "restype": c_void_p},
+				"addTurbulentWind": {"argtypes": [c_double, c_double, c_double, c_double, c_int, c_double,c_double, c_char_p, c_char_p, c_int, c_double, c_double, c_bool,],"restype": c_void_p,},
+				"setExternalAction": {"argtypes": [c_char_p, c_char_p, c_double, c_double, c_char_p, c_bool, c_int],"restype": c_void_p,},
+				"setMooringStiffness": {"argtypes": [c_double, c_double, c_int, c_int], "restype": c_void_p},
+				"loadTurbulentWindBinary": {"argtypes": [c_char_p], "restype": c_void_p},
+				"setTimestepSize": {"argtypes": [c_double], "restype": c_void_p},
+				"setInitialConditions_at_num": {"argtypes": [c_double, c_double, c_double, c_double, c_int],"restype": c_void_p,},
+				"setRPMPrescribeType_at_num": {"argtypes": [c_int, c_int], "restype": c_void_p},
+				"setRPM_at_num": {"argtypes": [c_double, c_int], "restype": c_void_p},
+				"setRampupTime": {"argtypes": [c_double], "restype": c_void_p},
+				"setTurbinePosition_at_num": {"argtypes": [c_double, c_double, c_double, c_double, c_double, c_double, c_int],"restype": c_void_p,},
+				"getTowerBottomLoads_at_num": {"argtypes": [POINTER(c_double * 6), c_int], "restype": c_void_p},
+				"initializeSimulation": {"argtypes": None, "restype": c_void_p},
+				"advanceTurbineSimulation": {"argtypes": None, "restype": c_bool},
+				"advanceController_at_num": {"argtypes": [POINTER(c_double * 5), c_int], "restype": c_void_p},
+				"setDebugInfo": {"argtypes": [c_bool], "restype": c_void_p},
+				"setUseOpenCl": {"argtypes": [c_bool], "restype": c_void_p},
+				"setGranularDebug": {"argtypes": [c_bool, c_bool, c_bool, c_bool, c_bool], "restype": c_void_p},
+				"setControlVars_at_num": {"argtypes": [POINTER(c_double * 5), c_int], "restype": c_void_p},
+				"getTurbineOperation_at_num": {"argtypes": [POINTER(c_double * 41), c_int], "restype": c_void_p},
+				"setPowerLawWind": {"argtypes": [c_double, c_double, c_double, c_double, c_double], "restype": c_void_p},
+				"runFullSimulation": {"argtypes": None, "restype": c_void_p},
+				"setAutoClearTemp": {"argtypes": [c_bool], "restype": c_void_p},
+			}
 			
+			# Automatically load the library
+			self.load_library()
+	
+		def load_library(self):
+			"""Load the shared library and dynamically bind all functions."""
 			try:
-				self.lib = CDLL(shared_lib_path)
-				print("Successfully loaded ", shared_lib_path)
+				self.lib = CDLL(self.lib_path)
+				print(f"Successfully loaded library from: {self.lib_path}")
 			except Exception as e:
-				print("Could not load the file ", shared_lib_path)
-				print(e)
-				return
+				raise RuntimeError(f"Could not load the library at {self.lib_path}: {e}")
+	
+			# Bind functions dynamically
+			for func_name, config in self.functions.items():
+				try:
+					func = getattr(self.lib, func_name)
+					func.argtypes = config.get("argtypes")
+					func.restype = config.get("restype")
+					setattr(self, func_name, func)  # Bind the function to the instance
+				except AttributeError as e:
+					raise RuntimeError(f"Failed to bind function '{func_name}': {e}")
+	
+			# Call setLibraryPath after the library is loaded
+			try:
+				self.setLibraryPath(self.lib_path.encode('utf-8'))
+				print(f"Library path set to: {self.lib_path}")
+			except Exception as e:
+				raise RuntimeError(f"Failed to set library path: {e}")
+	
+		def unload(self):
+			
+			# Close the QBlade instance if it exists
+			try:
+				self.closeInstance()
+				print("QBlade instance closed.")
+			except Exception as e:
+				print(f"Warning: Failed to close QBlade instance: {e}")
+			
+			# Clean up resources and unload the library
+			if self.lib:
+				del self.lib
+				self.lib = None
+				print("Library unloaded successfully.")
 				
-			#setting the library Path, so that the Library knows about its location!
-			self.lib.setLibraryPath(shared_lib_path.encode('utf-8')) #setting the library Path, so that the DLL knows about its location!
-			
-			#here the imported functions are defined
-			
-			self.loadProject = self.lib.loadProject
-			self.loadProject.argtype = c_char_p
-			self.loadProject.restype = c_void_p
-			
-			self.loadSimDefinition = self.lib.loadSimDefinition
-			self.loadSimDefinition.argtype = c_char_p
-			self.loadSimDefinition.restype = c_void_p
-			
-			self.getCustomData_at_num = self.lib.getCustomData_at_num
-			self.getCustomData_at_num.argtypes = [c_char_p, c_double, c_int]
-			self.getCustomData_at_num.restype = c_double
-			
-			self.getCustomSimulationData = self.lib.getCustomSimulationData
-			self.getCustomSimulationData.argtype = c_char_p
-			self.getCustomSimulationData.restype = c_double
-			
-			self.getWindspeed = self.lib.getWindspeed
-			self.getWindspeed.argtypes = [c_double, c_double, c_double, c_double * 3]
-			self.getWindspeed.restype = c_void_p
-			
-			self.getWindspeedArray = self.lib.getWindspeedArray
-			self.getWindspeedArray.argtypes = [POINTER(c_double), POINTER(c_double), POINTER(c_double), POINTER(c_double), POINTER(c_double), POINTER(c_double), c_int]
-			self.getWindspeedArray.restype = c_void_p
-			
-			self.storeProject = self.lib.storeProject
-			self.storeProject.argtype = c_char_p
-			self.storeProject.restype = c_void_p
-			
-			self.exportResults = self.lib.exportResults
-			self.exportResults.argtypes = [c_int, c_char_p, c_char_p, c_char_p]
-			self.exportResults.restype = c_void_p
-			
-			self.setLibraryPath = self.lib.setLibraryPath
-			self.setLibraryPath.argtype = c_char_p
-			self.setLibraryPath.restype = c_void_p
-			
-			self.setLogFile = self.lib.setLogFile
-			self.setLogFile.argtype = c_char_p
-			self.setLogFile.restype = c_void_p
-			
-			self.createInstance = self.lib.createInstance
-			self.createInstance.argtypes = [c_int, c_int]
-			self.createInstance.restype = c_void_p
-			
-			self.closeInstance = self.lib.closeInstance
-			self.closeInstance.restype = c_void_p
-			
-			self.addTurbulentWind = self.lib.addTurbulentWind
-			self.addTurbulentWind.argtypes = [c_double, c_double, c_double, c_double, c_int, c_double, c_double, c_char_p, c_char_p, c_int, c_double, c_double, c_bool]
-			self.addTurbulentWind.restype = c_void_p
-			
-			self.setExternalAction = self.lib.setExternalAction
-			self.setExternalAction.argtypes = [c_char_p, c_char_p, c_double, c_double, c_char_p, c_bool, c_int]
-			self.setExternalAction.restype = c_void_p
-			
-			self.loadTurbulentWindBinary = self.lib.loadTurbulentWindBinary
-			self.loadTurbulentWindBinary.argtype = c_char_p
-			self.loadTurbulentWindBinary.restype = c_void_p
-			
-			self.setTimestepSize = self.lib.setTimestepSize
-			self.setTimestepSize.argtype = c_double
-			self.setTimestepSize.restype = c_void_p
-			
-			self.setInitialConditions_at_num = self.lib.setInitialConditions_at_num
-			self.setInitialConditions_at_num.argtypes = [c_double, c_double, c_double, c_double, c_int]
-			self.setInitialConditions_at_num.restype = c_void_p
-			
-			self.setRPMPrescribeType_at_num = self.lib.setRPMPrescribeType_at_num
-			self.setRPMPrescribeType_at_num.argtypes = [c_int, c_int]
-			self.setRPMPrescribeType_at_num.restype = c_void_p
-			
-			self.setRampupTime = self.lib.setRampupTime
-			self.setRampupTime.argtype = c_double
-			self.setRampupTime.restype = c_void_p
-			
-			self.setTurbinePosition_at_num = self.lib.setTurbinePosition_at_num
-			self.setTurbinePosition_at_num.argtypes = [c_double, c_double, c_double, c_double, c_double, c_double, c_int]
-			self.setTurbinePosition_at_num.restype = c_void_p
-			
-			self.getTowerBottomLoads_at_num = self.lib.getTowerBottomLoads_at_num
-			self.getTowerBottomLoads_at_num.argtypes = [c_double * 6, c_int]
-			self.getTowerBottomLoads_at_num.restype = c_void_p
-			
-			self.initializeSimulation = self.lib.initializeSimulation
-			self.initializeSimulation.restype = c_void_p
-			
-			self.advanceTurbineSimulation = self.lib.advanceTurbineSimulation
-			self.advanceTurbineSimulation.restype = c_void_p
-			
-			self.advanceController_at_num = self.lib.advanceController_at_num
-			self.advanceController_at_num.argtypes = [c_double * 5, c_int]
-			self.advanceController_at_num.restype = c_void_p
-			
-			self.setDebugInfo = self.lib.setDebugInfo
-			self.setDebugInfo.argtype = c_bool
-			self.setDebugInfo.restype = c_void_p
-			
-			self.setUseOpenCl = self.lib.setUseOpenCl
-			self.setUseOpenCl.argtype = c_bool
-			self.setUseOpenCl.restype = c_void_p
-			
-			self.setGranularDebug = self.lib.setGranularDebug
-			self.setGranularDebug.argtypes = [c_bool, c_bool, c_bool, c_bool, c_bool]
-			self.setGranularDebug.restype = c_void_p
-			
-			self.setControlVars_at_num = self.lib.setControlVars_at_num
-			self.setControlVars_at_num.argtypes = [c_double * 5, c_int]
-			self.setControlVars_at_num.restype = c_void_p
-			
-			self.getTurbineOperation_at_num = self.lib.getTurbineOperation_at_num
-			self.getTurbineOperation_at_num.argtypes = [c_double * 41, c_int]
-			self.getTurbineOperation_at_num.restype = c_void_p
-			
-			self.setPowerLawWind = self.lib.setPowerLawWind
-			self.setPowerLawWind.argtypes = [c_double, c_double, c_double, c_double, c_double]
-			self.setPowerLawWind.restype = c_void_p
-			
-			self.runFullSimulation = self.lib.runFullSimulation
-			self.runFullSimulation.restype = c_void_p
-		
+				
+				
+
 Matlab Example: Running the QBlade Library
 ******************************************
 
@@ -583,7 +566,7 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 	close all 
 	clc
 	
-	% Find all files containing 'QBlade' and either '.dll' or '.so' in their names
+	% Search the directory below for library files matching the pattern QBlade*.dll or QBlade*.so
 	libSearchDirectory = '../';
 	sharedLibFiles = dir(fullfile(libSearchDirectory, '*QBlade*'));
 	sharedLibFiles = sharedLibFiles(contains({sharedLibFiles.name}, {'.dll', '.so'}));
@@ -597,19 +580,18 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 	sharedLibFilePath = fullfile(libSearchDirectory, sharedLibFiles(1).name);
 	fprintf('Using DLL file: %s\n', sharedLibFilePath);
 	
-	% create an object of the class 'QBladeLibrary' that contains all interface
-	% functions
-	QBLIB = QBladeLibrary(sharedLibFilePath);
+	% Create an object of the class 'QBladeLibrary' that contains the API
+	QBLADE = QBladeLibrary(sharedLibFilePath);
 	
-	QBLIB.createInstance(1,32);
+	QBLADE.createInstance(1,32);
 	
-	% since matlab is unable to display the console output from the library, we
+	% Since matlab is unable to display the console output from the library, we
 	% store the output in a log file
-	QBLIB.setLogFile('./LogFile.txt')
+	QBLADE.setLogFile(fullfile('.', 'LogFile.txt'))
 	
-	QBLIB.loadProject('NREL_5MW_Sample.qpr')
+	QBLADE.loadProject('NREL_5MW_Sample.qpr')
 	
-	QBLIB.initializeSimulation()
+	QBLADE.initializeSimulation()
 	
 	number_of_timesteps = 500; 
 	
@@ -617,56 +599,64 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 	
 	for i = 1:1:number_of_timesteps
 		
-		%advance the simulation
-		QBLIB.advanceTurbineSimulation()
+		% Advance the simulation
+		success = QBLADE.advanceTurbineSimulation();
 		
-		%assign the c-type double array 'loads' with length [6], initialized with zeros
+		% Check if the simulation step was successful
+		if ~success
+			fprintf('Simulation failed at timestep %d. Exiting loop.\n', i);
+			break; % Exit the loop
+		end
+		
+		% Assign the c-type double array 'loads' with length [6], initialized with zeros
 		loads = libpointer('doublePtr',zeros(6,1));
-		%retrieve the tower loads and store the in the array 'loads' by calling the function getTowerBottomLoads_at_num()
-		QBLIB.getTowerBottomLoads_at_num(loads,0);
-		%dereferencing the 'loads' pointer and accessing its first value
+		% Retrieve the tower loads and store them in the array 'loads' by calling the function getTowerBottomLoads_at_num()
+		QBLADE.getTowerBottomLoads_at_num(loads,0);
+		% De-referencing the 'loads' pointer and accessing its first value
 		loads.Value(1);
 		
-		%uncomment the next line to try changing the position of the turbine dynamically
-		%QBLIB.setTurbinePosition_at_num(-0.2*i,0,0,0,i*0.1,i*0.1,0)
+		% Uncomment the next line to try changing the position of the turbine dynamically
+		%QBLADE.setTurbinePosition_at_num(-0.2*i,0,0,0,i*0.1,i*0.1,0)
 		
-		%example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
-		rpm = QBLIB.getCustomData_at_num('Rotational Speed [rpm]',0,0);
-		t = QBLIB.getCustomData_at_num('Time [s]',0,0);  %example how to extract the variable 'Time' by name from the simulation
-		AoA = QBLIB.getCustomData_at_num('Angle of Attack at 0.25c (at section) Blade 1 [deg]',0.85,0); %example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
+		% Example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
+		rpm = QBLADE.getCustomData_at_num('Rotational Speed [rpm]',0,0);
+		t = QBLADE.getCustomData_at_num('Time [s]',0,0);  %example how to extract the variable 'Time' by name from the simulation
+		AoA = QBLADE.getCustomData_at_num('Angle of Attack at 0.25c (at section) Blade 1 [deg]',0.85,0); %example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
 		
-		%example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
+		% Example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
 		windspeed = libpointer('doublePtr',zeros(3,1)); 
-		QBLIB.getWindspeed(-50,0,100,windspeed);
+		QBLADE.getWindspeed(-50,0,100,windspeed);
 		
-		%assign the c-type double array 'ctr_vars' with length [5], initialized with zeros
+		% Assign the c-type double array 'ctr_vars' with length [5], initialized with zeros
 		ctr_vars = libpointer('doublePtr',zeros(5,1));
-		%advance the turbine controller and store the controller signals in the array 'ctr_vars'
-		QBLIB.advanceController_at_num(ctr_vars,0)
+		% Advance the turbine controller and store the controller signals in the array 'ctr_vars'
+		QBLADE.advanceController_at_num(ctr_vars,0)
 		
-		%pass the controller signals in 'ctr_vars' to the turbine by calling setControlVars_at_num(ctr_vars,0) 
-		QBLIB.setControlVars_at_num(ctr_vars,0)
+		% Pass the controller signals in 'ctr_vars' to the turbine by calling setControlVars_at_num(ctr_vars,0) 
+		QBLADE.setControlVars_at_num(ctr_vars,0)
 		
 		fprintf('Time: %3.2f	Windspeed: %2.2f    Torque: %1.4e	RPM: %2.2f	Pitch: %2.2f    AoA at 85%%: %2.2f\n',t,windspeed.Value(1),ctr_vars.Value(1),rpm,ctr_vars.Value(3),AoA);
-	
+		
 		waitbar(i/number_of_timesteps,f,'QBlade Simulation Running')
 	
 	end
 	
 	close(f)
 	
-	%storing the finished simulation in a project as NREL_5MW_Sample_completed, you can open this file to view the results of the simulation inside QBlade's GUI
-	QBLIB.storeProject('./NREL_5MW_Sample_completed.qpr')
+	% Storing the finished simulation in a project as NREL_5MW_Sample_completed, you can open this file to view the results of the simulation inside QBlade's GUI
+	QBLADE.storeProject('./NREL_5MW_Sample_completed.qpr')
 	
-	%storing the simulation results in QBlade ASCII format in the file NREL_5MW_Sample_results.txt
-	QBLIB.exportResults(0,'./','NREL_5MW_Sample_Results','')
+	% Storing the simulation results in QBlade ASCII format in the file NREL_5MW_Sample_results.txt
+	QBLADE.exportResults(0,'./','NREL_5MW_Sample_Results','')
 	
-	%closing the instance of the shared library, if this fail it can lead to unexpected behavior
-	QBLIB.closeInstance()
+	% Closing the instance of the shared library, if this fail it can lead to unexpected behavior
+	QBLADE.closeInstance()
 	
-	%unloading the shared library
-	QBLIB.unload()
-
+	% Unloading the shared library
+	QBLADE.unload()
+	
+	
+	
 
 Matlab Example: Definition of the QBladeLibrary Class
 *****************************************************
@@ -684,17 +674,41 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 		methods
 			% Constructor
 			function obj = QBladeLibrary(dllPath)
-				% Load DLL
-				obj.lib = loadlibrary(dllPath,'QBladeLibInclude.h','alias','QBLIB');
-				calllib('QBLIB','setLibraryPath',dllPath)
+				% Validate DLL path
+				if ~isfile(dllPath)
+					error('QBladeLibrary:InvalidPath', 'The specified DLL path does not exist: %s', dllPath);
+				end
+				
+				% Check if the library is already loaded
+				if libisloaded('QBLIB')
+					disp('Library "QBLIB" is already loaded. Unloading it first...');
+					unloadlibrary('QBLIB');
+				end
+				
+				% Attempt to load the library
+				try
+					obj.lib = loadlibrary(dllPath, 'QBladeLibInclude.h', 'alias', 'QBLIB');
+					calllib('QBLIB', 'setLibraryPath', dllPath);
+					disp('Library loaded and path set successfully.');
+				catch ME
+					error('QBladeLibrary:LoadError', 'Failed to load library: %s\n%s', dllPath, ME.message);
+				end
 			end
 			
 			% Destructor
 			function unload(obj)
 				% Unload Library
-				if libisloaded('QBLIB')
-					unloadlibrary 'QBLIB'
-				end;
+				if libisloaded('QBLIB') % Check if the library is loaded
+					try
+						% Unload the library
+						unloadlibrary('QBLIB');
+						disp('Library unloaded successfully.');
+					catch ME
+						warning('Error during library unloading: %s', ME.message);
+					end
+				else
+					disp('Library is not loaded. No action taken.');
+				end
 			end
 			
 			% Function to call library function
@@ -710,6 +724,10 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 				calllib('QBLIB', 'loadSimDefinition', str);
 			end
 			
+			function setOmpNumThreads(obj,num)
+				calllib('QBLIB', 'setOmpNumThreads', num);
+			end
+			
 			function initializeSimulation(obj)
 				calllib('QBLIB', 'initializeSimulation');
 			end
@@ -722,8 +740,8 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 				calllib('QBLIB', 'advanceController_at_num', vars, num);
 			end
 			
-			function advanceTurbineSimulation(obj)
-				calllib('QBLIB', 'advanceTurbineSimulation');
+			function success = advanceTurbineSimulation(obj)
+				success = calllib('QBLIB', 'advanceTurbineSimulation');
 			end
 			
 			function storeProject(obj,str)
@@ -774,6 +792,10 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 				calllib('QBLIB', 'setRPMPrescribeType_at_num',type,num);
 			end
 			
+			function setRPM_at_num(obj,rpm,num)
+				calllib('QBLIB', 'setRPM_at_num',rpm,num);
+			end
+			
 			function setRampupTime(obj,time)
 				calllib('QBLIB', 'setRampupTime',time);
 			end
@@ -792,6 +814,10 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 			
 			function setExternalAction(obj,action,id,val,pos,dir,isLocal,num)
 				calllib('QBLIB', 'setExternalAction',action,id,val,pos,dir,isLocal,num);
+			end
+			
+			function setMooringStiffness(obj,EA,id,num)
+				calllib('QBLIB', 'setMooringStiffness',EA,neutralStrain,id,num);
 			end
 			
 			function getWindspeed(obj,x,y,z,velocity)
@@ -814,10 +840,17 @@ This code shows how the class *QBladeLibrary* is defined in the Matlab environme
 				output = calllib('QBLIB','getCustomData_at_num',var,i,j);
 			end
 			
-			function output = getCustomSimulationData(obj,var)
-				output = calllib('QBLIB','getCustomSimulationData',var);
+			function output = getCustomSimulationTimeData(obj,var)
+				output = calllib('QBLIB','getCustomSimulationTimeData',var);
+			end
+			
+			function output = setAutoClearTemp(obj,var)
+				output = calllib('QBLIB','setAutoClearTemp',var);
 			end
 			
 		end
 	end
 	
+	
+	
+

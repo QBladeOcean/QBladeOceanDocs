@@ -477,7 +477,7 @@ substructure dynamics and the tensions of the mooring lines.
 
     Mooring line tensions for regular sea state with :math:`H` = 8 m and :math:`T` = 12 s. QB Loc = QB local buoyancy model, QB Lin = QB linear buoyancy model.
 
-The response of the substructure if the local buoyancy model is used changes even more drastic for this
+The response of the substructure if the local buoyancy model is used changes even more drastically for this
 test case. In :numref:`fig-OC4-RegWave-Case2` we see that the mean surge displacement of the QB Loc simulations is now negative
 compared to the positive mean surge displacement of the QB Lin simulations. Now, the heave and pitch
 DOF have a larger amplitude compared to the QB Lin simulations and there is again a positive phase shift.

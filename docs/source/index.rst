@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-**v 2.0.7**
+**v 2.0.8**
 
 ====================
 QBlade Documentation
@@ -41,8 +41,8 @@ The hydrodynamic loads on the wind turbine’s substructure are calculated eithe
 
 
    QBlade Documentation <https://docs.qblade.org>
-   src/theory/index_th
    src/user/index_ue
+   src/theory/index_th
    src/validation/index_val
    src/license/index_license
 

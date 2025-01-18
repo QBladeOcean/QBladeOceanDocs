@@ -62,12 +62,12 @@ The parameter options are as described above and the batch calculation is execut
 
 Operational Point Analysis
 --------------------------
-Open completion of the XFoil analysis, a detailed aerodynamic description of the flow over the airfoil at each of the selected operational points (OpPoint) is available.
+Upon completion of the XFoil analysis, a detailed aerodynamic description of the flow over the airfoil at each of the selected operational points (OpPoint) is available.
 These parameters can be conveniently viewed in the graphics interface. Three options are available for data visualization:
 
 * **Polar Graph:** Shows changes of global aerodynamic parameters for each OpPoint. 
 * **OpPoint Graph:** Shows local aerodynamic quantities as a function of the position on the airfoil.
-* **Aifoil visualization:** Provide a visualization of flow features superimposed onto the airfoil profile.
+* **Airfoil visualization:** Provide a visualization of flow features superimposed onto the airfoil profile.
 
 An example output for an airfoil is given in :numref:`fig-oppoint`. 
 

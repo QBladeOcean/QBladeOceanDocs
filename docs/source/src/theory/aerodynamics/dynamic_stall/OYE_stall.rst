@@ -4,11 +4,11 @@ OYE Model
 In QBlade dynamic stall may be modeled in unsteady :doc:`../lifting_line/lifting_line` or :doc:`../bem/bem` simulations by using the dynamic stall model proposed by Oye :footcite:`Oye1991`. It should be noted that this model only captures the dynamics of separated flow. The additional attached flow dynamics due to airfoil wake memory effects are captured intrinsically by the :doc:`../lifting_line/lifting_line` model. In its implementation in QBlade the Oye dynamic stall model is only applied within the angle of attack range of -50° to 50°.
 
 
-In Oye's work the dynamic stall is modeled with th help of a separation function :math:`f`. It is used to calculate the dynamic lift :math:`Cl_{dyn}` in the following way:
+In Oye's work the dynamic stall is modeled with the help of a separation function :math:`f`. It is used to calculate the dynamic lift :math:`Cl_{dyn}` in the following way:
 
 .. math::
 	\begin{align}
-	Cl_{dyn} = f  Cl_{att} + (1-f)  Cl_{sep} . 
+	Cl_{dyn} = f \cdot Cl_{att} + (1-f) \cdot Cl_{sep}.
 	\end{align}
 	
 Where :math:`Cl_{att}` is the fully attached inviscid lift contribution and :math:`Cl_{sep}` the fully separated lift contribution. 
@@ -16,7 +16,7 @@ To solve the equation above, it is applied to steady conditions. The result is:
 
 .. math::
 	\begin{align}
-	Cl^{st} = f^{st}  Cl_{att}^{st}  + (1-f^{st} )  Cl_{sep}^{st}  , 
+	Cl^{st} = f^{st} \cdot Cl_{att}^{st} + (1-f^{st}) \cdot Cl_{sep}^{st}.
 	\end{align}
 
 where the superscript :math:`st` refers to steady conditions. Comparing the equations above, :math:`Cl_{att} = Cl^{st}_{att}` and :math:`Cl_{sep} = Cl^{st}_{sep}`. :math:`Cl^{st}` is obtained by reading in static polar data and :math:`Cl_{att}^{st}` is obtained by extrapolating the linear part of the lift curve to the required angle of attack. 
@@ -31,7 +31,7 @@ The value of :math:`f^{st}` is limited to be between 0 and 1. Now :math:`f` is a
 
 .. math::
 	\begin{align}
-	\frac{df}{dt} = \frac{f^{st} - f}{\tau}  . 
+	\frac{df}{dt} = \frac{f^{st} - f}{\tau}  .
 	\end{align}
 
 Integrating the equation above allows the determination  of the dynamic behavior of :math:`f(t)`:
@@ -64,7 +64,7 @@ In QBlade, the Oye dynamic stall model also determines a dynamically changing dr
 
 .. math::
 	\begin{align}
-	Cd_{dyn} = Cd^{st} +  (Cd^{st}-Cd^{st}_0) (0.5(\sqrt{f^{st}}-\sqrt{f}))-0.25(f-f^{st}).
+	Cd_{dyn} = Cd^{st} + (Cd^{st}-Cd^{st}_0) (0.5(\sqrt{f^{st}}-\sqrt{f}))-0.25(f-f^{st}).
 	\end{align}
 
 In this equation :math:`Cd^{st}_{0}` is the drag at 0 degree angle of attack.

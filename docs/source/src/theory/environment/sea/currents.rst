@@ -17,7 +17,7 @@ Three different types of time constant currents may be defined in QBlade. An ove
 where,
 
 - :math:`u_{cs}(z=0)` is the velocity at the sea surface,
-- :math:`\alpha` is the power law exponent (deault value is :math:`\alpha = 0.14`),
+- :math:`\alpha` is the power law exponent (default value is :math:`\alpha = 0.14`),
 - :math:`h` is the water depth,
 - :math:`z`` is   :math:`0 \geq z \geq-h`.
 

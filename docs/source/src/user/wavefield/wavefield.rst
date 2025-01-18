@@ -11,7 +11,7 @@ Wave Generator Overview
 If an offshore simulation where the consideration of wave excitation is being carried out, it is necessary to provide the information about the sea sate in the form of
 a wave field. The field may either consist of a single wave train (regular wave) or multiple, superpositioned regular waves - (irregular waves). Both types may be generated
 directly in QBlade. A third possibility is the definition of a prescribed sea state, allowing the user to import externally generated wave fields. The three functionalities are described
-in more detailed below. The underlying theory implemented in QBlade is described in the :ref:`Waves` section of the theory guide.
+in more detail below. The underlying theory implemented in QBlade is described in the :ref:`Waves` section of the theory guide.
 
 Any wave field generated in QBlade requires that a new wave is created by selecting this option in the *Controls* box. 
 This opens the *Linear Waves* dialogue, where the wave generation options are displayed. 
@@ -147,7 +147,7 @@ It is highly suggested to use an *Equal Frequency* discretization, with sufficie
 * **At X Position**: The X position at which the extreme wave occurs
 * **At Y Position**: The Y position at which the extreme wave occurs
 
-Furthermore, it is possible to *copy-paste* a nonlinear regular wave over the constrained wave. This process is carried out in a similar way as described in the work by P. J. Rainey at al. :footcite:`Rainey_2007`. It is only possible to copy-paste a nonlinear wave over a constrained wave in a unidirectional wavefield. The user has to specify the following parameters of the embedded nonlinear wave:
+Furthermore, it is possible to *copy-paste* a nonlinear regular wave over the constrained wave. This process is carried out in a similar way as described in the work by P. J. Rainey at al. :footcite:`Rainey_2007`. It is only possible to copy-paste a nonlinear wave over a constrained wave in an unidirectional wavefield. The user has to specify the following parameters of the embedded nonlinear wave:
 
 * **Nonlinear Wave Height**: The wave height of the pasted nonlinear wave
 * **Nonlinear Wave Period**: The period of the nonlinear wave
@@ -262,7 +262,7 @@ An exemplary ``.lwa`` file is shown below:
 	0.00                                     EMBEDYPOS          - the y-position at which the embedded wave occurs [m]
 	true                                     PASTESTREAM        - paste a streamfunction wave over the embedded linear wave [bool]
 	23.00                                    SIGHEIGHTSTREAM    - the significant height of the streamfunction wave [m]
-	12.70                                    PERIODSTREAM       - the period of the stremfunction wave [s]
+	12.70                                    PERIODSTREAM       - the period of the streamfunction wave [s]
 
 
 
@@ -278,7 +278,7 @@ Merged Waves
     
 It is also possible to merge two or more linear wave definitions to create a new merged wave. The merged wave is a simple superposition of the wave components of all merged waves. The main purpose for this option is to allow the user to generate seastates that are caused both by swell and wind coming from different directions. If both spectra (swell / wind) and their direction are known a merged wave can simply be created by merging both wave definitions.
 
-The merge wave dialog is avaiilable from the top menu, shown in :numref:`fig-merged-wave-dialog`.
+The merge wave dialog is available from the top menu, shown in :numref:`fig-merged-wave-dialog`.
 
 .. _fig-merged-wave-dialog:
 .. figure:: merged_wave_dialog.png

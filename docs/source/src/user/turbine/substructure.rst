@@ -11,7 +11,7 @@ Substructure Overview
 Optionally, a substructure definition can be added to the structural model of a wind turbine in QBlade. The substructure definition can fulfill several different roles. Below a few typical applications of substructure definitions are given:
 
  * **Lattice towers:** The substructure can be used to model the turbine tower with greater freedom as the standard tower file, which can only model tubular, straight towers, for instance by explicitly defining a lattice tower structure in the substructure file.
- * **Floaters and moorings**: The substructure can be used to define the floater of a floating offshore wind turbine (FOWT). This requires that the floater is modeled both hydrodynamically (Morison or Potential flow) and structurally /flexible or rigid) within the substructure definition. The substructure definition is also used to define the mooring system which keeps the floater place.
+ * **Floaters and moorings**: The substructure can be used to define the floater of a floating offshore wind turbine (FOWT). This requires that the floater is modeled both hydrodynamically (Morison or Potential flow) and structurally (flexible or rigid) within the substructure definition. The substructure definition is also used to define the mooring system which keeps the floater in place.
  * **Soil modeling:** In the substructure file a p-y curve can be defined to model nonlinear soil dynamics, both onshore or offshore.
  * **Multi-rotor assemblies:** The substructure definition is also used to define the substructure of a multi-rotor assembly, with an arbitrary number of rotors.
 
@@ -32,7 +32,7 @@ The substructure is typically composed of interconnected members and joints (see
 Substructure Buoyancy
 ^^^^^^^^^^^^^^^^^^^^^
 
-Similar to mass and inertia, substructure buoyancy can be modeled explicitly or in a lumped linearized manner. Explicit modeling involves enabling the buoyancy calculation for each member based on its submerged part in the :code:`SUBMEMBERS` table (see :ref:`Substructure Members`). Explicity buoyancy applies buoyancy forces locally to each member. In the lumped approach, a 6x6 hydrodynamic stiffness matrix is defined to represent the substructure's buoyancy restoring forces and moments (see :ref:`Lumped Mass, Inertia and Hydrodynamic Forces`). This linearized hydrodynamic stiffness matrix is valid for small rotations and translations of the substructure.
+Similar to mass and inertia, substructure buoyancy can be modeled explicitly or in a lumped linearized manner. Explicit modeling involves enabling the buoyancy calculation for each member based on its submerged part in the :code:`SUBMEMBERS` table (see :ref:`Substructure Members`). Explicit buoyancy applies buoyancy forces locally to each member. In the lumped approach, a 6x6 hydrodynamic stiffness matrix is defined to represent the substructure's buoyancy restoring forces and moments (see :ref:`Lumped Mass, Inertia and Hydrodynamic Forces`). This linearized hydrodynamic stiffness matrix is valid for small rotations and translations of the substructure.
 
 Substructure Hydrodynamics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -43,6 +43,20 @@ Different Scenarios
 ^^^^^^^^^^^^^^^^^^^
 
 It is possible to combine different approaches mentioned above. A common mix involves using linear potential flow hydrodynamics along with the Morison equation to account for viscous hydrodynamic drag. If obtaining distributed loads for substructure components is important, hydrodynamic forces should be distributed as well (Morison equation with explicit buoyancy modeling), and the substructure members should be modeled as flexible elements. By carefully selecting and combining these modeling options, a comprehensive understanding of the hydrodynamics and structural dynamics of an offshore substructure can be achieved.
+
+================== ====================== ==========================
+Feature            Explicit Modeling      Lumped Modeling
+================== ====================== ==========================
+Mass               Defined by             Represented via a  
+                   substructure's         6x6 mass matrix.  
+                   members.               
+Buoyancy           Calculated for each    Represented by a  
+                   member based on        hydrodynamic  
+                   submerged parts.       stiffness matrix.  
+Hydrodynamics      Distributed forces     Lumped forces from  
+                   via Morison            external potential  
+                   coefficients.          flow databases.  
+================== ====================== ==========================
 
 Keywords and Tables
 -------------------
@@ -58,7 +72,7 @@ A parameter is defined by its value followed by the parameter *Keyword*:
 	Value	KEYWORD
  
 A table is identified by its *Keyword* and the row and column count of the subsequent ASCII values, which need to separated by *space(s)* or *tab(s)*.
-An example of a table with two rows and tree columns is shown below.
+An example of a table with two rows and three columns is shown below.
  
 * :code:`KEYWORD` <new line> *<Header>* <new line> *<Values>* for parameters defined by a table. The *<Header>* <new line> part is only optional and can be omitted.
 
@@ -79,28 +93,60 @@ Miscellaneous Substructure Parameters
 The following keywords can be used to define different properties and modeling options for the substructure.
 
 :code:`ISFLOATING`
- A flag that determines if the substructure is floating of bottom-fixed. If the structure is bottom-fixed the joint coordinates (see :code:`SUBJOINTS` below) are assigned in a coordinate system with its origin placed at the seabed. For floaters, the origin is placed at the mean see level (MSL) and marks the floaters's neutral point (NP)
+ [**bool**] A flag that determines if the substructure is floating of bottom-fixed. If the structure is bottom-fixed the joint coordinates (see :code:`SUBJOINTS` below) are assigned in a coordinate system with its origin placed at the seabed. For floaters, the origin is placed at the mean see level (MSL) and marks the floater's neutral point (NP)
+
+ .. code-block:: console
+
+	true	ISFLOATING
 
 :code:`WATERDEPTH`
- Sets the design water depth of the substructure, this value is only used for visualization of the turbine and the identification of flooded members during turbine setup. Note that this water depth is only for the turbine setup and is not used during the simulations. During the simulation the water depth is obtained from the simulation settings.
+ [**m**] Sets the design water depth of the substructure, this value is only used for visualization of the turbine and the identification of flooded members during turbine setup. Note that this water depth is only for the turbine setup and is not used during the simulations. During the simulation the water depth is obtained from the simulation settings.
+
+ .. code-block:: console
+
+	220	WATERDEPTH
 
 :code:`WATERDENSITY`
- Sets the water density to calculate the mass of the flooded members. Note that this water density is only for the turbine setup and is not used during simulations. During simulations the water density is obtained from the simulation settings.
+ [**kg/m^2**] Sets the water density to calculate the mass of the flooded members. Note that this water density is only for the turbine setup and is not used during simulations. During simulations the water density is obtained from the simulation settings.
+
+ .. code-block:: console
+
+	1025	WATERDENSITY
 
 :code:`SEABEDDISC`
- Sets the sub-discretization length for mooring lines in contact with the seabed, in [m]. A value of 1 means that when a mooring line element is in contact with the seabed the mooring element will be discretized into elements of 1m length for which the contact forces will be evaluated. The default value is 2.
+ [**m**] Sets the sub-discretization length for mooring lines in contact with the seabed, in [m]. A value of 1 means that when a mooring line element is in contact with the seabed the mooring element will be discretized into elements of 1m length for which the contact forces will be evaluated. The default value is 2.
 
-:code:`CONSTRAINEDFLOATER`
- A flag that if set to true constrains the floater. A constrained floater can be subjected to a prescribed motion via a *Prescribed Motion File* (see :ref:`Turbine Events and Operation`).
+ .. code-block:: console
+
+	1	SEABEDDISC
+
+:code:`FIXEDFLOATER`
+ [**bool**] A flag that if set to true fixes the floater to the ground. A fixed floater can be subjected to a prescribed motion via a *Prescribed Motion File* (see :ref:`Turbine Events and Operation`).
+
+ .. code-block:: console
+
+	true	FIXEDFLOATER
 
 :code:`BUOYANCYTUNER`
- A multiplication factor that affects the calculation of the explicit buoyancy forces. Buoyancy caused by the linear hydrodynamic stiffness matrix is not affected by this factor.
+ [**-**] A multiplication factor that affects the calculation of the explicit buoyancy forces. Buoyancy caused by the linear hydrodynamic stiffness matrix is not affected by this factor.
+
+ .. code-block:: console
+
+	1.0032	BUOYANCYTUNER
 
 :code:`ADVANCEDBUOYANCY`
- An option to use an advanced discretization technique to calculate the explicit buoyancy of partially submerged members, especially useful if non-vertical substructure members are located close to the mean sea level. Each partially submerged member will be discretized into the user defined number of elements. The value used must be a square integer number (a value of 100 is suggested).
+ [**bool**] An option to use an advanced discretization technique to calculate the explicit buoyancy of partially submerged members, especially useful if non-vertical substructure members are located close to the mean sea level. Each partially submerged member will be discretized into the user defined number of elements. The value used must be a square integer number (a value of 100 is suggested).
+
+ .. code-block:: console
+
+	true	ADVANCEDBUOYANCY
 
 :code:`STATICBUOYANCY`
- An optional flag that controls for which sea level the explicit buoyancy is calculated in QBlade. If set to true, the buoyancy is considering only the mean sea level. If set to false (default), the local wave elevation at each member is used to calculate the buoyancy. When evaluating the hydrodynamics using potential a potential flow theory excitation database (:code:`USE_EXCITATION`) it is recommended to enable the :code:`STATICBUOYANCY` option since the hydrodynamic forces due to a change in wave elevation are already accounted for by the excitation forces. Using the the instantaneous sea level for the evaluation of buoyancy in such a case would cause this part of the buoyancy force to be double-accounted for.
+ [**bool**] An optional flag that controls for which sea level the explicit buoyancy is calculated in QBlade. If set to true, the buoyancy is considering only the mean sea level. If set to false (default), the local wave elevation at each member is used to calculate the buoyancy. When evaluating the hydrodynamics using potential a potential flow theory excitation database (:code:`USE_EXCITATION`) it is recommended to enable the :code:`STATICBUOYANCY` option since the hydrodynamic forces due to a change in wave elevation are already accounted for by the excitation forces. Using the instantaneous sea level for the evaluation of buoyancy in such a case would cause this part of the buoyancy force to be double-accounted for.
+
+ .. code-block:: console
+
+	true	STATICBUOYANCY
 
 :code:`MARINEGROWTH`
  A table that allows the user to define different types of marine growth that is present in the members. In QBlade, marine growth is simulated as an additional thickness that affects the diameter of the cylindrical or rectangular element. An entry is defined by its ID number, the thickness of the growth (added to the cylinder radius) and the density of the growth.
@@ -158,7 +204,7 @@ In general, a substructure consists of **Members** that are defined between **Jo
 Substructure Joints
 -------------------
 
-Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its position and optionally by its orientation. In most cases it is sufficient to define only the position of the joint, however when imposing constraints along certain degrees of freedom of a joint the joint orientation becomes important. Joints generally dont have a mass, but can be assigned a mass using the :code:`ADDMASS_<JntID>` keyword.
+Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its position and optionally by its orientation. In most cases, it is sufficient to define only the position of the joint, however when imposing constraints along certain degrees of freedom of a joint the joint orientation becomes important. Joints generally dont have a mass, but can be assigned a mass using the :code:`ADDMASS_<JntID>` keyword.
 
 .. _fig-substruc-joint:
 .. figure:: joints.png
@@ -170,7 +216,7 @@ Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its po
 
 :code:`SUBJOINTS`
  Defines a table that is used to place spatial joints that help define the members of the substructure. Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the Cartesian coordinates of the joint (in m). The origin is the seabed if :code:`ISFLOATING` is false and the MSL if :code:`ISFLOATING` is true. 
- 
+
  The table is structured as follows:
 
  .. code-block:: console 
@@ -198,6 +244,8 @@ Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its po
 	18     4.04145    19.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
 	19   -18.47520     6.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
 	20   -18.47520    -6.00000   -17.00000    1.00    0.00    0.00    0.00    1.00    0.00
+
+ By default, the ``SUBJOINTS`` are translated and rotated alongside the floater when subjected to initial heave, surge, sway, yaw, pitch, or roll displacements. However, this behavior may be undesirable in certain cases, such as when the ``SUBJOINTS`` serve as endpoints for linear springs designed to stabilize the floater (e.g., during a tank test campaign). To address this, you can assign a **JntID** a negative value. For instance, setting **JntID** to ``-1`` will globally fix that joint, preventing it from translating or rotating with the initial floater displacements. Despite the negative assignment, the **JntID** is always treated as a positive value for identification purposes (e.g., in the ``MOORMEMBERS`` table). It is important to note that you cannot assign ``JntID`` values of ``-1`` and ``1`` to separate joints simultaneously, as the system treats both as equivalent.
 
 :code:`SUBJOINTS` (orientation defined by y- and y-axes)
  Defines a table that is used to place spatial joints that help define the members of the substructure. Each row of the table defines one joint and has four entries: the first gives the id number of the joint and the other three the Cartesian coordinates of the joint (in m). The origin is the seabed if :code:`ISFLOATING` is false and the MSL if :code:`ISFLOATING` is true. 
@@ -273,6 +321,18 @@ Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its po
 	XOFF	YOFF	ZOFF
 	10	0	0
 	
+:code:`JOINTROTATION`
+ Defines a table that can be used to apply a global rotation to the positions of all :code:`SUBJOINTS` (rotation around (0,0,0)). Note that the rotation is only applied to the joints and not the mass and hydro reference points defined in :ref:`StrDef_LPFT`. This table reads in the rotation angles in degree.
+
+ The table is structured as follows:
+
+ .. code-block:: console
+	:caption: : The JOINTROTATION table (rotation in °)
+
+	JOINTROTATION 	
+	XROT	YROT	ZROT
+	0	0	90
+	
 :code:`ADDMASS_<JntID>`
  can be used to add a mass at a joint *<JntID>*. :code:`ADDMASS_<JntID>` can be followed by up to 7 numeric values (at least one) to assign mass and rotational inertia properties. For example: :code:`ADDMASS_5 10 1 2 3 4 5 6` adds a mass of 10kg at the joint with ID 5. The following numbers assign the rotational inertia in local joint coordinates: *Ixx = 1, Iyy = 2, Izz = 3, Ixy = 4, Ixz = 5, Iyz = 6*. 
  
@@ -301,7 +361,7 @@ Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its po
 Substructure Elements
 ---------------------
 
-Four different types of element exits that can be used to construct the substructure geometry in the :code:`SUBMEMBERS` table. Each element definition, identified by a unique *Element ID*, can be used to generate multiple members. The available element types are: cylidrical flexible elements, cylindrical rigid elements, rectangular flexible elements and rectangular rigid elements. 
+Four different types of element exists that can be used to construct the substructure geometry in the :code:`SUBMEMBERS` table. Each element definition, identified by a unique *Element ID*, can be used to generate multiple members. The available element types are: cylindrical flexible elements, cylindrical rigid elements, rectangular flexible elements and rectangular rigid elements. 
 
 .. _fig-substruc-cylindrical:
 .. figure:: cylindrical.png
@@ -389,7 +449,7 @@ Four different types of element exits that can be used to construct the substruc
 Substructure Members
 --------------------
 
-The members of the substructure are defines within the :code:`SUBMEMBERS` table. Each line in the table generated one element that is defined by an element definition, identified by its *Element ID* and two joints, defined by their *Joint ID*. In addition the :code:`SUBMEMBERS` table assigns the member rotation (for rectangular elements) hydrodynamic coefficients, marine growth, flooded area and the discretization for each member.
+The members of the substructure are defined within the :code:`SUBMEMBERS` table. Each line in the table generated one element that is defined by an element definition, identified by its *Element ID* and two joints, defined by their *Joint ID*. In addition the :code:`SUBMEMBERS` table assigns the member rotation (for rectangular elements) hydrodynamic coefficients, marine growth, flooded area and the discretization for each member.
 
 
 :code:`SUBMEMBERS`
@@ -425,7 +485,7 @@ When multiple members are connected to the same joint these members are *rigidly
 :code:`SUBCONSTRAINTS`
  Defines the table that defines the constraints between two joints that are not already connected by members, constraints of joints to the ground or to one :code:`TP_INTERFACE_POS` transition piece point. 
  
- Each row of the table has 12 entries. The first entry defines the constraint ID number (**CstID**). The next entry define the joint which shall be constrained (**JntID**). The joint can now be constrained to a second joint, by inserting the corresponding JntID into the **JntCon** column, to a :code:`TP_INTERFACE_POS` by inserting its number into the 4th column (**TpCon**) or to the ground by setting the **GrdCon** column to 1. A joint can **either** be constrained to a second joint (**JntCon**), to the transition piece (**TpCon**) point or to the the ground (**GrdCon**), so only one of these three columns should be used at the same time. 
+ Each row of the table has 12 entries. The first entry defines the constraint ID number (**CstID**). The next entry define the joint which shall be constrained (**JntID**). The joint can now be constrained to a second joint, by inserting the corresponding JntID into the **JntCon** column, to a :code:`TP_INTERFACE_POS` by inserting its number into the 4th column (**TpCon**) or to the ground by setting the **GrdCon** column to 1. A joint can **either** be constrained to a second joint (**JntCon**), to the transition piece (**TpCon**) point or to the ground (**GrdCon**), so only one of these three columns should be used at the same time. 
  
  The sixth entry specifies that the constraint is realized as a non-linear spring-damper element (defined via an the spring ID number). If no spring or damper element is selected the constraint is realized as a stiff connection.
  The last 6 entries specify which degrees of freedom are constrained (either stiff or with a spring damper element): the three translational and three rotational degrees of freedom. For these entries 0 is interpreted as unconstrained (free) and 1 is interpreted as constrained. A spring-damper element is always acting along **all** the constrained degrees of freedom at the same time.
@@ -602,8 +662,8 @@ For each transition piece multiple reference position exist, which are rigidly c
 :code:`SUB_DISPLACEDVOLUME_<X>`
  applies a constant force in the global z-direction to the :code:`REF_HYDRO_POS_<X>` point that is calculated based on the displaced water volume given by the user. It can be used to e.g. model the constant buoyancy force acting on the floater in its equilibrium position in a simple way without evaluating the force directly. This force is added to the :code:`SUB_CONSTFORCE_<X>` entries, but can be used without specifying :code:`SUB_CONSTFORCE_<X>`.
 
-Mooring Elements and Ground-Constraints
-#######################################
+Mooring Elements
+################
 
 .. _fig-turbine-cables:
 .. figure:: turbine_cables.png
@@ -613,11 +673,11 @@ Mooring Elements and Ground-Constraints
     Mooring lines connected to a floating wind turbine for ground fixing.
 
 The connection to the ground is handled differently for floating and fixed-bottom substructures. For floating substructures, the anchoring is done via the mooring lines defined with the :code:`MOORELEMENTS` and 
-:code:`MOORMEMBERS` keywords. These keywords can also be used to define flexible cable elements of the substructure. For bottom-fixed substructures, the connection the ground is defined in the :code:`SUBCONSTRAINTS` table.
+:code:`MOORMEMBERS` keywords. These keywords can also be used to define flexible cable elements of the substructure. For bottom-fixed substructures, the connection to the ground is defined in the :code:`SUBCONSTRAINTS` table.
 It can be either a rigid connection or a connection via a system of non-linear springs and dampers. These latter elements are defined with the keywords :code:`NLSPRINGDAMPERS` and optionally :code:`SPRINGDAMPK`.
 
 :code:`MOORELEMENTS` 
- is a table that contains the structural parameters of the flexible cable elements of the substructure such as mooring lines. Each row defines one set of parameters and has 6 values. These are the mooring element ID number, the mass per length [kg/m], bending stiffness around y or x in [Nm^2], the axial stiffness in [N], a structural (longitudinal) damping coefficient and a hydrodynamic diameter in [m], which is used during buoyancy and Morison force evaluations.
+ is a table that contains the structural parameters of the flexible cable elements of the substructure such as mooring lines. Each row defines one set of parameters and has 6 values. These are the mooring element ID number, the mass per length [kg/m], bending stiffness around y or x in [Nm^2], the axial stiffness in [N], a structural (longitudinal) damping coefficient and a hydrodynamic diameter in [m], which are used during buoyancy and Morison force evaluations.
 
  .. code-block:: console
    	:caption: : The MOORELEMENTS table
@@ -628,7 +688,7 @@ It can be either a rigid connection or a connection via a system of non-linear s
 	2	2.013616E+02	4.234759E+08	8.513517E+08	0.001		0.137
 	
 	
- Optionally, a nonlinear axial stiffness for a *MOORELEMENT* may be defined by a nonlinear data table. In this case, the data table identifier, preceded by a hashtag (#) replaces the EA value of the *MOORELEMENTS* table.
+ Optionally, a nonlinear axial stiffness for a *MOORELEMENT* may be defined by a nonlinear data table (see :ref:`Nonlinear Data Tables`). In this case, the data table identifier, preceded by a hashtag (#) replaces the EA value of the *MOORELEMENTS* table.
 
  .. code-block:: console
    	:caption: : The MOORELEMENTS table
@@ -639,7 +699,7 @@ It can be either a rigid connection or a connection via a system of non-linear s
 	2	2.013616E+02	4.234759E+08	#NLDATA2	0.001		0.137
 
 :code:`CABDAMP`
- In some cases, if the alpha damping coefficient of a mooring line (or cable) element is too large, a simulation can become unstable. Therefore, be default the damping coefficient of the mooring lines is not applied. If the user wishes to activate the axial damping of mooring lines and guy cables, the keyword :code:`CABDAMP` must be set to true.
+ In some cases, if the alpha damping coefficient of a mooring line (or cable) element is too large, a simulation can become unstable. Therefore, by default the damping coefficient of the mooring lines is not applied. If the user wishes to activate the axial damping of mooring lines and guy cables, the keyword :code:`CABDAMP` must be set to true.
  
  .. code-block:: console
    	:caption: : Activating axial cable damping for all MOORELEMENTS be setting the keyword CABDAMP
@@ -666,6 +726,32 @@ It can be either a rigid connection or a connection via a system of non-linear s
 	1	FLT_-40.868_0.0_-14.0		GRD_-837.6_0		835.5	1	1	1	0	30	Mooring1
 	2	FLT_20.434_35.393_-14.0		GRD_418.8_725.4		835.5	1	1	1	0	30	Mooring2
 	3	FLT_20.434_-35.393_-14.0	GRD_418.8_-725.4	835.5	1	1	1	0	30	Mooring3
+	
+:code:`MOORCONSTRAINTS`
+ By default, only the position of the mooring line end nodes is constrained in the :code:`MOORMEMBERS` table. The :code:`MOORCONSTRAINTS` table can optionally be used to also constrain the orientation of a mooring line. This table requires seven columns, which define two unit directional vectors for the start and end nodes of the mooring line. These directional vectors are specified in one of the following coordinate systems:
+
+ - **Global Coordinate System (GRD):** For connections to the ground.
+ - **Joint Coordinate System (JNT):** If connected to a joint.
+ - **Floater Coordinate System (FLT):** If connected to the floater.
+
+ The columns required in the :code:`MOORCONSTRAINTS` table are:
+
+ - **ID:** The ID of the mooring line, as defined in the :code:`MOORMEMBERS` table.
+ - **C1_X:** The X-component of the directional (unit) vector at the start node.
+ - **C1_Y:** The Y-component of the directional (unit) vector at the start node.
+ - **C1_Z:** The Z-component of the directional (unit) vector at the start node.
+ - **C2_X:** The X-component of the directional (unit) vector at the end node.
+ - **C2_Y:** The Y-component of the directional (unit) vector at the end node.
+ - **C2_Z:** The Z-component of the directional (unit) vector at the end node.
+
+ .. code-block:: console
+   	:caption: : The MOORCONSTRAINTS table
+
+	MOORCONSTRAINTS
+	ID	C1_X	C1_Y	C1_Z	C2_X	C2_Y	C2_Z
+	1	0	0	1	1	0	0
+	2	0	0	1	1	0	0
+	3	0	0	1	1	0	0
 
 Mooring Element Lineloads
 -------------------------
@@ -690,7 +776,7 @@ Mooring Element Lineloads
 	3	520		550		2000
 
 Nonlinear Spring and Damper Constraints
----------------------------------------
+#######################################
 
 :code:`NLSPRINGDAMPERS`
  is a table that defines one or more non-linear spring-damper systems for connecting the substructure to the ground, or for the interconnection of two joints in the constraints table. A usual application would be to model the soil dynamics using nonlinear (p-y curves) springs. Another application would be to define compliant connections between substructure members or joints. Furthermore, in the :code:`SUBCONSTRAINTS` table the nonlinear springs, or dampers may be assigned to constrain any or all degrees of freedom of choice.
@@ -709,13 +795,13 @@ Nonlinear Spring and Damper Constraints
 
 	NLSPRINGDAMPERS
 	ElemID	Type	Coefficient & Displacement/Velocity Sets (for NL springs, dampers)
-	1	spring	1.000	1.160E+06
-	2	spring	1.000	9.000E+06
-	3	spring	1.000	2.090E+07
-	4	spring	1.000	3.560E+07
+	1	spring	1.000	1.160E+06	2.000	2.21E+06
+	2	spring	1.000	9.000E+06	2.000	1.20E+07
+	3	spring	1.000	2.090E+07	2.000	2.10E+07
+	4	spring	1.000	3.560E+07	2.000	3.30E+07
 	
 
- Optionally, the force/displacement or force/velocity relationship can also be specified though a :ref:`Nonlinear Data Tables`. In this case, the data table ID, preceded by a hashtag (#) replaces the 2N lookup table entries in the *NLSPRINGDAMPERS* table.
+ Optionally, the force/displacement or force/velocity relationship can also be specified though a :ref:`Nonlinear Data Tables`. In this case, the data table ID, preceded by a hashtag (#), replaces the 2N lookup table entries in the *NLSPRINGDAMPERS* table.
 
  .. code-block:: console
 	:caption: : The NLSPRINGDAMPERS table, using data from a NLDATA table
@@ -746,11 +832,95 @@ Nonlinear Spring and Damper Constraints
    	3       spring  0.000E+00       1.000   2.090E+07
    	4       spring  0.000E+00       1.000   3.560E+07
 
+	
+Soil Modeling with P-Y Curves
+-----------------------------
+
+P-y curves are a widely used method for modeling soil resistance as a function of pile displacement in soil-structure interaction. In QBlade, these curves can be defined using the :code:`NLSPRINGDAMPERS` table, which allows direct input of force-displacement pairs to capture the nonlinear behavior of soil.
+
+Adding P-Y Curves to a Substructure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. **Identify Interaction Joints**:
+   Determine the substructure joints where soil-structure interaction will be modeled, typically those located below the seabed.
+
+2. **Define P-Y Curves in :code:`NLSPRINGDAMPERS`**:
+   Use the :code:`NLSPRINGDAMPERS` table to directly input the force-displacement pairs for the p-y curve. For each nonlinear spring element:
+
+   - Assign an element ID (:code:`ElemID`) and specify the type (:code:`spring` for p-y curves).
+   - Provide the displacement and corresponding force pairs.
+
+   **Example:**
+
+   .. _nlspringdampers-table:
+   
+   .. code-block:: console
+      :caption: NLSPRINGDAMPERS Table with P-Y Curve Data
+      
+      NLSPRINGDAMPERS
+      ElemID   Type     Displacement & Force Pairs
+      1        spring   0.001  10000   0.005  20000   0.01  30000   1.0  30000
+
+   - At a displacement of :math:`0.001` m, the soil provides :math:`10000` N of resistance.
+   - At :math:`0.005` m, the resistance increases to :math:`20000` N.
+   - At :math:`0.01` m, the resistance reaches :math:`30000` N.
+   - For displacements exceeding :math:`0.01` m, the resistance plateaus at :math:`30000` N, indicated by the final force-displacement pair. A plateau, indicating *ultimate resistance* is automatically detected when the last two force/displacement pairs have equa force values.
+
+3. **Assign Nonlinear Springs in :code:`SUBCONSTRAINTS`**:
+   Link the nonlinear spring elements to constrain specific degrees of freedom (DOFs) at the interaction points. Assign the spring to act along translational DOFs to represent lateral soil resistance.
+
+4. **Reference External Data Tables (Optional)**:
+   For extensive or separately stored p-y data, use a predefined nonlinear data table (:code:`NLDATA`) instead of directly entering displacement-force pairs. Replace the force-displacement entries in the :code:`NLSPRINGDAMPERS` table with the reference ID:
+
+   .. code-block:: console
+      :caption: NLSPRINGDAMPERS Table with Referenced Data
+
+      NLSPRINGDAMPERS
+      ElemID   Type     Displacement & Force Pairs
+      1        spring   #NLDATA1
+
+   Ensure that :code:`NLDATA1` contains the corresponding p-y curve data.
+
+5. **Set Proportional Damping (Optional)**:
+   Add damping to the nonlinear springs using the :code:`SPRINGDAMPK` keyword:
+
+   .. code-block:: console
+
+      SPRINGDAMPK = 0.05
+
+   This applies proportional damping to the force-displacement relationship, where damping coefficients are calculated as :math:`D_i = \text{SPRINGDAMPK} \cdot K_i`.
+
+P-Y Curve Hysteresis
+^^^^^^^^^^^^^^^^^^^^
+In QBlade, nonlinear springs can model *elastic perfectly-plastic* behavior, meaning the spring response is fully recoverable until the *ultimate soil resistance* is reached. The *ultimate soil resistance* is reached when the user defined p-y- curve reaches a plateau (see :ref:`nlspringdampers-table`). As the lateral displacement increases and the p–y curve approaches its plateau (representing the soil's ultimate resistance), the behavior transitions to plastic deformation, where any additional displacement results in permanent deformation. To capture this behavior, an elastic perfectly plastic hysteresis model is implemented (see :numref:`fig-p_y_curve`), ensuring that the model accurately represents the transition from elastic (recoverable) to plastic (permanent) behavior. 
+
+In QBlade, nonlinear springs can model *elastic perfectly-plastic* behavior, ensuring an accurate representation of soil response. The soil resistance increases elastically until the *ultimate soil resistance* is reached, at which point it plateaus and transitions to plastic deformation. This is defined in the p-y curve by the plateau in the force-displacement pairs (see :ref:`nlspringdampers-table`).
+
+To model this behavior, QBlade uses an elastic perfectly-plastic hysteresis model (see :numref:`fig-p_y_curve`). This ensures that the transition from elastic (recoverable) to plastic (permanent) behavior is captured accurately. 
+
+
+.. _fig-p_y_curve:
+.. figure:: moor_load.png
+   :align: center
+   :alt: Elastic perfectly-plastic hysteresis.
+   
+   Elastic perfectly-plastic hysteresis.
+
+Outputting P-Y Spring Reaction Force
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The p-y spring force can be output in QBlade by adding sensors to the relevant constraints and joints:
+
+- Add a sensor for the constraint using :code:`CST_X`, where :code:`X` is the constraint ID.
+- Add a sensor for the connected joint using :code:`JNT_X`, where :code:`X` is the joint ID.
+
+Place these sensor definitions in the substructure file to enable force/displacement monitoring during simulations.
+
 Nonlinear Data Tables
 ---------------------
 
 :code:`NLDATA<X>`
- is a table that defines a nonlinear data distribution. The type as which the data is interpreted, depends on where the data table is used. Currently, nonlinear data tables can be used to define nonlinear stress/strain relationships for the axial (EA) stiffness of mooring lines (see :ref:`Mooring Elements and Ground-Constraints`) or to define the force/displacement relationships of spring (or damper) elements (see :ref:`Nonlinear Spring and Damper Constraints`).
+ is a table that defines a nonlinear data distribution. The type as which the data is interpreted, depends on where the data table is used. Currently, nonlinear data tables can be used to define nonlinear stress/strain relationships for the axial (EA) stiffness of mooring lines (see :ref:`Mooring Elements`) or to define the force/displacement relationships of spring (or damper) elements (see :ref:`Nonlinear Spring and Damper Constraints`).
  
  Each nonlinear data table needs a unique identifier, such as NLDATA1, NLDATA2, NLDATA3, up to NLDATA100. The first column in each data table represents the x-value (such as displacement, velocity or strain) and the second column represents the y-axis (such as force or stress. A nonlinear data table is assumed to always go through the origin at x=0 and y=0 and it is not requires to input the 0,0 entry into the table. Other values should be input is ascending order of x.
  
@@ -762,7 +932,6 @@ Nonlinear Data Tables
 	0.001	1.0e9
 	0.002	2.5e9
 	0.005	5.0e9
-	
 
 Hydrodynamic Modeling of a Substructure
 #######################################
@@ -771,7 +940,7 @@ Two options are available in QBlade to model the hydrodynamic forces acting on a
 
 When modeling the hydrodynamics using the Morison equation the user can distribute hydrodynamic coefficients that act in the normal direction of a substructure member. Furthermore, coefficients can be added to substructure joints so that the Morison equation is applied to the end faces of members. Thus, when modeling the hydrodynamics using the Morison equation the hydrodynamic forces are *distributed* over the substructure model. 
 
-The second option is to model the hydrodynamic forces using a linear potential flow theory generated database. At present, QBlade can interpret hydrodynamic input data in the *WAMIT* and *NEMOH* formats. When modeling the hydrodynamic with potential flow theory the *lumped* hydrodynamic forces are always applied at the hydrodynamic reference point (:code:`REF_HYDRO_POS_<X>`). So in most cases a substructure modeled with potential flow theory should be modeled using *rigid* elements.
+The second option is to model the hydrodynamic forces using a linear potential flow theory generated database. At present, QBlade can interpret hydrodynamic input data in the *WAMIT* and *NEMOH* formats. When modeling hydrodynamics with potential flow theory the *lumped* hydrodynamic forces are always applied at the hydrodynamic reference point (:code:`REF_HYDRO_POS_<X>`). So, in most cases, a substructure modeled with potential flow theory should be modeled using *rigid* elements.
 
 QBlade allows the user to combine elements from the :doc:`../../theory/hydrodynamics/lpft/lpft` and :doc:`../../theory/hydrodynamics/me/me` hydrodynamic models freely. The user should be careful when setting up the substructure in QBlade so that the model remains consistent.
 
@@ -900,14 +1069,6 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
   - 1: evaluation at the fixed, undisplaced/unrotated initial reference position
   - 2: evaluation at a lagged position (controlled by :code:`WAVEKINTAU`).
   
-:code:`WAVEKINEVAL_POT`
- is an *optional* flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
- The available options are:
-
-  - 0: local evaluation of wave kinematics
-  - 1: evaluation at the fixed, undisplaced/unrotated initial reference position (**this is the default value if not specified**)
-  - 2: evaluation at a lagged position (controlled by :code:`WAVEKINTAU`).
-  
 :code:`WAVEKINTAU`
  is an *optional* time constant for the first order low-pass filter used to determine lagged position of the Morison/Potential Flow elements (when :code:`WAVEKINEVAL_MOR` or :code:`WAVEKINEVAL_POT` is set to 2). The default value is 30s.
 
@@ -934,17 +1095,20 @@ Defining a Potential Flow Body
 	0		0		-10.00
 
 :code:`POT_HST_FILE_<X>`
- defines the file where the hydrodynamic stiffness matrix is stored from a WAMIT calculation. If this keyword is used then the hydrodynamic stiffness matrix :code:`SUB_HYDROSTIFFNESS_<X>` is populated with data from the file, overwriting any user-defined stiffness matrix.
+ points to the file (.hst) in which the hydrodynamic stiffness matrix is stored from a WAMIT calculation. If this keyword is used then the hydrodynamic stiffness matrix :code:`SUB_HYDROSTIFFNESS_<X>` is populated with data from the file, overwriting any user-defined stiffness matrix.
 
 :code:`POT_RAD_FILE_<X>`
- defines the file where the radiation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file. QBlade currently supports radiation files in the WAMIT, NEMOH and BEMUse formats.
+ points to the file (.1) file in which the radiation coefficients from a WAMIT calculation for the linear potential flow model are located. The file ending must be included. This determines the format of the file. QBlade currently supports radiation files in the WAMIT, NEMOH and BEMUse formats.
 
 :code:`POT_EXC_FILE_<X>`
- defines the file where the excitation coefficients for the linear potential flow model are located. The file ending must be included. This determines the format of the file. QBlade currently supports excitation files in the WAMIT, NEMOH and BEMUse formats.
+ points to the file (.3 file) in which the excitation coefficients from a WAMIT calculation for the linear potential flow model are located. The file ending must be included. This determines the format of the file. QBlade currently supports excitation files in the WAMIT, NEMOH and BEMUse formats.
   
 :code:`POT_DIFF_FILE_<X>`
- defines the file where the second-order difference-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file.  QBlade currently supports difference-frequency files only in the WAMIT format.
+ points to the file (.12d file) in which the second-order difference-frequency wave force coefficients from a WAMIT calculation are located. The file ending must be included. This determines the format of the file.  QBlade currently supports difference-frequency files only in the WAMIT format.
  
+:code:`POT_SUM_FILE_<X>`
+ points to the file (.12s file) in which the second-order sum-frequency wave force coefficients from a WAMIT calculation are located. The file ending must be included. This determines the format of the file.  QBlade currently supports sum-frequency files only in the WAMIT format.
+
 :code:`DIFF_CUTOFF_L_<X>`
  Specifies the low cut-off frequency for the difference QTFs. Intended to speed up the QTF evaluations.
  
@@ -958,9 +1122,6 @@ Defining a Potential Flow Body
    	:caption: : The DIFF_INACTIVE_DOF keyword to deactivate the DOFs 1 and 4 from the difference QTF evaluation
 
 	1 4 DIFF_INACTIVE_DOF
- 
-:code:`POT_SUM_FILE_<X>`
- defines the file where the second-order sum-frequency wave force coefficients are located. The file ending must be included. This determines the format of the file.  QBlade currently supports sum-frequency files only in the WAMIT format.
  
 :code:`SUM_CUTOFF_L_<X>`
  Specifies the low cut-off frequency for the sum QTFs. Intended to speed up the QTF evaluations.
@@ -1006,6 +1167,49 @@ By default, the hydrodynamic loads are applied at the :code:`REF_HYDRO_POS`. Whe
 
 	2 4 6 POT_NBODY_NODES
 
+Potential Flow Hydrodynamics Coordinate Systems
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When hydrodynamic potential flow databases are included in a simulation the resulting hydrodynamic forces are evaluated in the **Hydrodynamic Wavekinematics Evaluation Coordinate System** (HYDRO Wavekin. Eval. Coord). In the **HYDRO Wavekin. Eval. Coord** system (see :numref:`fig-wavekineval`) the wave kinematics (heading, amplitude, phase) are measured and and floater kinematics (translational and rotational velocities) are projected into this coordinate system. The radiation, excitation, second order sum and difference forces and moments are then evaluated and applied to the floater at the origin of the **Reference Hydrodynamic Position Coordinate System** (REF_HYDRO_POS_X), defined by the user.
+
+When hydrodynamic potential flow databases are included in a simulation, the resulting hydrodynamic forces are evaluated in the **Hydrodynamic Wavekinematics Evaluation Coordinate System** (HYDRO Wavekin. Eval. Coord). In this coordinate system (see :numref:`fig-wavekineval`), wave kinematics (heading, amplitude, phase) and floater kinematics (translational and rotational velocities) are projected. Radiation, excitation, second-order sum, and difference forces and moments are then computed in the **HYDRO Wavekin. Eval.** frame and applied to the floater at the origin of the **Reference Hydrodynamic Position Coordinate System** (**REF_HYDRO_POS**).
+
+.. _fig-wavekineval:
+.. figure:: wavekineval.png
+    :align: center
+    :alt: The Hydrodynamic Wavekinematics Evaluation Coordinate System (**HYDRO Wavekin. Eval. Coord**) and the Reference Hydrodynamic Position Coordinate System (**REF_HYDRO_POS**).
+
+    The Hydrodynamic Wavekinematics Evaluation Coordinate System and the Reference Hydrodynamic Position Coordinate System.
+
+Hydrodynamic databases from potential flow solvers like *WAMIT* are typically derived assuming small displacements and rotations around a reference position. Applying these databases in a globally fixed coordinate system introduces inconsistencies for floating wind turbines that experience large displacements. For example:
+
+ - Wave kinematics evaluation may deviate significantly as the floater moves through the wave field.
+ - Single-point mooring designs, prone to large yaw rotations, can lead to direction-sensitive force inconsistencies.
+
+To address these issues, QBlade allows users to configure the hydrodynamic coordinate systems for wave kinematics evaluation as follows:
+
+ - **Local Evaluation of Wave Kinematics:**
+   The origin of the **HYDRO Wavekin. Eval. Coord** is attached to the **REF_HYDRO_POS** origin. This coordinate system yaws with the floater but does not rotate along pitch and roll axes, ensuring the z-axis points vertically upward. However, unfiltered position updates may cause phasing inconsistencies.
+
+ - **Fixed Initial Position Evaluation:**
+   The **HYDRO Wavekin. Eval. Coord** origin and orientation remain fixed at the global initial position, aligned with the initial global z-rotation, throughout the simulation. This configuration avoids phasing issues but disregards floater movement.
+
+ - **Lagged Position Evaluation:**
+   The origin updates based on a time-filtered (*lagged*) position and yaw rotation of the **REF_HYDRO_POS**, controlled by the **WAVEKINTAU** parameter. The z-axis remains vertical, correcting for large yaw movements (Yaw Rotation Correction).
+
+The following parameters manage the potential flow evaluation frame:
+
+:code:`WAVEKINEVAL_POT`
+ is an *optional* flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
+ The available options are:
+
+ - `0`: Local evaluation of wave kinematics.
+ - `1`: Evaluation at the fixed initial position (**default**).
+ - `2`: Evaluation at a lagged position (requires :code:`WAVEKINTAU`).
+  
+:code:`WAVEKINTAU`
+ is an *optional* time constant for the first order low-pass filter used to determine lagged position of the Morison/Potential Flow elements (when :code:`WAVEKINEVAL_MOR` or :code:`WAVEKINEVAL_POT` is set to 2). The default value is 30s.
+
 Common Potential Flow Keywords
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1013,10 +1217,26 @@ Common Potential Flow Keywords
  is a flag that enables the calculation of the radiation loads on all potential flow bodies. (true or false)
 
 :code:`USE_RAD_ADDMASS`
- when this flag is set to true the hydrodynamic added mass matrix is automatically extracted from the potential flow radiation file (if such a file is defined). Using this flag will **overwrite** the user defined SUB_HYDROADDEDMASS definition. This is an optional flag and the default value is *false*.
+ when this flag is set to true, the hydrodynamic added mass matrix is automatically extracted from the potential flow radiation file (if such a file is defined). Using this flag will **overwrite** the user defined SUB_HYDROADDEDMASS definition. This is an optional flag and the default value is *false*.
 
 :code:`DELTA_FREQ_RAD`
  is the discretization of the frequencies used for the calculation of the radiation forces (in Hz).
+ 
+:code:`DELTA_T_IRF`
+ sets the timestep size for the discretization of the impulse response function
+
+:code:`DELTA_T_QTF`
+ The :code:`DELTA_T_QTF` parameter specifies the time interval at which the **expensive** full Quadratic Transfer Function (QTF) evaluations, to compute the sum-frequency and difference-frequency contributions, are conducted. If :code:`DELTA_T_QTF` is smaller than the simulation timestep, the simulation timestep is automatically used for the update instead. If :code:`DELTA_T_QTF` is larger than the simulation timestep, the difference frequency and sum frequency forces are updated only at intervals defined by :code:`DELTA_T_QTF`. Between these updates, the forces are linearly interpolated.
+ 
+ This functionality allows for flexible and computationally efficient handling of QTF evaluations during simulations. In figure :numref:`fig-dt_qtf`, the black line is updated at 0.04s intervals, while the red line is only updated at 0.5s intervals and interpolated linearly in between updates. 
+ 
+ .. _fig-dt_qtf:
+ .. figure:: dt_qtf.png
+    :align: center
+    :scale: 50%
+    :alt: The 2nd order sum frequency y-moment, evaluated at 0.04s (black) and 0.5s (red).
+
+    The 2nd order sum frequency y-moment, evaluated at 0.04s (black) and 0.5s (red).
 
 :code:`TRUNC_TIME_RAD`
  is the truncation time for the wave radiation kernel calculations (in s). 
@@ -1045,7 +1265,19 @@ Common Potential Flow Keywords
  is a flag that enables the (full field QTF) calculation of the sum-frequency loads on all potential flow bodies. (true or false)
 
 :code:`UNITLENGTH_WAMIT`
- Enables to specify a WAMIT unit length different than 1.0, if not specified 1.0 is the default value.
+ Enables to specify a WAMIT unit length different than 1.0, if not specified 1.0 is the default value. The WAMIT unit length is used to scale WAMIT Excitation (.3), Radiation (.1), and Hydrodynamic Stiffness (.hst) data files when the are loaded into QBlade.
+ 
+ :code:`WAVEKINEVAL_POT`
+ is an *optional* flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
+ The available options are:
+
+  - 0: local evaluation of wave kinematics
+  - 1: evaluation at the fixed, undisplaced/unrotated initial reference position (**this is the default value if not specified**)
+  - 2: evaluation at a lagged position (controlled by :code:`WAVEKINTAU`).
+  
+:code:`WAVEKINTAU`
+ is an *optional* time constant for the first order low-pass filter used to determine lagged position of the Morison/Potential Flow elements (when :code:`WAVEKINEVAL_MOR` or :code:`WAVEKINEVAL_POT` is set to 2). The default value is 30s.
+
 
 Sensor Locations and Definitions
 ################################
@@ -1054,7 +1286,7 @@ The locations at which data is recorded for the substructure is also controlled 
 The logic of defining an output is as follows:
 
 :code:`SUB_<MemID>_<RelPos>`
- is the keyword used for setting an output of a member from the the :code:`SUBMEMBERS` table with the ID number = <MemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Joint1ID) to 1 (= the postion of Joint2ID). When an output sensor is placed at a member hydrodynamic loads are displayed in the *Hydrodynamic Time Graph* and internal structural loads are displayed in the *Structural Time Graph*.
+ is the keyword used for setting an output of a member from the :code:`SUBMEMBERS` table with the ID number = <MemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Joint1ID) to 1 (= the postion of Joint2ID). When an output sensor is placed at a member hydrodynamic loads are displayed in the *Hydrodynamic Time Graph* and internal structural loads are displayed in the *Structural Time Graph*.
 
 :code:`MOO_<MMemID>_<RelPos>`
  is the keyword used for placing a sensor on the cable member with the ID number = <MMemID> and a relative postion = <RelPos>. The relative position goes from 0 (= the position of Conn1) to 1 (= the postion of Conn2). When an output sensor is placed at a mooring line hydrodynamic loads are displayed in the *Hydrodynamic Time Graph* and internal structural loads are displayed in the *Structural Time Graph*.
@@ -1077,7 +1309,7 @@ An exemplary substructure file for the OC4 Semi-Submersible floater is shown bel
 
 	1025		WATERDENSITY // design density, used for flooded member mass calcs
 
-	true 		ISFLOATING //if the structure is fixed the joint coordinates are assigned in a coordinate system with O(0,0,0) at the mudline, for floaters O(0,0,0) is at the MSL and marks the floaters's NP
+	true 		ISFLOATING //if the structure is fixed, the joint coordinates are assigned in a coordinate system with O(0,0,0) at the mudline, for floaters O(0,0,0) is at the MSL and marks the floaters's NP
 
 	100 		ADVANCEDBUOYANCY //using an advanced discretization technique (N must be a square int number) to calculate buoyancy of partially submerged members, especially usefull if "lying" cylinders are used to generate the draft
 
@@ -1315,14 +1547,210 @@ An exemplary substructure file for the OC4 Semi-Submersible floater is shown bel
 	MOO_3_0.0
 	MOO_3_1.0
 	
+Alphabetical Keyword List
+#########################
+
+* **ADDFORCE_<JntID>**
+  Adds a constant force and torque to a specified joint in the global coordinate system.
+
+* **ADDFORCELOC_<JntID>**
+  Adds a constant force and torque to a specified joint in the local joint coordinate system.
+
+* **ADDMASS_<JntID>**
+  Adds mass and rotational inertia properties to a specified joint.
+
+* **ADVANCEDBUOYANCY**
+  Enables detailed buoyancy calculation for partially submerged members.
+
+* **BUOYANCYTUNER**
+  Adjusts the explicit buoyancy forces by a multiplication factor.
+
+* **CABDAMP**
+  Activates axial damping for mooring lines and cables.
+
+* **DIFF_CUTOFF_H_<X>**
+  Specifies the high cut-off frequency for difference QTFs.
+
+* **DIFF_CUTOFF_L_<X>**
+  Specifies the low cut-off frequency for difference QTFs.
+
+* **DIFF_EVAL_TYPE**
+  Controls how second-order difference-frequency loads are evaluated.
+
+* **DIFF_INACTIVE_DOF_<X>**
+  Deactivates specific DOFs from difference QTF evaluations.
+
+* **FIXEDFLOATER**
+  Fixes the floater to the ground and allows prescribed motion.
+
+* **HYDROJOINTCOEFF**
+  Defines hydrodynamic coefficients for cylindrical joint end faces.
+
+* **HYDROMEMBERCOEFF**
+  Specifies hydrodynamic coefficients for cylindrical substructure members.
+
+* **HYDROMEMBERCOEFF_RECT**
+  Defines hydrodynamic coefficients for rectangular substructure members.
+
+* **ISFLOATING**
+  Indicates if the substructure is floating or bottom-fixed.
+
+* **JOINTOFFSET**
+  Applies a global position offset to substructure joints.
+
+* **JOINTROTATION**
+  Applies a global rotational offset to substructure joints.
+
+* **MARINEGROWTH**
+  Describes additional thickness and density due to marine growth on members.
+
+* **MASSTUNER**
+  Adjusts the mass density of all substructure elements.
+
+* **MOORELEMENTS**
+  Defines structural parameters for flexible cable elements (e.g., mooring lines).
+
+* **MOORMEMBERS**
+  Details cable members such as mooring lines with connection points and properties.
+
+* **MOORCONSTRAINTS**
+  Constrains the orientation of mooring line end nodes.
+
+* **MOORLOADS**
+  Adds buoyancy or additional weight loads to cable members.
+
+* **NLSPRINGDAMPERS**
+  Defines nonlinear spring-damper systems for ground or joint connections.
+
+* **NLDATA<X>**
+  Specifies nonlinear data for force/displacement or stress/strain relationships.
+
+* **POT_DIFF_FILE_<X>**
+  Defines the file for second-order difference-frequency wave force coefficients.
+
+* **POT_EXC_FILE_<X>**
+  Defines the file for excitation coefficients from potential flow theory.
+
+* **POT_HST_FILE_<X>**
+  Specifies the hydrodynamic stiffness matrix file.
+
+* **POT_NBODY**
+  Activates multiple hydrodynamic body definitions.
+
+* **POT_NBODY_NODES_<X>**
+  Assigns hydrodynamic loads of a particular body to substructure joints.
+
+* **POT_RAD_FILE_<X>**
+  Specifies the file for radiation coefficients.
+
+* **POT_SUM_FILE_<X>**
+  Specifies the file for second-order sum-frequency wave force coefficients.
+
+* **REF_COG_POS_<X>**
+  Defines the center of gravity position for mass matrix evaluation.
+
+* **REF_HYDRO_POS_<X>**
+  Specifies the reference point for hydrodynamic forces.
+
+* **RGBCOLOR**
+  Sets a color for the substructure for visualization.
+
+* **SEABEDDISC**
+  Sets the sub-discretization length for mooring lines in contact with the seabed.
+
+* **SPRINGDAMPK**
+  Adds damping to nonlinear spring elements based on a proportionality constant.
+
+* **STATICBUOYANCY**
+  Calculates buoyancy at the mean sea level rather than local wave elevation.
+
+* **STIFFTUNER**
+  Adjusts the stiffness of substructure elements.
+
+* **SUBCONSTRAINTS**
+  Defines constraints between joints, transition pieces, or ground.
+
+* **SUBELEMENTS**
+  Specifies flexible cylindrical elements for the substructure.
+
+* **SUBELEMENTSRIGID**
+  Defines rigid cylindrical elements for the substructure.
+
+* **SUBELEMENTS_RECT**
+  Specifies flexible rectangular elements.
+
+* **SUBELEMENTSRIGID_RECT**
+  Defines rigid rectangular elements for the substructure.
+
+* **SUBFILE**
+  Specifies the filename for a substructure definition in the main structural input file.
+
+* **SUB_HYDROADDEDMASS_<X>**
+  Defines a 6x6 hydrodynamic added mass matrix.
+
+* **SUB_HYDROCONSTFORCE_<X>**
+  Applies a constant force (e.g., buoyancy) to a hydrodynamic reference point.
+
+* **SUB_HYDRODAMPING_<X>**
+  Specifies a 6x6 hydrodynamic damping matrix.
+
+* **SUB_HYDROQUADDAMPING_<X>**
+  Specifies a 6x6 quadratic hydrodynamic damping matrix.
+
+* **SUB_HYDROSTIFFNESS_<X>**
+  Specifies a 6x6 hydrodynamic stiffness matrix.
+
+* **SUBJOINTS**
+  Defines spatial joints and their orientation for substructure elements.
+
+* **SUBLOADS**
+  Defines distributed buoyancy or weight loads along members.
+
+* **SUBMEMBERS**
+  Lists the members connecting joints using specific elements.
+
+* **TP_INTERFACE_POS_<X>**
+  Defines the connection point of the substructure to the turbine.
+
+* **TP_ORIENTATION_<X>**
+  Sets the orientation of the transition piece coordinate system.
+
+* **USE_EXCITATION**
+  Enables the calculation of excitation forces from potential flow.
+
+* **USE_RAD_ADDMASS**
+  Extracts hydrodynamic added mass from radiation files.
+
+* **USE_RADIATION**
+  Activates radiation load calculation for potential flow bodies.
+
+* **USE_SUM_FREQS**
+  Enables sum-frequency load calculation.
+
+* **WATERDENSITY**
+  Specifies water density for substructure setup.
+
+* **WATERDEPTH**
+  Sets the water depth for visualization and setup.
+
+* **WAVEKINEVAL_MOR**
+  Controls wave kinematic evaluation for Morison equation forces.
+
+* **WAVEKINEVAL_POT**
+  Controls wave kinematic evaluation for potential flow forces.
+
+* **WAVEKINTAU**
+  Specifies the time constant for lagged wave kinematics.
+
+	
 Substructure File Format Changes from QBlade v2.06b
----------------------------------------------------
+###################################################
 
 The section describes the changes that have been made to different parts of the substructure file format from QBlade 2.06b onward.
-In most cases compatibility is still ensured and older formats are automatically detected, however you are strongly advised to update the substructure files that you are working with to this new format. All in all the changes are very little and can be implemented in a few minutes per file. See a summary of the changes below:
+In most cases, compatibility is still ensured and older formats are automatically detected, however you are strongly advised to update the substructure files that you are working with to this new format. All in all the changes are very little and can be implemented in a few minutes per file. See a summary of the changes below:
 
 SUBMEMBERS Table
-^^^^^^^^^^^^^^^^
+----------------
 
 In QBlade versions prior to 2.06b the **SUBMEMBERS** table looked like this:
 
@@ -1352,7 +1780,7 @@ Pay attention to the columns 4 and 5. In the old version column 4 specified a fl
 
 Because we did not want to add an extra column for each element type to the **SUBMEMBERS** table all element types can now be assigned in column 4. However, this change also requires that an element ID is unique across all different element types. Whereas previously you could have a rigid element with ID 1 and a flexible element with ID 1 this is not possible anymore since each element requires a unique ID. 
 
-Furthermore, for rectangular elements their orientation becomes important (vs cylindrical elements which are unidirectional), so we are using column 5 of the **SUBMEMBERS** table to define the rotation of an element (in degrees).
+Furthermore, for rectangular elements their orientation becomes important (vs cylindrical elements, which are unidirectional, so we are using column 5 of the **SUBMEMBERS** table to define the rotation of an element (in degrees).
 
 To sum up the changes:
 
@@ -1387,7 +1815,7 @@ Based on this we can easily convert the old **SUBMEMBERS** table to the new form
 As you can see in the above table we have moved all entries from column 5 of the old format (**RElmID**) to column 4 of the new format (**ElmID**). Since the rotation for cylindrical elements has no effect we simply added 0 for all members into column 5 (**ElmRot**).
 
 SUBELEMENTS Tables
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Each subelement that is defined now requires a unique element ID (the first column of each table) across all element types (**SUBELEMENTS**, **SUBELEMENTSRIGID**, **SUBELEMENTS_RECT**, **SUBELEMENTSRIGID_RECT**). In contrast in previous versions of QBlade the element ID only needed to unique within each table. 
 
@@ -1431,7 +1859,7 @@ This now needs to be change so that every element ID is unique across all elemen
 	
 
 MOORELEMENTS Table
-^^^^^^^^^^^^^^^^^^
+------------------
 
 The format of the **MOORELEMENTS** table has also been updated to align it more with the other element table formats. Older **MOORELEMENTS** formats are still accepted and recognized, however only the new format is documented from now on and should be preferred. 
 

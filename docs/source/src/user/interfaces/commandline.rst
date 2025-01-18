@@ -70,6 +70,7 @@ This command prints out an overview of all CLI functionality::
 	exp_ascii                 - adds ASCII format to auto-export and post-export formats
 	exp_fastbin               - adds FAST BINARY format to auto-export and post-export formats
 	exp_modal                 - exports modal frequencies (if a modal analysis was performed) during auto-export and post-export
+	exp_sim                   - exports the simulation time graph data during auto-export and post-export
 	exp_cut_txt               - adds cut-plane txt format to auto-export and post-export formats
 	exp_cut_vtu               - adds cut-plane vtu format to auto-export and post-export formats
 	post_exp                  - export results and cut-planes from all FINISHED .qpr and .qpr1 files in all WORKING_DIR(s)
@@ -83,96 +84,74 @@ CLI Functionality
 In this section the different CLI options are briefly explained.
 
 :code:`-d`
-
-	This parameter is used to specify on which OpenCL device QBlade should be executed. The default value is 0. To execute on the OpenCL device 1, the parameter would be :code:`-d1`.
+ This parameter is used to specify on which OpenCL device QBlade should be executed. The default value is 0. To execute on the OpenCL device 1, the parameter would be :code:`-d1`.
 
 :code:`-g`
-
-	This parameter specifies the OpenCL work-group size, which has a GPU dependent impact on the OpenCL performance. The work-group size should always be a power of 2. The default value is 32. To specify a work-group size of 64 you would pass the parameter :code:`-g64`.  
+ This parameter specifies the OpenCL work-group size, which has a GPU dependent impact on the OpenCL performance. The work-group size should always be a power of 2. The default value is 32. To specify a work-group size of 64 you would pass the parameter :code:`-g64`.  
 
 :code:`-t`
-
-	This parameter sets how many parallel instances of QBlade should be started when evaluating a batch of simulations. The default values is 1. To specify 12 parallel threads you would pass the parameter :code:`-t12`.
+ This parameter sets how many parallel instances of QBlade should be started when evaluating a batch of simulations. The default values is 1. To specify 12 parallel threads you would pass the parameter :code:`-t12`.
 	
 :code:`-o`
-
-	This parameter sets how many openMp threads should be used for each parallel instance of QB. This is specifically important to fine tune the performance of QB instances in a cloud-computing environment.
+ This parameter sets how many openMp threads should be used for each parallel instance of QB. This is specifically important to fine tune the performance of QB instances in a cloud-computing environment.
 	
 :code:`c:\directory\simulation.sim`
-	
-	Passing the absolute location of a :ref:`Simulation Definition ASCII File` (\*.sim) as one of the parameters adds this simulation definition to the list of simulations that will be evaluated. Multiple simulation definitions may be added during a single CLI call. Finished simulation definitions are stored as **.qpr1**, to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
+ Passing the absolute location of a :ref:`Simulation Definition ASCII File` (\*.sim) as one of the parameters adds this simulation definition to the list of simulations that will be evaluated. Multiple simulation definitions may be added during a single CLI call. Finished simulation definitions are stored as **.qpr1**, to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
 
 :code:`c:\directory\project.qpr`
-
-	Passing the absolute location of a QBlade Project File (\*.qpr) adds all simulation definitions within this project to the list of simulations that will be evaluated. Multiple project files may be added during a single CLI call. Finished project files are stored as ***.qpr1**,  to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
+ Passing the absolute location of a QBlade Project File (\*.qpr) adds all simulation definitions within this project to the list of simulations that will be evaluated. Multiple project files may be added during a single CLI call. Finished project files are stored as ***.qpr1**,  to indicate that these are project files that have already been evaluated. Should a simulation fail for any reason the associated project is stored as ***.qpre** instead, to indicate that this is a problematic simulation.
 
 :code:`c:\directory\ `
-	
-	Passing the absolute path of any directory adds this directory to the list of working directories (**WORKING_DIR**). Multiple directories may be added during a single CLI call.
+ Passing the absolute path of any directory adds this directory to the list of working directories (**WORKING_DIR**). Multiple directories may be added during a single CLI call.
 
 :code:`all_sim`
-	
-	Adding the parameter :code:`all_sim` causes QBlade to add **all \*.sim files from all WORKING_DIR(s)** to the list of simulations that will be evaluated.
+ Adding the parameter :code:`all_sim` causes QBlade to add **all \*.sim files from all WORKING_DIR(s)** to the list of simulations that will be evaluated.
 
 :code:`all_qpr`
-	
-	Adding the parameter :code:`all_qpr` causes QBlade to add **all \*.qpr files from to all WORKING_DIR(s)** to the list of projects that will be evaluated.
+ Adding the parameter :code:`all_qpr` causes QBlade to add **all \*.qpr files from to all WORKING_DIR(s)** to the list of projects that will be evaluated.
 
 :code:`no_save`
-	
-	The parameter :code:`no_save` prevents QBlade from automatically storing finished simulations as **\*.qpr1** or **\*.qpr2** files. Sometimes those files are not explicitly needed, for example if results are automatically exported and the user wants to reduce disk memory consumption during very large batch runs.
+ The parameter :code:`no_save` prevents QBlade from automatically storing finished simulations as **\*.qpr1** or **\*.qpr2** files. Sometimes those files are not explicitly needed, for example if results are automatically exported and the user wants to reduce disk memory consumption during very large batch runs.
 
 :code:`remove_wind`
-	
-	The parameter :code:`remove_wind` removes the binary windfield files (\*.bts), that may be automatically generated when a simulation definition file (\*.sim) is evaluated. This can be useful to reduce disk memory usage during very large batch runs.
+ The parameter :code:`remove_wind` removes the binary windfield files (\*.bts), that may be automatically generated when a simulation definition file (\*.sim) is evaluated. This can be useful to reduce disk memory usage during very large batch runs.
 
 :code:`skip`
-	
-	Adding the parameter :code:`skip` causes QBlade to skip the evaluation of a simulation (\*.sim) or project (\*.qpr) file if an assocated finished project file (\*.qpr1) already exists, or if the results from this simulation have already been exported previously. When using *skip* during post_exp files are only exported if their filename does not exist yet.
+ Adding the parameter :code:`skip` causes QBlade to skip the evaluation of a simulation (\*.sim) or project (\*.qpr) file if an assocated finished project file (\*.qpr1) already exists, or if the results from this simulation have already been exported previously. When using *skip* during post_exp files are only exported if their filename does not exist yet.
 
 :code:`exp_h2bin`
-	
-	The parameter :code:`exp_h2bin` adds the HAWC2 binary format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+ The parameter :code:`exp_h2bin` adds the HAWC2 binary format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 	
 :code:`exp_h2ascii`
-	
-	The parameter :code:`exp_h2ascii` adds the HAWC2 ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+ The parameter :code:`exp_h2ascii` adds the HAWC2 ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
 :code:`exp_ascii`
-	
-	The parameter :code:`exp_ascii` adds the ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+ The parameter :code:`exp_ascii` adds the ASCII format to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
 :code:`exp_fastbin`
-	
-	The parameter :code:èxp_fastbin`adds the OpenFAST binary format (.outb) to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
-
-:code:`\directory\filter.flt`
-	
-	Passing the absolute location of a result filter file. All export files that will be generated contain only the variables defined in the filter file. Each line in the filter file specifies a single variable name. The variable names in the filter file need to correspond to the exact name of the variable as it is shown in QBlade's graphs.
+ The parameter :code:èxp_fastbin`adds the OpenFAST binary format (.outb) to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 	
 :code:`exp_modal`
 	
 	The parameter :code:`exp_modal` exports modal frequencies during auto_exp and post_exp exports. The modal frequencies are only exported if the simulation contains the results of a modal analysis. The exported modal frequencies are stored in a file with the appendix *_modal.txt*.
+	
+:code:`exp_sim`
+ The parameter :code:`exp_sim` exports the simulation time graph data during auto_exp and post_exp exports. The sim time data is only exported if the simulation stores these results. The exported simulation time data is stored in a file with the appendix *_SimTimeData* in the filename.
 
 :code:`exp_cut_txt`
-	
-	The parameter :code:`exp_cut_txt` adds the cut-plane TXT format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+ The parameter :code:`exp_cut_txt` adds the cut-plane TXT format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
 :code:`exp_cut_vtu`
-	
-	The parameter :code:`exp_cut_vtu` adds the cut-plane VTU format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
+ The parameter :code:`exp_cut_vtu` adds the cut-plane VTU format to the list of export formats. Whenever a cut-plane is evaluated, its velocity field will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 
 :code:`post_exp`
-	
-	The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
+ The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
 
 :code:`dlc=\directory\dlc.*`
-	
-	This call allows to create simulations from a dlc table definition. It requires the filename of the dlc definition. Furthermore, a WORKING_DIR in which the simulations are created is required.
+ This call allows to create simulations from a dlc table definition. It requires the filename of the dlc definition. Furthermore, a WORKING_DIR in which the simulations are created is required.
 
 :code:`dlc=\directory\dlc.*`
-	
-	This sets a filter file that is applied during the generation of all auto-export and post-export files.
+ This sets a filter file that is applied during the generation of all auto-export and post-export files, see :ref:`Global Export Filter`.
 
 Sample CLI Call to Start a Batch Run
 ************************************

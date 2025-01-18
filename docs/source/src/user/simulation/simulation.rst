@@ -184,7 +184,9 @@ The turbine operation can be prescribed using a file of the following format. *T
 
 * **Prescribed Motion File**
 
-The translation and rotation of the ground, where the tower bottom of the wind turbine is constrained, can be prescribed using a prescribed motion file of the following format. The translation and rotation is applied to the "ground" to which a bottom fixed turbine is directly connected. If a floating wind turbine is simulated the prescribed motion will only affect elements that are constrained to the seabed (typically the mooring line anchors). By using the keyword *CONSTRAINEDFLOATER* in the turbine substructure definition it is also possible to prescribe the translation/rotation of the floater directly.
+The translation and rotation of the ground, where the tower bottom of the wind turbine is constrained, can be prescribed using a prescribed motion file of the following format. The translation and rotation is applied to the "ground" to which a bottom fixed turbine is directly connected. 
+
+If a **floating wind turbine** is simulated the prescribed motion will only affect elements that are constrained to the seabed (typically the mooring line anchors). By using the keyword **FIXEDFLOATER** (see :ref:`Miscellaneous Substructure Parameters`) in the turbine substructure definition it is also possible to prescribe the translation/rotation of the floater directly.
 
 .. code-block:: console
 	:caption: : An exemplary prescribed motion file
@@ -256,7 +258,7 @@ To prevent the mooring lines from penetrating the seabed, the seabed is modelled
 Stored Simulation Data
 ----------------------
 
-The uer can choose here to only store a certain type of simulation data (to limit the project file or data export size. Furthermore, the user can choose to store simulation data only after a certain time has passed, to remove transients from the datasets.
+The user can choose here to only store a certain type of simulation data (to limit the project file or data export size. Furthermore, the user can choose to store simulation data only after a certain time has passed, to remove transients from the datasets.
 
 * **Store Output From**: Simulation Data is only stored after the defined simulation time has passed.
 * **Store Aero Time Data**: Toggles if this data type is stored. (All data that is shown in the *Aerodynamic Time Graph*).
@@ -375,7 +377,7 @@ Simulation objects can be exported into the text based ``.sim`` format. When a s
 	    40.00                                INITIAL_AZIMUTH    - the initial azimuthal rotor angle in [deg]
 	    1                                    STRSUBSTEP         - the number of structural substeps per timestep (usually 1)
 	    5                                    RELAXSTEPS         - the number of initial static structural relaxation steps
-	    0                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
+	    0                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescribed) 
 	    7.000                                RPMPRESCRIBED      - the prescribed rotor RPM [-]
 	    5                                    STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
 	    0                                    MODNEWTONITER      - use the modified newton iteration?
@@ -494,57 +496,6 @@ Multiple simulations can be evaluated in a parallel batch queue through the dial
    :alt: The multi-threaded batch analysis dialog.
 
    The multi-threaded batch analysis dialog.
-   
-Exporting Simulation Results
-============================
-
-QBlade can export simulation time data in a range of different formats. The available formats are:
-
-* **QBlade_ASCII**: The QBlade ASCII format. A simple header per data column followed by the data in columns. This format can easily be imported into a spreadsheet tool.
-* **HAWC2_ASCII**: The HAWC2 ASCII format. A .sel file that contains the header information and a .dat file that contains the data in ASCII format.
-* **HAWC2_BIN**: The HAWC2 binary format. A .sel file that contains the header and a .dat file in binary format that contains the data. Memory efficient.
-* **OpenFAST_BIN**: The OpenFAST binary format. A single .outb file that contains header and data, both inbinary format. Memory efficient. 
-
-Information on the HAWC2 formats is found in the `HOW2HAWC2 User Manual <https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://orbit.dtu.dk/files/7703110/ris_r_1597.pdf&ved=2ahUKEwjf8tuP6tGGAxVjHjQIHQHYDRgQFnoECBYQAQ&usg=AOvVaw3D9y9rlDgZlGqOQCtCSvmF>`_. This format is also compatible with DTU's `PDap Software <https://tools.windenergy.dtu.dk/home/Pdap/default.html>`_. 
-
-Information on the OpenFAST binary format is found in the `OpenFAST Documentation <https://openfast.readthedocs.io/en/dev/source/user/fast.farm/OutputFiles.html>`_.
-
-.. _fig-export_simulation_dialog:
-.. figure:: export_simulation_dialog.png
-   :align: center
-   :scale: 50%
-   :alt: The Batch Export dialog
-
-   The Batch Export dialog
-
-Global Export Filter
---------------------
-
-If the user only needs to export a subsection of all data generated by QBlade, the *Global Export Filter* can be employed. It is found in the simulation menu, see :numref:`fig-global_export_filter`. The filter can be applied by specifying a list containing the exact variable names of QBlade, and the order in which the data should be exported. An exemplary list of variable names that can be used as a filter is shown below:
-
-.. code-block:: console
-	:caption: : Exemplary list of variable names for the global export filter
-	
-	Time [s]
-	Gen. HSS Torque [Nm]
-	X_c Tip Trl.Def. (OOP) BLD 1 [m]
-	X_b RootBend. Mom. BLD 1 [Nm]
-
-**Please note**: Once the global filter is set, it is applied each time time-domain data is exported. When a project is stored, the global export filter that is set is also stored. To reset the filter, simply remove all specified variable names in the export filter dialog, see :numref:`fig-global_export_filter_dialog`.
-
-.. _fig-global_export_filter:
-.. figure:: global_export_filter.png
-   :align: center
-   :alt: The Global Export Filter optioon in the menu
-
-   The Global Export Filter optioon in the menu
-   
-.. _fig-global_export_filter_dialog:
-.. figure:: global_export_filter_dialog.png
-   :align: center
-   :alt: The Global Export Filter optioon in the menu
-
-   The Global Export Filter optioon in the menu
 
 
 .. footbibliography::

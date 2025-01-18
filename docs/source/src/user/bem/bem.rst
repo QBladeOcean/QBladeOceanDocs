@@ -32,7 +32,7 @@ the computation. This implies that no dimensional power curve or load distributi
     :scale: 70%
     :alt: Rotor BEM definition dialogue
 
-    Definition of a Rotor BEM simulaton.
+    Definition of a Rotor BEM simulation.
 
 Characteristic BEM
 ------------------
@@ -48,7 +48,7 @@ This submodule is of great help when designing custom control strategies for var
     :scale: 30%
     :alt: Characteristic BEM demonstration
 
-    Result of a characteristic BEM simulation. The :math:`C_p` coefficent is plotted over :math:`rpm`, showing multiple wind speeds curves for a constant pitch angle.
+    Result of a characteristic BEM simulation. The :math:`C_p` coefficient is plotted over :math:`rpm`, showing multiple wind speeds curves for a constant pitch angle.
     
 Turbine BEM
 -----------
@@ -98,14 +98,14 @@ The simulation is carried out over the specified range of windspeeds with the se
 ..
     Annual Energy Production Calculation
     ------------------------------------
-    If a turbine simulation has been conducted, the user may calculate the annual yield of the turbine. Therefore, the the annual windspeed distribution
+    If a turbine simulation has been conducted, the user may calculate the annual yield of the turbine. Therefore, the annual windspeed distribution
     can be detailed in the Weibull Settings via the WEIBULL distribution parameters k and A (see :footcite:t:`QBlade06`).
 
 ..
     Corrections
 
     * **DTU Poly BEM**: Time shift of the generated wave signal.
-    * **Prandtl Tip Loss**: Acvitate Prandtl Tip Loss, see :ref:`Corrections`.
+    * **Prandtl Tip Loss**: Activate Prandtl Tip Loss, see :ref:`Corrections`.
     * **3D Correction**: Activate 3D correction:ref:`Corrections`.
 
 .. footbibliography::

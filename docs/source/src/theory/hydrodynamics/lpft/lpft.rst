@@ -113,7 +113,7 @@ The time convolution kernel is referred to as the *impulse response function*, o
 	\end{equation}
 	\textrm{  .}
 	
-In practise the second form is used due to its easier numerical integration.
+In practice the second form is used due to its easier numerical integration.
 
 The arrays for :math:`A_{ij}(\omega)` and :math:`B_{ij}(\omega)` can be imported into QBlade in NEMOH, WAMIT, or BEMUse formats. This integration is carried out numerically with a frequency step size :math:`\Delta_{\omega}`.
 	

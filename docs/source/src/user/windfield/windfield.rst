@@ -2,7 +2,7 @@ Wind Field Generator Overview
 -----------------------------
 
 .. _fig-wind-module:
-.. figure:: windbutton.png
+.. figure:: wind_module.png
     :align: center
     :alt: Wind field creation dialogue in QBlade.
 
@@ -227,7 +227,7 @@ If the parameter **IMPORTBOX** is set to *true*, QBlade will search for the (pos
  * *PREFIX* _v.bin
  * *PREFIX* _z.bin
 
-An import the velocity components from these binary files directly.
+and import the velocity components from these binary files directly.
 
 .. code-block:: console
 	:caption: : Exemplary Mann (.man) format file
@@ -363,7 +363,7 @@ Uniform Wind Field
 A uniform wind field is specified directly within the *Wind Input Type* of the turbine simulation dialogue, shown in :numref:`fig-wind-pane` (see :doc:`../simulation/simulation`).
 The necessary input parameters including velocity, horizontal inflow angle and directional shear are defined here.
 In the case that the atmospheric boundary layer is to be modelled, this can be selected with the wind shear type radio button. 
-The corresponding shear parameters can then by specified (see :doc:`../../theory/environment/wind/wind`). 
+The corresponding shear parameters can then be specified (see :doc:`../../theory/environment/wind/wind`). 
 
 .. _fig-wind-pane:
 .. figure:: winddialog.png

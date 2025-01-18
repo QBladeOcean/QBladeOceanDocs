@@ -30,7 +30,7 @@ HAWT Mode, VAWT Mode and PROP Mode
 ==================================
 
 The main differences between the three modes are in the Blade Design Module (see :ref:`Blade Design Overview`) and the :ref:`Rotor BEM` Module. Depending on the chosen mode features in the blade design module and variables for the steady state rotor/propeller design simulations are changed.
-For instance when in **PROP** mode propeller specific variables are introduces, such as the *Advance ratio* or the *Propeller Efficiency*. Furthermore in the blade design module propeller specific optimization algorithms are introduced.
+For instance when in **PROP** mode propeller specific variables are introduced, such as the *Advance ratio* or the *Propeller Efficiency*. Furthermore in the blade design module propeller specific optimization algorithms are introduced.
 
 .. _fig-propdesign:
 .. figure:: propdesign.png

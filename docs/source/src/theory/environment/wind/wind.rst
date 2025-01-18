@@ -32,7 +32,7 @@ It is assumed that the flow is unidirectional (uniform) and that the streamtube 
 	Idealised treatment of the flow field through a wind turbine rotor of the actuator disc theory. The streamtube is shown dashed.
 
 We shall introduce a new quantity, the axial induction :math:`a = 1 - u/u_{\infty}`, where :math:`u_{\infty}=u_1` is the inflow velocity far upstream of the rotor. 
-The axial induction is a measure for the deceleration of the wind cased by the presence of the rotor. Following this specification, it is clear that the velocity through the rotor can be expressed as :math:`u = u_{\infty}(1-a)`.
+The axial induction is a measure for the deceleration of the wind caused by the presence of the rotor. Following this specification, it is clear that the velocity through the rotor can be expressed as :math:`u = u_{\infty}(1-a)`.
 The flow downstream is given by :math:`u_4 = u_{\infty}(1-2a)`. In addition to predictions of the velocity field, the Bernoulli equation is utilized within the actuator disc to calculate integral forces acting over the disc. 
 The total force in freestream direction, the thrust :math:`T`, is given by:
 
@@ -95,7 +95,7 @@ Turbulent Inflow
 ---------------------------------------------
 In generally all cases of practical interest, the inflow of a wind turbine is turbulent.
 The influence of atmospheric stability, terrain, obstacles and upstream turbines act to further increase the turbulence in the inflow of a wind turbine. 
-A realistic modelling approaching therefore also accounts for this.
+A realistic modelling approach therefore also accounts for this.
 Inflow turbulence is generally inhomogeneous and anisotropic, however for many cases homogeneity and isotropy can be assumed.
 A representative quantity for the magnitude of the turbulent velocity fluctuations is given by the turbulence intensity :math:`I_T`, given by:
 

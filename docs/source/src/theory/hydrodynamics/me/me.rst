@@ -86,7 +86,7 @@ Correction (MCFC). The original MCFC is formulated in terms of the normal force 
 cylinder. It can be recast so that the inertia part of the Morison equation is affected, see the IEC standard :footcite:`IEC61400-3-1` for reference. Following an
 approach presented in the USFOS reality engineering guide :footcite:`USFOS`, QBlade changes the local water particle acceleration's magnitude and phase to
 affect the Morison element. The original modifications include the calculation of Bessel functions. To
-speed up calculations, an more efficiently calculable approximation proposed in :footcite:t:`USFOS` is used for the
+speed up calculations, a more efficiently calculable approximation proposed in :footcite:t:`USFOS` is used for the
 modification of the particle acceleration's magnitude and phase. The equivalent particle acceleration
 amplitude is given by:
 
@@ -123,8 +123,8 @@ These options are presented in :numref:`fig-me-kin-opt`.
 
 The first option shown in :numref:`fig-me-kin-opt` (a) is the wave kinematics and elevation at the local instantaneous position of the cylinder. In this example, the cylinder has been divided into four
 sub-elements. The lower two are fully submerged and one sub-element is partially submerged. The second option in :numref:`fig-me-kin-opt` (b) 
-is using the wave elevation and kinematics at the initial position of the sub-element. This option allows a coherent theoretical assumption of small oscillations around a steady positon when Morison forces are used in conjunction with a linear potential
+is using the wave elevation and kinematics at the initial position of the sub-element. This option allows a coherent theoretical assumption of small oscillations around a steady position when Morison forces are used in conjunction with a linear potential
 flow model (see :doc:`../lpft/lpft`). The third option uses the wave elevation and kinematics at a low-passed position of the sub-element (:numref:`fig-me-kin-opt` (c)). This allows for an assumption of 
-small oscillations around a steady state for an element that as drifted from its initial position due to an acting force such as and aerodynamic thrust or sea current hydrodynamic force.
+small oscillations around a steady state for an element that has drifted from its initial position due to an acting force such as and aerodynamic thrust or sea current hydrodynamic force.
 
 .. footbibliography::

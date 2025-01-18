@@ -15,7 +15,7 @@ QBlade also provides the capability to model Marine Hydrokinetic (MHK) Turbines 
 Simulation Settings for MHK Turbines
 ************************************
 
-MHK turbines are treated as if the were *onshore* turbines within the modeling framework. This involves substituting the density and viscosity values of air with those corresponding to water to ensure accurate physical properties throughout the model.
+MHK turbines are treated as if they were *onshore* turbines within the modeling framework. This involves substituting the density and viscosity values of air with those corresponding to water to ensure accurate physical properties throughout the model.
 
  * In the simulation settings, Turbine Environment set the Installation to **Onshore**.
  * Change the **Air Density** value to the respective value for water.

@@ -15,15 +15,15 @@ may be expressed as
 where,
 
 - :math:`\Theta` is the velocity potential,
-- :math:`g` is the graviational acceleration,
+- :math:`g` is the gravitational acceleration,
 - :math:`A` is the wave amplitude,
-- :math:`\omega` is the ciruclar frequency,
+- :math:`\omega` is the circular frequency,
 - :math:`h` is the water depth,
 - :math:`t` is the time,
 - :math:`x,y,z` are Cartesian coordinates,
 - :math:`k` is the wave number.
 
-The wave number k may be be expressed through the approximation of the dispersion relationship :footcite:t:`Guo2002`
+The wave number k may be expressed through the approximation of the dispersion relationship :footcite:t:`Guo2002`
 
 .. math::
    \begin{align}
@@ -110,9 +110,9 @@ where,
 .. _fig-spectra:
 .. figure:: spectra.png
     :align: center
-    :alt: Person-Moskowitz an JONSWAP spectra
+    :alt: Pierson-Moskowitz an JONSWAP spectra
 
-    Person-Moskowitz an JONSWAP spectra with different peak shape parameters :math:`\gamma`
+    Pierson-Moskowitz an JONSWAP spectra with different peak shape parameters :math:`\gamma`
 
 As visible in :numref:`fig-spectra`, the JONSWAP spectrum is a modification of the PM-spectrum by :math:`A_\gamma` a normalizing factor,  :math:`\gamma` the peak shape parameter
 and :math:`\sigma` the spectra width parameter :footcite:t:`Branlard2010`.

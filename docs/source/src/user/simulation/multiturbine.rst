@@ -110,7 +110,10 @@ For multi-turbine simulations it is also possible to define a global mooring sys
 
 Furthermore, it is also possible to include **SUBMEMBERS**, **SUBELEMENTS**, **SUBCONSTRAINTS** and  **NLSPRINGDAMPERS** and **MOORLOADS** in the same way as described in the :ref:`Substructure Modeling`.
 
-The simulation data that is stored from the global mooring system can be viewed in the *Simulation Time Graph*.
+Simulation Data from the Global Mooring System
+----------------------------------------------
+
+The simulation data that is stored from the global mooring system can be viewed in the *Simulation Time Graph*, see :ref:`Simulation Results & Data`.
 
 The global mooring system definition file shown below is used to setup the mooring conficuration that is shown in :numref:`fig-global-mooring`.
 
@@ -230,7 +233,7 @@ The second options is is to defined multiple turbines by encapsulating each turb
 	0.000                                    SHEAREXP           - the shear exponent if using a power law profile, if a windfield is used these values are used to calculate the mean wake convection velocities
 	0.010                                    ROUGHLENGTH        - the roughness length if using a log profile, if a windfield is used these values are used to calculate the mean wake convection velocities
 	0.00                                     DIRSHEAR           - a value for the directional shear in deg/m
-	78.00                                    REFHEIGHT          - the reference height, used to contruct the BL profile
+	78.00                                    REFHEIGHT          - the reference height, used to construct the BL profile
 
 	----------------------------------------Ocean Depth, Waves and Currents------------------------------------------- 
 	the following parameters only need to be set if ISOFFSHORE = 1
@@ -337,7 +340,7 @@ The second options is is to defined multiple turbines by encapsulating each turb
 	    0.00                                 INITIAL_AZIMUTH    - the initial azimuthal rotor angle in [deg]
 	    1                                    STRSUBSTEP         - the number of structural substeps per timestep (usually 1)
 	    5                                    RELAXSTEPS         - the number of initial static structural relaxation steps
-	    0                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescibed) 
+	    0                                    PRESCRIBETYPE      - rotor RPM prescribe type (0 = ramp-up; 1 = whole sim; 2 = no RPM prescribed) 
 	    4.000                                RPMPRESCRIBED      - the prescribed rotor RPM [-]
 	    10                                   STRITERATIONS      - number of iterations for the time integration (used when integrator is HHT or Euler)
 	    1                                    MODNEWTONITER      - use the modified newton iteration?
@@ -386,7 +389,7 @@ The second options is is to defined multiple turbines by encapsulating each turb
 	the following parameters only need to be set if ISOFFSHORE = 1
 	200.00                                   WATERDEPTH         - the water depth
 	New_Wave.lwa                             WAVEFILE           - the path to the wave file, leave blank if unused
-	1                                        WAVESTRETCHING     - the type of wavestretching, 0 = vertical, 1 = wheeler, 2 = extrapolation, 3 = none
+	1                                        WAVESTRETCHING     - the type of wave stretching, 0 = vertical, 1 = wheeler, 2 = extrapolation, 3 = none
 	10000.00                                 SEABEDSTIFF        - the vertical seabed stiffness [N/m^3]
 	0.50                                     SEABEDDAMP         - a damping factor for the vertical seabed stiffness evaluation, between 0 and 1 [-]
 	0.00                                     SEABEDSHEAR        - a factor for the evaluation of shear forces (friction), between 0 and 1 [-]

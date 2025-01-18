@@ -29,7 +29,6 @@ Structural Dynamics
 
    structure/chrono/chrono
    structure/coupling/coupling
-   structure/table/table
    
 Environmental Conditions
 ************************
