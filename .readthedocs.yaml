@@ -7,7 +7,7 @@ version: 2
   
 # Specify build formats (html is built by default; add pdf to enable it)
 formats:
-  - html
+  - htmlzip 
   - pdf
 
 # Set the version of Python and other tools you might need
