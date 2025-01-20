@@ -107,7 +107,7 @@ It is also possible to send sectional data using this table. Sectional data requ
 Sending Turbine Data to a Wind Turbine Controller Across Turbine Instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In multi-turbine or multi-rotor simulations, sensor data from one turbine can be transmitted to the controller of another turbine. To achieve this, append **NUM_X** to the **CONTROLLER_IN** keyword, where **X** is the integer identifier of the target turbine instance. The identifiers start at 0 for the first turbine and increment sequentially up to N-1, where N is the total number of turbines in the simulation.
+In multi-turbine or multi-rotor simulations, sensor data from one turbine can be transmitted to the controller of another turbine. To achieve this, append **NUM_X** to the **CONTROLLER_IN** keyword, where **X** is the integer identifier of the target turbine instance. **The identifiers start at 0 for the first turbine and increment sequentially up to N-1, where N is the total number of turbines in the simulation.**
 
 For instance, to send data to the third turbine in the list (index Turbine[2] in C++ notation), the **CONTROLLER_IN** table should be configured as follows:
 
@@ -120,11 +120,26 @@ For instance, to send data to the third turbine in the list (index Turbine[2] in
     0    "Time [s]"
     1    "Timestep [s]"
     10   "X_l Acc. BLD_1 pos 1.000"
+    
+It is also possible to send data from this turbine controllers SWAP array to the SWAP array of the turbine controller of Turbine[2]. In the example below the SWAP array values from indices 14 and 11 of this turbine are send to the SWAP array of Turbine[2] at the indices 0 and 1.
+
+.. code-block:: console
+    :caption: CONTROLLER_IN Table Example – Sending Sectional Data
+
+    CONTROLLER_IN NUM_2
+    SWAP DATA POSITION
+    0    "SWAP_14" 
+    1    "SWAP_11"
+    
+.. admonition:: Turbine indices in multi-turbine simulations
+   :class: important
+   
+   While most numberings in QBlade, such as for substructure transition pieces, or for external controllers, start at 1 - the turbine objects are numbered with c++ array notation. The main reason for this is to have consistency with the numbering of turbine objects with the functions in QBlade's :ref:`Command Line Interface (CLI)`.
 
 Sending Turbine Data to an External Library
 -------------------------------------------
 
-Sending custom data to an external library is the same process as sending data to a predefined controller (see :ref:`Sending Turbine Data to a Wind Turbine Controller`), only the keyword for the table changes. In this case we are passing data to the external controller *1*, indicated by the keyword *EXTERNAL_1_IN*. To pass to the second external controller you would use the keyword *EXTERNAL_2_IN*.
+Sending custom data to an external library is the same process as sending data to a predefined controller (see :ref:`Sending Turbine Data to a Wind Turbine Controller`), only the keyword for the table changes. In this case we are passing data to the external controller *1*, indicated by the keyword *EXTERNAL_1_IN*. To pass to the second external controller you would use the keyword *EXTERNAL_2_IN*. It is also possible to send data from the turbine controllers SWAP array to the external library. To do this, simply enter **SWAP**, followed by the swap array index number:
 
 .. code-block:: console
 	:caption: : EXTERNAL_1_IN Table
@@ -133,6 +148,7 @@ Sending custom data to an external library is the same process as sending data t
 	SWAP DATA
 	0    "Time [s]"
 	1    "Timestep [s]"
+	3    "SWAP_5"
 
 Note that the output of the desired sensor should be enabled in the :ref:`StrDef_MainFile` and the variable name must exist. Otherwise, zeros will be passed to the controller.
 
@@ -150,6 +166,12 @@ For example, the following configuration sends data to the second external libra
     SWAP DATA
     0    "Time [s]"
     1    "Timestep [s]"
+    3    "SWAP_5"
+    
+.. admonition:: Turbine indices in multi-turbine simulations
+   :class: important
+   
+   While most numberings in QBlade, such as for substructure transition pieces, or for external controllers, start at 1 - the turbine objects are numbered with c++ array notation. The main reason for this is to have consistency with the numbering of turbine objects with the functions in QBlade's :ref:`Command Line Interface (CLI)`.
 
 Applying Wind Turbine Controller Data to the Turbine
 ----------------------------------------------------

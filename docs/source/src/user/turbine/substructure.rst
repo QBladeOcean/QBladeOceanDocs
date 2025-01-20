@@ -1170,7 +1170,7 @@ By default, the hydrodynamic loads are applied at the :code:`REF_HYDRO_POS`. Whe
 Potential Flow Hydrodynamics Coordinate Systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When hydrodynamic potential flow databases are included in a simulation the resulting hydrodynamic forces are evaluated in the **Hydrodynamic Wavekinematics Evaluation Coordinate System** (HYDRO Wavekin. Eval. Coord). The floater states (translational and rotational velocity) are evaluated in the **HYDRO Wavekin. Eval. Coord** system (see :numref:`fig-wavekineval`). The wave kinematics (heading, amplitude, phase) are evaluated at the origin of the same system. The radiation, excitation, second order sum and difference forces and moments are then calculated and applied to the floater at the origin of the **Reference Hydrodynamic Position** (REF_HYDRO_POS_X). The definition of the **Hydrodynamic Wavekinematics Evaluation Coordinate System** is discussed below.
+When hydrodynamic potential flow databases are included in a simulation the resulting hydrodynamic forces are evaluated in the **Hydrodynamic Wavekinematics Evaluation Coordinate System** (HYDRO Wavekin. Eval. Coord). The floater velocities (translational and rotational) are evaluated in the **HYDRO Wavekin. Eval. Coord** system (see :numref:`fig-wavekineval`). The wave kinematics (heading, amplitude, phase) are evaluated at the origin of the same system. The radiation, excitation, second order sum and difference forces and moments are then calculated and applied to the floater at the origin of the **Reference Hydrodynamic Position** :code:`REF_HYDRO_POS_X`. The definition of the **Hydrodynamic Wavekinematics Evaluation Coordinate System** is discussed below.
 
 .. _fig-wavekineval:
 .. figure:: wavekineval.png
