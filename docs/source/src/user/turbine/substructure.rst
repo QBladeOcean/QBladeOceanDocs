@@ -890,6 +890,11 @@ Adding P-Y Curves to a Substructure
 
    This applies proportional damping to the force-displacement relationship, where damping coefficients are calculated as :math:`D_i = \text{SPRINGDAMPK} \cdot K_i`.
 
+.. admonition:: Caution: Correctly Integrating Force Values
+   :class: important
+   
+      Typically, the resistance force in p-y curves is expressed in terms of force per unit pile length (:math:`\frac{N}{m}`). Since the spring elements in QBlade act on the nodes of a member, the force values defined in the :code:`NLSPRINGDAMPERS` table must be integrated according to the length of the associated member.
+
 P-Y Curve Hysteresis
 ^^^^^^^^^^^^^^^^^^^^
 In QBlade, nonlinear springs can model *elastic perfectly-plastic* behavior, meaning the spring response is fully recoverable until the *ultimate soil resistance* is reached. The *ultimate soil resistance* is reached when the user defined p-y- curve reaches a plateau (see :ref:`nlspringdampers-table`). As the lateral displacement increases and the p–y curve approaches its plateau (representing the soil's ultimate resistance), the behavior transitions to plastic deformation, where any additional displacement results in permanent deformation. To capture this behavior, an elastic perfectly plastic hysteresis model is implemented (see :numref:`fig-p_y_curve`), ensuring that the model accurately represents the transition from elastic (recoverable) to plastic (permanent) behavior. 
