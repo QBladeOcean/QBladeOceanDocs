@@ -905,7 +905,7 @@ To model this behavior, QBlade uses an elastic perfectly-plastic hysteresis mode
 
 
 .. _fig-p_y_curve:
-.. figure:: moor_load.png
+.. figure:: p_y_curve.png
    :align: center
    :alt: Elastic perfectly-plastic hysteresis.
    
