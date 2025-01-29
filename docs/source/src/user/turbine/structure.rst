@@ -314,6 +314,29 @@ Blade Parameters
 	
 The location of the structural data tables for the blades is defined by the keywords shown above. The number of blades is defined by the parameter :code:`NUMBLD`, this value overrides the number of blades that is defined in the turbine definition dialog. For each blade a keyword :code:`BLDFILE_X` is searched for where the filename of the blade data table is defined. Different blade data tables can be assigned to each individual blade.
 
+Custom Azimuthal Spacing
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, the azimuthal spacing between rotor blades is given by :math:\frac{360^\circ}{N}, where :math:N represents the number of blades. If a rotor is under construction and not all blades are attached, the azimuthal spacing can be customized to reflect the incomplete assembly, see :numref:`fig-incomplete_rotor`.
+
+.. code-block:: console
+	:caption: : Custom azimuthal spacing
+	
+	------------------------------- BLADES ------------------------------------
+	120				AZISPACING - Custom azimuthal spacing
+	2				NUMBLD - Number of blades 
+	NREL5MW_Blade.str		BLDFILE_1 - Name of file containing properties for blade 1
+	NREL5MW_Blade.str		BLDFILE_2 - Name of file containing properties for blade 2
+
+.. _fig-incomplete_rotor:
+.. figure:: incomplete_rotor.png
+    :align: center
+    :width: 400px
+    :alt: An incomplete rotor with only 2 blades attached.
+    
+    An incomplete rotor with only 2 blades attached.
+
+
 Tower Parameters
 ----------------
 

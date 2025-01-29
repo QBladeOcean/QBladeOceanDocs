@@ -713,6 +713,10 @@ It can be either a rigid connection or a connection via a system of non-linear s
  - With the keyword :code:`JNT_<ID>`, where <ID> represents the ID of the joint. This way, the cable is connected directly to a existing joint.
  - With the keyword :code:`FLT_<XPos>_<YPos>_<ZPos>`, where <XPos>_<YPos>_<ZPos> represent the global (x,y,z) coordinates of the connection point (in m). Here, QBlade creates a constraint between this point and the floater to attach the cable.
  - With the keyword :code:`GRD_<XPos>_<YPos>`, where <XPos>_<YPos> represent the global (x,y) (in m) coordinates of an anchor point which is located at the z-position of the seabed.
+ - With the keyword :code:`BLD_<X>_<Y>`, blade X at the normalized curved length position Y.
+ - With the keyword :code:`STR_<X>_<Y>_<Z>`, connects to strut Y of blade X at the normalized curved length position Z.
+ - With the keyword :code:`TWR_<X>`, connects to the tower at the normalized position X.
+ - With the keyword :code:`TRQ_<X>`, connects to the torquetube, at the normalized position X.
   
  The fourth entry is the length of the cable (in m). The fifth entry is the ID number of the cable element defined in :code:`MOORELEMENTS`. The sixth entry is the ID number of the hydrodynamic coefficient group defined in :code:`HYDROMEMBERCOEFF`.
  The seventh entry specifies if the cable is buoyant (= 1) or not (= 0). The eighth entry specifies the ID number of the marine growth element used for this cable (see :code:`MARINEGROWTH`). The ninth entry is the number of discretization nodes used 
@@ -726,6 +730,12 @@ It can be either a rigid connection or a connection via a system of non-linear s
 	1	FLT_-40.868_0.0_-14.0		GRD_-837.6_0		835.5	1	1	1	0	30	Mooring1
 	2	FLT_20.434_35.393_-14.0		GRD_418.8_725.4		835.5	1	1	1	0	30	Mooring2
 	3	FLT_20.434_-35.393_-14.0	GRD_418.8_-725.4	835.5	1	1	1	0	30	Mooring3
+
+ It is also possible to assign offsets to mooring line connections when connecting to blades, struts, the tower, or the torquetube. These offsets are defined similarly to the offsets for cable connections; see :ref:`Applying Offsets to Cables`. 
+
+ The offsets are specified in the local coordinate system of the connected body using `x`, `y`, and `z` coordinates, appended after the length position. 
+
+ For example, ``BLD_1_0.5_0_1_1`` applies an offset of 1m in the local `y` and `z` directions of the blade.
 	
 :code:`MOORCONSTRAINTS`
  By default, only the position of the mooring line end nodes is constrained in the :code:`MOORMEMBERS` table. The :code:`MOORCONSTRAINTS` table can optionally be used to also constrain the orientation of a mooring line. This table requires seven columns, which define two unit directional vectors for the start and end nodes of the mooring line. These directional vectors are specified in one of the following coordinate systems:
@@ -994,6 +1004,41 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	4	0.61	0.0	0.0	0.61	0.0	0.0	0	
 	5	0.68	0.0	0.0	0.68	0.0	0.0	0	
 
+:code:`FOILMEMBERCOEFF`
+ This table allows the user to assign lift and drag coefficients of a 360° polar to a substructure member. The aero- or hydrodynamic forces are evaluated based on the current angle of attack experienced by the member. The chord used for force evaluation is the **DIAMETER** specified for the underlying **SUBELEMENT**, see :numref:`fig-foiled_member`.
+
+ .. _fig-foiled_member:
+ .. figure:: foiled_member.png
+   :align: center
+   :scale: 40%
+   :alt: A substructure member with an airfoil and polar assigned through the FOILMEMBERCOEFF table. The visualized chord equals the SUBELEMENT diameter.
+
+   A substructure member with an airfoil and polar assigned through the **FOILMEMBERCOEFF** table. 
+   The visualized chord is equal to the **SUBELEMENT** diameter.
+
+ Below is an exemplary :code:`FOILMEMBERCOEFF` table. The first column defines the coefficient ID, the second column specifies the airfoil, and the third column lists the associated 360° polar. The last two columns define the pitch axis of the airfoil and whether the airfoil is inverted.
+
+ .. code-block:: console
+	:caption: : The FOILMEMBERCOEFF table
+
+	FOILMEMBERCOEFF
+	CoeffID	Foil		Polar					PAxis	IsInverted
+	1	"NACA 0020"	"NACA_0020_Re1.000_M0.00_N9.0 360 M"	0.5 	false
+	
+ When aerodynamic forces are evaluated for a *foiled* member, an iteration for the bound circulation is carried out, similar to the iteration for the bound circulation of a rotor blade when simulating with the :ref:`Lifting Line Free Vortex Wake` method. The convergence criterion *epsilon* and the *relaxation factor* can be specified in the substructure file. If not explicitly set, default values are used: 
+
+ - **Relaxation Factor**: 0.015
+ - **Epsilon (Convergence Criterion)**: 0.005
+
+ The *Lifting Line* at the member position is updated with the circulation calculated at every timestep, and the induction field caused by the *Lifting Line* influences neighboring elements.
+
+ The user can also output the angle of attack, aero- or hydrodynamic force, and moment evaluated at this member by setting **AER_OUT** to `true` in the structural input file. See :ref:`Loading Data and Sensor Locations`.
+
+ .. code-block:: console
+	:caption: : The FOILMEMBERCOEFF table
+
+	0.1	RELAXGAMME
+	0.001	EPSILON_GAMMA
 
 :code:`HYDROJOINTCOEFF`
  is a table that defines hydrodynamic axial coefficients that can be placed at specific joints (defined by their ID number) of the substructure that are located at the ends of **cylindrical** members. QBlade assumes a spherical end of the element when calculating the hydrodynamic axial Morison forces (e.g. :math:`F_a^{ax} = \frac{2\pi}{3}(\frac{d}{2})^3\cdot C_a^{ax}`). The table contains the axial drag, added mass and dynamic pressure axial coefficients and is structured as shown below. The hydrodynamic reference volume for a member end face is assumed to be a semi-spheroid with the member diameter (the equivalent diameter for rectangular members). If two substructure members are connected to the same node the member face reference areas and reference volumes are subtracted from another so that just the area and reference volumes that is exposed to the fluid is considered when evaluating the Morison forces.

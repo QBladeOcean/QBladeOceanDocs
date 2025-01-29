@@ -50,6 +50,22 @@ Two keywords can be used to specify the initial rotor position in a multi-rotor 
  	:caption: : AZIOFFSET
  	
  	120	AZIOFFSET_2
+	
+**PITCHOFFSET_X**
+ Offsets the initial collective pitch angle of the rotor by this angle (in °).
+
+ .. code-block:: console
+ 	:caption: : PITCHOFFSET
+ 	
+ 	2	PITCHOFFSET_2
+	
+**YAWOFFSET_X**
+ Offsets the initial yaw angle of the rotor by this angle (in °).
+
+ .. code-block:: console
+ 	:caption: : YAWOFFSET
+ 	
+ 	15	YAWOFFSET_2
 
 **ROTFACT_X**
  Sets the rotational rate of a *slave' rotor in relation to that of the *master* rotor. This value is only in effect if the simulation is performed with a fixed rotational rate (see :ref:`Rotational Speed Settings`).
