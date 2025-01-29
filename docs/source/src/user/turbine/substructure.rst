@@ -1016,7 +1016,7 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
    A substructure member with an airfoil and polar assigned through the **FOILMEMBERCOEFF** table. 
    The visualized chord is equal to the **SUBELEMENT** diameter.
 
- Below is an exemplary :code:`FOILMEMBERCOEFF` table. The first column defines the coefficient ID, the second column specifies the airfoil, and the third column lists the associated 360° polar. The last two columns define the pitch axis of the airfoil and whether the airfoil is inverted.
+ Below is an exemplary :code:`FOILMEMBERCOEFF` table. The first column defines the coefficient ID, the second column specifies the airfoil, and the third column lists the associated 360° polar. The last two columns define the pitch axis of the airfoil and whether the airfoil is inverted. When an airfoil is assigned to a substructure member, for the purpose of buoyancy calculations, the scaled cross-sectional area of the airfoil is used. The :code:`ADVANCEDBUOYANCY` feature cannot be used for *foiled* members.
 
  .. code-block:: console
 	:caption: : The FOILMEMBERCOEFF table
