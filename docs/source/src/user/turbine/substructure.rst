@@ -581,6 +581,18 @@ The transition piece is the reference position in the substructure definition th
 	Rot_X[deg]	Rot_Y[deg]	Rot_Z[deg]
 	30 		0 		0
 	
+The Neutral Point
+-----------------
+In the context of floating offshore structures, the **neutral point** is defined as the origin (0,0,0) in the local floater coordinate system. The floater's dynamic behavior, including translations and rotations, is typically referenced to this point. During the **ramp-up phase** of a simulation, the floater remains fixed at its neutral point to allow the mooring lines to settle into their equilibrium shape. By default, the neutral point is rigidly constrained to :code:`TP_INTERFACE_POS_1`, ensuring that :code:`TP_INTERFACE_POS_1` remains fixed during this initial phase. If the user wishes to override this default constraint and constrain the neutral point (**NP**) to a different joint, this can be done using the :code:`NPSUBJOINT` keyword.
+
+:code:`NPSUBJOINT`
+ This keyword can be used to constrain the neutral point to an arbitrary substructure joint. This overrides the default setting where the neutral point is constrained to :code:`TP_INTERFACE_POS_1`.
+
+   .. code-block:: console
+   	:caption: : The neutral point is constrained to SUBJOINT 12
+
+	12	NPSUBJOINT
+	
 Lumped Mass, Inertia and Hydrodynamic Forces
 --------------------------------------------
 

@@ -148,7 +148,7 @@ Sending custom data to an external library is the same process as sending data t
 	SWAP DATA
 	0    "Time [s]"
 	1    "Timestep [s]"
-	3    "SWAP_5"
+	2    "SWAP_3"
 
 Note that the output of the desired sensor should be enabled in the :ref:`StrDef_MainFile` and the variable name must exist. Otherwise, zeros will be passed to the controller.
 
@@ -166,7 +166,7 @@ For example, the following configuration sends data to the second external libra
     SWAP DATA
     0    "Time [s]"
     1    "Timestep [s]"
-    3    "SWAP_5"
+    2    "SWAP_3"
     
 .. admonition:: Turbine indices in multi-turbine simulations
    :class: important
@@ -253,7 +253,7 @@ Applying custom data from an external library library to the turbine is the same
 	EXTERNAL_1_OUT
 	SWAP  ACTION     ID     POS  DIR  LOCAL  NUM
 	50    SETLENGTH  MOO_1  1.0  X    true   0
-	50    SETLENGTH  MOO_   1.0  X    true   0
+	50    SETLENGTH  MOO_2  1.0  X    true   0
 	
 	
 
