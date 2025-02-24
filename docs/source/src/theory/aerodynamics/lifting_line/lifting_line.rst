@@ -132,6 +132,52 @@ The desingularized Biot-Savart equation then becomes:
 	\end{align}
 
 
+Velocity Integration
+--------------------
+
+The velocity integration method determines how the wake convection step is computed. QBlade provides four different numerical schemes with varying levels of accuracy and computational cost.
+
+1st Order Euler Forward Integration (EF)
+****************************************
+
+The simplest integration scheme, the **Euler Forward (EF)** method, uses only the current velocity to update the position:
+
+.. math::
+   \mathbf{x}_{t+1,EF} = \mathbf{x}_t + (\mathbf{v}_{\infty} + \mathbf{v}_{ind}(\mathbf{x}_t)) \Delta t. 
+
+This method is computationally efficient but can introduce numerical dissipation and is less accurate for long time steps.
+
+2nd Order Euler-Trapezoidal Integration (ET)
+********************************************
+
+The **Euler-Trapezoidal (ET)** scheme improves accuracy by considering both the current and previous induced velocity:
+
+.. math::
+   \mathbf{x}_{t+1,ET} = \mathbf{x}_t + \frac{1}{2} (2\mathbf{v}_{\infty} + \mathbf{v}_{ind}(\mathbf{x}_t) + \mathbf{v}_{ind}(\mathbf{x}_{t-1})) \Delta t.
+
+This second-order method provides better numerical stability than EF while maintaining computational efficiency.
+
+2nd Order Predictor-Corrector Scheme (PC)
+*****************************************
+
+The **Predictor-Corrector (PC)** method improves accuracy by predicting the next velocity step and then correcting it:
+
+.. math::
+   \mathbf{x}_{t+1,PC} = \mathbf{x}_t + \frac{1}{2} (2\mathbf{v}_{\infty} + \mathbf{v}_{ind}(\mathbf{x}_t) + \mathbf{v}_{ind}(\mathbf{x}_{t+1})) \Delta t.
+
+This approach provides increased precision but requires an additional iteration per time step.
+
+2nd Order Predictor-Corrector Backwards Scheme (PC2B)
+*****************************************************
+
+The **Predictor-Corrector Backwards (PC2B)** scheme further refines the PC method by including a correction term based on multiple previous time steps:
+
+.. math::
+   \mathbf{x}_{t+1,PC2B} = \mathbf{w}_{t,PC2B} + \frac{1}{4} (3 \mathbf{x}_{t+1,PC} - \mathbf{x}_{t,PC2B} - 3\mathbf{x}_{t-1,PC2B} + \mathbf{x}_{t-2,PC2B}).
+
+This higher-order scheme provides improved numerical stability and accuracy, particularly for resolving unsteady wake dynamics.
+
+
 .. footbibliography::
 
 
