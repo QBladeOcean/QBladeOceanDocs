@@ -343,20 +343,20 @@ Joints are defined via the :code:`SUBJOINTS` table. A joint is defined by its po
 	
  
 :code:`ADDFORCE_<JntID>`
- can be used to add a constant force, defined in the global coordinate system, to a joint *<JntID>*. :code:`ADDFORCE_<JntID>` can be followed by up to 6 numeric values (at least one) to assign forces and moments. For example: :code:`ADDFORCE_5 10 1 2 3 4 5` applies a force vector of (10,1,2)N and a torque vector of (3,4,5)Nm to joint ID 5. All forces and moments are defined in the global coordinate system. 
+ can be used to add a constant force, defined in the global coordinate system, to a joint *<JntID>*. :code:`ADDFORCE_<JntID>` can be followed by up to 6 numeric values (at least one) to assign forces and moments. For example: :code:`ADDFORCE_5 1 2 3 4 5 6` applies a force vector of (1,2,3)N and a torque vector of (4,5,6)Nm to joint ID 5. All forces and moments are defined in the global coordinate system. 
 
  .. code-block:: console
    	:caption: : Using the ADDFORCE keyword
 
-	ADDFORCE__5 10 1 2 3 4 5 6
+	ADDFORCE_5 1 2 3 4 5 6
 
 :code:`ADDFORCELOC_<JntID>`
- can be used to add a constant force, defined in the local joint coordinate system, to a joint *<JntID>*. :code:`ADDFORCELOC_<JntID>` can be followed by up to 6 numeric values (at least one) to assign forces and moments. For example: :code:`ADDFORCELOC_5 10 1 2 3 4 5` applies a force vector of (10,1,2)N and a torque vector of (3,4,5)Nm to joint ID 5. All forces and moments are defined in the local joint coordinate system. 
+ can be used to add a constant force, defined in the local joint coordinate system, to a joint *<JntID>*. :code:`ADDFORCELOC_<JntID>` can be followed by up to 6 numeric values (at least one) to assign forces and moments. For example: :code:`ADDFORCELOC_5 1 2 3 4 5 6` applies a force vector of (1,2,3)N and a torque vector of (4,5,6)Nm to joint ID 5. All forces and moments are defined in the local joint coordinate system. 
 
  .. code-block:: console
    	:caption: : Using the ADDFORCELOC keyword
 
-	ADDFORCELOC_5 10 1 2 3 4 5 6
+	ADDFORCELOC_5 1 2 3 4 5 6
 
 Substructure Elements
 ---------------------
