@@ -130,7 +130,10 @@ Turbine Events and Operation
 
 In this section special events, external loading, prescribed motion and prescribed operation can be defined for a *turbine definition*. Below exemplary files are shown for each file type:
 
-* **Event Definition File**: An event is defined by a combination of *Keywords* and values. The following list gives an overview of the available event types. Events can only be defined if the turbine definition has a structural definition. Multiple events may be defined in a single file. The events override any events / control that is returned via the controller exchange array:
+Event Definition File
+^^^^^^^^^^^^^^^^^^^^^
+
+An event is defined by a combination of *Keywords* and values. The following list gives an overview of the available event types. Events can only be defined if the turbine definition has a structural definition. Multiple events may be defined in a single file. The events override any events / control that is returned via the controller exchange array:
 
 	* **30 FAILGRID**: At time 30 s, the generator moment is set to 0 Nm.
 	* **30 SETBRAKE**: At time 30 s, the brake is engaged.
@@ -140,7 +143,10 @@ In this section special events, external loading, prescribed motion and prescrib
 	* **30 FAILBLADE_1**: At time 30 s, blade nr. 1 is *released* from the hub, by deactivating the respective structural constraint.
 	* **30 FAILCABLE_1**: At time 30 s, the cable with the IDNr. 1 brakes away from the substructure.
 
-* **External Loading File**: A user defined loading timeseries can be applied to the turbine during simulation via this file format, multiple loading timeseries may be appended into a single file. The nomenclature in the file is as follows:
+External Loading File
+^^^^^^^^^^^^^^^^^^^^^
+
+A user defined loading timeseries can be applied to the turbine during simulation via this file format, multiple loading timeseries may be appended into a single file. The nomenclature in the file is as follows:
 
 .. code-block:: console
 	:caption: : The scheme of an external loading file
@@ -150,6 +156,12 @@ In this section special events, external loading, prescribed motion and prescrib
 	<time2> <fx2> <fy2> <fz2> <mx2> <my2> <mz2>
 	
 Sensor naming is the same as in the main file for the sensor outputs (see :ref:`Loading Data and Sensor Locations`) The local flag (local, global) defined if the loads are applied in the :ref:`Global Coordinate System` or in the :ref:`Local Body Coordinate Systems` or :ref:`Local Sensor Coordinate Systems`. QBlade interpolates linearly the loads between time stamps. External load time series for multiple sensors can be appended into a single file.
+
+Furthermore, the user can specify the following *<SensorNames>* to which the loading will be applied:
+
+ * **HUB**: The load will be applied to the hub, in the rotating hub coordinate system.
+ * **HUBFIXED**: The load will be applied to the hub, in the nonrotating hub coordinate system.
+ * **GENERATOR**: The **<mx>** torque will be applied to the generator side of the drivetrain, all other force components (<fx> <fy> <fz> <my> <mz>) are ignored.
 
 This exemplary file applies an impulsive load of 1e7 N along the global x-direction to the tower at 50% height. The loads are interpolated in time, so the x-loading rises from 0 N at 19.8s linearly to 1e7 N at 20s and drops of to 0 N at 20.2s:
 
@@ -161,7 +173,8 @@ This exemplary file applies an impulsive load of 1e7 N along the global x-direct
 	20	1e8	0	0	0	0	0	
 	20.2	0	0	0	0	0	0
 
-* **Simulation Input File**:
+Simulation Input File
+^^^^^^^^^^^^^^^^^^^^^
 
 The turbine operation can be prescribed using a file of the following format. *Turbine definition* with or without a structural definition can be subjected to prescribed operation. QBlade interpolates linearly the loads between time stamps.
 
@@ -182,7 +195,8 @@ The turbine operation can be prescribed using a file of the following format. *T
 	50	11	11	0	40	...	40	0	0	...	0
 
 
-* **Prescribed Motion File**
+Prescribed Motion File
+^^^^^^^^^^^^^^^^^^^^^^
 
 The translation and rotation of the ground, where the tower bottom of the wind turbine is constrained, can be prescribed using a prescribed motion file of the following format. The translation and rotation is applied to the "ground" to which a bottom fixed turbine is directly connected. 
 
