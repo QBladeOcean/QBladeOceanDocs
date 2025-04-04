@@ -80,7 +80,7 @@ To add custom sensors to the swap array of a *Predefined Controller* (BLADED, DT
  2. substructure file
  3. controller parameter stream
 
-The box below shows an exemplary **CONTROLLER_IN** table. The first column contains the swap array position and the second column the variable name in quotation marks. In the example below the table assigns the variable *Time [s]* to swap array position [0], the variable *Timestep [s]* to array position [1] and the variable *X_l Acc. BLD_1 pos 1.000* to array position [10]. Note that the full variable name, as shown in any of QBlade's graphs must be included in the table. If the variable name does not exist (or the data is not stored as part of the simulation) no value is passed to the swap array at the designated position. Also note that the data defined in this table overwrites the standard data that is normally passed to the predefined controller interface.
+The box below shows an exemplary **CONTROLLER_IN** table. The first column contains the swap array position and the second column the variable name in quotation marks. In the example below the table assigns the variable *Time [s]* to swap array position [0], the variable *Timestep [-]* to array position [1] and the variable *X_l Acc. BLD_1 pos 1.000* to array position [10]. Note that the full variable name, as shown in any of QBlade's graphs must be included in the table. If the variable name does not exist (or the data is not stored as part of the simulation) no value is passed to the swap array at the designated position. Also note that the data defined in this table overwrites the standard data that is normally passed to the predefined controller interface.
 
 .. code-block:: console
 	:caption: : CONTROLLER_IN Table
@@ -88,7 +88,7 @@ The box below shows an exemplary **CONTROLLER_IN** table. The first column conta
 	CONTROLLER_IN
 	SWAP DATA
 	0    "Time [s]"
-	1    "Timestep [s]"
+	1    "Timestep [-]"
 	10   "X_l Acc. BLD_1 pos 1.000"
 
 **Note** that the output of the desired sensor should be enabled in the :ref:`StrDef_MainFile`, and the variable name must exist. Otherwise, zeros will be passed to the controller.
@@ -118,7 +118,7 @@ For instance, to send data to the third turbine in the list (index Turbine[2] in
     CONTROLLER_IN NUM_2
     SWAP DATA
     0    "Time [s]"
-    1    "Timestep [s]"
+    1    "Timestep [-]"
     10   "X_l Acc. BLD_1 pos 1.000"
     
 It is also possible to send data from this turbine controllers SWAP array to the SWAP array of the turbine controller of Turbine[2]. In the example below the SWAP array values from indices 14 and 11 of this turbine are send to the SWAP array of Turbine[2] at the indices 0 and 1.
@@ -147,7 +147,7 @@ Sending custom data to an external library is the same process as sending data t
 	EXTERNAL_1_IN
 	SWAP DATA
 	0    "Time [s]"
-	1    "Timestep [s]"
+	1    "Timestep [-]"
 	2    "SWAP_3"
 
 Note that the output of the desired sensor should be enabled in the :ref:`StrDef_MainFile` and the variable name must exist. Otherwise, zeros will be passed to the controller.
@@ -165,7 +165,7 @@ For example, the following configuration sends data to the second external libra
     EXTERNAL_2_IN NUM_3
     SWAP DATA
     0    "Time [s]"
-    1    "Timestep [s]"
+    1    "Timestep [-]"
     2    "SWAP_3"
     
 .. admonition:: Turbine indices in multi-turbine simulations
