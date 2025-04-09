@@ -138,7 +138,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* filter: allows to point to a global result filter file (see :ref:`Global Export Filter`), specify full fill path and extension
 	
 :code:`void setLogFile(char *str)`
-	This functions sets the path to a log file that will be created to store the dobug output. This is helpful when accessing the SIL interface from a tool that does not display standard output.
+	This functions sets the path to a log file that will be created to store the debug output. This is helpful when accessing the SIL interface from a tool that does not display standard output.
 
 :code:`void closeInstance()`
 	This function closes the instance of QBlade and frees the memory.
