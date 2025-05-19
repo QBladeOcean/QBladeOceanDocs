@@ -208,13 +208,22 @@ Linearization of the HOS Field
 QBlade allows two options when using HOS wavefields:
 
 1. **Fully nonlinear wave field** — the original HOS data is directly sampled at runtime for:
-   - Wave elevation
-   - Velocity
-   - Acceleration 
 
-2. **Linearized wavefield** — for each turbine instance in the simulation, a localized linearization of the wavefield is automatically performed at simulation start.
+	- Wave elevation
+	
+	- Velocity
+	
+	- Acceleration 
 
-This linearization occurs around the **initial global position** of each turbine. If the turbine is floating and may significantly shift position during simulation, it is recommended to apply an offset using the `HOSOFFSET` keyword in the turbine’s substructure file to align the linearization closer to the equilibrium position.
+2. **Linearized wavefield** — for each turbine instance in the simulation, a local linearization of the wavefield is automatically performed at simulation start. This local linearization is then used for:
+
+	- Wave elevation
+	
+	- Velocity
+	
+	- Acceleration
+
+When the *Fully nonlinear wave field** option is used the elevation, velocity and acceleration data is sampled directly from the nonlinear HOS data, for :ref:`Linear Potential Flow Theory` based calculations, a local linearization of the HOS data is employed. The linearization occurs around the **initial global position** of each turbine. If the turbine is floating and may significantly shift position during simulation, it is recommended to apply an offset using the `HOSOFFSET` keyword in the turbine’s substructure file to align the linearization closer to the equilibrium position.
 
 Example usage of the `HOSOFFSET` directive in a substructure input file:
 
