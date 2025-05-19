@@ -173,6 +173,97 @@ Nonlinear wave models in offshore wind turbine simulations offer enhanced accura
 
 **Please note** that nonlinear waves cannot be used to obtain hydrodynamic forces from :ref:`Linear Potential Flow Theory` , but are only suited to model :ref:`Morison Equation` based hydrodynamic forces.
 
+Higher-Order Spectral Waves (HOS)
+---------------------------------
+
+QBlade offers full integration with the Grid2Grid framework :footcite:`grid2gridGitlab,choi2017` to import and use nonlinear Higher-Order Spectral (HOS) wavefields in time-domain simulations. This coupling enables advanced modelling of wave kinematics and their interactions with floating and fixed offshore wind turbines. The underlying HOS methodology has been developed at École Centrale Nantes (LHEEA) :footcite:`ducrozet2016`, and the interpolation tool Grid2Grid is actively maintained within the LHEEA GitLab ecosystem..
+
+.. note::
+
+    QBlade supports both **HOS-Ocean** and **HOS-NWT** datasets through this interface.
+
+Loading HOS Wavefields
+^^^^^^^^^^^^^^^^^^^^^^
+
+To use a HOS wavefield in QBlade, the user must provide:
+
+- A ``.dat`` file containing the HOS wave simulation output.
+- A corresponding ``.json`` Grid2Grid configuration file.
+
+The ``.json`` file describes the spatial interpolation grid for the HOS data. It is important to correctly set the ``mode`` parameter to either:
+
+- ``HOSOcean`` (for `.dat` files generated with HOS-Ocean),
+- or ``HOSNWT`` (for files from HOS-NWT).
+
+
+.. note::
+	* The ``isAcceleration`` option to in the ``.json`` file is automatically set to ``true`` within QBlade.
+	* The ``filePath`` variable in the ``.json`` file is automatically updated by QBlade based on the selected ``.dat`` file. Users do not need to modify this manually.
+	* Once loaded, the ``.dat`` file is fully serialized into QBlade’s runtime database and stored for subsequent simulations.
+
+
+Linearization of the HOS Field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+QBlade allows two options when using HOS wavefields:
+
+1. **Fully nonlinear wave field** — the original HOS data is directly sampled at runtime for:
+   - Wave elevation
+   - Velocity
+   - Acceleration 
+
+2. **Linearized wavefield** — for each turbine instance in the simulation, a localized linearization of the wavefield is automatically performed at simulation start.
+
+This linearization occurs around the **initial global position** of each turbine. If the turbine is floating and may significantly shift position during simulation, it is recommended to apply an offset using the `HOSOFFSET` keyword in the turbine’s substructure file to align the linearization closer to the equilibrium position.
+
+Example usage of the `HOSOFFSET` directive in a substructure input file:
+
+.. code-block::
+
+    HOSOFFSET
+    100 200 0
+
+This adds an offset of +100 m in the global x-direction and +200 m in the global y-direction to the linearization origin.
+
+FFT Conversion Parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The linearization of the HOS wave elevation data uses an FFT-based procedure. The following parameters must be defined by the user:
+
+- **Low Cut-Off Frequency** [Hz]
+- **High Cut-Off Frequency** [Hz]
+- **Signal Sampling Rate** [Hz]
+- **Amplitude Threshold** [m]
+- **Window Tapering** [0-1]
+
+These define how the frequency-domain representation of the wave elevation is reconstructed into a usable linearized field.
+
+HOS Field Configuration Parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following parameters must be specified when loading a HOS wavefield into QBlade:
+
+- **Ref. Pos. X** (in model scale) [m]
+- **Ref. Pos. Y** (in model scale) [m]
+
+    Defines the reference position in the unscaled (model) coordinate system. The HOS field will be centered around this point. Note that these coordinates are not scaled by the Froude number.
+
+- **Froude Scale** [-]:  
+    A user-defined Froude scaling factor used to scale the HOS wavefield to full scale. This allows loading wave tank (model scale) data and scaling it appropriately.
+
+- **Use Nonlinear Field**:
+  
+    If selected, QBlade will sample the fully nonlinear HOS field for use with Morison elements. For potential flow elements, QBlade always uses the corresponding linearized local wavefield.
+
+- **Principal Wave Direction** [deg]:
+
+    By default, QBlade assumes that waves propagate in the global x-direction (0°). Users can override this by specifying a different principal direction.
+
+.. important::
+
+    The linearization procedure assumes a **uni-directional** wavefield, with waves traveling in a consistent direction. The system assumes that direction to be 0° unless specified otherwise.
+
+
 Import Components
 -----------------
 By selecting this option the user can import a wave using wave component data.
@@ -211,59 +302,73 @@ An exemplary ``.lwa`` file is shown below:
 	:caption: : A wave exported in ASCII format
 
 	----------------------------------------QBlade Wave Definition File-------------------------------------------------
-	Generated with : QBlade IH v2.0.7-release_candidate_beta windows
-	Archive Format: 310023
-	Time : 15:05:06
-	Date : 15.05.2024
+	Generated with : QBlade EE v2.0.8.7_beta windows
+	Archive Format: 310038
+	Time : 12:31:03
+	Date : 19.05.2025
 
 	----------------------------------------Object Name-----------------------------------------------------------------
-	Pasted-Nonlinear-Wave                    OBJECTNAME         - the name of the linear wave definition object
+	New Wave                                           OBJECTNAME         - the name of the linear wave definition object
 
 	----------------------------------------Main Parameters-------------------------------------------------------------
-	0.000                                    TIMEOFFSET         - the time offset from t=0s [s]
-	3                                        WAVETYPE           - wave type: 0=TIMESERIES, 1=COMPONENT, 2=SINGLE, 3=JONSWAP, 4=ISSC, 5=TORSETHAUGEN, 6=CUSTOM, 7=STREAMFUNCTION
-	8.100                                    SIGHEIGHT          - the significant wave height (Hs) [m]
-	12.700                                   PEAKPERIOD         - the peak period (Tp) [s]
-	true                                     AUTOGAMMA          - use gamma according to IEC (bool): 0 = OFF, 1 = ON (JONSWAP & TORSE only) [bool]
-	1.000                                    GAMMA              - custom gamma (JONSWAP & TORSE only)
-	true                                     AUTOSIGMA          - use sigmas according to IEC (JONSWAP & TORSE only) [bool]
-	0.070                                    SIGMA1             - sigma1 (JONSWAP & TORSE only)
-	0.090                                    SIGMA2             - sigma1 (JONSWAP & TORSE only)
-	0                                        DOUBLEPEAK         - if true a double peak TORSETHAUGEN spectrum will be created, if false only a single peak (TORSE only)
-	true                                     AUTOORCHI          - automatic OCHI-HUBBLE parameters from significant wave height (OCHI only) [bool]
-	0.077                                    MODFREQ1           - modal frequency 1, must be "< modalfreq1 * 0.5" (OCHI only)
-	0.133                                    MODFREQ2           - modal frequency 2, should be larger than 0.096 (OCHI only)
-	6.804                                    SIGHEIGHT1         - significant height 1, should be larger than height 2 (OCHI only)
-	4.374                                    SIGHEIGHT2         - significant height 2 (OCHI only)
-	3.000                                    LAMBDA1            - peak shape 1 (OCHI only)
-	0.932                                    LAMBDA2            - peak shape 2 (OCHI only)
+	0.000                                              TIMEOFFSET         - the time offset from t=0s [s]
+	3                                                  WAVETYPE           - wave type: 0=TIMESERIES, 1=COMPONENT, 2=SINGLE, 3=JONSWAP, 4=ISSC, 5=TORSETHAUGEN, 6=OCHI_HUBBLE, 7=CUSTOM_SPECTRUM, 8=STREAMFUNCTION, 9=HOS
+	8.100                                              SIGHEIGHT          - the significant wave height (Hs) [m]
+	12.700                                             PEAKPERIOD         - the peak period (Tp) [s]
+	true                                               AUTOGAMMA          - use gamma according to IEC (bool): 0 = OFF, 1 = ON (JONSWAP & TORSE only) [bool]
+	1.000                                              GAMMA              - custom gamma (JONSWAP & TORSE only)
+	true                                               AUTOSIGMA          - use sigmas according to IEC (JONSWAP & TORSE only) [bool]
+	0.070                                              SIGMA1             - sigma1 (JONSWAP & TORSE only)
+	0.090                                              SIGMA2             - sigma1 (JONSWAP & TORSE only)
+	0                                                  DOUBLEPEAK         - if true a double peak TORSETHAUGEN spectrum will be created, if false only a single peak (TORSE only)
+	true                                               AUTOORCHI          - automatic OCHI-HUBBLE parameters from significant wave height (OCHI only) [bool]
+	0.077                                              MODFREQ1           - modal frequency 1, must be "< modalfreq1 * 0.5" (OCHI only)
+	0.133                                              MODFREQ2           - modal frequency 2, should be larger than 0.096 (OCHI only)
+	6.804                                              SIGHEIGHT1         - significant height 1, should be larger than height 2 (OCHI only)
+	4.374                                              SIGHEIGHT2         - significant height 2 (OCHI only)
+	3.000                                              LAMBDA1            - peak shape 1 (OCHI only)
+	0.932                                              LAMBDA2            - peak shape 2 (OCHI only)
 
 	----------------------------------------Frequency Discretization ---------------------------------------------------
-	1                                        DISCTYPE           - frequency discretization type: 0 = equal energy; 1 = equal frequency
-	true                                     AUTOFREQ           - use automatic frequency range (f_in = 0.5*f_p, f_out = 10*f_p) [bool]
-	0.039                                    FCUTIN             - cut-in frequency
-	0.787                                    FCUTOUT            - cut-out frequency
-	0.050                                    MAXFBIN            - maximum freq. bin width [Hz]
-	3020                                     NUMFREQ            - the number of frequency bins
-	65535                                    RANDSEED           - the seed for the random phase generator range [0-65535]
+	0                                                  DISCTYPE           - frequency discretization type: 0 = equal energy; 1 = equal frequency
+	true                                               AUTOFREQ           - use automatic frequency range (f_in = 0.5*f_p, f_out = 10*f_p) [bool]
+	0.039                                              FCUTIN             - cut-in frequency
+	0.787                                              FCUTOUT            - cut-out frequency
+	0.050                                              MAXFBIN            - maximum freq. bin width [Hz]
+	320                                                NUMFREQ            - the number of frequency bins
+	65535                                              RANDSEED           - the seed for the random phase generator range [0-65535]
 
 	----------------------------------------Directional Discretization (Equal Energy)-----------------------------------
-	0                                        DIRTYPE            - the directional type, 0 = UNIDIRECTIONAL, 1 = COSINESPREAD
-	0.000                                    DIRMEAN            - mean wave direction [deg]
-	60.000                                   DIRMAX             - directional spread [deg]
-	5.000                                    SPREADEXP          - the spreading exponent
-	32                                       NUMDIR             - the number of directional bins
+	0                                                  DIRTYPE            - the directional type, 0 = UNIDIRECTIONAL, 1 = COSINESPREAD
+	0.000                                              DIRMEAN            - mean wave direction [deg]
+	60.000                                             DIRMAX             - directional spread [deg]
+	5.000                                              SPREADEXP          - the spreading exponent
+	32                                                 NUMDIR             - the number of directional bins
 
 	----------------------------------------Embedded Constrained Wave --------------------------------------------------
-	true                                     EMBEDWAVE          - add a constrained wave [bool]
-	16.00                                    EMBEDELEV          - the wave elevation of the embedded wave [m]
-	0.00                                     EMBEDTIME          - the time at which the embedded wave occurs [s]
-	0.00                                     EMBEDXPOS          - the x-position at which the embedded wave occurs [m]
-	0.00                                     EMBEDYPOS          - the y-position at which the embedded wave occurs [m]
-	true                                     PASTESTREAM        - paste a streamfunction wave over the embedded linear wave [bool]
-	23.00                                    SIGHEIGHTSTREAM    - the significant height of the streamfunction wave [m]
-	12.70                                    PERIODSTREAM       - the period of the streamfunction wave [s]
+	false                                              EMBEDWAVE          - add a constrained wave [bool]
+	10.00                                              EMBEDELEV          - the wave elevation of the embedded wave [m]
+	0.00                                               EMBEDTIME          - the time at which the embedded wave occurs [s]
+	0.00                                               EMBEDXPOS          - the x-position at which the embedded wave occurs [m]
+	0.00                                               EMBEDYPOS          - the y-position at which the embedded wave occurs [m]
+	false                                              PASTESTREAM        - paste a streamfunction wave over the embedded linear wave [bool]
+	8.10                                               SIGHEIGHTSTREAM    - the significant height of the streamfunction wave [m]
+	12.70                                              PERIODSTREAM       - the period of the streamfunction wave [s]
 
+	----------------------------------------FFT Parameters (for sampling time series or HOS data)-----------------------
+	0.020                                              FFTCUTIN           - only frequencies above this value are used from the FFT
+	0.700                                              FFTCUTOUT          - only frequencies below this value are used from the FFT
+	20.000                                             FFTSAMPLE          - the timeseries is sampled with this rate before the FFT is carried out
+	0.001                                              FFTTHRESH          - amplitudes below the threshold will not be used to create wave components
+	0.100                                              TUKEYALPHA         - Tukey window shape: 0 = rectangular, 1 = Hann, values define taper amount in [0â??1]
+
+	----------------------------------------HOS Interface --------------------------------------------------------------
+													   HOSJSON            - the grid2grid JSON file [-]
+													   HOSDATA            - the grid2grid HOS data file [-]
+	0.0000                                             HOSX               - HOS wavefield neutral position x [m]
+	0.0000                                             HOSY               - HOS wavefield neutral position y [m]
+	1.0000                                             HOSFROUDE          - HOS wavefield Froude scale [-]
+	true                                               HOSNONLINEAR       - during simulations use the nonlinear HOS field for Morison elements and elevation
 
 
 Merged Waves
