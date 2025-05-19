@@ -237,15 +237,15 @@ This adds an offset of +100 m in the global x-direction and +200 m in the global
 FFT Conversion Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The linearization of the HOS wave elevation data uses an FFT-based procedure. The following parameters must be defined by the user:
+An FFT-based routine is used to linearise the HOS wave-elevation signal. Five user-controlled settings govern how the time-domain record is decomposed into its linear frequency components:
 
-- **Low Cut-Off Frequency** [Hz]
-- **High Cut-Off Frequency** [Hz]
-- **Signal Sampling Rate** [Hz]
-- **Amplitude Threshold** [m]
-- **Window Tapering** [0-1]
+	* **Low cut-off frequency** [Hz] and **high cut-off frequency** [Hz] delimit the frequency band that will be retained after filtering.
 
-These define how the frequency-domain representation of the wave elevation is reconstructed into a usable linearized field.
+	* **Signal sampling rate** [Hz] specifies the temporal resolution of the input record and therefore the maximum resolvable frequency.
+
+	* **Amplitude threshold** [m] suppresses spurious components whose amplitudes fall below the chosen value.
+
+	* **Window tapering** [0 – 1] applies a Hann-type window to the time series; a value of 0 leaves the signal untouched, whereas 1 applies full tapering to minimise spectral leakage.
 
 HOS Field Configuration Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
