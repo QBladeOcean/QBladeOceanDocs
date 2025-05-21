@@ -662,7 +662,7 @@ For each transition piece multiple reference position exist, which are rigidly c
 :code:`SUB_HYDROADDEDMASS_<X>`
  defines a complete 6 by 6 added mass matrix that is evaluated in the location defined by the :code:`REF_HYDRO_POS_<X>` keyword. The units are kg. This matrix has the same form as the :code:`SUB_HYDROSTIFFNESS_<X>` matrix.
 
-:code:`SUB_CONSTFORCE_<X>`
+:code:`SUB_HYDROCONSTFORCE_<X>`
  applies a constant force (and/or torque) to the :code:`REF_HYDRO_POS_<X>` point. It can be used to e.g. model the constant buoyancy force acting on the floater in its equilibrium position. The units are N or Nm, depending on the entry.
   
  .. code-block:: console
