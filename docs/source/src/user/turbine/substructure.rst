@@ -674,6 +674,11 @@ For each transition piece multiple reference position exist, which are rigidly c
 :code:`SUB_DISPLACEDVOLUME_<X>`
  applies a constant force in the global z-direction to the :code:`REF_HYDRO_POS_<X>` point that is calculated based on the displaced water volume given by the user. It can be used to e.g. model the constant buoyancy force acting on the floater in its equilibrium position in a simple way without evaluating the force directly. This force is added to the :code:`SUB_CONSTFORCE_<X>` entries, but can be used without specifying :code:`SUB_CONSTFORCE_<X>`.
 
+ .. code-block:: console
+   	:caption: : The SUB_DISPLACEDVOLUME_1 keyword
+
+	21155.2 	SUB_DISPLACEDVOLUME_1 
+
 Mooring Elements
 ################
 
