@@ -119,9 +119,9 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	
 	* vars[0] = generator torque [Nm]
 	* vars[1] = yaw angle [deg]
-	* vars[2] = pitch blade 1 [deg]
-	* vars[3] = pitch blade 2 [deg]
-	* vars[4] = pitch blade 3 [deg]
+	* vars[2] = pitch BLD_1 [deg]
+	* vars[3] = pitch BLD_2 [deg]
+	* vars[4] = pitch BLD_3 [deg]
 
 :code:`bool advanceTurbineSimulation()`
 	This function advances the turbine simulation for all turbines by one (time) step. Returns *true* if the step was successful.
@@ -213,9 +213,9 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	
 	* vars[0] = generator torque [Nm];
 	* vars[1] = yaw angle [deg];
-	* vars[2] = pitch blade 1 [deg];
-	* vars[3] = pitch blade 2 [deg];
-	* vars[4] = pitch blade 3 [deg];
+	* vars[2] = pitch BLD_1 [deg];
+	* vars[3] = pitch BLD_2 [deg];
+	* vars[4] = pitch BLD_3 [deg];
 
 :code:`void setExternalAction(char *action, char *id, double val, double pos, char *dir, bool isLocal, int num)`
 	This is a general purpose function that can be used to apply an external action to the simulated turbine. 
@@ -289,24 +289,24 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* vars[1] = power [W]
 	* vars[2] = Abs HH wind velocity [m/s]
 	* vars[3] = yaw angle [deg]
-	* vars[4] = pitch blade 1 [deg]
-	* vars[5] = pitch blade 2 [deg]
-	* vars[6] = pitch blade 3 [deg]
-	* vars[7] = oop blade root bending moment blade 1 [Nm]
-	* vars[8] = oop blade root bending moment blade 2 [Nm]
-	* vars[9] = oop blade root bending moment blade 3 [Nm]
-	* vars[10] = ip blade root bending moment blade 1 [Nm]
-	* vars[11] = ip blade root bending moment blade 2 [Nm]
-	* vars[12] = ip blade root bending moment blade 3 [Nm]
-	* vars[13] = tor blade root bending moment blade 1 [Nm]
-	* vars[14] = tor blade root bending moment blade 2 [Nm]
-	* vars[15] = tor blade root bending moment blade 3 [Nm]
-	* vars[16] = oop tip deflection blade 1 [m]
-	* vars[17] = oop tip deflection blade 2 [m]
-	* vars[18] = oop tip deflection blade 3 [m]
-	* vars[19] = ip tip deflection blade 1 [m]
-	* vars[20] = ip tip deflection blade 2 [m]
-	* vars[21] = ip tip deflection blade 3 [m]
+	* vars[4] = pitch BLD_1 [deg]
+	* vars[5] = pitch BLD_2 [deg]
+	* vars[6] = pitch BLD_3 [deg]
+	* vars[7] = oop blade root bending moment BLD_1 [Nm]
+	* vars[8] = oop blade root bending moment BLD_2 [Nm]
+	* vars[9] = oop blade root bending moment BLD_3 [Nm]
+	* vars[10] = ip blade root bending moment BLD_1 [Nm]
+	* vars[11] = ip blade root bending moment BLD_2 [Nm]
+	* vars[12] = ip blade root bending moment BLD_3 [Nm]
+	* vars[13] = tor blade root bending moment BLD_1 [Nm]
+	* vars[14] = tor blade root bending moment BLD_2 [Nm]
+	* vars[15] = tor blade root bending moment BLD_3 [Nm]
+	* vars[16] = oop tip deflection BLD_1 [m]
+	* vars[17] = oop tip deflection BLD_2 [m]
+	* vars[18] = oop tip deflection BLD_3 [m]
+	* vars[19] = ip tip deflection BLD_1 [m]
+	* vars[20] = ip tip deflection BLD_2 [m]
+	* vars[21] = ip tip deflection BLD_3 [m]
 	* vars[22] = tower top acceleration in global X [m/s^2]
 	* vars[23] = tower top acceleration in global Y [m/s^2]
 	* vars[24] = tower top acceleration in global Z [m/s^2]
@@ -330,7 +330,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* vars[42] = HH wind velocity z [m/s]
 
 :code:`double getCustomData_at_num(char *str, double pos = 0, int num = 0)`
-	This function can be used to access the current value from an arbitrary turbine simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' variable, for instance 'Angle of Attack at 0.25c (at section) Blade 1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) Blade 1 [deg]", 0.85,0)`. Choosing num == -1 allows to extract any values that are stored in the *Simulation Time Graph* (such as for the global mooring system).
+	This function can be used to access the current value from an arbitrary turbine simulation variable in QBlade. Specify the data name as is would appear in any QBlade graph as a *char pointer*. If you are requesting an aerodynamic 'at section' variable, for instance 'Angle of Attack at 0.25c (at section) BLD_1 [deg]' you can specify the normalized position along the blade length using the 'pos' variable. As an example, to get the AoA at 85% blade length from turbine 0, you would call the function the following way: :code:`getCustomData_at_num("Angle of Attack at 0.25c (at section) BLD_1 [deg]", 0.85,0)`. Choosing num == -1 allows to extract any values that are stored in the *Simulation Time Graph* (such as for the global mooring system).
 	
 :code:`double getCustomSimulationTimeData(char *str)`
 	This function can be used to access the current value from an arbitrary *simulation time graph* variable in QBlade. 
@@ -419,7 +419,7 @@ After the QBlade library has been loaded a simulation object is imported and a s
 		# Example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
 		rpm = QBLADE.getCustomData_at_num(b"Rotational Speed [rpm]",0,0) 
 		time = QBLADE.getCustomData_at_num(b"Time [s]",0,0) #example how to extract the variable 'Time' by name from the simulation
-		AoA = QBLADE.getCustomData_at_num(b"Angle of Attack at 0.25c (at section) Blade 1 [deg]",0.85,0) #example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
+		AoA = QBLADE.getCustomData_at_num(b"Angle of Attack at 0.25c (at section) BLD_1 [deg]",0.85,0) #example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
 		
 		# Example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
 		windspeed = (c_double * 3)(0,0,0) 
@@ -621,7 +621,7 @@ This is an example for using the QBlade library within Matlab. It reproduces the
 		% Example how to extract a variable by name from the simulation, call as often as needed with different variable names, extracting rpm and time in the lines below
 		rpm = QBLADE.getCustomData_at_num('Rotational Speed [rpm]',0,0);
 		t = QBLADE.getCustomData_at_num('Time [s]',0,0);  %example how to extract the variable 'Time' by name from the simulation
-		AoA = QBLADE.getCustomData_at_num('Angle of Attack at 0.25c (at section) Blade 1 [deg]',0.85,0); %example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
+		AoA = QBLADE.getCustomData_at_num('Angle of Attack at 0.25c (at section) BLD_1 [deg]',0.85,0); %example how to extract the variable 'Angle of Attack' by name at 85% blade length from the simulation 
 		
 		% Example how to extract a 3 length double array with the x,y,z windspeed components at a global position of x=-50,Y=0,Z=100m from the simulation
 		windspeed = libpointer('doublePtr',zeros(3,1)); 
