@@ -992,14 +992,14 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
     Hydrodynamic coefficients acting on a substructure member.
 
 :code:`HYDROMEMBERCOEFF`
- defines a table that contains the hydrodynamic normal coefficients that are used for the **cylindrical** members of the substructure. Each row contains one group of coefficients that can be used by one or more cylindrical members. The table contains a minimum of five entries, with an optional sixth entry. These are the ID number of the group, the normal drag coefficient, the normal added mass coefficient, the normal dynamic pressure coefficient, a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for a longitudinal drag coefficient CdL, which is only active when the HYDROMEMBERCOEFF is assigned to a mooring line.
+ defines a table that contains the hydrodynamic normal coefficients that are used for the **cylindrical** members of the substructure. Each row contains one group of coefficients that can be used by one or more cylindrical members. The table contains a minimum of five entries, with an optional sixth entry. These are the ID number of the group, the normal drag coefficient, the normal added mass coefficient, the normal dynamic pressure coefficient, a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx.
   
 
  .. code-block:: console
 	:caption: : The HYDROMEMBERCOEFF table
 
 	HYDROMEMBERCOEFF
-	CoeffID	CdN	CaN	CpN	MCFC	CdL (optional)
+	CoeffID	CdN	CaN	CpN	MCFC	CdAx (optional)
 	1	2.0 	0.8	1.0	1	0
 	2	0.63	0.0	0.0	1	0
 	3	0.56	0.0	0.0	0	0
@@ -1007,19 +1007,19 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	5	0.68	0.0	0.0	0	0
 	
 :code:`HYDROMEMBERCOEFF_RECT`
- defines a table that contains the hydrodynamic normal coefficients that are used for the **rectangular** members of the substructure. Each row contains one group of coefficients that can be used by one or more rectangular members. The table contains eight entries. These are the ID number of the group, the normal drag coefficient along the members x-direction, the normal added mass coefficient along the members x-direction, the normal dynamic pressure coefficient along the members x-direction, the normal drag coefficient along the members y-direction, the normal added mass coefficient along the members y-direction, the normal dynamic pressure coefficient along the members y-direction and a flag that enables the MacCamy-Fuchs correction (MCFC).
+ defines a table that contains the hydrodynamic normal coefficients that are used for the **rectangular** members of the substructure. Each row contains one group of coefficients that can be used by one or more rectangular members. The table contains eight entries. These are the ID number of the group, the normal drag coefficient along the members x-direction, the normal added mass coefficient along the members x-direction, the normal dynamic pressure coefficient along the members x-direction, the normal drag coefficient along the members y-direction, the normal added mass coefficient along the members y-direction, the normal dynamic pressure coefficient along the members y-direction and a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx.
   
 
  .. code-block:: console
 	:caption: : The HYDROMEMBERCOEFF_RECT table
 
 	HYDROMEMBERCOEFF_RECT
-	CoeffID	CdNx	CaNx	CpNx	CdNy	CaNy	CpNy	MCFC
-	1	2.0 	0.8	1.0	2.0 	0.8	1.0	1	
-	2	0.63	0.0	0.0	0.63	0.0	0.0	1	
-	3	0.56	0.0	0.0	0.56	0.0	0.0	0	
-	4	0.61	0.0	0.0	0.61	0.0	0.0	0	
-	5	0.68	0.0	0.0	0.68	0.0	0.0	0	
+	CoeffID	CdNx	CaNx	CpNx	CdNy	CaNy	CpNy	MCFC	CdAx (optional)
+	1	2.0 	0.8	1.0	2.0 	0.8	1.0	1	0
+	2	0.63	0.0	0.0	0.63	0.0	0.0	1	0
+	3	0.56	0.0	0.0	0.56	0.0	0.0	0	0
+	4	0.61	0.0	0.0	0.61	0.0	0.0	0	0
+	5	0.68	0.0	0.0	0.68	0.0	0.0	0	0
 
 :code:`FOILMEMBERCOEFF`
  This table allows the user to assign lift and drag coefficients of a 360° polar to a substructure member. The aero- or hydrodynamic forces are evaluated based on the current angle of attack experienced by the member. The chord used for force evaluation is the **DIAMETER** specified for the underlying **SUBELEMENT**, see :numref:`fig-foiled_member`.
