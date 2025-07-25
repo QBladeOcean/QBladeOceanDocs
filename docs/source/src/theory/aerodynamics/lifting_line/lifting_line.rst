@@ -128,7 +128,7 @@ The desingularized Biot-Savart equation then becomes:
 
 .. math::
 	\begin{align}
-	V_{ind} = -\frac{1}{4\pi}\int\Gamma\frac{\vec{r}\times\partial\vec{l}}{r^3+r_c^2} . 
+	V_{ind} = -\frac{1}{4\pi}\int\Gamma\frac{\vec{r}\times\partial\vec{l}}{(r^2+r_c^2)^{3/2}} . 
 	\end{align}
 
 
