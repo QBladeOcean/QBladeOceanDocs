@@ -1332,7 +1332,7 @@ Common Potential Flow Keywords
 :code:`UNITLENGTH_WAMIT`
  Enables to specify a WAMIT unit length different than 1.0, if not specified 1.0 is the default value. The WAMIT unit length is used to scale WAMIT Excitation (.3), Radiation (.1), and Hydrodynamic Stiffness (.hst) data files when the are loaded into QBlade.
  
- :code:`WAVEKINEVAL_POT`
+:code:`WAVEKINEVAL_POT`
  is an *optional* flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
  The available options are:
 
