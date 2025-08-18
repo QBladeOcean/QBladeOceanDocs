@@ -147,10 +147,10 @@ In this section the different CLI options are briefly explained.
 :code:`post_exp`
  The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
 
-:code:`dlc=\directory\dlc.*`
+:code:`dlc=\\directory\\dlc.*`
  This call allows to create simulations from a dlc table definition. It requires the filename of the dlc definition. Furthermore, a WORKING_DIR in which the simulations are created is required.
 
-:code:`dlc=\directory\dlc.*`
+:code:`flt=\\directory\\filter.*`
  This sets a filter file that is applied during the generation of all auto-export and post-export files, see :ref:`Global Export Filter`.
 
 Sample CLI Call to Start a Batch Run
