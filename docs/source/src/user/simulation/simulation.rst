@@ -141,7 +141,11 @@ An event is defined by a combination of *Keywords* and values. The following lis
 	* **30 90 1.5 PITCHTO**: At time 30 s, the collective pitch rate is set to 1.5deg/s until 90 deg are reached.
 	* **30 90 1.5 YAWTO**: At time 30 s, the yaw rate is set to 1.5deg/s until 90 deg are reached.
 	* **30 FAILBLADE_1**: At time 30 s, blade nr. 1 is *released* from the hub, by deactivating the respective structural constraint.
-	* **30 FAILCABLE_1**: At time 30 s, the cable with the IDNr. 1 brakes away from the substructure.
+	* **30 FAILCAB_1**: At time 30 s, the cable with the CABID 1 is removed.
+	* **30 FAILMOO_1**: At time 30 s, the mooring line with the MOOID 1 is removed.
+	* **30 FAILCST_1**: At time 30 s, the constraint with the CSTID 1 is deactivated.
+	
+The events **FAILMOO** and **FAILCST** may also be defined in the :ref:`Multi Turbine Global Mooring System` file. If defined there, these events are applied onto the mooring lines or constraints of the shared mooring system.
 
 External Loading File
 ^^^^^^^^^^^^^^^^^^^^^

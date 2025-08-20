@@ -87,6 +87,7 @@ Interface Function Definitions
 	void getWindspeedArray(double *posx, double *posy, double *posz, double *velx, double *vely, double *velz, int arraySize);
 	void getTowerBottomLoads_at_num(double *loads, int num);
 	void getTurbineOperation_at_num(double *vars, int num);
+	void getWaveVelAccElev(double posx, double posy, double posz, double *vel, double *acc, double *elev);
 	double getCustomData_at_num(char *str, double pos, int num);
 	double getCustomSimulationTimeData(char *str);
 
@@ -231,7 +232,9 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* SETYAW: sets the yaw angle, in [rad]
 	* SETPITCH: sets the pitch angle for BLD_X, in [rad]
 	* SETBRAKE: sets the brake modulation [0-1]
-	
+	* POSOFFSET : applies a position offset, in [m]
+	* ROTOFFSET : applies a rotation offset, in [rad]
+
 	Some actions are applied to a certain location ID, indicated by the parameter **id**, the different locations are:
 	
 	* CAB_<X>: applies the action to the guycable with ID <X>. Actions on cables are: SETLENGTH, ADDMASS, ADDFORCE
@@ -243,7 +246,8 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* SUB_<X>: applies the action to the substructure element with ID <X>. Actions on the substructure elements are: ADDFORCE, ADDTORQUE, ADDMASS
 	* JNT_<X>: applies the action to the substructure joint with ID <X>. Actions on the substructure joints are: ADDFORCE, ADDTORQUE, ADDMASS
 	* HUB: applies the action to the free LSS hub node. Actions on the hub node are: ADDFORCE, ADDTORQUE, ADDMASS
-	* HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: DDFORCE, ADDTORQUE, ADDMASS
+	* HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: DDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET
+	* NAC: applies the action to the nacelle node, located at the tower top, yawing. Actions on the nacelle node are: POSOFFSET, ROTOFFSET 
 	
 	The remaining parameters are used to further define the action that is applied, their coordinate systems, etc.
 	
@@ -264,24 +268,34 @@ In the following, the functionality that is exported from the QBlade dll or shar
 :code:`void getWindspeed(double x, double y, double z, double *velocity)`
 	This function can be called to get the current windspeed at the chosen position (x,y,z), returns the windspeed vector in the *double pointer* velocity.
 	
-	* velocity[0] = x-component [m/s];
-	* velocity[1] = y-component [m/s];
-	* velocity[2] = z-component [m/s];
+	* velocity[0] = x-component [m/s]
+	* velocity[1] = y-component [m/s]
+	* velocity[2] = z-component [m/s]
 	
 :code:`void getWindspeedArray(double *posx, double *posy, double *posz, double *velx, double *vely, double *velz, int arraySize)`
 	This function can be called to get the current windspeed for an array of positions
 	
-	* posx = double array of position x-components;
-	* posy = double array of position y-components;
-	* posz = double array of position z-components;
-	* velx = double array of velocity x-components evaluated at the pos array;
-	* vely = double array of velocity y-components evaluated at the pos array;
-	* velz = double array of velocity z-components evaluated at the pos array;
-	* arraySize = the size of the pos and velocity arrays;
+	* posx = double array of position x-components
+	* posy = double array of position y-components
+	* posz = double array of position z-components
+	* velx = double array of velocity x-components evaluated at the pos array
+	* vely = double array of velocity y-components evaluated at the pos array
+	* velz = double array of velocity z-components evaluated at the pos array
+	* arraySize = the size of the pos and velocity arrays
 
 :code:`void getTowerBottomLoads_at_num(double *loads, int num)`
 	This function can be used to obtain the loads at the bottom of the tower. The main purpose of this is to be used in conjunction with the :code:`setTurbinePosition_at_num()` function for force/position cosimilation with a hydrodynamics solver that is modeling the floater.
-
+	
+:code:`void getWaveVelAccElev(double posx, double posy, double posz, double *vel, double *acc, double *elev)`
+	This function can be used to obtain the current wave velocity, acceleration and elevation at an arbitrary position. 
+	
+	* posx = global x position of query location
+	* posy = global y position of query location
+	* posz = global z position of query location
+	* vel = double array that returns the velocity (size 3)
+	* acc = double array that returns the acceleration (size 3)
+	* elev = double pointer that returns the elevation
+	
 :code:`void getTurbineOperation_at_num(double *vars, int num = 0)`
 	This function returns useful turbine operational parameters from the selected turbine (argument *num*). Typically, this data is used to feed the logic of a supervisory wind turbine controller. The data is returned in the array *vars* which has the following content:
 	

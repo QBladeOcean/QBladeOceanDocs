@@ -201,8 +201,9 @@ The following parameters are **optional** and if not user specified are set to t
 :code:`SUPELEM_INTEGRATOR_<X>`
  is a keyword with which the user can choose from two different time integrators to evaluate the kinematics of the superelement. 
  
- * 1: The integration is performed with Runge-Kutta 4 (RK4) (more accurate)
- * 2: The integration is performed by first order Euler integration. (faster)
+ * 1: The integration is performed with the HHT (Hilber-Hughes-Taylor) integrator (default)
+ * 2: The integration is performed with Runge-Kutta 4 (RK4) 
+ * 3: The integration is performed by first order Euler integration. 
  
  The default value is 1: RK4.
  

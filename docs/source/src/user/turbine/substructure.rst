@@ -121,11 +121,18 @@ The following keywords can be used to define different properties and modeling o
 	1	SEABEDDISC
 
 :code:`FIXEDFLOATER`
- [**bool**] A flag that if set to true fixes the floater to the ground. A fixed floater can be subjected to a prescribed motion via a *Prescribed Motion File* (see :ref:`Turbine Events and Operation`).
+ [**bool**] A flag that if set to *true* fixes the floater to the ground (by constraining the neutral point). A fixed floater can be subjected to a prescribed motion via a *Prescribed Motion File* (see :ref:`Turbine Events and Operation`).
 
  .. code-block:: console
 
 	true	FIXEDFLOATER
+	
+:code:`FIXEDRAMPUP`
+ [**bool**] A flag that if set to *false* prevents the floater from being held fixed (at the neutral point) during the rampup. This is intended to help the floater to find its equilibrium position already during rampup. The default setting is *true*, e.g. the floater is held fixed during rampup.
+
+ .. code-block:: console
+
+	false	FIXEDRAMPUP
 
 :code:`BUOYANCYTUNER`
  [**-**] A multiplication factor that affects the calculation of the explicit buoyancy forces. Buoyancy caused by the linear hydrodynamic stiffness matrix is not affected by this factor.
@@ -134,12 +141,12 @@ The following keywords can be used to define different properties and modeling o
 
 	1.0032	BUOYANCYTUNER
 
-:code:`ADVANCEDBUOYANCY`
- [**bool**] An option to use an advanced discretization technique to calculate the explicit buoyancy of partially submerged members, especially useful if non-vertical substructure members are located close to the mean sea level. Each partially submerged member will be discretized into the user defined number of elements. The value used must be a square integer number (a value of 100 is suggested).
+:code:`ADVANCEDBUOYANCY`  
+ Controls the discretization of cylindrical members during buoyancy calculations. In QBlade, buoyancy forces are determined by integrating the hydrostatic pressure over the wetted surfaces of each member, including both sidewalls and end faces. The :code:`ADVANCEDBUOYANCY` parameter defines into how many circumferential strips the sidewalls of a cylindrical member are subdivided for this integration. A higher number of strips increases the geometric resolution of the buoyancy model, leading to more accurate force predictions for partially submerged or inclined members, at the cost of additional computation. The default value, if not specified, is **72** subdivisions, which provides a good balance between accuracy and performance for most applications.
 
  .. code-block:: console
 
-	true	ADVANCEDBUOYANCY
+	200	ADVANCEDBUOYANCY
 
 :code:`STATICBUOYANCY`
  [**bool**] An optional flag that controls for which sea level the explicit buoyancy is calculated in QBlade. If set to true, the buoyancy is considering only the mean sea level. If set to false (default), the local wave elevation at each member is used to calculate the buoyancy. When evaluating the hydrodynamics using potential a potential flow theory excitation database (:code:`USE_EXCITATION`) it is recommended to enable the :code:`STATICBUOYANCY` option since the hydrodynamic forces due to a change in wave elevation are already accounted for by the excitation forces. Using the instantaneous sea level for the evaluation of buoyancy in such a case would cause this part of the buoyancy force to be double-accounted for.
@@ -147,6 +154,13 @@ The following keywords can be used to define different properties and modeling o
  .. code-block:: console
 
 	true	STATICBUOYANCY
+	
+:code:`HYDROJOINTVENTED`
+ Excludes all member end faces connected to this joint from applying the hydrodynamic pressure during buoyancy calculations. This setting is used to represent vented or open joints, where water can freely pass through the structural connection. By disabling pressure loads on these end faces, artificial buoyancy forces from trapped water volumes are avoided, ensuring a more realistic representation of the member’s submerged behavior. In the example shown below the end face pressure is not applied to the subjoints with ID's 1 4 6 and 12 during buoyancy calculations.
+ 
+  .. code-block:: console
+
+	HYDROJOINTVENTED 1 4 6 12
 
 :code:`MARINEGROWTH`
  A table that allows the user to define different types of marine growth that is present in the members. In QBlade, marine growth is simulated as an additional thickness that affects the diameter of the cylindrical or rectangular element. An entry is defined by its ID number, the thickness of the growth (added to the cylinder radius) and the density of the growth.
@@ -454,7 +468,7 @@ The members of the substructure are defined within the :code:`SUBMEMBERS` table.
 
 :code:`SUBMEMBERS`
  Defines a table that contains the members that make up the turbine substructure. A member, with the ID **MemID**, is defined between two entries of the :code:`SUBJOINTS` table (**Jnt1ID** and **Jnt2ID**) and one entry from an element table (**ElmID**) (:code:`SUBELEMENTS`, :code:`SUBELEMENTSRIGID`, :code:`SUBELEMENTS_RECT`, :code:`SUBELEMENTSRIGID_RECT`). The column **ElmRot** can be used to rotate the member around its principal axis. Rotations are entered in degree.
- Additionally, it can have one Morison force coefficients group (**HyCoID**) defined in the :code:`HYDROMEMBERCOEFF` table and a marine growth entry (**MaGrID**) from the :code:`MARINEGROWTH` table. Also, this table allows the member to be flooded via a flooded cross sectional area entry in [m^2] (**FldArea**). The member can be subdivided into smaller elements for a more accurate structural and hydrodynamic evaluation. This is done in the **MemDisc** column; it gives the maximum allowed length of a discrete structural element of the member in [m]. Also, this table has the option to enable the buoyancy forces (**IsBuoy**) for the individual members (0 = False, 1 = True). Finally, the member can be optionally named for easier recognition in the output tables (**Name**). The last three optional columns can be used to assign a unique color, specified by its RBG components (**Red**, **Green**, **Blue**), to the member.
+ Additionally, it can have one Morison force coefficients group (**HyCoID**) defined in the :code:`HYDROMEMBERCOEFF` table and a marine growth entry (**MaGrID**) from the :code:`MARINEGROWTH` table. Also, this table allows the member to be flooded via a flooded cross sectional area entry in [m^2] (**FldArea**). The member can be subdivided into smaller elements for a more accurate structural and hydrodynamic evaluation. This is done in the **MemDisc** column; it gives the maximum allowed length of a discrete structural element of the member in [m]. Also, this table has the option to scale the buoyancy forces (**IsBuoy**) for the individual members (from 0 to 1). It is also possible to use a negative value in the **IsBuoy** column. In this case the member buoyancy is treated as *static*, e.g. the MSL is used during buoyancy calculations for this member. Finally, the member can be optionally named for easier recognition in the output tables (**Name**). The last three optional columns can be used to assign a unique color, specified by its RBG components (**Red**, **Green**, **Blue**), to the member.
   
  The keyword table has the following format:
 
@@ -522,6 +536,17 @@ When multiple members are connected to the same joint these members are *rigidly
  
  **Connections to the Tower Top**
   Connections to the tower top are realized in a similar way as connections to the torquetube top. By adding 100 into column *TpCon*. So to connect to the tower top of turbine 1 insert 101 in column *TpCon*.
+  
+ **TSDA (Translational Spring Damper)**
+  A simple TSDA element can directly be defined between two joints by setting the entry in the **Spring** column to **-1**. The spring stiffness is then defined in the **DoF_X** column, the damping in the **DoF_Y** column and the rest length :math:`L_0` in the column **DoF_Z**.
+  
+  .. code-block:: console
+   	:caption: : exemplary definition of a TSDA element
+
+	SUBCONSTRAINTS
+	CstID	JntID	JntCon	TpCon	GrdCon	Spring	DoF_X	DoF_Y	DoF_Z	DoF_rX	DoF_rY	DoF_rZ
+	1	1	2	0	0	-1	100	5	10	1	1	1
+	
 
 .. admonition:: Changes to in SUBCONSTRAINTS QBlade 2.0.7
    :class: important
@@ -992,34 +1017,32 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
     Hydrodynamic coefficients acting on a substructure member.
 
 :code:`HYDROMEMBERCOEFF`
- defines a table that contains the hydrodynamic normal coefficients that are used for the **cylindrical** members of the substructure. Each row contains one group of coefficients that can be used by one or more cylindrical members. The table contains a minimum of five entries, with an optional sixth entry. These are the ID number of the group, the normal drag coefficient, the normal added mass coefficient, the normal dynamic pressure coefficient, a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx.
-  
+ defines a table that contains the hydrodynamic normal coefficients that are used for the **cylindrical** members of the substructure. Each row contains one group of coefficients that can be used by one or more cylindrical members. The table contains a minimum of five entries, with an optional sixth entry. These are the ID number of the group, the normal drag coefficient, the normal added mass coefficient, the normal dynamic pressure coefficient, a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx. The last two columns are also optional, and allow to specify a cut off frequency and blend factor alpha to apply a high pass filter to be applied to the viscous drag forces, see :ref:`High-Pass Filtered Morison Drag`.
 
  .. code-block:: console
 	:caption: : The HYDROMEMBERCOEFF table
 
 	HYDROMEMBERCOEFF
-	CoeffID	CdN	CaN	CpN	MCFC	CdAx (optional)
-	1	2.0 	0.8	1.0	1	0
-	2	0.63	0.0	0.0	1	0
-	3	0.56	0.0	0.0	0	0
-	4	0.61	0.0	0.0	0	0
-	5	0.68	0.0	0.0	0	0
+	CoeffID	CdN	CaN	CpN	MCFC	CdAx*	f_c*	alpha*	
+	1	2.0 	0.8	1.0	1	0	0	0
+	2	0.63	0.0	0.0	1	0	0	0
+	3	0.56	0.0	0.0	0	0	0	0
+	4	0.61	0.0	0.0	0	0	0	0
+	5	0.68	0.0	0.0	0	0	0	0
 	
 :code:`HYDROMEMBERCOEFF_RECT`
- defines a table that contains the hydrodynamic normal coefficients that are used for the **rectangular** members of the substructure. Each row contains one group of coefficients that can be used by one or more rectangular members. The table contains eight entries. These are the ID number of the group, the normal drag coefficient along the members x-direction, the normal added mass coefficient along the members x-direction, the normal dynamic pressure coefficient along the members x-direction, the normal drag coefficient along the members y-direction, the normal added mass coefficient along the members y-direction, the normal dynamic pressure coefficient along the members y-direction and a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx.
-  
+ defines a table that contains the hydrodynamic normal coefficients that are used for the **rectangular** members of the substructure. Each row contains one group of coefficients that can be used by one or more rectangular members. The table contains eight entries. These are the ID number of the group, the normal drag coefficient along the members x-direction, the normal added mass coefficient along the members x-direction, the normal dynamic pressure coefficient along the members x-direction, the normal drag coefficient along the members y-direction, the normal added mass coefficient along the members y-direction, the normal dynamic pressure coefficient along the members y-direction and a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx. The last two columns are also optional, and allow to specify a cut off frequency and blend factor alpha to apply a high pass filter to be applied to the viscous drag forces, see :ref:`High-Pass Filtered Morison Drag`.
 
  .. code-block:: console
 	:caption: : The HYDROMEMBERCOEFF_RECT table
 
 	HYDROMEMBERCOEFF_RECT
-	CoeffID	CdNx	CaNx	CpNx	CdNy	CaNy	CpNy	MCFC	CdAx (optional)
-	1	2.0 	0.8	1.0	2.0 	0.8	1.0	1	0
-	2	0.63	0.0	0.0	0.63	0.0	0.0	1	0
-	3	0.56	0.0	0.0	0.56	0.0	0.0	0	0
-	4	0.61	0.0	0.0	0.61	0.0	0.0	0	0
-	5	0.68	0.0	0.0	0.68	0.0	0.0	0	0
+	CoeffID	CdNx	CaNx	CpNx	CdNy	CaNy	CpNy	MCFC	CdAx*	f_c*	alpha*
+	1	2.0 	0.8	1.0	2.0 	0.8	1.0	1	0	0	0
+	2	0.63	0.0	0.0	0.63	0.0	0.0	1	0	0	0
+	3	0.56	0.0	0.0	0.56	0.0	0.0	0	0	0	0
+	4	0.61	0.0	0.0	0.61	0.0	0.0	0	0	0	0
+	5	0.68	0.0	0.0	0.68	0.0	0.0	0	0	0	0
 
 :code:`FOILMEMBERCOEFF`
  This table allows the user to assign lift and drag coefficients of a 360° polar to a substructure member. The aero- or hydrodynamic forces are evaluated based on the current angle of attack experienced by the member. The chord used for force evaluation is the **DIAMETER** specified for the underlying **SUBELEMENT**, see :numref:`fig-foiled_member`.
@@ -1065,69 +1088,17 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	:caption: : The HYDROJOINTCOEFF table
 
 	HYDROJOINTCOEFF
-	CoeffID	JointID	CdA	CaA	CpA
-	1	9	4.8	0.0 	0.0	
-	2	10	4.8	0.0 	0.0	
-	3	11	4.8	0.0 	0.0	
-	4 	1 	0.0 	0.0 	0.0 	
-	5	3	0.0	0.0 	0.0	
-	6	5	0.0	0.0 	0.0	
-	7	7	0.0	0.0 	0.0	
+	CoeffID	JointID	CdA	CaA	CpA	OSD*	f_cutOff*	alpha*
+	1	9	4.8	0.0	0.0	0	0	0
+	2	10	4.8	0.0	0.0	0	0	0
+	3	11	4.8	0.0	0.0	0	0	0
+	4 	1	0.0	0.0	0.0	0	0	0	
+	5	3	0.0	0.0	0.0	0	0	0
+	6	5	0.0	0.0	0.0	0	0	0
+	7	7	0.0	0.0	0.0	0	0	0
 	
- In addition to the basic functionalities of the *HYDROJOINTCOEFF* table additional entries in the table can activate a more advanced modeling of member end Morison forces, to improve the prediction of low frequency responses of floating structures. Two advanced modeling techniques (see Wang et al. :footcite:`WANG2022282` and Behrens de Luna et al. :footcite:`wes-9-623-2024`), named **One-Sided Morison Drag** and **High Pass Filtered Morison Drag** can be activated by populating additional columns in the *HYDROJOINTCOEFF* table.
+ In addition to the basic functionalities of the *HYDROJOINTCOEFF* table additional entries in the table can activate a more advanced modeling of member end Morison forces, to improve the prediction of low frequency responses of floating structures. Two advanced modeling techniques (see Wang et al. :footcite:`WANG2022282` and Behrens de Luna et al. :footcite:`wes-9-623-2024`), named :ref:`One-Sided Morison Drag` and :ref:`High-Pass Filtered Morison Drag` can be activated by optionally populating additional columns in the *HYDROJOINTCOEFF* table. The **OSD**, **f_cutOff** and **alpha** columns are all optional, and can be omitted if these modeling features are bot needed.
  
-**One-Sided Morison Drag**
- The *One Sided Morison Drag* method modifies the axial drag model used in QBlade by applying the axial drag force solely when the flow normal to the surface is in the direction of the end faces normal vector (:math:`v \cdot n > 0`), representing a state of flow separation. This modification is suggested because the potential-flow model already includes the increased stagnation pressure when the flow is the opposite direction of the end face normal vector. This modification more accurately reflects the physical conditions where viscous effects cause a pressure reduction on the flow-facing side, which diverges from the ideal pressure recovery assumed in potential-flow models. This modification modifies the evaluation of the end face drag force in the following way:
- 
- :math:`F_D = \frac{1}{2} C_{d_A} \left| v \cdot n \right| \max(v \cdot n, 0)`
- 
- The one-sided Morison drag evaluation is activated by setting the sixth column of the *HYDROJOINTCOEFF* table to 1. Setting this column to 0 deactivates this correction:
- 
- .. code-block:: console
-	:caption: : The HYDROJOINTCOEFF table with the optional sixth column
-
-	HYDROJOINTCOEFF
-	CoeffID	JointID	CdA	CaA	CpA	OSD
-	1	9	4.8	0.0	0.0	1
-	2	10	4.8	0.0	0.0	1
-	3	11	4.8	0.0	0.0	0
-	4 	1 	0.0	0.0	0.0	0
-	5	3	0.0	0.0	0.0	0
-	6	5	0.0	0.0	0.0	1
-	7	7	0.0	0.0	0.0	1
-	
-**High-Pass Filtered Morison Drag**
- The *High-Pass Filtered Morison Drag* modification is another method to improve, or fine-tune the low-frequency response of a floating structure. To optimize the simulation of freely floating structures in irregular waves, QBlade incorporates an optional high-pass velocity filter for evaluation of the axial drag force on heave plates. This model allows to implement varying drag force across different wave frequency bands. This method uses a first-order high pass filter, which is applied to the relative normal velocity at a members end-face. After Wang et al. :footcite:`WANG2022282`, the filtered normal velocity (:math:`\tilde{v}_{i}`) in discrete time is evaluated as:
- 
- :math:`\tilde{v}_{i} = C \cdot \tilde{v}_{i-1} + C \cdot (v_{i} - v_{i-1})`,
- 
- with 
- 
- :math:`C = exp(-2\pi f_c \Delta t)`.
- 
- The applied filtered drag force :math:`F_{D,f}` is then evaluated as:
- 
- :math:`F_{D,f}=\alpha F_D + (1-\alpha) \tilde{F}_D`,
- 
- where :math:`\alpha` is a scaling factor between 0 and 1, :math:`\tilde{F}_D` is the drag force evaluated with the filtered normal velocity :math:`\tilde{v}_i` and :math:`F_D` the drag force evaluated with the unfiltered normal velocity :math:`v_i`.
- 
- The *High-Pass Filtered Morison Drag* evaluation is activated by setting the seventh and eight column of the *HYDROJOINTCOEFF* tables to the cut-off frequency :math:`f_c` and the scaling factor :math:`\alpha`:
- 
- .. code-block:: console
-	:caption: : The HYDROJOINTCOEFF table with the optional seventh and eight column
-
-	HYDROJOINTCOEFF
-	CoeffID	JointID	CdA	CaA	CpA	OSD	f_c	alpha
-	1	9	4.8	0.0	0.0	1	0.07	0.5	
-	2	10	4.8	0.0	0.0	1	0.07	0.5
-	3	11	4.8	0.0	0.0	0	0.07	0.5
-	4 	1 	0.0	0.0	0.0	0	0.07	0.5
-	5	3	0.0	0.0	0.0	0	0.07	0.5
-	6	5	0.0	0.0	0.0	1	0.07	0.5
-	7	7	0.0	0.0	0.0	1	0.07	0.5
-	
- An application of this filtered drag evaluation can be found in the works of Wang et al. :footcite:`WANG2022282` and Behrens de Luna et al. :footcite:`wes-9-623-2024`.
-
 :code:`WAVEKINEVAL_MOR`
  is an *optional* flag that controls how the local wave kinematics are used to calculate the Morison forces (see :ref:`ME_modeling-considerations`).
  The available options are:
@@ -1138,6 +1109,33 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
   
 :code:`WAVEKINTAU`
  is an *optional* time constant for the first order low-pass filter used to determine lagged position of the Morison/Potential Flow elements (when :code:`WAVEKINEVAL_MOR` or :code:`WAVEKINEVAL_POT` is set to 2). The default value is 30s.
+
+High-Pass Filtered Morison Drag
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The *High-Pass Filtered Morison Drag* modification is another method to improve, or fine-tune the low-frequency response of a floating structure. To optimize the simulation of freely floating structures in irregular waves, QBlade incorporates an optional high-pass velocity filter for evaluation of the axial drag force on heave plates. This model allows to implement varying drag force across different wave frequency bands. This method uses a first-order high pass filter, which is applied to the relative normal velocity at a members end-face. After Wang et al. :footcite:`WANG2022282`, the filtered normal velocity (:math:`\tilde{v}_{i}`) in discrete time is evaluated as:
+
+:math:`\tilde{v}_{i} = C \cdot \tilde{v}_{i-1} + C \cdot (v_{i} - v_{i-1})`,
+
+with 
+
+:math:`C = exp(-2\pi f_c \Delta t)`.
+
+The applied filtered drag force :math:`F_{D,f}` is then evaluated as:
+
+:math:`F_{D,f}=\alpha F_D + (1-\alpha) \tilde{F}_D`,
+
+where :math:`\alpha` is a scaling factor between 0 and 1, :math:`\tilde{F}_D` is the drag force evaluated with the filtered normal velocity :math:`\tilde{v}_i` and :math:`F_D` the drag force evaluated with the unfiltered normal velocity :math:`v_i`.
+
+An application of this filtered drag evaluation can be found in the works of Wang et al. :footcite:`WANG2022282` and Behrens de Luna et al. :footcite:`wes-9-623-2024`.
+
+One-Sided Morison Drag
+^^^^^^^^^^^^^^^^^^^^^^
+
+The *One Sided Morison Drag* method modifies the (axial) drag model used in QBlade by applying the axial drag force solely when the flow normal to the surface is in the direction of the end faces normal vector (:math:`v \cdot n > 0`), representing a state of flow separation. This modification is suggested because the potential-flow model already includes the increased stagnation pressure when the flow is the opposite direction of the end face normal vector. This modification more accurately reflects the physical conditions where viscous effects cause a pressure reduction on the flow-facing side, which diverges from the ideal pressure recovery assumed in potential-flow models. This modification modifies the evaluation of the end face drag force in the following way:
+ 
+:math:`F_D = \frac{1}{2} C_{d_A} \left| v \cdot n \right| \max(v \cdot n, 0)`
+ 
+The one-sided Morison drag evaluation is activated by setting the sixth column of the *HYDROJOINTCOEFF* table to 1. Setting this column to 0 deactivates this correction:
 
 .. _StrDef_LPFT:
 
@@ -1647,9 +1645,15 @@ Alphabetical Keyword List
 
 * **FIXEDFLOATER**
   Fixes the floater to the ground and allows prescribed motion.
+  
+* **FIXEDRAMPUP**
+  If set to false the floater is not held fixed during the rampup phase of the simulation.
 
 * **HYDROJOINTCOEFF**
   Defines hydrodynamic coefficients for cylindrical joint end faces.
+  
+* **HYDROJOINTVENTED**
+    Excludes all member end faces connected to this joint from applying the hydrodynamic pressure during buoyancy calculations.
 
 * **HYDROMEMBERCOEFF**
   Specifies hydrodynamic coefficients for cylindrical substructure members.

@@ -254,6 +254,18 @@ Drivetrain Parameters
 	6215000		DTTORDMP - Drivetrain torsional damping (N*m*s/rad)
 	
 This section of the main input file defined the drive train model. The drive train model in QBlade is a simple 2 mass spring-damper model. An overview is given in :numref:`fig-drivetrain`. The parameter **GBOXEFF** define the mechanical losses within the gearbox, **GENEFF** defined the electrical losses within the generator.
+
+Optionally, **GENEFF** and **GBOXEFF** can also define a table, instead of a scalar value for the efficiency:
+
+.. code-block:: console
+	:caption: : exemplary GENEFF table
+
+	GENEFF
+	RPM	EFF
+	4	0.8
+	9	0.9
+	12	0.98
+
 The drivetrain is parameterized by the main shaft torsional stiffness and damping, a high speed side (HSS) generator inertia and the low speed side (LSS) inertia. The LSS inertia (of shaft and Hub combined) should be summed up and assigned to the :code:`HUBINER` value. 
 
 .. _fig-drivetrain:

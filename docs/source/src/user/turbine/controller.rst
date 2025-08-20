@@ -216,7 +216,9 @@ The different columns are now further defined:
   * SETYAW: sets the yaw angle of **DATA**, in [rad]
   * SETPITCH: sets the pitch angle of **DATA** for BLD_X, in [rad]
   * SETBRAKE: sets the brake modulation of **DATA** [0-1]
-  
+  * POSOFFSET : applies a position offset, in [m]
+  * ROTOFFSET : applies a rotation offset, in [rad]
+
 **ID**
  The **ID** is used to identify a certain turbine component, possible **IDs** and actions that can be performed on them are shown below:
   * CAB_<X>: applies the action to the guycable with ID <X>. Actions on cables are: SETLENGTH, ADDMASS, ADDFORCE
@@ -228,7 +230,8 @@ The different columns are now further defined:
   * SUB_<X>: applies the action to the substructure element with ID <X>. Actions on the substructure elements are: ADDFORCE, ADDTORQUE, ADDMASS
   * JNT_<X>: applies the action to the substructure joint with ID <X>. Actions on the substructure joints are: ADDFORCE, ADDTORQUE, ADDMASS
   * HUB: applies the action to the free LSS hub node. Actions on the hub node are: ADDFORCE, ADDTORQUE, ADDMASS
-  * HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: DDFORCE, ADDTORQUE, ADDMASS
+  * HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: DDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET
+  * NAC: applies the action to the nacelle node, located at the tower top, yawing. Actions on the nacelle node are: POSOFFSET, ROTOFFSET 
 
 **POSITION**
  Sets the normalized position [0-1] at which the mass, force or torque is applied. Only has an effect on elements, not on nodes. 
