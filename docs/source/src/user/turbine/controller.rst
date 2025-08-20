@@ -62,6 +62,7 @@ Below is an example for the *Turbine Controllers* and *External Libraries* secti
 	type2_dll                                LIBFILE_1          - the library file name, WITHOUT file ending (.dll or .so )
 	update2                                  LIBFUNCTION_1      - the library function name that should be called every timestep
 	100                                      LIBARRAYSIZE_1     - the library swap array size for data exchange
+	param.txt                                LIBPARAMETERFILE_1 - the library parameter file name (leave blank if unused)
 
 **IMPORTANT**: 
 
