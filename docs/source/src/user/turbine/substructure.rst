@@ -140,6 +140,26 @@ The following keywords can be used to define different properties and modeling o
  .. code-block:: console
 
 	1.0032	BUOYANCYTUNER
+	
+:code:`BUOYANCYPREDICTOR`  
+ [**-**] Dimensionless look-ahead factor for evaluating hydrostatic pressure within a time step. Positions are predicted using **velocity and acceleration** before computing explicit buoyancy. Does **not** affect the linear hydrostatic stiffness.
+
+ - **Default:** `0.65`  
+ - **Typical range:** `0 … 1` (0 = no prediction, 1 = full one-step look-ahead; values >1 may destabilize)  
+
+ .. math::
+
+   \mathbf{x}_\mathrm{pred}
+   \;=\;
+   \mathbf{x}_\mathrm{now}
+   \;+\; (p\,\Delta t)\,\mathbf{v}_\mathrm{now}
+   \;+\; \tfrac{1}{2}\,(p\,\Delta t)^2\,\mathbf{a}_\mathrm{now}
+
+ where :math:`p=\texttt{BUOYANCYPREDICTOR}`.
+
+ .. code-block:: console
+
+   0.65    BUOYANCYPREDICTOR
 
 :code:`ADVANCEDBUOYANCY`  
  Controls the discretization of cylindrical members during buoyancy calculations. In QBlade, buoyancy forces are determined by integrating the hydrostatic pressure over the wetted surfaces of each member, including both sidewalls and end faces. The :code:`ADVANCEDBUOYANCY` parameter defines into how many circumferential strips the sidewalls of a cylindrical member are subdivided for this integration. A higher number of strips increases the geometric resolution of the buoyancy model, leading to more accurate force predictions for partially submerged or inclined members, at the cost of additional computation. The default value, if not specified, is **72** subdivisions, which provides a good balance between accuracy and performance for most applications.
@@ -1627,6 +1647,9 @@ Alphabetical Keyword List
 
 * **BUOYANCYTUNER**
   Adjusts the explicit buoyancy forces by a multiplication factor.
+
+* **BUOYANCYPREDICTOR** 
+  Dimensionless look-ahead factor for evaluating hydrostatic pressure within a time step. Does **not** affect the linear hydrostatic stiffness.
 
 * **CABDAMP**
   Activates axial damping for mooring lines and cables.

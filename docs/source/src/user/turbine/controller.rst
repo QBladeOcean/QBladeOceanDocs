@@ -36,12 +36,14 @@ Adding a Controller or an External Library to a Turbine Definition
 
 A controller library can be included in a turbine definition by selecting the library in the dialog shown in :numref:`fig-controller_dialog`. Depending on which controller interface type is used the appropriate option has to be selected. Furthermore, a controller parameter file has to be selected and loaded by the user. The parameter file is stored in the QBlade project and can be edited by the user once loaded. This if for example useful for setting up an identical turbine with a modified controller parameter (i.e. for control parameter tuning). Controller parameter files edited within QBlade can also be exported to ASCII format. 
 
-Any number of custom external libraries can be loaded in the lower part of the dialog shown in :numref:`fig-controller_dialog`. When loading a custom library the user also has to specify the function name that should be called by QBlade as well as the swap array size that will be used for communication between the library and QBlade. Each external library receives an integer identifier, which is later used to pass and receive data to and from its swap array.
+Any number of custom external libraries can be loaded in the lower part of the dialog shown in :numref:`fig-controller_dialog`. When loading a custom library the user also has to specify the function name that should be called by QBlade as well as the swap array size that will be used for communication between the library and QBlade. Furthermore, a parameter file can optionally be loaded. 
+
+Each external library receives an integer identifier, which is later used to pass and receive data to and from its swap array.
 
 .. _fig-controller_dialog:
 .. figure:: controller_dialog.png
     :align: center
-    :scale: 40%
+    :scale: 80%
     :alt: The controller dialog.
     
     The controller dialog.
@@ -103,6 +105,8 @@ It is also possible to send sectional data using this table. Sectional data requ
     0    "Angle of Attack at 0.25c (at section) Blade 1 [deg]" 0.5
     1    "Circulation (at section) Blade 2 [m^2/s]" 0.2
     10   "Time [s]"
+	
+You can directly communicate the timestep size to the controller by using "dt" in the DATA column.
 
 Sending Turbine Data to a Wind Turbine Controller Across Turbine Instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -151,6 +155,8 @@ Sending custom data to an external library is the same process as sending data t
 	2    "SWAP_3"
 
 Note that the output of the desired sensor should be enabled in the :ref:`StrDef_MainFile` and the variable name must exist. Otherwise, zeros will be passed to the controller.
+
+You can directly communicate the timestep size to the controller by using "dt" in the DATA column.
 
 Sending Turbine Data to an External Library Across Turbine Instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -270,34 +276,54 @@ The example below shows the source code of a simple external controller library 
 	:caption: : customDll.cpp
 
 	#include <stdio.h>
-
+	#include <cstring>
+	
 	bool firstCall = true;
 	double value;
-	char message_out[1000];
-
-	//this should be the function that QBlade calls at every timestep. The function name can be assigned 
-	//in QBlade turbine setup dialog or in the respective section of the .trb file
-	extern "C" void __declspec(dllexport) __cdecl update(float *avrSwap){
-
-	    if (firstCall){
-		//this is an example how the external controller could be initialized
-		sprintf(message_out,"First call, do some initialization things! Timestep = %f",avrSwap[1]);
-		firstCall = false;
-	    }
-	    
-	    //this is an example how some value is computed from the data in the swap array and then 
-	    //returned in the same swap array at position [50]
-	    sprintf(message_out,"Successive call, do some calculation things! Time = %f",avrSwap[0]);
-	    avrSwap[50] = avrSwap[0]*(-1.0);
-	    
+	char message_out[1024];
+	
+	//----------------------------------------------------------------
+	// Called once per timestep. This function name needs to match the
+	// one that you have assigned as the library function name.
+	//----------------------------------------------------------------
+	extern "C" __declspec(dllexport) void __cdecl update(float *avrSwap){
+	
+		if (firstCall){
+			// example one-time initialization
+			snprintf(message_out,sizeof(message_out),"update call: first call, do some initialization things! Timestep = %f",avrSwap[1]);
+			firstCall = false;
+		}
+		else{
+			// this is an example how some value is computed from the data in the swap array and then
+			// returned in the same swap array at position [50]
+			snprintf(message_out,sizeof(message_out),"update call: successive call, do some calculation things! Time = %f",avrSwap[0]);
+			avrSwap[50] = avrSwap[0]*(-1.0);
+		}
+	
 	}
-
-	//this function should have the same name as the function above with "_message" appended to it
-	//if this function is defined QBlade calls it automatically to print the output that "update"
-	//passes to the message_out variable
-	extern "C" void __declspec(dllexport) __cdecl update_message(char *message){
-
-	    sprintf(message,message_out);
+	
+	//----------------------------------------------------------------
+	// Called once before the first `update`. `paramFile` is the full
+	// path to your parameter file. Use it to load config.
+	// This function should have the same name as the "update" 
+	// function with "_init" appended to it
+	//----------------------------------------------------------------
+	extern "C" __declspec(dllexport) void __cdecl update_init(const char *paramFile){
+	
+		snprintf(message_out,sizeof(message_out),"_init call: full parameter filename %s",paramFile);
+		// TODO: open paramFile, parse settings, initialize your controller here
+	}
+	
+	//----------------------------------------------------------------
+	// if this optional function is defined QBlade calls it 
+	// automatically to print the output that "update" passes to the
+	// message_out variable. This function should have the same name 
+	// as the "update" function with "_message" appended to it.
+	//----------------------------------------------------------------
+	extern "C" __declspec(dllexport) void __cdecl update_message(char *outBuf){
+	
+		// copy the full 1024-byte buffer, including its terminator
+		std::memcpy(outBuf, message_out, sizeof(message_out));
 	}
 
 .. footbibliography::
