@@ -1044,11 +1044,11 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 
 	HYDROMEMBERCOEFF
 	CoeffID	CdN	CaN	CpN	MCFC	CdAx*	f_c*	alpha*	
-	1	2.0 	0.8	1.0	1	0	0	0
-	2	0.63	0.0	0.0	1	0	0	0
-	3	0.56	0.0	0.0	0	0	0	0
-	4	0.61	0.0	0.0	0	0	0	0
-	5	0.68	0.0	0.0	0	0	0	0
+	1	2.0 	0.8	1.0	1	0	0	1
+	2	0.63	0.0	0.0	1	0	0	1
+	3	0.56	0.0	0.0	0	0	0	1
+	4	0.61	0.0	0.0	0	0	0	1
+	5	0.68	0.0	0.0	0	0	0	1
 	
 :code:`HYDROMEMBERCOEFF_RECT`
  defines a table that contains the hydrodynamic normal coefficients that are used for the **rectangular** members of the substructure. Each row contains one group of coefficients that can be used by one or more rectangular members. The table contains eight entries. These are the ID number of the group, the normal drag coefficient along the members x-direction, the normal added mass coefficient along the members x-direction, the normal dynamic pressure coefficient along the members x-direction, the normal drag coefficient along the members y-direction, the normal added mass coefficient along the members y-direction, the normal dynamic pressure coefficient along the members y-direction and a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx. The last two columns are also optional, and allow to specify a cut off frequency and blend factor alpha to apply a high pass filter to be applied to the viscous drag forces, see :ref:`High-Pass Filtered Morison Drag`.
@@ -1058,11 +1058,11 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 
 	HYDROMEMBERCOEFF_RECT
 	CoeffID	CdNx	CaNx	CpNx	CdNy	CaNy	CpNy	MCFC	CdAx*	f_c*	alpha*
-	1	2.0 	0.8	1.0	2.0 	0.8	1.0	1	0	0	0
-	2	0.63	0.0	0.0	0.63	0.0	0.0	1	0	0	0
-	3	0.56	0.0	0.0	0.56	0.0	0.0	0	0	0	0
-	4	0.61	0.0	0.0	0.61	0.0	0.0	0	0	0	0
-	5	0.68	0.0	0.0	0.68	0.0	0.0	0	0	0	0
+	1	2.0 	0.8	1.0	2.0 	0.8	1.0	1	0	0	1
+	2	0.63	0.0	0.0	0.63	0.0	0.0	1	0	0	1
+	3	0.56	0.0	0.0	0.56	0.0	0.0	0	0	0	1
+	4	0.61	0.0	0.0	0.61	0.0	0.0	0	0	0	1
+	5	0.68	0.0	0.0	0.68	0.0	0.0	0	0	0	1
 
 :code:`FOILMEMBERCOEFF`
  This table allows the user to assign lift and drag coefficients of a 360° polar to a substructure member. The aero- or hydrodynamic forces are evaluated based on the current angle of attack experienced by the member. The chord used for force evaluation is the **DIAMETER** specified for the underlying **SUBELEMENT**, see :numref:`fig-foiled_member`.

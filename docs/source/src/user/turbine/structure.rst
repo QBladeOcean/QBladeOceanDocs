@@ -329,7 +329,7 @@ The location of the structural data tables for the blades is defined by the keyw
 Custom Azimuthal Spacing
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-By default, the azimuthal spacing between rotor blades is given by :math:\frac{360^\circ}{N}, where :math:N represents the number of blades. If a rotor is under construction and not all blades are attached, the azimuthal spacing can be customized to reflect the incomplete assembly, see :numref:`fig-incomplete_rotor`.
+By default, the azimuthal spacing between rotor blades is given by :math:`\frac{360^\circ}{N}`, where :math:`N` represents the number of blades. If a rotor is under construction and not all blades are attached, the azimuthal spacing can be customized to reflect the incomplete assembly, see :numref:`fig-incomplete_rotor`.
 
 .. code-block:: console
 	:caption: : Custom azimuthal spacing
@@ -711,10 +711,19 @@ The radius of gyration :math:`r_g` is related to the moment of inertia (:math:`I
 
 Please not the the radius of gyration in the structural datatable furthermore is normalized by the local chord of the blade.
 
+These properties are defined in QBlades cross sectional coordinate system:
+
+.. _fig-crossection-blade:
+.. figure:: crosssection.png
+    :align: center
+    :alt: Visualization of the local coordinate system that is used to define the cross sectional beam properties of blades and struts.
+    
+    Visualization of the local coordinate system that is used to define the cross sectional beam properties of blades and struts.
+
 Blade and Strut Timoshenko FPM Datatable
 ----------------------------------------
 
-The following table gives an overview of the entries of the structural data table for blades and struts:
+The following table gives an overview of the entries of the structural data table for blades and struts. 
 
 .. table:: Blade / Strut Cross Sectional Beam Properties for Timoshenko FPM Beams
 	:widths: 10 20 30 10
@@ -728,7 +737,7 @@ The following table gives an overview of the entries of the structural data tabl
 	-------- -------------------- ----------------------------------------- -------
 	3        Beam offset Y        Offset in local y-direction (norm with c) -
 	-------- -------------------- ----------------------------------------- ------- 
-	4        Pitch                Structural pitch, applied to matrix       deg
+	4        Str. Pitch           Structural pitch, applied to matrix       deg
 	-------- -------------------- ----------------------------------------- ------- 
 	5        K11                  (1,1) entry for the stiffness matrix      N
 	-------- -------------------- ----------------------------------------- ------- 
@@ -815,7 +824,24 @@ The following table gives an overview of the entries of the structural data tabl
 	46       M66                  (6,6) entry for the mass matrix           kgm^2
 	======== ==================== ========================================= ======= 
 
+In the table above the beam offsets in x and y are defined in QBlades cross sectional coordinate system, while for the sake of compatibility with windIO, the mass and structural matrix entries are defined in the `windIO <https://ieawindsystems.github.io/windIO/main/index.html>`_ coordinate system.
 
+.. _fig-crossection-fpm:
+.. figure:: crosssection.png
+    :align: center
+    :alt: Visualization of the local coordinate system that is used to define the cross sectional beam properties of blades and struts.
+    
+    QBlade's cross sectional coordinate system in which the beam offsets are defined.
+	
+
+.. _fig-crossection-windio:
+.. figure:: windio_coords.png
+    :align: center
+    :alt: Visualization of the windIO coordinate system.
+    
+    Visualization of the windIO coordinate system in which the mass and stiffness matrix entries are defined.
+	
+Note that typically the FPM matrices are already defined in the local, twisted windIO coordinate system, so adding a structural pitch is usually not needed and the value should be set to zero. When adding a structural twist the user defined matrix entries are rotated along the windIO z-axis in the direction shown in :numref:`fig-crossection-windio`.
 
 Tower and Torquetube Euler Bernoulli and Timoshenko Datatable
 -------------------------------------------------------------
@@ -890,6 +916,15 @@ The radius of gyration :math:`r_g` is related to the moment of inertia (:math:`I
 :math:`r_{g,x} = \sqrt{\frac{I_{xx}}{m}} = \sqrt{\frac{I_x}{A}}`
 
 Please note that the radius of gyration in the structural datatable furthermore is normalized by the local diameter of the tower or torquetube.
+
+These properties are defined in QBlades cross sectional coordinate system:
+
+.. _fig-crossection-tower:
+.. figure:: crosssection.png
+    :align: center
+    :alt: Visualization of the local coordinate system that is used to define the cross sectional beam properties of blades and struts.
+    
+    Visualization of the local coordinate system that is used to define the cross sectional beam properties of blades and struts, the tower and torquetube.
 
 Cable Structural Data File
 ==========================
