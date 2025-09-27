@@ -33,7 +33,7 @@ For added mass calculations, the blade sections are approximated as flat plates,
 .. code-block:: console
 	:caption: : Exemplary Added Mass Keyword use
 	
-	1.2 ADDMASSCOEFF
+	1.2 ADDEDMASSCOEFF
 
 The keyword :code:`DYNPRESSURECOEFF` is used to assign a dynamic pressure coefficient to the blade. This coefficient plays a role in modeling marine hydrokinetic turbines (MHK) and contributes to the Morison-style hydrodynamic inertia force calculation.
 
@@ -42,12 +42,12 @@ The keyword :code:`DYNPRESSURECOEFF` is used to assign a dynamic pressure coeffi
 	
 	1.2 DYNPRESSURECOEFF
 
-The keyword :code:`ISBUOYANCY` activates buoyancy calculations for the structure to which it is applied. This accounts for the buoyancy force acting on the cross-sectional area of a blade or tower section.
+The keyword :code:`BUOYANCYCOEFF` linearly scales the buoyancy calculations for the structure to which it is applied. This accounts for the buoyancy force acting on the cross-sectional area of a blade or tower section. A value of 0.0 means no buoyancy is evaluated. A value of 1.0 calculates buoyancy based on the displaced volume.
 
 .. code-block:: console
 	:caption: : Exemplary Buoyancy Keyword use
 	
-	true ISBUOYANCY
+	1.0 BUOYANCYCOEFF
 	
 Substructure Model Settings for MHK Turbines
 ********************************************

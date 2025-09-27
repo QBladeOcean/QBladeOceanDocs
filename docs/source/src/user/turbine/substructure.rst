@@ -479,6 +479,11 @@ Four different types of element exists that can be used to construct the substru
 
 :code:`MASSTUNER`
  A multiplication factor that affects the mass density of ALL elements defined in :code:`SUBELEMENTS`.
+ 
+.. admonition:: Assigning Aerodynamic Drag to Substructure Elements
+   :class: info
+    
+   Optionally, the user can assign *aerodynamic drag coefficienr* in a substructure element table. To do this the aerodynamic drag coefficients are assigned by adding an optional extra column to the substructure element table. The aerodynamic drag is only acting on a substructure member when it is located above the mean sea level (MSL) in an *offshore* simulation (e.g. poking out of the water). In an *onshore* simulation the aerodynamic drag value has no effect, instead the HYDROMEMBERCOEFF table is used to assign aerodynamic drag.
 
 Substructure Members
 --------------------
@@ -524,7 +529,7 @@ When multiple members are connected to the same joint these members are *rigidly
  The sixth entry specifies that the constraint is realized as a non-linear spring-damper element (defined via an the spring ID number). If no spring or damper element is selected the constraint is realized as a stiff connection.
  The last 6 entries specify which degrees of freedom are constrained (either stiff or with a spring damper element): the three translational and three rotational degrees of freedom. For these entries 0 is interpreted as unconstrained (free) and 1 is interpreted as constrained. A spring-damper element is always acting along **all** the constrained degrees of freedom at the same time.
  
- The coordinate system for these constraints is defined by the type that JointID1 is connected to. If Joint1ID is connected to Joint2ID, or the transition piece, the coordinate system in which this constrained is carried out is that of Joint1ID. If Joint1ID is connected to the ground, the constraint is realized in the global world coordinate system.
+ The coordinate system in which the constraints are defined is the coordinate system of JointID1.
  
  An exemplary :code:`SUBCONSTRAINTS` table is shown below. In this example all joints in the table are connected directly to the transition piece.
 
@@ -571,7 +576,7 @@ When multiple members are connected to the same joint these members are *rigidly
 .. admonition:: Changes to in SUBCONSTRAINTS QBlade 2.0.7
    :class: important
    
-   In QBlade versions prior to 2.0.7 the constraint degrees of freedom were always defined in the coordinate system of the object to which Jnt1ID was constrained, e.g. Joint2ID, the transition piece or the ground. From QBlade 2.0.7 on the coordinate system for the constraint is now that of Jnt1ID, except when Jnt1ID is connected to the ground. In the latter case the coordinate system that is used is the global coordinate system.
+   In QBlade versions prior to 2.0.7 the constraint degrees of freedom were always defined in the coordinate system of the object to which Jnt1ID was constrained, e.g. Joint2ID, the transition piece or the ground. From QBlade 2.0.7 on the coordinate system for the constraint is now that of Jnt1ID.
 
 The Transition Piece
 --------------------
@@ -1025,6 +1030,11 @@ A typical mix between the Morison equation and potential flow theory is to have 
 
 Morison Equation (Strip Theory) Modelling
 -----------------------------------------
+
+.. admonition:: Morison Element Behavior in On- and Offshore Simulations
+   :class: info
+
+	Morison strip theory can be used to assign drag, added mass and damping coefficients to elements of the substructure. Typically this is used in an *offshore* simulation where the Morison forces are applied to the *submerged* members based on the *water density*. In case Morison coefficients are applied to a substructure that is used in an *onshore* simulation all members are treated as *submerged* and the *air density* values is used to evaluate the Morison forces. See also :ref:`Marine Hydrokinetic Turbines`.
 
 Hydrodynamic coefficients can be assigned to substructure members and joints. Hydrodynamic member coefficients (:code:`HYDROMEMBERCOEFF`) act in the direction normal to the center-line of the substructure member. Hydrodynamic joint coefficients act in the direction normal to the end face of a member (see :numref:`fig-substruct-morison_member`). 
 
