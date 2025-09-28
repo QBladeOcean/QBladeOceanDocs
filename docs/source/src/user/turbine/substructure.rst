@@ -1265,43 +1265,50 @@ By default, the hydrodynamic loads are applied at the :code:`REF_HYDRO_POS`. Whe
 Potential Flow Hydrodynamics Coordinate Systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When hydrodynamic potential flow databases are included in a simulation the resulting hydrodynamic forces are evaluated in the **Hydrodynamic Wavekinematics Evaluation Coordinate System** (HYDRO Wavekin. Eval. Coord). The floater velocities (translational and rotational) are evaluated in the **HYDRO Wavekin. Eval. Coord** system (see :numref:`fig-wavekineval`). The wave kinematics (heading, amplitude, phase) are evaluated at the origin of the same system. The radiation, excitation, second order sum and difference forces and moments are then calculated and applied to the floater at the origin of the **Reference Hydrodynamic Position** :code:`REF_HYDRO_POS_X`. The definition of the **Hydrodynamic Wavekinematics Evaluation Coordinate System** is discussed below.
+**Radiation Force and Moment Evaluation**
 
-.. _fig-wavekineval:
-.. figure:: wavekineval.png
-    :align: center
-    :alt: The Hydrodynamic Wavekinematics Evaluation Coordinate System (**HYDRO Wavekin. Eval. Coord**) and the Reference Hydrodynamic Position Coordinate System (**REF_HYDRO_POS**).
+ Radiation forces (and the hydrodynamic added mass matrix SUB_HYDROADDEDMASS) are evaluated in the **Hydrodynamic Heading Coordinate System**, :code:`HYDRO Heading Coord`. This frame translates with the floater, its z-axis is always vertical (up), and its x-axis instantaneously aligns with the floater heading (yaw). The y-axis completes the right-handed triad. Roll and pitch are not followed. The radiation forces and moments are then computed and applied at the origin of the **Reference Hydrodynamic Position** :code:`REF_HYDRO_POS_X`.
 
-    The Hydrodynamic Wavekinematics Evaluation Coordinate System and the Reference Hydrodynamic Position Coordinate System.
+**Diffraction, Sum- and Difference Frequency Force and Moment Evaluation**
 
-Hydrodynamic databases from potential flow solvers like *WAMIT* are typically derived assuming small displacements and rotations around a reference position. Applying these databases in a globally fixed coordinate system introduces inconsistencies for floating wind turbines that experience large displacements. For example:
-
- - Wave kinematics evaluation may deviate significantly as the floater moves through the wave field.
- - Single-point mooring designs, prone to large yaw rotations, can lead to direction-sensitive force inconsistencies.
-
-To address these issues, QBlade allows users to configure the **Hydrodynamic Wavekinematics Evaluation Coordinate System** for wave and floater kinematics evaluation as follows:
-
- - **Local Evaluation of Wave Kinematics:**
-   The origin of the **HYDRO Wavekin. Eval. Coord** is attached to the **REF_HYDRO_POS** origin. This coordinate system yaws with the floater but does not rotate along pitch and roll axes, ensuring the z-axis points vertically upward. However, unfiltered position updates may cause phasing inconsistencies.
-
- - **Fixed Initial Position Evaluation:**
-   The **HYDRO Wavekin. Eval. Coord** origin and orientation remain fixed at the global initial position, aligned with the initial global z-rotation, throughout the simulation. This configuration avoids phasing issues but disregards floater movement.
-
- - **Lagged Position Evaluation:**
-   The origin updates based on a time-filtered (*lagged*) position and yaw rotation of the **REF_HYDRO_POS**, controlled by the **WAVEKINTAU** parameter. The z-axis remains vertical, correcting for large yaw movements (Yaw Rotation Correction).
-
-The following parameters manage the potential flow evaluation frame:
-
-:code:`WAVEKINEVAL_POT`
- is an *optional* flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
- The available options are:
-
- - `0`: Local evaluation of wave kinematics.
- - `1`: Evaluation at the fixed initial position (**default**).
- - `2`: Evaluation at a lagged position (requires :code:`WAVEKINTAU`).
-  
-:code:`WAVEKINTAU`
- is an *optional* time constant for the first order low-pass filter used to determine lagged position of the Morison/Potential Flow elements (when :code:`WAVEKINEVAL_MOR` or :code:`WAVEKINEVAL_POT` is set to 2). The default value is 30s.
+ When hydrodynamic potential flow databases are included, the resulting hydrodynamic forces are evaluated in the **Hydrodynamic Wavekinematics Evaluation Coordinate System** (:code:`HYDRO Wavekin. Eval. Coord`). This frame also keeps the z-axis vertical (up). Its origin and heading are updated according to one of three options described below. Floater velocities (translational and rotational) are evaluated in the :code:`HYDRO Wavekin. Eval. Coord` frame (see :numref:`fig-wavekineval`). Wave kinematics (heading, amplitude, phase) are evaluated at the origin of the same frame. The excitation, second-order sum, and difference forces and moments are then computed and applied at the origin of the **Reference Hydrodynamic Position** :code:`REF_HYDRO_POS_X`.
+ 
+ .. _fig-wavekineval:
+ .. figure:: wavekineval.png
+     :align: center
+     :alt: The Hydrodynamic Wavekinematics Evaluation Coordinate System (**HYDRO Wavekin. Eval. Coord**) and the Reference Hydrodynamic Position Coordinate System (**REF_HYDRO_POS**).
+ 
+     The Hydrodynamic Wavekinematics Evaluation Coordinate System and the Reference Hydrodynamic Position Coordinate System.
+ 
+ Hydrodynamic databases from potential flow solvers like *WAMIT* are typically derived assuming small displacements and rotations around a reference position. Applying these databases in a globally fixed coordinate system introduces inconsistencies for floating wind turbines that experience large displacements. For example:
+ 
+  - As the floater moves through the wave field, wave-kinematics evaluation can drift from the intended reference.
+  - Single-point moored systems can experience large yaw rotations, leading to direction-dependent inconsistencies.
+ 
+ To address these issues, QBlade allows users to configure the :code:`HYDRO Wavekin. Eval. Coord` for wave and floater kinematics evaluation as follows:
+ 
+  - **Local Evaluation of Wave Kinematics:**
+    The origin of the **HYDRO Wavekin. Eval. Coord** is attached to the **REF_HYDRO_POS** origin. This coordinate system yaws with the floater but does not rotate along pitch and roll axes, ensuring the z-axis points vertically upward. However, unfiltered position updates may cause phasing inconsistencies.
+ 
+  - **Fixed Initial Position Evaluation:**
+    The **HYDRO Wavekin. Eval. Coord** origin and orientation remain fixed at the global initial position, aligned with the initial global z-rotation, throughout the simulation. This configuration avoids phasing issues but disregards floater movement.
+ 
+  - **Lagged Position Evaluation:**
+    The origin updates based on a time-filtered (*lagged*) position and yaw rotation of the **REF_HYDRO_POS**, controlled by the **WAVEKINTAU** parameter. The z-axis remains vertical, correcting for large yaw movements (Yaw Rotation Correction).
+ 
+ The following parameters manage the update of the :code:`HYDRO Wavekin. Eval. Coord` frame:
+ 
+ :code:`WAVEKINEVAL_POT`
+  is an *optional* flag that control how the local wave kinematics are used to calculate the diffraction and second order forces at potential flow bodies.
+  The available options are:
+ 
+  - `0`: Local evaluation of wave kinematics.
+  - `1`: Evaluation at the fixed initial position (**default**).
+  - `2`: Evaluation at a lagged position (requires :code:`WAVEKINTAU`).
+   
+ :code:`WAVEKINTAU`
+  is an *optional* time constant for the first order low-pass filter used to determine lagged position of the Morison/Potential Flow elements (when :code:`WAVEKINEVAL_MOR` or :code:`WAVEKINEVAL_POT` is set to 2). The default value is 30s.
+ 
 
 Common Potential Flow Keywords
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
