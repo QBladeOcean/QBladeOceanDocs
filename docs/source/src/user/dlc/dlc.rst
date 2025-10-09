@@ -179,7 +179,7 @@ The definition of a single simulation requires 33 entries (columns) in a spreads
 
 3 **Master Simulation** : The path to a simulation definition template. A relative path based on the spreadsheet location can be used. This needs to be a *Simulation Definition ASCII File* with all associated files (.trb, plr, .bla, etc.). In this template all fixed variables that are not defined in one of the spreadsheet columns can be set.
 
-4 **Events** : The (absolute or relative) path to an event definition file. If no event should be simulation insert the word *none*.  
+4 **Events** : The (absolute or relative) path to an event definition file. Use the keyword *none* if no event file is used. 
 
 5 **Windspeed** : The windspeed in [m/s].
 
@@ -191,33 +191,31 @@ The definition of a single simulation requires 33 entries (columns) in a spreads
 
 9 **Turbulence Seed** : The seed that is used by TurbSim for the turbulent windfield generation (if a TurbSim template is defined).
 
-10 **Hub Height Input File** : The (absolute or relative) path of a hub-height wind input file.
+10 **Wind Input File** : The (absolute or relative) path of a wind input file (Turbsim .inp), Hub Height (.hht) or Mann (.man). Depending on the user entries in columns 4-9 the respective values in the template are overwritten. Use the keyword *none* if no windfile is used.
 
-11 **TurbSim Template** : The (absolute or relative) path of the TurbSim input file (.inp) that will be used as a template for the generation of turbulent wind fields. Depending on the user entries in columns 4-9 the respective values in the template are overwritten.
+11 **Water Depth** : The water depth in [m]. If an onshore turbine is simulated use the value 0.
 
-12 **Water Depth** : The water depth in [m]. If an onshore turbine is simulated use the value 0.
+12 **Significant Height (Hs)** : The significant wave height in [m].
 
-13 **Significant Height (Hs)** : The significant wave height in [m].
+13 **Significant Wave Period (Tp)** : The significant wave period in [s].
 
-14 **Significant Wave Period (Tp)** : The significant wave period in [s].
-
-15 **Wave Misalignment** : The misalignment between wind and waves in [°]. The wave direction is calculated so that the wave is misaligned from the wind by the user specified value as a positive rotation around the global z-axis.
+14 **Wave Misalignment** : The misalignment between wind and waves in [°]. The wave direction is calculated so that the wave is misaligned from the wind by the user specified value as a positive rotation around the global z-axis.
 
 15 **Wave Seed** : The seed that is used by the wave generator during the generation of wave timeseries from wave spectra.
 
-16 **Wave Template** : The (absolute or relative) path to a :ref:`Wave Definition ASCII File` that is used as a template for the wave generation. Depending on the user entries in column 13-15 the respective values in the template are overwritten.
+16 **Wave Template** : The (absolute or relative) path to a :ref:`Wave Definition ASCII File` that is used as a template for the wave generation. Depending on the user entries in column 13-15 the respective values in the template are overwritten. Use the keyword *none* if no wave file is used.
 
-17 **Near Surface Current Velocity** : The velocity of the near surface current in [m/s], see :ref:`Currents`.
+17 **Near Surface Current Velocity** : The velocity of the near surface current in [m/s], see :ref:`Currents`. Use the keyword *auto* to set this value automatically according to the standard (1% of windspeed).
 
-18 **Near Surface Current Direction** : The direction of the near surface current in [°], see :ref:`Currents`.
+18 **Near Surface Current Direction** : The direction of the near surface current in [°], see :ref:`Currents`. Use the keyword *auto* to set this value automatically according to the standard (along the wind direction).
 
-19 **Near Surface Current Depth** : The depth of the near surface current in [m], see :ref:`Currents`.
+19 **Near Surface Current Depth** : The depth of the near surface current in [m], see :ref:`Currents`. Use the keyword *auto* to set this value automatically according to the standard (20m depth).
 
 20 **Sub Surface Current Velocity** : The velocity of the sub surface current in [m/s], see :ref:`Currents`.
 
-21 **Sub Surface Current Direction** : The direction of the sub surface current in [°], see :ref:`Currents`.
+21 **Sub Surface Current Direction** : The direction of the sub surface current in [°], see :ref:`Currents`. Use the keyword *auto* to set this value automatically according to the standard (the wave direction).
 
-22 **Sub Surface Current Exponent** : The exponent of the sub surface current velocity profile, see :ref:`Currents`.
+22 **Sub Surface Current Exponent** : The exponent of the sub surface current velocity profile, see :ref:`Currents`. Use the keyword *auto* to set this value automatically according to the standard (1/7).
 
 23 **Near Shore Current** : The velocity of the near shore current in [m/s], see :ref:`Currents`.
 
