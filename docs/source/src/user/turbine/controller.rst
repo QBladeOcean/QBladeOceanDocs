@@ -21,6 +21,11 @@ Since QBlade is compiled as a 64bit software it is **only possible to call 64bit
 An example for a DTU-style controller is the :footcite:t:`DTUWEC` controller. An example for the TUB-Style controller is the TUB Controller presented in :footcite:t:`Perez-Becker2021`. The QBlade release contains pre-compiled ROSCO, DTU and TUB Controllers.  
 
 For these commonly used interfaces the data that is passed between the controller and the simulation in QBlade and its position in the swap array that is used for this communication is already predefined. This means that there are fixed array positions for data such as torque, rpm, pitch angles and tower top accelerations. The specific data that is communicated and its position depends on the controller interface definition and is different between the BLADED-style, DTU-style and TUB-style interfaces.
+
+.. admonition:: Location of controller library files
+   :class: info
+
+   To use a controller library (.dll or .so) in QBlade, place the file in the `/ControllerFiles` directory within the QBlade installation. When a simulation is initiated, QBlade automatically creates a unique temporary copy of each controller library file in this directory for every simulation instance.
  
 External Library Interface
 --------------------------

@@ -96,5 +96,5 @@ Turbine objects can be exported as a QBlade project file (``.qpr``) or into the 
 
 	----------------------------------------Turbine Controller-----------------------------------------------------------
 	3                                        CONTROLLERTYPE     - the type of turbine controller 0 = none, 1 = BLADED, 2 = DTU, 3 = TUB
-	TUBCon_1.3.9_64Bit                       CONTROLLERFILE     - the controller file name, WITHOUT file ending (.dll or .so ) - leave blank if unused
+	TUBCon_1.3.9_64Bit                       CONTROLLERFILE     - the controller file name, WITHOUT file ending (.dll or .so ) - leave blank if unused, this file must be located in the /ControllerFiles subdirectory of QBlade
 	Control/TUBCon_Params_V1.3.9_NREL5MW.xml PARAMETERFILE      - the controller parameter file name (leave blank if unused)
