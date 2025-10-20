@@ -242,8 +242,8 @@ The different columns are now further defined:
   * SUB_<X>: applies the action to the substructure element with ID <X>. Actions on the substructure elements are: ADDFORCE, ADDTORQUE, ADDMASS
   * JNT_<X>: applies the action to the substructure joint with ID <X>. Actions on the substructure joints are: ADDFORCE, ADDTORQUE, ADDMASS
   * HUB: applies the action to the free LSS hub node. Actions on the hub node are: ADDFORCE, ADDTORQUE, ADDMASS
-  * HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: DDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET
-  * NAC: applies the action to the nacelle node, located at the tower top, yawing. Actions on the nacelle node are: POSOFFSET, ROTOFFSET 
+  * HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: ADDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET
+  * NAC: applies the action to the nacelle node, located at the tower top, yawing. Actions on the nacelle node are: ADDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET 
 
 **POSITION**
  Sets the normalized position [0-1] at which the mass, force or torque is applied. Only has an effect on elements, not on nodes. 

@@ -246,8 +246,8 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* SUB_<X>: applies the action to the substructure element with ID <X>. Actions on the substructure elements are: ADDFORCE, ADDTORQUE, ADDMASS
 	* JNT_<X>: applies the action to the substructure joint with ID <X>. Actions on the substructure joints are: ADDFORCE, ADDTORQUE, ADDMASS
 	* HUB: applies the action to the free LSS hub node. Actions on the hub node are: ADDFORCE, ADDTORQUE, ADDMASS
-	* HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: DDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET
-	* NAC: applies the action to the nacelle node, located at the tower top, yawing. Actions on the nacelle node are: POSOFFSET, ROTOFFSET 
+	* HUBFIXED: applies the action to the fixed non-rotating hub node. Actions on the hub node are: ADDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET
+	* NAC: applies the action to the nacelle node, located at the tower top, yawing. Actions on the nacelle node are: ADDFORCE, ADDTORQUE, ADDMASS, POSOFFSET, ROTOFFSET 
 	
 	The remaining parameters are used to further define the action that is applied, their coordinate systems, etc.
 	
