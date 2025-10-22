@@ -1060,8 +1060,12 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	4	0.61	0.0	0.0	0	0	0	1
 	5	0.68	0.0	0.0	0	0	0	1
 	
+ For cylindrical members, the **reference area** used for the evaluation of **drag forces** is the projected member surface area :math:`A = d \, l`, where :math:`d` is the member diameter and :math:`l` is the (submerged) member length.
+
+ The **reference volume** used for the evaluation of **added mass** and **Froude–Krylov** forces is the member volume :math:`V = \frac{d^2}{4} \, \pi \, l`.
+
 :code:`HYDROMEMBERCOEFF_RECT`
- defines a table that contains the hydrodynamic normal coefficients that are used for the **rectangular** members of the substructure. Each row contains one group of coefficients that can be used by one or more rectangular members. The table contains eight entries. These are the ID number of the group, the normal drag coefficient along the members x-direction, the normal added mass coefficient along the members x-direction, the normal dynamic pressure coefficient along the members x-direction, the normal drag coefficient along the members y-direction, the normal added mass coefficient along the members y-direction, the normal dynamic pressure coefficient along the members y-direction and a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx. The last two columns are also optional, and allow to specify a cut off frequency and blend factor alpha to apply a high pass filter to be applied to the viscous drag forces, see :ref:`High-Pass Filtered Morison Drag`.
+ defines a table that contains the hydrodynamic normal coefficients that are used for the **rectangular** members of the substructure. Each row contains one group of coefficients that can be used by one or more rectangular members. The table contains eight entries. These are the ID number of the group, the normal drag coefficient along the members local x-axis, the normal added mass coefficient along the members local x-axis, the normal dynamic pressure coefficient along the members local x-axis, the normal drag coefficient along the members local y-axis, the normal added mass coefficient along the members local y-axis, the normal dynamic pressure coefficient along the members local y-axis and a flag that enables the MacCamy-Fuchs correction (MCFC) and an optional entry for an axial drag coefficient CdAx. The last two columns are also optional, and allow to specify a cut off frequency and blend factor alpha to apply a high pass filter to be applied to the viscous drag forces, see :ref:`High-Pass Filtered Morison Drag`.
 
  .. code-block:: console
 	:caption: : The HYDROMEMBERCOEFF_RECT table
@@ -1073,6 +1077,12 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	3	0.56	0.0	0.0	0.56	0.0	0.0	0	0	0	1
 	4	0.61	0.0	0.0	0.61	0.0	0.0	0	0	0	1
 	5	0.68	0.0	0.0	0.68	0.0	0.0	0	0	0	1
+
+.. For rectangular members, the **reference area** used for the evaluation of **drag forces** is the surface area :math:`A = 2 \, d_{xdim} \, l` and :math:`A = 2 \, d_{ydim} \, l`, where :math:`d_{xdim}` and :math:`d_{ydim}` are the side lengths of the member faces along the members local :math:`x` and :math:`y` axes and :math:`l` is the (submerged) member length. The area is multiplied by a factor of :math:`2` to account for both opposing faces of the member. This means *CdNx* is used in combination with the area calculated with :math:`d_{ydim}` and *CdNy* is used in combination with the area calculated with :math:`d_{xdim}`.   
+
+.. The **reference volume** used for the evaluation of **added mass** forces is calculated as the area of an equivalent circle, obtained from the side length of the member face, multiplied by the submerged member length: :math:`V_x = \frac{d_{xdim}^2}{4} \, \pi \, l`, and :math:`V_y = \frac{d_{ydim}^2}{4} \, \pi \, l`, where :math:`d_{xdim}` and :math:`d_{ydim}` are the side lengths of the member faces. This means *CaNx* is used in combination with the volume calculated with :math:`d_{ydim}` and *CaNy* is used in combination with the volume calculated with :math:`d_{xdim}`.   
+
+.. The **reference volume** used for the evaluation of **Froude–Krylov** forces is based on the cross-sectional member area and the submerged member length: :math:`V = d_{xdim} \, d_{ydim} \, l`. 
 
 :code:`FOILMEMBERCOEFF`
  This table allows the user to assign lift and drag coefficients of a 360° polar to a substructure member. The aero- or hydrodynamic forces are evaluated based on the current angle of attack experienced by the member. The chord used for force evaluation is the **DIAMETER** specified for the underlying **SUBELEMENT**, see :numref:`fig-foiled_member`.
@@ -1111,7 +1121,7 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	0.001	EPSILON_GAMMA
 
 :code:`HYDROJOINTCOEFF`
- is a table that defines hydrodynamic axial coefficients that can be placed at specific joints (defined by their ID number) of the substructure that are located at the ends of **cylindrical** members. QBlade assumes a spherical end of the element when calculating the hydrodynamic axial Morison forces (e.g. :math:`F_a^{ax} = \frac{2\pi}{3}(\frac{d}{2})^3\cdot C_a^{ax}`). The table contains the axial drag, added mass and dynamic pressure axial coefficients and is structured as shown below. The hydrodynamic reference volume for a member end face is assumed to be a semi-spheroid with the member diameter (the equivalent diameter for rectangular members). If two substructure members are connected to the same node the member face reference areas and reference volumes are subtracted from another so that just the area and reference volumes that is exposed to the fluid is considered when evaluating the Morison forces.
+ is a table that defines hydrodynamic axial coefficients that can be placed at specific joints (defined by their ID number) of the substructure that are located at the ends of **cylindrical** members. QBlade assumes a spherical end of the element when calculating the hydrodynamic axial Morison forces (e.g. :math:`F_a^{ax} = \frac{d^3}{12} \, \pi \, C_a^{ax}`). The table contains the axial drag, added mass and dynamic pressure axial coefficients and is structured as shown below. The hydrodynamic reference volume for a member end face is assumed to be a semi-spheroid with the member diameter (the equivalent diameter for rectangular members). If two substructure members are connected to the same node the member face reference areas and reference volumes are subtracted from another so that just the area and reference volumes that is exposed to the fluid is considered when evaluating the Morison forces.
 
 
  .. code-block:: console
@@ -1119,15 +1129,19 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 
 	HYDROJOINTCOEFF
 	CoeffID	JointID	CdA	CaA	CpA	OSD*	f_cutOff*	alpha*
-	1	9	4.8	0.0	0.0	0	0	0
-	2	10	4.8	0.0	0.0	0	0	0
-	3	11	4.8	0.0	0.0	0	0	0
-	4 	1	0.0	0.0	0.0	0	0	0	
-	5	3	0.0	0.0	0.0	0	0	0
-	6	5	0.0	0.0	0.0	0	0	0
-	7	7	0.0	0.0	0.0	0	0	0
+	1	9	4.8	0.0	0.0	0	0		1
+	2	10	4.8	0.0	0.0	0	0		1
+	3	11	4.8	0.0	0.0	0	0		1
+	4 	1	0.0	0.0	0.0	0	0		1	
+	5	3	0.0	0.0	0.0	0	0		1
+	6	5	0.0	0.0	0.0	0	0		1
+	7	7	0.0	0.0	0.0	0	0		1
 	
- In addition to the basic functionalities of the *HYDROJOINTCOEFF* table additional entries in the table can activate a more advanced modeling of member end Morison forces, to improve the prediction of low frequency responses of floating structures. Two advanced modeling techniques (see Wang et al. :footcite:`WANG2022282` and Behrens de Luna et al. :footcite:`wes-9-623-2024`), named :ref:`One-Sided Morison Drag` and :ref:`High-Pass Filtered Morison Drag` can be activated by optionally populating additional columns in the *HYDROJOINTCOEFF* table. The **OSD**, **f_cutOff** and **alpha** columns are all optional, and can be omitted if these modeling features are bot needed.
+ The **reference area** for **member end drag forces** is evaluated based on the member diameter as :math:`A = \frac{d^2}{4} \, \pi`. For rectangular members, this formula uses the hydrodynamic diameter :math:`d` defined in the element table.
+ 
+ The **reference volume** for **added mass** and **Froude-Krylov forces** is evaluated as the volume of a semisphere, using the hydrodynamic member diameter: :math:`V = \frac{dia^3}{12} \, \pi`.
+	
+ In addition to the basic functionalities of the *HYDROJOINTCOEFF* table additional entries in the table can activate a more advanced modeling of member end Morison forces, to improve the prediction of low frequency responses of floating structures. Two advanced modeling techniques (see Wang et al. :footcite:`WANG2022282` and Behrens de Luna et al. :footcite:`wes-9-623-2024`), named :ref:`One-Sided Morison Drag` and :ref:`High-Pass Filtered Morison Drag` can be activated by optionally populating additional columns in the *HYDROJOINTCOEFF* table. The **OSD**, **f_cutOff** and **alpha** columns are all optional, and can be omitted if these modeling features are not needed.
  
 :code:`WAVEKINEVAL_MOR`
  is an *optional* flag that controls how the local wave kinematics are used to calculate the Morison forces (see :ref:`ME_modeling-considerations`).
