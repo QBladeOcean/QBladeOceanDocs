@@ -937,13 +937,13 @@ Adding P-Y Curves to a Substructure
       NLSPRINGDAMPERS
       ElemID   Type     Displacement & Force Pairs
       1        spring   0.001  10000   0.005  20000   0.01  30000   1.0  30000
-
+      
    - At a displacement of :math:`0.001` m, the soil provides :math:`10000` N of resistance.
    - At :math:`0.005` m, the resistance increases to :math:`20000` N.
    - At :math:`0.01` m, the resistance reaches :math:`30000` N.
    - For displacements exceeding :math:`0.01` m, the resistance plateaus at :math:`30000` N, indicated by the final force-displacement pair. A plateau, indicating *ultimate resistance* is automatically detected when the last two force/displacement pairs have equa force values.
 
-3. **Assign Nonlinear Springs in :code:`SUBCONSTRAINTS`**:
+3. **Assign Nonlinear Springs in** :code:`SUBCONSTRAINTS`:
    Link the nonlinear spring elements to constrain specific degrees of freedom (DOFs) at the interaction points. Assign the spring to act along translational DOFs to represent lateral soil resistance.
 
 4. **Reference External Data Tables (Optional)**:
@@ -963,14 +963,14 @@ Adding P-Y Curves to a Substructure
 
    .. code-block:: console
 
-      SPRINGDAMPK = 0.05
+      0.05	SPRINGDAMPK
 
-   This applies proportional damping to the force-displacement relationship, where damping coefficients are calculated as :math:`D_i = \text{SPRINGDAMPK} \cdot K_i`.
+   This applies proportional damping to the force-displacement relationship, where damping coefficients are calculated as :math:`D_i = \mathrm{SPRINGDAMPK} \cdot K_i`.
 
 .. admonition:: Caution: Correctly Integrating Force Values
    :class: important
    
-      Typically, the resistance force in p-y curves is expressed in terms of force per unit pile length (:math:`\frac{N}{m}`). Since the spring elements in QBlade act on the nodes of a member, the force values defined in the :code:`NLSPRINGDAMPERS` table must be integrated according to the length of the associated member.
+   Typically, the resistance force in p-y curves is expressed in terms of force per unit pile length (:math:`\frac{N}{m}`). Since the spring elements in QBlade act on the nodes of a member, the force values defined in the :code:`NLSPRINGDAMPERS` table must be integrated according to the length of the associated member.
 
 P-Y Curve Hysteresis
 ^^^^^^^^^^^^^^^^^^^^
