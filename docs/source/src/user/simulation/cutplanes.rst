@@ -108,7 +108,7 @@ An exemplary cut-plane definition file is shown below. The parameters in the cut
 	
 Automated Evaluation of Cut-Planes
 **********************************
-Multiple cut-plane definitions can be predefined in the definition of a :ref:`Wind Turbine Simulation` object (see :numref:`fig-cut-plane-simulation-dialog`), before the simulation is evaluated. In this way it is possible to already define all cut-planes of interest at the start of a simulation. This feature also allows to generate cut-planes on-the-fly during a simulation even when the *Store Replay* option is not active. This can reduce the memory consumption drastically, especially for long simulations with finely resolved wakes. 
+Multiple cut-plane definitions can be predefined in the definition of a simulation object (see :numref:`fig-cut-plane-simulation-dialog`), before the simulation is evaluated. In this way it is possible to already define all cut-planes of interest at the start of a simulation. This feature also allows to generate cut-planes on-the-fly during a simulation even when the *Store Replay* option is not active. This can reduce the memory consumption drastically, especially for long simulations with finely resolved wakes. 
 
 .. _fig-cut-plane-simulation-dialog:
 .. figure:: cut_plane_simulation_dialog.png

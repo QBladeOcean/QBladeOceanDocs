@@ -2,8 +2,8 @@ User's Guide
 ============
 
 
-General GUI Functionality
-*************************
+The Graphical User Interface
+****************************
 .. toctree::
    :maxdepth: 3
 
@@ -54,22 +54,22 @@ Airfoil Analysis with XFoil
 
    airfoil/polar_extrapolation
 
-Aerodynamic Blade Design
-************************
+Creating a Blade Design
+***********************
 .. toctree::
    :maxdepth: 3
 
    blade/blade
 
-Steady BEM Simulation
-*********************
+Running Steady BEM Simulations
+******************************
 .. toctree::
    :maxdepth: 3
 
    bem/bem
 
-Wind Turbine Modeling
-*********************
+Creating a Wind Turbine Model
+*****************************
 .. toctree::
    :maxdepth: 3
 
@@ -80,23 +80,23 @@ Wind Turbine Modeling
    turbine/turbineexport
    turbine/multi_turbine
 
-Controller Modeling
-*******************
+Integration of Controllers
+**************************
 .. toctree::
    :maxdepth: 3
    
    turbine/controller
   
-Substructure Modeling
-*********************
+Creating a Substructure
+***********************
 .. toctree::
    :maxdepth: 3
 
    turbine/substructure
    turbine/superelements
 
-Wind Turbine Simulation
-***********************
+Creating Wind Turbine Simulations
+*********************************
 .. toctree::
    :maxdepth: 3
    
@@ -106,29 +106,29 @@ Wind Turbine Simulation
    simulation/advancedgraphs
    simulation/rendersim
 
-Multi Turbine Simulation
-************************
+Creating Multi Turbine Simulations
+**********************************
 .. toctree::
    :maxdepth: 3
    
    simulation/multiturbine
 
-Simulation Postprocessing
-*************************
+Postprocessing of Simulations
+*****************************
 .. toctree::
    :maxdepth: 3
    
    postprocessing/postprocessing
    
-Windfield Generation
-********************
+Generation of Windfields
+************************
 .. toctree::
    :maxdepth: 3
    
    windfield/windfield
    
-Wave Generation
-***************
+Generation of Waves 
+*******************
 .. toctree::
    :maxdepth: 3
 

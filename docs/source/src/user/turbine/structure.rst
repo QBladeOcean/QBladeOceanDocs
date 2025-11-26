@@ -360,7 +360,7 @@ Tower Parameters
 	OC3_Sparbuoy_Tower.str		TWRFILE - Name of file containing properties for the tower
 	OC3_Sparbuoy_Sub_LPMD.str	SUBFILE	 - Name of the substructure file
 	
-The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Modeling`.
+The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Creating a Substructure`.
 
 VAWT Specific Parameters
 ------------------------
@@ -444,6 +444,18 @@ Cable Parameters
 	cable.dat		CABFILE - file containing the definitions of cables
 	
 An exemplary cable definition file is shown here: :ref:`Cable Structural Data File`.
+
+Gravity Direction
+-----------------
+
+The direction of the gravitational force can be customized by optionally specifying a gravity direction vector using the **GRAVITY_DIR** table in the main structural input file. QBlade will automatically normalize the vector upon reading the input to ensure it represents only the direction and not the magnitude of gravity. The default direction is (0,0,-1).
+
+.. code-block:: console
+	:caption: Example of the GRAVITY_DIR table
+
+	GRAVITY_DIR
+	X	Y	Z
+	0	0	-1
 	
 Loading Data and Sensor Locations
 =================================
@@ -996,13 +1008,13 @@ Isotropic Rayleigh Damping
 
 A single Rayleigh damping coefficient can be set for each structural data table by using the keyword :code:`RAYLEIGHDMP`. This keyword defined the *stiffness proportional* Rayleigh damping coefficient :math:`\beta`. The :math:`\beta` coefficient is applied to each degree of freedom of the structural body:
 
-:math:`C=beta*K`, 
+:math:`C=\beta\;K`, 
 
-where :math:`C`is the damping matrix and :math:`K` the stiffness matrix. The Rayleigh damping :math:`beta` coefficient is related to the fraction of critical damping :math:`Xi` as:
+where :math:`C` is the damping matrix and :math:`K` the stiffness matrix. The Rayleigh damping :math:`\beta` coefficient is related to the fraction of critical damping :math:`zeta` as:
 
-:math:`\zeta = \beta * \pi * f`, or 
+:math:`\zeta = \beta \; \pi \; f`, or 
 
-:math:`\beta = \frac{\zeta}{\pi * f}`.
+:math:`\beta = \frac{\zeta}{\pi \; f}`.
 
 Rayleigh damping is not constant, but varies with frequency. Typically, Rayleigh damping is set for the first natural frequency of a component. Optionally, it is also possible to assign a nonuniformly distributed :math:`\beta` coefficient via the structural datatables (see :ref:`Blade and Strut Euler Bernoulli and Timoshenko Datatable`). 
 
@@ -1024,11 +1036,11 @@ The five parameters are related to the anisotropic damping in the following way:
  * **4:** The stiffness proportional :math:`\beta` Rayleigh damping coefficient along the local z-axis (elongation).
  * **5:** (optional) A mass proportional :math:`\alpha` Rayleigh damping coefficient, applied to all degrees of freedom (0.00 as default).
  
-In the same way as the isotropic stiffness proportional Rayleigh damping coefficients, the Rayleigh damping :math:`beta` coefficients are related to the fraction of critical damping :math:`Xi` of the related mode shape as:
+In the same way as the isotropic stiffness proportional Rayleigh damping coefficients, the Rayleigh damping :math:`beta` coefficients are related to the fraction of critical damping :math:`\zeta` of the related mode shape as:
 
-:math:`\zeta = \beta * \pi * f`, or 
+:math:`\zeta = \beta \; \pi \; f`, or 
 
-:math:`\beta = \frac{\zeta}{\pi * f}`.
+:math:`\beta = \frac{\zeta}{\pi \; f}`.
 
 Cross Sectional Coordinate Systems
 ==================================

@@ -176,7 +176,7 @@ The following keywords can be used to define different properties and modeling o
 	true	STATICBUOYANCY
 	
 :code:`HYDROJOINTVENTED`
- Excludes all member end faces connected to this joint from applying the hydrodynamic pressure during buoyancy calculations. This setting is used to represent vented or open joints, where water can freely pass through the structural connection. By disabling pressure loads on these end faces, artificial buoyancy forces from trapped water volumes are avoided, ensuring a more realistic representation of the member’s submerged behavior. In the example shown below the end face pressure is not applied to the subjoints with ID's 1 4 6 and 12 during buoyancy calculations.
+ Excludes all member end faces connected to this joint from applying the hydrodynamic pressure during buoyancy calculations. Also, no Morison loads are applied at *vented* nodes. This setting is used to represent joints, where no hydrodynamic forces are evaluated. In the example shown below the end face loads are not applied to the subjoints with ID's 1 4 6 and 12 during hydrodynamic calculations. This feature is useful if the user wants to measure the internal axial loads in between two members. At the location where these loads are measured the internal joints should be set to *vented*. 
  
   .. code-block:: console
 
@@ -1078,11 +1078,11 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
 	4	0.61	0.0	0.0	0.61	0.0	0.0	0	0	0	1
 	5	0.68	0.0	0.0	0.68	0.0	0.0	0	0	0	1
 
-.. For rectangular members, the **reference area** used for the evaluation of **drag forces** is the surface area :math:`A = 2 \, d_{xdim} \, l` and :math:`A = 2 \, d_{ydim} \, l`, where :math:`d_{xdim}` and :math:`d_{ydim}` are the side lengths of the member faces along the members local :math:`x` and :math:`y` axes and :math:`l` is the (submerged) member length. The area is multiplied by a factor of :math:`2` to account for both opposing faces of the member. This means *CdNx* is used in combination with the area calculated with :math:`d_{ydim}` and *CdNy* is used in combination with the area calculated with :math:`d_{xdim}`.   
+ For rectangular members, the **reference area** used for the evaluation of **drag forces** is the surface area :math:`A = 2 \, d_{xdim} \, l` and :math:`A = 2 \, d_{ydim} \, l`, where :math:`d_{xdim}` and :math:`d_{ydim}` are the side lengths of the member faces along the members local :math:`x` and :math:`y` axes and :math:`l` is the (submerged) member length. The area is multiplied by a factor of :math:`2` to account for both opposing faces of the member. This means *CdNx* is used in combination with the area calculated with :math:`d_{ydim}` and *CdNy* is used in combination with the area calculated with :math:`d_{xdim}`.   
 
-.. The **reference volume** used for the evaluation of **added mass** forces is calculated as the area of an equivalent circle, obtained from the side length of the member face, multiplied by the submerged member length: :math:`V_x = \frac{d_{xdim}^2}{4} \, \pi \, l`, and :math:`V_y = \frac{d_{ydim}^2}{4} \, \pi \, l`, where :math:`d_{xdim}` and :math:`d_{ydim}` are the side lengths of the member faces. This means *CaNx* is used in combination with the volume calculated with :math:`d_{ydim}` and *CaNy* is used in combination with the volume calculated with :math:`d_{xdim}`.   
+ The **reference volume** used for the evaluation of **added mass** forces is calculated as the area of an equivalent circle, obtained from the side length of the member face, multiplied by the submerged member length: :math:`V_x = \frac{d_{xdim}^2}{4} \, \pi \, l`, and :math:`V_y = \frac{d_{ydim}^2}{4} \, \pi \, l`, where :math:`d_{xdim}` and :math:`d_{ydim}` are the side lengths of the member faces. This means *CaNx* is used in combination with the volume calculated with :math:`d_{ydim}` and *CaNy* is used in combination with the volume calculated with :math:`d_{xdim}`.   
 
-.. The **reference volume** used for the evaluation of **Froude–Krylov** forces is based on the cross-sectional member area and the submerged member length: :math:`V = d_{xdim} \, d_{ydim} \, l`. 
+ The **reference volume** used for the evaluation of **Froude–Krylov** forces is based on the cross-sectional member area and the submerged member length: :math:`V = d_{xdim} \, d_{ydim} \, l`. 
 
 :code:`FOILMEMBERCOEFF`
  This table allows the user to assign lift and drag coefficients of a 360° polar to a substructure member. The aero- or hydrodynamic forces are evaluated based on the current angle of attack experienced by the member. The chord used for force evaluation is the **DIAMETER** specified for the underlying **SUBELEMENT**, see :numref:`fig-foiled_member`.
@@ -1096,14 +1096,14 @@ Hydrodynamic coefficients can be assigned to substructure members and joints. Hy
    A substructure member with an airfoil and polar assigned through the **FOILMEMBERCOEFF** table. 
    The visualized chord is equal to the **SUBELEMENT** diameter.
 
- Below is an exemplary :code:`FOILMEMBERCOEFF` table. The first column defines the coefficient ID, the second column specifies the airfoil, and the third column lists the associated 360° polar. The last two columns define the pitch axis of the airfoil and whether the airfoil is inverted. When an airfoil is assigned to a substructure member, for the purpose of buoyancy calculations, the scaled cross-sectional area of the airfoil is used. The :code:`ADVANCEDBUOYANCY` feature cannot be used for *foiled* members.
+ Below is an exemplary :code:`FOILMEMBERCOEFF` table. The first column defines the coefficient ID, the second column specifies the airfoil, and the third column lists the associated 360° polar. The last two columns define the pitch axis of the airfoil and whether the airfoil is inverted. Optionally, the user may assign added mass (*Ca*) and dynamic pressure (*Cp*) coefficients in columns 6 and 7 of the data table. When an airfoil is assigned to a substructure member, for the purpose of buoyancy calculations, the scaled cross-sectional area of the airfoil is used. The :code:`ADVANCEDBUOYANCY` feature cannot be used for *foiled* members.
 
  .. code-block:: console
 	:caption: : The FOILMEMBERCOEFF table
 
 	FOILMEMBERCOEFF
-	CoeffID	Foil		Polar					PAxis	IsInverted
-	1	"NACA 0020"	"NACA_0020_Re1.000_M0.00_N9.0 360 M"	0.5 	false
+	CoeffID	Foil		Polar					PAxis	IsInv	Ca	Cp
+	1	"NACA 0020"	"NACA_0020_Re1.000_M0.00_N9.0 360 M"	0.5 	false	1.0	1.0
 	
  When aerodynamic forces are evaluated for a *foiled* member, an iteration for the bound circulation is carried out, similar to the iteration for the bound circulation of a rotor blade when simulating with the :ref:`Lifting Line Free Vortex Wake` method. The convergence criterion *epsilon* and the *relaxation factor* can be specified in the substructure file. If not explicitly set, default values are used: 
 
