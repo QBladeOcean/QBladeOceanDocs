@@ -74,6 +74,25 @@ Below is an example for the *Turbine Controllers* and *External Libraries* secti
  - The controller library (.dll or .so) must always be located in the folder path *.\\ControllerFiles* relative to the QBlade executable. 
  - QBlade is a 64bit code, so the controller dlls must also be compiled for 64bit use. 
 
+Defining the Controller or Library Sampling Timestep
+----------------------------------------------------
+
+By default, if no explicit sampling timestep is specified, QBlade executes the turbine controller or external library at every simulation timestep. In this case, the controller sampling period is identical to the simulation timestep (``TIMESTEP``).
+
+To decouple the controller update rate from the simulation timestep, the user may specify a custom sampling interval using the parameter ``SAMPLESTEP``. This optional parameter must be defined inside the controller or external-library parameter file:
+
+.. code-block:: console
+   :caption: Example: setting a custom sample step for the controller
+
+       0.1    SAMPLESTEP
+
+In this example, the controller is executed every 0.1 seconds, regardless of the simulation timestep.
+
+QBlade uses an asynchronous sampling mechanism: the controller operates on its own internal sampling timeline, independent of the simulation timestep. Conceptually, the controller “ticks” at fixed intervals determined by ``SAMPLESTEP`` (e.g., 0.0 s, 0.1 s, 0.2 s, ...), while the simulation advances with a potentially different timestep. Whenever the simulation time reaches or exceeds the next scheduled controller sampling point, the controller is executed. Between these sampling points, the previously computed controller outputs are held constant using a zero-order hold.
+
+This design intentionally mirrors real industrial PLC-based wind turbine controllers. In an actual turbine, the PLC or embedded controller executes its control loop at a fixed cycle time (for example 25–100 ms), independent of the much faster real-world dynamics of the mechanical and aerodynamic system. The PLC does not update continuously: it samples sensor values at discrete intervals, performs its control computations, and holds its actuator commands constant until the next control cycle. QBlade’s sampling mechanism reproduces this behavior exactly, enabling realistic simulation of discrete-time control systems.
+
+The only restriction is that the sampling step must not be smaller than the simulation timestep (:math:`dt_\text{sample} < dt_\text{sim}`). If a smaller sampling step is specified, QBlade will automatically fall back to using the simulation timestep as the effective sampling interval.
 
 Sending Turbine Data to a Wind Turbine Controller
 -------------------------------------------------
