@@ -19,7 +19,7 @@ import os
 # -- Project information -----------------------------------------------------
 
 project = 'QBlade Documentation'
-copyright = '2024, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND'
+copyright = '2026, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebastian Perez-Becker, licensed under CC BY-NC-ND'
 author = 'D. Marten, J. Saverin, R. Behrens de Luna, S. Perez-Becker'
 
 # The full version, including alpha/beta/rc tags

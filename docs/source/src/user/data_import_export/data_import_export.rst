@@ -32,8 +32,8 @@ Data Objects Import and Export
 
 In QBlade, various data objects collectively form the foundation of an aero-servo-hydro-elastic simulation. These objects and their respective file types are outlined below (see :numref:`fig-data_struct`):
 
-**Data Object Types**
----------------------
+Data Object Types
+-----------------
 
 - **Simulation Definition**: Specifies boundary conditions, discretization, simulation duration, and additional parameters.  
   File type: ``.sim``
