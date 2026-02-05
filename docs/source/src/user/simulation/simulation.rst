@@ -243,6 +243,7 @@ These edits are only enabled if *Offshore* installation is selected.
 
 * **Wave Type**: Toggles if a linear wave should be included in the simulation.
 * **Kinematic Stretching**: Choose the :ref:`Kinematic Stretching` type if a linear wave is selected.
+* **Vertical Weight**: Interpolates between Vertical stretching and Wheeler stretching to provide a controlled modeling envelope for near-surface kinematics and resulting Morison loads (see: :ref:`Kinematic Stretching`). The **Vertical Weight** parameter only has an effect when Vertical stretching is chosen as kinematic stretching.
 * **Linear Wave**: A wave from QBlades database can be selected.
 * **Linear Wave Object**: The currently selected *wave object* can be edited or a new *wave object* can be created.
 
