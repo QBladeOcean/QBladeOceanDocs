@@ -175,6 +175,13 @@ The following keywords can be used to define different properties and modeling o
 
 	true	STATICBUOYANCY
 	
+:code:`STATICSUBMERGENCE`
+ [**bool**] An optional flag that controls which sea level is used for the wetting / submergence check of Morison elements in QBlade. If set to true, Morison elements are considered wetted (or dry) based on the mean sea level (MSL) only. If set to false (default), the local instantaneous wave elevation at each member is used for the wetting check, i.e. members can enter and leave the water depending on :math:`\zeta(x,y,t)`. When evaluating hydrodynamics using a potential-flow excitation database (:code:`USE_EXCITATION`), it can be beneficial to enable :code:`STATICSUBMERGENCE` to avoid double-accounting of free-surface effects (e.g. additional load contributions introduced by time-varying wetted length/area) that may already be represented in the excitation loads.
+
+ .. code-block:: console
+
+	false	STATICSUBMERGENCE
+	
 :code:`HYDROJOINTVENTED`
  Excludes all member end faces connected to this joint from applying the hydrodynamic pressure during buoyancy calculations. Also, no Morison loads are applied at *vented* nodes. This setting is used to represent joints, where no hydrodynamic forces are evaluated. In the example shown below the end face loads are not applied to the subjoints with ID's 1 4 6 and 12 during hydrodynamic calculations. This feature is useful if the user wants to measure the internal axial loads in between two members. At the location where these loads are measured the internal joints should be set to *vented*. 
  
