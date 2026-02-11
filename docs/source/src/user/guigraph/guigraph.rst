@@ -46,6 +46,76 @@ The OpenGl Light Settings Dialog (see :numref:`fig-openglsettings`) can be found
    
 This dialog allows to change the global illumination and light settings for all scenes that are rendered in 3D using opengl.
 
+Debug Console Dialog
+====================
+
+The Debug Console Dialog (see :numref:`fig-debugdialog`) can be found in the top *Menu* under *Options->Open Debug Console*. 
+
+.. _fig-debugdialog:
+.. figure:: debug_dialog.png
+   :align: center
+   :alt: The debug console.
+
+   The debug console.
+   
+The *Debug Output* dialog provides live, human-readable log messages from different QBlade subsystems. It is primarily intended for troubleshooting model setup, solver initialization, controller I/O, and serialization/import issues.
+
+Overview
+********
+
+The dialog consists of:
+
+- **Subsystem filters** (checkboxes): enable/disable log streams.
+- **Redirect target** (radio buttons): choose where debug output is written.
+- **Log view** (scrollable text area): displays collected messages.
+- **Clear Output** button: clears the dialog content (does not delete external files).
+- **Close** button: closes the dialog.
+
+Subsystem Filters
+*****************
+
+The following checkboxes enable debug messages for specific parts of QBlade:
+
+- **Simulation Debug Output**
+  General simulation workflow messages (setup, runtime steps, solver state changes).
+
+- **Turbine Debug Output**
+  Turbine-specific messages (turbine initialization, aerodynamic/structural coupling stages, rotor state).
+
+- **Controller Debug Output**
+  Messages related to controller loading and communication (DLL/interface calls, signals, controller errors).
+
+- **Structural Model Debug Output**
+  Detailed messages from the structural model assembly and constraints.
+  Typical entries include creation of connectors/joints, added mass assignment, and component property assignment.
+
+- **Serializer, Store and I/O Debug Output**
+  Messages from import/export, parsing, project serialization, and file I/O.
+
+.. note::
+
+   Enabling more categories increases verbosity. For performance-sensitive runs, enable only the subsystem you are debugging.
+
+Redirect Debug Output
+*********************
+
+Under **Redirect Debug Output to:** you can select one output target:
+
+- **DebugLog.txt**
+  Writes the debug stream to a text file located in the QBlade folder. Use this when you need to attach logs to a support request or   compare runs. Even when QBlade crashes the debug output remains inside the file. Upon restarting QBlade the file is cleared and reinitialized. 
+
+- **This Dialog**
+  Shows output directly in the dialog (useful for interactive debugging and quick checks).
+
+- **To Console**
+  Redirects messages to stdout/stderr. This is useful when running QBlade from a terminal or when collecting logs
+  from automated workflows.
+
+.. tip::
+
+   For reproducible bug reports, prefer **DebugLog.txt** so the full initialization sequence is preserved.
+
+
 Graph Functionality
 ===================
 
