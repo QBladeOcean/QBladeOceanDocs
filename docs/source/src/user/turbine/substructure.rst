@@ -1785,9 +1785,6 @@ Alphabetical Keyword List
 * **RGBCOLOR**
   Sets a color for the substructure for visualization.
 
-* **SEABEDDISC**
-  Sets the sub-discretization length for mooring lines in contact with the seabed.
-
 * **SPRINGDAMPK**
   Adds damping to nonlinear spring elements based on a proportionality constant.
 
