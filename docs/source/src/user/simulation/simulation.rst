@@ -287,6 +287,28 @@ The user can choose here to only store a certain type of simulation data (to lim
 * **Store Hydrodynamic Data**: Toggles if this data type is stored. (All data that is shown in the *Hydrodynamic Time Graph*).
 * **Store Controller Data**: Toggles if this data type is stored. (All data that is shown in the *Controller Time Graph*).
 * **Store DWM Wake Data**: Toggles if this data type is stored. (All data that is shown in the *DWM Graph*).
+* **Results Filter**: To store only a subset of the generated data, a **Results Filter** can be applied. Users can specify a list of the variable names that should be stored. Below is an example of variable names for the **Results Filter**. When a user specified a **Results Filter** only the variables specified within the filter file, in the order in which they are specified, are stored. This is an effective way to prepare simulation data for post-processing and to reduce the memory consumption during large batch runs of simulations.
+
+.. code-block:: console
+	:caption: : The contents of an exemplary results filter file
+	
+	Time [s]
+	Abs Inflow Vel. at Hub [m/s]
+	Aero. Power [W]
+	Gen. Elec. Power [W]
+	Gen. HSS Torque [Nm]
+	X_c RootBend. Mom. (IP) BLD_1 [Nm]
+	Y_c RootBend. Mom. (OOP) BLD_1 [Nm]
+	Z_c RootBend. Mom. BLD_1 [Nm]
+	X_tb Mom. TWR Bot. Const. [Nm]
+	Y_tb Mom. TWR Bot. Const. [Nm]
+	Z_tb Mom. TWR Bot. Const. [Nm]
+	X_n For. Nac. Const. [N]
+	Y_n For. Nac. Const. [N]
+	Z_n For. Nac. Const. [N]
+	X_n Mom. Nac. Const. [Nm]
+	Y_n Mom. Nac. Const. [Nm]
+	Z_n Mom. Nac. Const. [Nm]
 
 VPML Particle Remeshing
 -----------------------
