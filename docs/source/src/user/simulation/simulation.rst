@@ -267,11 +267,13 @@ The user can set the environmental parameters that are used during the simulatio
 Seabed Modelling
 ----------------
 
-To prevent the mooring lines from penetrating the seabed, the seabed is modelled as vertically oriented spring/dampers that act on the mooring line elements that are in contact with the seabed. The model implemented is highly similar to the work of :footcite:t:`Hall2017`.
+To prevent the mooring lines from penetrating the seabed, the seabed is modelled as vertically oriented spring/dampers that act on the mooring line elements that are in contact with the seabed. The model implemented is highly similar to the work of :footcite:t:`Hall2017`. For more details see the theory section: :ref:`Seabed`.
 
-* **Seabed Stiffness**: The spring stiffness coefficient for the seabed model (acting in the vertical direction only).
-* **Seabed Damping Factor**: The seabed damping coefficient, as a fraction of the spring stiffness coefficient (acting in the vertical direction only).
-* **Seabed Fraction Factor**: The seabed fraction coefficient for the seabed model, as a fraction of the spring stiffness coefficient (acting in the horizontal direction, opposite to the direction of line movement, only).
+* **Seabed Stiffness**: The linear foundation spring stiffness coefficient for the seabed. It calculates the vertical restorative normal force based on the depth of the element's penetration into the soil.
+* **Seabed Damping**: The absolute viscous damping coefficient of the seabed soil. It acts purely in the vertical direction, applying a resistive pressure proportional to the element's vertical penetration velocity.
+* **Seabed Friction Coefficients (Axial & Transverse)**: The kinetic Coulomb friction coefficients (:math:`\mu_k`). They act in the horizontal plane, opposite to the direction of line movement. The friction force is calculated as a fraction of the vertical normal contact force. It is split into **Axial** (sliding along the cable's length) and **Transverse** (dragging perpendicular to the cable) components.
+* **Seabed Static/Kinetic Friction Scale**: A dimensionless multiplier applied to the kinetic friction coefficients to define the static breakout friction limit (:math:`\mu_s = \mu_k \times \text{Scale}`).
+* **Seabed Friction Break Velocity**: The critical ramp-up velocity (:math:`v_c`) [m/s]. To prevent numerical instability, friction ramps linearly from zero up to the static limit while the cable velocity is below this threshold, and saturates at the kinetic limit once exceeded.
 
 
 Stored Simulation Data
@@ -443,74 +445,81 @@ Simulation objects can be exported into the text based ``.sim`` format. When a s
 	END_TURB_1
 
 	----------------------------------------Simulation Settings-------------------------------------------------------
-	0.050000                                 TIMESTEP           - the timestep size in [s]
-	1200                                     NUMTIMESTEPS       - the number of timesteps
-	10.000                                   RAMPUP             - the rampup time for the structural model
-	5.000                                    ADDDAMP            - the initial time with additional damping
-	100.000                                  ADDDAMPFACTOR      - for the additional damping time this factor is used to increase the damping of all components
-	0.000                                    WAKEINTERACTION    - in case of multi-turbine simulation the wake interaction start at? [s]
-
+	0.050000                                           TIMESTEP           - the timestep size in [s]
+	1000                                               NUMTIMESTEPS       - the number of timesteps
+	50.000                                             RAMPUP             - the rampup time for the structural model
+	0.000                                              ADDDAMP            - the initial time with additional damping
+	100.000                                            ADDDAMPFACTOR      - for the additional damping time this factor is used to increase the damping of all components
+	0.000                                              WAKEINTERACTION    - in case of multi-turbine simulation the wake interaction start at? [s]
+	
 	----------------------------------------Wind Input-----------------------------------------------------------------
-	0                                        WNDTYPE            - use a number: 0 = steady; 1 = windfield; 2 = hubheight
-						 WNDNAME            - filename of the turbsim input file, mann input file or hubheight file (with extension), leave blank if unused
-	0                                        STITCHINGTYPE      - the windfield stitching type; 0 = periodic; 1 = mirror
-	true                                     WINDAUTOSHIFT      - the windfield shifting automatically based on rotor diameter [bool]
-	0.00                                     SHIFTTIME          - the windfield is shifted by this time if WINDAUTOSHIFT = 0
-	12.00                                    MEANINF            - the mean inflow velocity, overridden if a windfield or hubheight file is use
-	0.00                                     HORANGLE           - the horizontal inflow angle
-	0.00                                     VERTANGLE          - the vertical inflow angle
-	0                                        PROFILETYPE        - the type of wind profile used (0 = Power Law; 1 = Logarithmic)
-	0.200                                    SHEAREXP           - the shear exponent if using a power law profile, if a windfield is used these values are used to calculate the mean wake convection velocities
-	0.010                                    ROUGHLENGTH        - the roughness length if using a log profile, if a windfield is used these values are used to calculate the mean wake convection velocities
-	0.00                                     DIRSHEAR           - a value for the directional shear in deg/m
-	77.60                                    REFHEIGHT          - the reference height, used to contruct the BL profile
-
+	0                                                  WNDTYPE            - use a number: 0 = steady; 1 = windfield; 2 = hubheight
+													   WNDNAME            - wind file name: TurbSim (.inp), Mann (.man), hub-height (.hht) or binary field (.bts); leave empty if unused. If an .inp is given and a matching .bts exists, the .bts is used
+	0                                                  STITCHINGTYPE      - the windfield stitching type; 0 = periodic; 1 = mirror
+	true                                               WINDAUTOSHIFT      - the windfield shifting automatically based on rotor diameter [bool]
+	0.00                                               SHIFTTIME          - the windfield is shifted by this time if WINDAUTOSHIFT = 0
+	10.00                                              MEANINF            - the mean inflow velocity, overridden if a windfield or hubheight file is use
+	0.00                                               HORANGLE           - the horizontal inflow angle
+	0.00                                               VERTANGLE          - the vertical inflow angle
+	0                                                  PROFILETYPE        - the type of wind profile used (0 = Power Law; 1 = Logarithmic)
+	0.000                                              SHEAREXP           - the shear exponent if using a power law profile, if a windfield is used these values are used to calculate the mean wake convection velocities
+	0.010                                              ROUGHLENGTH        - the roughness length if using a log profile, if a windfield is used these values are used to calculate the mean wake convection velocities
+	0.00                                               DIRSHEAR           - a value for the directional shear in deg/m
+	115.63                                             REFHEIGHT          - the reference height, used to construct the BL profile
+	false                                              GROUNDEFFECT       - should the ground effect be included (for vortex lines and particles)
+	
 	----------------------------------------Ocean Depth, Waves and Currents------------------------------------------- 
 	the following parameters only need to be set if ISOFFSHORE = 1
-	200.00                                   WATERDEPTH         - the water depth
-	New_Wave.lwa                             WAVEFILE           - the path to the wave file, leave blank if unused
-	1                                        WAVESTRETCHING     - the type of wavestretching, 0 = vertical, 1 = wheeler, 2 = extrapolation, 3 = none
-	10000.00                                 SEABEDSTIFF        - the vertical seabed stiffness [N/m^3]
-	0.20                                     SEABEDDAMP         - a damping factor for the vertical seabed stiffness evaluation, between 0 and 1 [-]
-	0.10                                     SEABEDSHEAR        - a factor for the evaluation of shear forces (friction), between 0 and 1 [-]
-	0.00                                     SURF_CURR_U        - near surface current velocity [m/s]
-	0.00                                     SURF_CURR_DIR      - near surface current direction [deg]
-	30.00                                    SURF_CURR_DEPTH    - near surface current depth [m]
-	0.00                                     SUB_CURR_U         - sub surface current velocity [m/s]
-	0.00                                     SUB_CURR_DIR       - sub surface current direction [deg]
-	0.14                                     SUB_CURR_EXP       - sub surface current exponent
-	0.00                                     SHORE_CURR_U       - near shore (constant) current velocity [m/s]
-	0.00                                     SHORE_CURR_DIR     - near shore (constant) current direction [deg]
-
+	250.00                                             WATERDEPTH         - the water depth
+	New_Wave.lwa                                       WAVEFILE           - the path to the wave file, leave blank if unused
+	1                                                  WAVESTRETCHING     - the type of wave stretching, 0 = vertical, 1 = wheeler, 2 = extrapolation, 3 = none
+	1                                                  VERTWEIGHT         - vertical to wheeler blending factor: 1 = pure vertical, 0 = pure wheeler, only active if WAVETRETCHING = 0
+	10000.00                                           SEABEDSTIFF        - the vertical seabed stiffness [N/m^3]
+	2000.00                                            SEABEDDAMP         - a linear damping coefficient for the vertical seabed contact [N*s/m^3]; applied proportional to vertical penetration velocity 
+	0.10                                               SEABEDFRICTAXIAL   - seabed axial kinematic friction coefficient (mu_k_a) [-]; defines the Coulomb sliding friction along the seafloor (typically 0.2 to 1.0)
+	0.10                                               SEABEDFRICTTRANS   - seabed transverse kinematic friction coefficient (mu_k_t) [-]; defines the Coulomb sliding friction along the seafloor (typically 0.2 to 1.0)
+	1.00                                               SEABEDFRICTSCALE   - static/dynamic friction scale [-]; mu_s = mu_k * scale (1.0 = no breakout, > 1.0 increases low-speed/breakout resistance)
+	0.0500                                             SEABEDFRICTVEL     - seabed friction break velocity v_c [m/s]; threshold for kinetic sliding (MoorDyn FricDamp = 1.0 / v_c)
+	0.00                                               SURF_CURR_U        - near surface current velocity [m/s]
+	0.00                                               SURF_CURR_DIR      - near surface current direction [deg]
+	30.00                                              SURF_CURR_DEPTH    - near surface current depth [m]
+	0.00                                               SUB_CURR_U         - sub surface current velocity [m/s]
+	0.00                                               SUB_CURR_DIR       - sub surface current direction [deg]
+	0.14                                               SUB_CURR_EXP       - sub surface current exponent
+	0.00                                               SHORE_CURR_U       - near shore (constant) current velocity [m/s]
+	0.00                                               SHORE_CURR_DIR     - near shore (constant) current direction [deg]
+	
 	----------------------------------------Global Mooring System------------------------------------------------------
-						 MOORINGSYSTEM      - the path to the global mooring system file, leave blank if unused
-
+													MOORINGSYSTEM      - the path to the global mooring system file, leave blank if unused
+	
 	----------------------------------------Dynamic Wake Meandering----------------------------------------------------
-	0                                        DWMSUMTYPE         - the dynamic wake meandering wake summation type: 0 = DOMINANT; 1 = QUADRATIC; 2 = LINEAR
-
+	0                                                  DWMSUMTYPE         - the dynamic wake meandering wake summation type: 0 = DOMINANT; 1 = QUADRATIC; 2 = LINEAR
+	
 	----------------------------------------Environmental Parameters---------------------------------------------------
-	1.22500                                  DENSITYAIR         - the air density [kg/m^3]
-	0.000016470                              VISCOSITYAIR       - the air kinematic viscosity 
-	1025.00000                               DENSITYWATER       - the water density [kg/m^3]
-	0.000001307                              VISCOSITYWATER     - the water kinematic viscosity [m^2/s]
-	9.806650000                              GRAVITY            - the gravity constant [m/s^2]
-
+	1.22500                                            DENSITYAIR         - the air density [kg/m^3]
+	0.000016470                                        VISCOSITYAIR       - the air kinematic viscosity 
+	1025.00000                                         DENSITYWATER       - the water density [kg/m^3]
+	0.000001307                                        VISCOSITYWATER     - the water kinematic viscosity [m^2/s]
+	9.806650000                                        GRAVITY            - the gravity constant [m/s^2]
+	
 	----------------------------------------Output Parameters----------------------------------------------------------
-	20.00000                                 STOREFROM          - the simulation stores data from this point in time, in [s]
-	false                                    STOREREPLAY        - store a replay of the simulation (warning, large memory will be required) [bool]
-	true                                     STOREAERO          - should the aerodynamic data be stored [bool]
-	false                                    STOREBLADE         - should the local aerodynamic blade data be stored [bool]
-	true                                     STORESTRUCT        - should the structural data be stored [bool]
-	true                                     STORESIM           - should the simulation (performance) data be stored [bool]
-	true                                     STOREHYDRO         - should the controller data be stored [bool]
-	false                                    STORECONTROLLER    - should the controller data be stored [bool]
-	false                                    STOREDWM           - should the dynamic wake meandering (DWM) data be stored [bool]
-
+	20.00000                                           STOREFROM          - the simulation stores data from this point in time, in [s]
+	false                                              STOREREPLAY        - store a replay of the simulation (warning, large memory will be required) [bool]
+	true                                               STOREAERO          - should the aerodynamic data be stored [bool]
+	true                                               STOREBLADE         - should the local aerodynamic blade data be stored [bool]
+	true                                               STORESTRUCT        - should the structural data be stored [bool]
+	true                                               STORESIM           - should the simulation (performance) data be stored [bool]
+	true                                               STOREHYDRO         - should the controller data be stored [bool]
+	false                                              STORECONTROLLER    - should the hydrodynamic data be stored [bool]
+	false                                              STOREDWM           - should the dynamic wake meandering (DWM) data be stored [bool]
+													FILTERFILE         - filename of the results data filter file, leave blank if unused
+	
 	----------------------------------------Modal Analysis Parameters--------------------------------------------------
-	false                                    CALCMODAL          - perform a modal analysis (only single turbine simulations) [bool]
-	0.00000                                  MINFREQ            - store Eigenvalues, starting with this frequency
-	0.00000                                  DELTAFREQ          - omit Eigenvalues that are closer spaced than this value
-	100.00000                                NUMFREQ            - set the number of Eigenmodes and Eigenvalues that will be stored
+	false                                              CALCMODAL          - perform a modal analysis (only single turbine simulations) [bool]
+	false                                              USEMBC             - apply the multi blade coordinate transformation (MBC) during the modal analysis [bool]
+	0.00000                                            MINFREQ            - store Eigenvalues, starting with this frequency
+	0.00000                                            DELTAFREQ          - omit Eigenvalues that are closer spaced than this value
+	100.00000                                          NUMFREQ            - set the number of Eigenmodes and Eigenvalues that will be stored
 
 
 Multi-Threaded Batch Analysis
