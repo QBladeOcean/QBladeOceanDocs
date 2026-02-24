@@ -48,7 +48,7 @@ Unsteady BEM
 The :ref:`Blade Element Momentum Method` in QBlade is the default modeling option for HAWT (Horizontal Axis Wind Turbines). It has a low computational cost and good accuracy in most cases. The Unsteady BEM cannot be used to model VAWT (Vertical Axis Wind Turbines). To model a VAWT the :ref:`Free Vortex Wake` method must be used.
 
 Unsteady BEM Options
---------------------
+********************
 
 - **Azimuthal Polar Grid Discretization**: The polar grid is discretized into the chosen number of azimuthal sections. A value of 1 is equal to the BEM without a polar grid.
 - **Include Tip Loss**: This activates the classical BEM tip loss correction to account for a finite number of blades, see :footcite:t:`Glauert1935`. 
@@ -56,56 +56,120 @@ Unsteady BEM Options
 
 The theory of the unsteady polar BEM is briefly described in :ref:`Polar Grid`.
 
-Dynamic Wake Meandering Parameters
-----------------------------------
 
-DWM Wake Settings
-*****************
+Dynamic Wake Meandering (DWM) 
+-----------------------------
 
-- **Total Wake Length (in D) [-]**: This parameter sets the total wake length of the DWM model, normalized by rotor diameter.
-- **Number of Wake Planes [-]**: The total number of wake planes that is spread out over the total wake length. If the *Total Wake Length* would be 10 and the *Number of Wake Planes* 20, then the wake planes would be :math:`\frac{10D}{20}=0.5D` apart.
-- **Max Wake Plane Width (in D) [-]**: This specifies the max. diameter of the wake planes. If *Max Wake Plane Width* = 3, then the wake plane would cover 3 rotor diameters.
-- **Wake Plane Update Dist. (in D) [-]**: After each wake plane was propagated by this distance, normalized by rotor diameter, its velocity distribution is updated (evolve step).
-- **Yaw Deflection Factor [1/deg]**: Is a parameter for the yaw deflection correction, scaled with yaw error and normalized downstream distance.
-- **Tilt Deflection Factor**: Is a parameter for the tilt deflection correction, scaled with tilt error and normalized downstream distance.
-- **Include Rotor Tilt**: If deactivated, the rotor tilt error does not cause a vertical deflection of the wake planes.
+The Dynamic Wake Meandering (DWM) model in QBlade provides a highly efficient, mid-fidelity approach to modeling wind turbine wakes. It captures the unsteady aerodynamics of wake meandering, deficit recovery, and wake-added turbulence without the extreme computational cost of a full CFD simulation.
 
-DWM Wake Plane Settings
-***********************
+This guide details the parameters available in the DWM configuration setup and provides recommendations for tuning your simulation, for more details on the theory see: :ref:`Dynamic Wake Meandering Model` 
 
-- **Wake Plane Radial Disc. [-]**: Specifies with how many points the wake plane is discretized over its width (*Max Wake Plane Width*).
-- **C Meander, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the meandering (in plane) components during the propagation step.
-- **C Advect, Polar Grid Size (in D) [-]**: Specifies the size of the polar grid, normalized by rotor diameter, that is used to average velocities at each wake plane to evaluate the advection (out of plane) component during the propagation step.
-- **Polar Grid Measurement Points [-]**: The number of points distributed over the polar grid (for meandering and advection calculation) at which velocities are evaluated during the averaging step.
-- **Polar Grid Measurement Points [-]**: The number of points distributed over the polar grid (for meandering and advection calculation) at which velocities are evaluated during the averaging step.
-- **Polar Grid Weighting [-]**: Specifies the weighting function for the polar grid points, used during velocity averaging.
-- **Rotor Low Pass Filter Freq. [Hz]**: The cut-off (corner) frequency :math:`f_c` of a low pass time filter to obtain rotor conditions (thrust, yaw, etc.), implemented as :math:`x_{lp,t} = x_{lp,t-1} \cdot e^{-2\pi f_c} + (1-e^{-2\pi f_c}) \cdot x_t`.
-- **Thrust Coefficient Ct [-]**: The thrust coefficient can be obtained automatically from the local rotor conditions (*auto*) or manually, as a user input (*manual*).
-- **Turbulence Intensity [-]**: The turbulence intensity can be obtained automatically from the inflowconditions (*auto*) or manually, as a user input (*manual*).
-- **Viscosity Model**: The viscosity model that is used during the wake plane update (evolution) calculations, options are *MADSEN, LARSEN, IEC, KECK*..
-- **Boundary Condition**: The boundary condition model that is used to generate the velocity distribution of the rotor fixed wake plane, options are *NONE, MADSEN, IEC, KECK*.
+DWM Wake & Discretization Setup
+*******************************
+
+These parameters control the spatial resolution and extent of the simulated wake. Higher resolution increases accuracy but demands more computational resources.
+
+* **Total Wake Length (in D) [-]**
+  Sets the total downstream tracking distance of the wake, normalized by the rotor diameter (:math:`D`). Wake planes that travel further downstream than this value are automatically deleted to save memory. 
+  *Recommendation:* 10 to 20 :math:`D` is typical for farm simulations, depending on turbine spacing.
+
+* **Number of Wake Planes [-]**
+  The maximum number of discrete 2D wake planes distributed over the total wake length. The spacing between planes is roughly ``Total Wake Length / Number of Wake Planes``. 
+  *Recommendation:* A value of 50-100 provides smooth downstream resolution.
+
+* **Max Wake Plane Width (in D) [-]**
+  Specifies the radial extent of the numerical grid for each wake plane. The plane must be wide enough to capture the fully expanded wake deficit.
+  *Recommendation:* 3.0 :math:`D` is usually sufficient. If simulating highly turbulent or heavily loaded conditions where wakes expand drastically, increase this value.
+
+* **Wake Plane Radial Disc. [-]**
+  The number of radial grid points (:math:`N_{disc}`) used to discretize the velocity profile from the center of the wake plane out to the *Max Wake Plane Width*.
+  *Recommendation:* 40 is the default. Increasing this improves the resolution of the shear layer but slightly increases the cost of the viscous evolution step.
+
+* **Wake Plane Update Dist. (in D) [-]**
+  The downstream propagation distance (:math:`\Delta`) required before a wake plane's velocity deficit profile is physically updated via the viscous Navier-Stokes solver. 
+  *Recommendation:* 0.1 :math:`D` provides frequent, stable updates to the wake recovery profile.
+
+Meandering & Spatial Averaging
+******************************
+
+To determine how the wake planes are pushed around by atmospheric turbulence, the local free-stream wind field is spatially averaged over a moving polar grid.
+
+* **C Meander, Polar Grid Size (in D) [-]**
+  The diameter of the polar grid used to average the ambient wind field for evaluating the transverse (in-plane) meandering velocities. 
+  *Recommendation:* Typically set to 1.9 :math:`D` to capture eddies larger than the rotor.
+
+* **C Advect, Polar Grid Size (in D) [-]**
+  The diameter of the polar grid used to average the ambient wind field for evaluating the axial (out-of-plane) advection velocity.
+  *Recommendation:* Typically set to 1.9 :math:`D`.
+
+* **Polar Grid Measurement Points [-]**
+  The total number of measurement points distributed across the polar grid.
+  *Recommendation:* 64 points provide a good balance between spatial coverage and wind field sampling speed.
+
+* **Polar Grid Weighting [-]**
+  Specifies the spatial filter applied to the polar grid points during velocity averaging. 
+  *Options:* ``UNIFORM`` (equal weight to all points), ``JINC1``, or ``JINC2`` (Bessel-function filters that smoothly taper the influence of turbulence toward the grid edges). ``JINC2`` is highly recommended for standard DWM operation.
+
+* **Rotor Low Pass Filter Freq. [Hz]**
+  The cut-off frequency (:math:`f_c`) of an exponential moving average low-pass time filter. This is used to smooth the rotor conditions (thrust, yaw) and advection velocities, preventing unphysical high-frequency jitter in the wake emission.
+  *Recommendation:* 0.1 Hz is standard.
+
+Wake Deficit & Recovery Models
+******************************
+
+These settings dictate how the velocity deficit is initialized immediately behind the rotor and how it mixes with the ambient air downstream.
+
+* **Boundary Condition**
+  The model used to translate the blade axial induction (:math:`a`) into the initial velocity deficit profile right behind the rotor.
+  *Options:* ``NONE`` (simple momentum), ``MADSEN``, ``IEC``, or ``KECK``. ``MADSEN`` and ``KECK`` are robust choices that account for initial stream-tube expansion.
+
+* **Viscosity Model**
+  The eddy-viscosity formulation used to solve the momentum equations during the wake evolution step. This dictates how fast the wake recovers.
+  *Options:* ``MADSEN``, ``LARSEN``, ``IEC``, or ``KECK``. 
+
+* **Thrust Coefficient Ct [-]**
+  Used to calculate the initial deficit magnitude. 
+  *Options:* Choose **Auto** to compute this dynamically from the local blade aerodynamics at each time step, or **Manual** to override it with a constant value (e.g., 0.8).
+
+* **Turbulence Intensity [-]**
+  The ambient turbulence intensity (:math:`TI`) used by the viscosity models to determine atmospheric mixing.
+  *Options:* Choose **Auto** to sample this dynamically from the inflow wind field, or **Manual** to override it.
+
+Wake Deflection (Yaw & Tilt)
+****************************
+
+If the turbine is yawed or tilted relative to the inflow, the wake is deflected laterally or vertically.
+
+* **Include Rotor Tilt**
+  If activated, the rotor's tilt angle explicitly drives a vertical deflection of the wake planes.
+
+* **Yaw Deflection Factor [1/deg]**
+  A tunable parameter for the lateral wake deflection correction, scaled by the yaw error. 
+  *Recommendation:* Default is -0.004.
+
+* **Tilt Deflection Factor [1/deg]**
+  A tunable parameter for the vertical wake deflection correction, scaled by the tilt error.
+  *Recommendation:* Default is -0.004.
 
 DWM Added Turbulence Settings
 *****************************
 
-A small scale three dimensional turbulence windfield may be used to introduce wake added turbulence into the flowfield. The added turbulence wind field should have a unit variance and isotropic turbulence. It is introduced into the wake plane velocity field by a weighting factor km:
+Because the spatial averaging process intentionally filters out micro-scale turbulence, the high-frequency turbulence generated by the turbine's shear layer must be artificially reintroduced to accurately model fatigue loads on downstream turbines.
 
+* **Enable Added Turbulence**
+  Activates the micro-scale turbulence superposition model.
 
-:math:`T_{added}(\vec{x},t) = k_m \cdot T_{field}(\vec{x},t)`
+* **Added Turbulence Box**
+  The file path to a pre-generated synthetic wind field (e.g., a TurbSim `.bts` file). **Important:** This specific wind field must be generated with unit variance and isotropic turbulence, as it will be scaled dynamically by the DWM solver.
 
+* **Added Turbulence km1 [-]**
+  The tuning parameter (:math:`k_{m1}`) that scales the added turbulence based on the absolute magnitude of the local velocity deficit.
+  *Recommendation:* 0.1234 (default baseline calibration).
 
-:math:`k_m(x,r) = |(1-U(x,r))|\cdot k_{m1}+|\frac{\delta U(x,r)}{\delta r}|\cdot k_{m2}`
+* **Added Turbulence km2 [-]**
+  The tuning parameter (:math:`k_{m2}`) that scales the added turbulence based on the radial velocity gradient (the shear layer intensity).
+  *Recommendation:* 0.1234 (default baseline calibration).
 
-
-- **Enable Added Turbulence**: This activates the added turbulence model
-- **Added Turbulence km1 [-]**: A tunable parameter in the formula for the weighting factor km
-- **Added Turbulence km2 [-]**: A tunable parameter in the formula for the weighting factor km
-- **Added Turbulence Box**: The windfield that is used to provide the turbulence, should be of unit variance and isotropic turbulence.
-
-.. admonition:: Info
-   :class: important
-   
-	This section will be expanded in the near future...
 
 Free Vortex Wake
 ----------------
