@@ -41,9 +41,9 @@ The hydrodynamic loads on the wind turbine’s substructure are calculated eithe
 
 
    QBlade Documentation <https://docs.qblade.org>
-   src/user/index_ue
    src/theory/index_th
-..    src/validation/index_val
+   src/user/index_ue
+   src/tutorial/index_tt
    src/license/index_license
 
 .. footbibliography::

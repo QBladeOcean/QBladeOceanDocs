@@ -23,7 +23,7 @@ copyright = '2026, David Marten, Joseph Saverin, Robert Behrens de Luna, Sebasti
 author = 'D. Marten, J. Saverin, R. Behrens de Luna, S. Perez-Becker'
 
 # The full version, including alpha/beta/rc tags
-release = '2.0.9.6'
+release = '2.0.9.7'
 
 # -- General configuration ---------------------------------------------------
 

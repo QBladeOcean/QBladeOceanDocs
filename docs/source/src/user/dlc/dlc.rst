@@ -15,7 +15,7 @@ QBlade-EE is equipped with a fully featured automatic DLC generator (see :numref
 * **IEC 61400-3-1 Ed. 1**
 * **IEC 61400-3-2 Ed. 2**
 
-There two different ways how DLC's can be generated in QBlade with a high degree of automation. After all DLC simulations have been defined in QBlade all simulations are typically exported as Simulation Definition Files (:ref:`Simulation Definition ASCII File`) and then evaluated in parallel in the Command Line Interface (:ref:`CLI Overview`).
+There two different ways how DLC's can be generated in QBlade with a high degree of automation. After all DLC simulations have been defined in QBlade all simulations are typically exported as Simulation Definition Files (:ref:`Simulation Definition ASCII File`) and then evaluated in parallel in the Command Line Interface (:ref:`Command Line Interface (CLI) Overview`).
  
 DLC Object Generation (in GUI)
 ******************************
@@ -147,7 +147,7 @@ Below is an example for such a DLC table, where some entries are replaced with t
 Exporting DLC Definitions
 *************************
 
-After a *DLC Definition Object* has been defined through the dialog, all individual simulations can be automatically exported as ``.sim`` files, for an evaluation in the Command Line Interface (:ref:`CLI Overview`) or can be directly be generated and later evaluated in the GUI via the :ref:`Multi-Threaded Batch Analysis`. To export the DLC object into .sim files press: " Export .sim Files from this DLC Definition". To generate Simulation Objects within QBlade press "Create SImulations from this DLC Definition". (see :numref:`fig-dlc_gen`).
+After a *DLC Definition Object* has been defined through the dialog, all individual simulations can be automatically exported as ``.sim`` files, for an evaluation in the Command Line Interface (:ref:`Command Line Interface (CLI) Overview`) or can be directly be generated and later evaluated in the GUI via the :ref:`Multi-Threaded Batch Analysis`. To export the DLC object into .sim files press: " Export .sim Files from this DLC Definition". To generate Simulation Objects within QBlade press "Create SImulations from this DLC Definition". (see :numref:`fig-dlc_gen`).
    
 .. _fig-dlc_gen:
 .. figure:: dlc_gen.png

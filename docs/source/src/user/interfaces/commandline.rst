@@ -1,5 +1,5 @@
-CLI Overview
-************
+Command Line Interface (CLI) Overview
+*************************************
 
 .. admonition:: QBlade-EE
 
@@ -52,34 +52,57 @@ This command prints out an overview of all CLI functionality::
 	
 	List of CLI Options:
 	
-	help                      - list CLI options
-	-dX                       - choose compute device X for wake calculations (X must be an integer)
-	-gX                       - choose opencl group size X for wake calculations (X must be an integer)
-	-tX                       - choose the number X of paraleel simulation threads used during batch evaluation (X must be an integer)
-	-oX                       - choose the number X of OMP threads used in each of the parallel simulation threads (X must be an integer)
-	\directory\simulation.sim - evaluates the simulation definition '\directory\simulation.sim' and save it as *.qpr1
-	\directory\project.qpr    - evaluates the project '\directory\project.qpr' and save it as .qpr1
-	\directory                - sets the WORKING_DIR, multiple working directories may be defined
+	
+	General
+	--------------------------------------------------
+	help                      - show this help message
+	
+	Compute & Parallelization
+	--------------------------------------------------
+	-dX                       - select compute device X for wake calculations
+	-gX                       - set OpenCL group size X for wake calculations
+	-tX                       - number of parallel simulation threads (batch level)
+	-oX                       - number of OpenMP threads per simulation thread
+	
+	Input Files & Working Directories
+	--------------------------------------------------
+	\directory\simulation.sim - evaluate a .sim file and save result as *.qpr1
+	\directory\project.qpr    - evaluate a .qpr project and save it as .qpr1
+	\directory                - add a WORKING_DIR (can be specified multiple times)
+	
+	Batch Execution Modes
+	--------------------------------------------------
 	all_sim                   - batch evaluate all .sim files in all WORKING_DIR(s) and saves them as *.qpr1
 	all_qpr                   - batch evaluate all .qpr files in all WORKING_DIR(s) and save them as *.qpr1
-	no_save                   - simulations are not stored after .sim or .qpr files or cutplanes (using post_cut) have been evaluated
-	remove_wind               - remove the windfield file (.bts) after a simulation definition (.sim) is evaluated
 	skip                      - skip evaluation of .qpr and .sim files if a .qpr1 file exists or .sim files that were already exported
-	exp_h2bin                 - adds HAWC2BINARY format to auto-export and post-export formats
-	exp_h2ascii               - adds HAWC2ASCII format to auto-export and post-export formats (only if HAWC2BINARY is not exported)
-	exp_ascii                 - adds ASCII format to auto-export and post-export formats
-	exp_fastbin               - adds FAST BINARY format to auto-export and post-export formats
-	exp_modal                 - exports modal frequencies (if a modal analysis was performed) during auto-export and post-export
-	exp_sim                   - exports the simulation time graph data during auto-export and post-export
-	exp_cut_txt               - adds cut-plane txt format to auto-export and post-export formats
-	exp_cut_vtu               - adds cut-plane vtu format to auto-export and post-export formats
-	post_exp                  - export results and cut-planes from all FINISHED .qpr and .qpr1 files in all WORKING_DIR(s)
-	flt=\directory\filter.*   - sets a filter file for the generation of all auto-export and post-export formats
-	dlc=\directory\dlc.*      - create simulations from the dlc table (dlc.*). requires a WORKING_DIR in which the simulations are created
-	--------------------------------------------------------------------------------------------
 	
-CLI Functionality
-*****************
+	Storage & Cleanup Behavior
+	--------------------------------------------------
+	no_save                   - do not store simulations after evaluation
+	remove_wind               - delete windfield (.bts) after simulation (.sim) is evaluated
+	
+	Post-Processing & Export Control
+	--------------------------------------------------
+	exp_h2bin                 - export results in HAWC2 binary format
+	exp_h2ascii               - export results in HAWC2 ASCII format (if no HAWC2 binary export)
+	exp_ascii                 - export results in generic ASCII format
+	exp_fastbin               - export results in FAST binary format
+	exp_modal                 - export modal frequencies (if modal analysis was run)
+	exp_sim                   - export the 'simulation time graph' data
+	exp_cut_txt               - export cut-planes in TXT format
+	exp_cut_vtu               - export cut-planes in VTU format
+	post_exp                  - export results from all finished .qpr / .qpr1 files in all WORKING_DIR(s)
+	exp=\directory            - set export directory for results and DLC tables
+	flt=\directory\filter.*   - apply filter file for auto- and post-export
+	dlc=\directory\dlc.*      - generate simulations from DLC table (requires WORKING_DIR, or export diretory)
+	
+	Output & Logging
+	--------------------------------------------------
+	-vX                       - number of rows shown in live batch view (default: 40)
+	echo_off                  - disable verbose console output
+	
+Command Line (CLI) Functionality
+********************************
 
 In this section the different CLI options are briefly explained.
 
@@ -132,8 +155,7 @@ In this section the different CLI options are briefly explained.
  The parameter :code:èxp_fastbin`adds the OpenFAST binary format (.outb) to the list of export formats. Whenever a simulation is completed the results of this simulation will be automatically exported for all specified formats. As default no format is specified, so auto-export if disabled.
 	
 :code:`exp_modal`
-	
-	The parameter :code:`exp_modal` exports modal frequencies during auto_exp and post_exp exports. The modal frequencies are only exported if the simulation contains the results of a modal analysis. The exported modal frequencies are stored in a file with the appendix *_modal.txt*.
+ The parameter :code:`exp_modal` exports modal frequencies during auto_exp and post_exp exports. The modal frequencies are only exported if the simulation contains the results of a modal analysis. The exported modal frequencies are stored in a file with the appendix *_modal.txt*.
 	
 :code:`exp_sim`
  The parameter :code:`exp_sim` exports the simulation time graph data during auto_exp and post_exp exports. The sim time data is only exported if the simulation stores these results. The exported simulation time data is stored in a file with the appendix *_SimTimeData* in the filename.
@@ -147,11 +169,15 @@ In this section the different CLI options are briefly explained.
 :code:`post_exp`
  The parameter :code:`post_exp` causes QBlade to automatically export the results from all finished project files (\*.qpr, \*.qpr1, \*.qpr2) in all WORKING_DIR(s). This parameter only affects simulations that are already finished when the CLI call is executed and not simulations that are being evaluated during the CLI call. Simulations are exported in all formats that have been added to the export format list.
 
+:code:`exp=\\directory`
+ This sets the export directory for results and DLC tables generation
+
 :code:`dlc=\\directory\\dlc.*`
  This call allows to create simulations from a dlc table definition. It requires the filename of the dlc definition. Furthermore, a WORKING_DIR in which the simulations are created is required.
 
 :code:`flt=\\directory\\filter.*`
  This sets a filter file that is applied during the generation of all auto-export and post-export files, see :ref:`Global Export Filter`.
+ 
 
 Sample CLI Call to Start a Batch Run
 ************************************

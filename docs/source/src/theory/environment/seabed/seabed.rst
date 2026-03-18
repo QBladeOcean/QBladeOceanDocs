@@ -38,9 +38,9 @@ Where :math:`\hat{q}` is the axial unit vector of the cable element.
 The continuous tangential force evaluates a static ramp below the arbitrary ramp-up velocity threshold (:math:`v_c`), and saturates to the kinetic limit above it. For example, the transverse component evaluates as:
 
 .. math::
-   -F_{f_T} = \begin{cases} F_{k_T} & \text{if } |v_T| \ge v_c \\ (\mu_{s_T} c_v) v_T & \text{if } |v_T| < v_c \end{cases}
+   -F_{f_T} = \begin{cases} F_{k_T} & \text{if } |v_T| \ge v_c \\ \left( \mu_{s_T} \frac{F_n}{v_c} \right) v_T & \text{if } |v_T| < v_c \end{cases}
 
-Where the arbitrary damping term :math:`c_v` represents the slope :math:`F_n / v_c`. This allows the use of distinct static and kinetic friction coefficients for both the axial and transverse directions.
+This linear ramp allows the use of distinct static and kinetic friction coefficients for both the axial and transverse directions without needing an explicitly defined damping constant.
 
 **Numerical Impulse Safety Cap:** To improve solver robustness beyond standard analytical formulations, the evaluated friction magnitude is mathematically capped by the stopping impulse: :math:`F_{stop} = (m \cdot v) / dt`. This strictly guarantees that the applied tangential force cannot artificially flip the node's velocity direction within a single integration time step, eliminating numerical high-frequency chatter.
 

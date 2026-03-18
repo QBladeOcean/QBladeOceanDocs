@@ -23,8 +23,8 @@ Data Structure, Import & Export
 
    data_import_export/data_import_export
    
-Coordinate Systems and Conventions
-**********************************
+Coordinate System Conventions
+*****************************
 .. toctree::
    :maxdepth: 3
 
@@ -40,8 +40,8 @@ Airfoil Generation and Import
    airfoil/airfoil
    
 
-Airfoil Analysis with XFoil
-***************************
+Airfoil Analysis / Polar Generation
+***********************************
 .. toctree::
    :maxdepth: 3
    
@@ -54,22 +54,23 @@ Airfoil Analysis with XFoil
 
    airfoil/polar_extrapolation
 
-Creating a Blade Design
-***********************
+Aerodynamic Blade Design
+************************
 .. toctree::
    :maxdepth: 3
 
    blade/blade
 
-Running Steady BEM Simulations
-******************************
+Steady BEM/DMS/AC Simulation
+****************************
 .. toctree::
    :maxdepth: 3
 
    bem/bem
+   bem/dms
 
-Creating a Wind Turbine Model
-*****************************
+Wind Turbine Modeling
+*********************
 .. toctree::
    :maxdepth: 3
 
@@ -80,23 +81,23 @@ Creating a Wind Turbine Model
    turbine/turbineexport
    turbine/multi_turbine
 
-Integration of Controllers
-**************************
+Controller Integration
+**********************
 .. toctree::
    :maxdepth: 3
    
    turbine/controller
   
-Creating a Substructure
-***********************
+Substructure Modeling
+*********************
 .. toctree::
    :maxdepth: 3
 
    turbine/substructure
    turbine/superelements
 
-Creating Wind Turbine Simulations
-*********************************
+Turbine Simulation Setup
+************************
 .. toctree::
    :maxdepth: 3
    
@@ -106,36 +107,36 @@ Creating Wind Turbine Simulations
    simulation/advancedgraphs
    simulation/rendersim
 
-Creating Multi Turbine Simulations
-**********************************
+Multi-Turbine Simulation Setup
+******************************
 .. toctree::
    :maxdepth: 3
    
    simulation/multiturbine
 
-Postprocessing of Simulations
-*****************************
+Simulation Postprocessing
+*************************
 .. toctree::
    :maxdepth: 3
    
    postprocessing/postprocessing
    
-Generation of Windfields
-************************
+Windfield Generation
+********************
 .. toctree::
    :maxdepth: 3
    
    windfield/windfield
    
-Generation of Waves 
-*******************
+Wave Generation
+***************
 .. toctree::
    :maxdepth: 3
 
    wavefield/wavefield
    
-Design Load Case Generation
-***************************
+Design Load Cases (DLC)
+***********************
 .. toctree::
    :maxdepth: 3
 

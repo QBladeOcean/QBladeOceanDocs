@@ -159,15 +159,24 @@ A user defined loading timeseries can be applied to the turbine during simulatio
 	<time1> <fx1> <fy1> <fz1> <mx1> <my1> <mz1>
 	<time2> <fx2> <fy2> <fz2> <mx2> <my2> <mz2>
 	
-Sensor naming is the same as in the main file for the sensor outputs (see :ref:`Loading Data and Sensor Locations`) The local flag (local, global) defined if the loads are applied in the :ref:`Global Coordinate System` or in the :ref:`Local Body Coordinate Systems` or :ref:`Local Sensor Coordinate Systems`. QBlade interpolates linearly the loads between time stamps. External load time series for multiple sensors can be appended into a single file.
+Sensor naming is the same as in the main file for the sensor outputs (see :ref:`Loading Data and Sensor Locations`). The local flag (local, global) defines if the loads are applied in the :ref:`Global Coordinate System` or in the :ref:`Local Body Coordinate Systems` or :ref:`Local Sensor Coordinate Systems`. QBlade interpolates linearly the loads between time stamps. External load time series for multiple sensors can be appended into a single file.
 
 Furthermore, the user can specify the following *<SensorNames>* to which the loading will be applied:
 
- * **HUB**: The load will be applied to the hub, in the rotating hub coordinate system.
- * **HUBFIXED**: The load will be applied to the hub, in the nonrotating hub coordinate system.
+ * **TWR_<Y>**: The load will be applied to the tower at the normalized position <Y>*
+ * **TRQ_<Y>**: The load will be applied to the torquetube at the normalized position <Y>.
+ * **BLD_<X>_<Y>**: The load will be applied to blade <X> at the normalized position <Y>.
+ * **STR_<X>_<Y>_<Z>**: The load will be applied to strut <X> of blade <Y> at the normalized position <Z>.
+ * **SUB_<X>_<Y>**: The load will be applied to the substructure element with ID <X> at the normalized position <Y>.
+ * **JNT_<X>**: The load will be applied to the substructure joint with ID <X>.
+ * **CAB_<X>_<Y>**: The load will be applied to the cable with ID <X> at the normalized position <Y>.
+ * **MOO_<X>_<Y>**: The load will be applied to the mooring line with ID <X> at the normalized position <Y>.
+ * **HUB**: The load will be applied to the free LSS hub node, in the rotating hub coordinate system.
+ * **HUBFIXED**: The load will be applied to the fixed non-rotating hub node.
+ * **NAC**: The load will be applied to the nacelle node, located at the tower top, yawing.
  * **GENERATOR**: The **<mx>** torque will be applied to the generator side of the drivetrain, all other force components (<fx> <fy> <fz> <my> <mz>) are ignored.
 
-This exemplary file applies an impulsive load of 1e7 N along the global x-direction to the tower at 50% height. The loads are interpolated in time, so the x-loading rises from 0 N at 19.8s linearly to 1e7 N at 20s and drops of to 0 N at 20.2s:
+This exemplary file applies an impulsive load of 1e8 N along the global x-direction to the tower at 50% height. The loads are interpolated in time, so the x-loading rises from 0 N at 19.8s linearly to 1e8 N at 20s and drops off to 0 N at 20.2s:
 
 .. code-block:: console
 	:caption: : An exemplary external loading file that applies an impulsive load at 20s to the tower
@@ -353,7 +362,7 @@ When a model analysis has successfully been conducted, the modeshapes can be ins
 
    The Modal Analysis Dock Window
    
-By setting up multiple simulations, at different windspeeds or rotational speeds, it is also possible to create a Campbell diagram for a wind turbine. This is explained in the section :ref:`Campbell Graphs`.
+By setting up multiple simulations, at different windspeeds or rotational speeds, it is also possible to create a Campbell diagram for a wind turbine. This is explained in the section :ref:`Creating Campbell Diagrams`.
    
 .. _fig-modal2:
 .. figure:: modal_2.png

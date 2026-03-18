@@ -94,6 +94,28 @@ This design intentionally mirrors real industrial PLC-based wind turbine control
 
 The only restriction is that the sampling step must not be smaller than the simulation timestep (:math:`dt_\text{sample} < dt_\text{sim}`). If a smaller sampling step is specified, QBlade will automatically fall back to using the simulation timestep as the effective sampling interval.
 
+Setting a Smooth Controller Ramp
+--------------------------------
+
+The ``CONTROLLER_RAMP`` parameter defines a smooth startup ramp for the controller action. The default value is ``-1``, which activates an automatic ramp duration based on rotor size. If a non-negative value is specified, it is interpreted directly as the ramp duration in seconds.
+
+For the default setting, the ramp time is computed from the rotor diameter as
+
+.. math::
+
+   t_\mathrm{ramp} = 0.01 \frac{D}{10\frac{m}{s}}
+
+where :math:`D` is the rotor diameter in meters. For vertical-axis turbines, the maximum rotor radius is used to determine the diameter.
+
+During the ramp interval, the controller output is scaled by a half-cosine function so that it increases smoothly from zero to full activity. This avoids an abrupt controller activation at the start of the simulation and can help reduce artificial startup transients and unwanted oscillations. After the ramp time has elapsed, the controller acts at full strength.
+
+The ``CONTROLLER_RAMP`` parameter is set in the structural main file. The ramp is only available for the standrad **DTU**, **BLADED** or **TUB** controller interfaces, but not for external libraries, where the user typically has full control over the internal calculations within the library.
+
+.. code-block:: console
+   :caption: Example: setting a custom sample step for the controller
+
+       2    CONTROLLER_RAMP
+
 Sending Turbine Data to a Wind Turbine Controller
 -------------------------------------------------
 
@@ -163,7 +185,7 @@ It is also possible to send data from this turbine controllers SWAP array to the
 .. admonition:: Turbine indices in multi-turbine simulations
    :class: important
    
-   While most numberings in QBlade, such as for substructure transition pieces, or for external controllers, start at 1 - the turbine objects are numbered with c++ array notation. The main reason for this is to have consistency with the numbering of turbine objects with the functions in QBlade's :ref:`Command Line Interface (CLI)`.
+   While most numberings in QBlade, such as for substructure transition pieces, or for external controllers, start at 1 - the turbine objects are numbered with c++ array notation. The main reason for this is to have consistency with the numbering of turbine objects with the functions in QBlade's CLI (see: :ref:`Command Line Interface (CLI) Overview`).
 
 Sending Turbine Data to an External Library
 -------------------------------------------
@@ -202,7 +224,7 @@ For example, the following configuration sends data to the second external libra
 .. admonition:: Turbine indices in multi-turbine simulations
    :class: important
    
-   While most numberings in QBlade, such as for substructure transition pieces, or for external controllers, start at 1 - the turbine objects are numbered with c++ array notation. The main reason for this is to have consistency with the numbering of turbine objects with the functions in QBlade's :ref:`Command Line Interface (CLI)`.
+   While most numberings in QBlade, such as for substructure transition pieces, or for external controllers, start at 1 - the turbine objects are numbered with c++ array notation. The main reason for this is to have consistency with the numbering of turbine objects with the functions in QBlade's SIL (see :ref:`Software in Loop (SIL) Overview`).
 
 Applying Wind Turbine Controller Data to the Turbine
 ----------------------------------------------------

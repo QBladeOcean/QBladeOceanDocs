@@ -23,6 +23,10 @@ An overview of the file structure of the structural model definition files is sh
     
     The file structure of the structural model input files.
 
+Geometric Stiffness and Aerodynamic Gradients
+=============================================
+When a structural model is included, the user may activate the evaluation of geometric stiffness and aerodynamic gradients. These two options are intended for modal and stability analyses, where a consistent linearization of the structural and aerodynamic loading is required. Geometric stiffness accounts for stress-stiffening effects caused by the current load state, while aerodynamic gradients include the sensitivity of the aerodynamic forces to structural motion and deformation. For standard time-domain simulations, these options are typically not required and may be disabled to improve computational efficiency.
+
 .. _StrDef_MainFile:
 
 Main Structural Definition File
@@ -360,7 +364,7 @@ Tower Parameters
 	OC3_Sparbuoy_Tower.str		TWRFILE - Name of file containing properties for the tower
 	OC3_Sparbuoy_Sub_LPMD.str	SUBFILE	 - Name of the substructure file
 	
-The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Creating a Substructure`.
+The structural tower data table is defined in a similar fashion as for the blades. The keyword :code:`TWRHEIGHT` defines the absolute height of the tower. The keyword :code:`SUBFILE` points to a substructure file that can be used to define a more complicated floating or bottom fixed substructure for offshore wind turbines or to model soil dynamics. If the keyword :code:`SUBFILE` is not defined then the tower will simply be rigidly constrained to the ground. More information on how a substructure file is defined is found in the section: :ref:`Substructure Modelling`.
 
 VAWT Specific Parameters
 ------------------------
@@ -539,7 +543,7 @@ true			ACC_OUT - store accelerations at all sensor locations
 true			STR_OUT - store element strain at all sensor locations 
 true			AER_OUT - store aerodynamic data at all sensor locations 
 
-The forces and moments from a structural body are **internal shear forces and bending moments**, while those at inter-body connections are **reaction forces and moments**. See :ref:`Coordinate Systems and Conventions` for more on conventions.
+The forces and moments from a structural body are **internal shear forces and bending moments**, while those at inter-body connections are **reaction forces and moments**. See :ref:`Local Body Coordinate Systems` for more on coordinate system conventions.
 
 Structural Definition of Bodies
 ===============================

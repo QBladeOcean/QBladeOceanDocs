@@ -6,7 +6,10 @@ Aerodynamics
 .. toctree::
    :maxdepth: 1
 
-   aerodynamics/bem/bem
+   aerodynamics/qfoil/qfoil
+   aerodynamics/bem/bem   
+   aerodynamics/dms/dmst 
+   aerodynamics/dms/mean_ac     
    aerodynamics/dwm/dwm
    aerodynamics/lifting_line/lifting_line
    aerodynamics/dynamic_stall/index_dynamicstall	

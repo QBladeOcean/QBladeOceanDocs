@@ -64,4 +64,4 @@ QBlade allows users to easily create and edit data objects via custom GUI dialog
 - **Exported**: Objects can be exported to an ASCII format for external editing or customization.
 - **Imported**: Objects created or edited externally in ASCII can be seamlessly imported back into QBlade.
 
-This feature, combined with the :ref:`Software in Loop Interface (SIL)`, enables users to create custom optimization or variable space exploration scripts. These scripts can target any aspect of the simulation model, including airfoil shapes, aerodynamic coefficients, structural parameters, hydrodynamic properties, and control settings.
+This feature, combined with the Software in Loop Interface (SIL) (see :ref:`Software in Loop (SIL) Overview`), enables users to create custom optimization or variable space exploration scripts. These scripts can target any aspect of the simulation model, including airfoil shapes, aerodynamic coefficients, structural parameters, hydrodynamic properties, and control settings.

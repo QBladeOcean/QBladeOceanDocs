@@ -19,12 +19,9 @@ This section gives insight into the three submodules *Rotor BEM*, *Characteristi
 
 Rotor BEM
 ---------
-In the *Rotor BEM* submodule, the user can carry out rotor blade simulations over a range of tip speed ratios (TSRs). A rotor simulation can only be defined when at
-least one rotor blade is present in the database (see :ref:`Blade Design Overview`). When defining a rotor simulation in the *Analysis Settings* box, the user can select the desired corrections (:ref:`Corrections`) to
-the BEM algorithm and the simulation parameters. Once a simulation is defined, the user can select a range of TSRs, and the incremental step for the simulation.
+In the *Rotor BEM* submodule, the user can carry out rotor blade simulations over a range of tip speed ratios (TSRs). A rotor simulation can only be defined when at least one rotor blade is present in the database (see :ref:`Blade Design Overview`). When defining a rotor simulation in the *Analysis Settings* box, the user can select the desired corrections to the BEM algorithm and the simulation parameters. Once a simulation is defined, the user can select a range of TSRs, and the incremental step for the simulation.
 
-A rotor simulation is always carried out with dimensionless arguments. The freestream velocity is assumed to be uniform and the rotor radius is normalized for
-the computation. This implies that no dimensional power curve or load distributions (e.g. bending moment) can be computed during a rotor simulation.
+A rotor simulation is always carried out with dimensionless arguments. The freestream velocity is assumed to be uniform and the rotor radius is normalized for the computation. This implies that no dimensional power curve or load distributions (e.g. bending moment) can be computed during a rotor simulation.
 
 .. _fig-rotor_bem:
 .. figure:: define_rotor_params.png
@@ -37,10 +34,7 @@ the computation. This implies that no dimensional power curve or load distributi
 Characteristic BEM
 ------------------
 
-In the *Characteristic BEM* submodule simulations can be carried out over a specified range of windspeeds, rotational speeds and pitch angles. 
-By right-clicking on each graph in the graphics module, the user can specify the plotted variables which are displayed.
-When the selected windspeed, rotational speed or pitch angle is changed in the top toolbar, the series of curves is changed accordingly. 
-This submodule is of great help when designing custom control strategies for variable rotational speed and/or pitch controlled wind turbine rotors.
+In the *Characteristic BEM* submodule simulations can be carried out over a specified range of windspeeds, rotational speeds and pitch angles. By right-clicking on each graph in the graphics module, the user can specify the plotted variables which are displayed. When the selected windspeed, rotational speed or pitch angle is changed in the top toolbar, the series of curves is changed accordingly. This submodule is of great help when designing custom control strategies for variable rotational speed and/or pitch controlled wind turbine rotors.
 
 .. _fig-def_char_bem:
 .. figure:: char_BEM.png
@@ -52,8 +46,7 @@ This submodule is of great help when designing custom control strategies for var
     
 Turbine BEM
 -----------
-In the *Turbine BEM* submodule, the user can simulate steady state BEM simulations. To define a wind turbine, a rotor blade must be present in the runtime database. In preparation for the simulations, a turbine has
-to be set up. This requires specification of the turbine type and turbine operational parameters. The turbine type is defined by:
+In the *Turbine BEM* submodule, the user can simulate steady state BEM simulations. To define a wind turbine, a rotor blade must be present in the runtime database. In preparation for the simulations, a turbine has to be set up. This requires specification of the turbine type and turbine operational parameters. The turbine type is defined by:
 
 * **Power Regulation**:
 
@@ -73,9 +66,7 @@ to be set up. This requires specification of the turbine type and turbine operat
 
     * Prescribed: Allows the user to set the rpm to an arbitrary value defined in an ``.txt`` file. This option is useful to match a certain control behavior or for code-to-code comparisons.
 
-Further parameters that need to be selected by the user are shown in :numref:`fig-turbSpec`. At :math:`V_{cut in}`, the turbine starts and at :math:`V_{cut out}` the turbine stops operation. 
-To account for power losses that are not of aerodynamical nature but are caused by the efficiency of the generator and the gearbox, a value for fixed losses and a value for variable losses can be selected. 
-The equation in which these losses are implemented is:
+Further parameters that need to be selected by the user are shown in :numref:`fig-turbSpec`. At :math:`V_{cut in}`, the turbine starts and at :math:`V_{cut out}` the turbine stops operation. To account for power losses that are not of aerodynamical nature but are caused by the efficiency of the generator and the gearbox, a value for fixed losses and a value for variable losses can be selected. The equation in which these losses are implemented is:
 
 .. math::
    \begin{align}
@@ -92,8 +83,7 @@ where, :math:`k_v` is the variable loss factor and :math:`P_{fixed}` the fixed l
     
     Turbine specification dialogue.
     
-After the turbine has been added to the runtime database, the BEM simulation can be executed identically to the :ref:`Rotor BEM` described above.
-The simulation is carried out over the specified range of windspeeds with the selected incremental step size. 
+After the turbine has been added to the runtime database, the BEM simulation can be executed identically to the :ref:`Rotor BEM` described above. The simulation is carried out over the specified range of windspeeds with the selected incremental step size. 
 
 ..
     Annual Energy Production Calculation

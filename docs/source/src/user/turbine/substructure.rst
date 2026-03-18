@@ -1,5 +1,5 @@
-Substructure Overview
-#####################
+Substructure Modelling
+######################
 
 .. _fig-substruc-structures:
 .. figure:: substructures.png

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 450" width="100%" height="100%">
+    <defs>
+        <!-- Arrowhead marker definition -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="black" />
+        </marker>
+        <marker id="arrow-small" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="black" />
+        </marker>
+    </defs>
+
+    <!-- White Background -->
+    <rect width="700" height="450" fill="white"/>
+
+    <!-- Wind Vectors -->
+    <g stroke="black" stroke-width="2" marker-end="url(#arrow)">
+        <line x1="40" y1="120" x2="120" y2="120"/>
+        <line x1="40" y1="225" x2="120" y2="225"/>
+        <line x1="40" y1="330" x2="120" y2="330"/>
+    </g>
+    <text x="35" y="105" font-family="sans-serif" font-size="16" font-style="italic">V<tspan baseline-shift="sub" font-size="12">∞</tspan></text>
+
+    <!-- Rotor Circular Path -->
+    <circle cx="350" cy="225" r="150" stroke="black" stroke-width="2" stroke-dasharray="8,6" fill="none"/>
+    
+    <!-- Central Axis -->
+    <circle cx="350" cy="225" r="5" fill="black"/>
+
+    <!-- Streamtubes (Horizontal Lines) -->
+    <g stroke="black" stroke-width="1" stroke-dasharray="4,4">
+        <!-- Top to Bottom -->
+        <line x1="160" y1="100" x2="540" y2="100"/>
+        <line x1="160" y1="140" x2="540" y2="140"/>
+        <line x1="160" y1="180" x2="540" y2="180"/>
+        <line x1="160" y1="270" x2="540" y2="270"/>
+        <line x1="160" y1="310" x2="540" y2="310"/>
+        <line x1="160" y1="350" x2="540" y2="350"/>
+    </g>
+
+    <!-- Central Streamtube highlight -->
+    <g stroke="black" stroke-width="1.5">
+        <line x1="160" y1="225" x2="540" y2="225"/>
+    </g>
+
+    <!-- Mid-plane dividing Upwind and Downwind -->
+    <line x1="350" y1="50" x2="350" y2="400" stroke="black" stroke-width="2" stroke-dasharray="10,5"/>
+
+    <!-- Annotations & Labels -->
+    <text x="230" y="45" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Upwind Half</text>
+    <text x="470" y="45" font-family="sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Downwind Half</text>
+
+    <text x="350" y="420" font-family="sans-serif" font-size="14" text-anchor="middle">Equator / Mid-plane</text>
+
+    <!-- Variables inside a streamtube -->
+    <text x="250" y="215" font-family="sans-serif" font-size="14" font-style="italic">a<tspan baseline-shift="sub" font-size="10">up</tspan></text>
+    <text x="355" y="215" font-family="sans-serif" font-size="14" font-style="italic">V<tspan baseline-shift="sub" font-size="10">equil</tspan></text>
+    <text x="430" y="215" font-family="sans-serif" font-size="14" font-style="italic">a<tspan baseline-shift="sub" font-size="10">down</tspan></text>
+
+    <!-- Single Blade Indicator -->
+    <circle cx="244" cy="119" r="6" fill="black"/> <!-- Blade -->
+    <line x1="244" y1="119" x2="300" y2="60" stroke="black" stroke-width="2" marker-end="url(#arrow-small)"/>
+    <text x="290" y="50" font-family="sans-serif" font-size="14" font-style="italic">W</text>
+    
+    <!-- Legend -->
+    <rect x="520" y="360" width="160" height="70" fill="white" stroke="black" stroke-width="1"/>
+    <text x="530" y="380" font-family="sans-serif" font-size="12">Discrete Streamtubes</text>
+    <line x1="530" y1="390" x2="600" y2="390" stroke="black" stroke-width="1" stroke-dasharray="4,4"/>
+    <text x="530" y="415" font-family="sans-serif" font-size="12">Rotor Path</text>
+    <line x1="530" y1="425" x2="600" y2="425" stroke="black" stroke-width="2" stroke-dasharray="8,6"/>
+</svg>

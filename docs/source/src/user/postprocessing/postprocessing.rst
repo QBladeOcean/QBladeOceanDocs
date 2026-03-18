@@ -251,4 +251,4 @@ To export only a subset of the generated data, the **Global Export Filter** can 
 
    The Global Export Filter option in the menu
    
-Export filters can also be applied in the :ref:`Command Line Interface (CLI)` to automate their use for all CLI-generated results. For details, see :ref:`CLI Functionality`.
+Export filters can also be applied in the Command Line Interface (CLI) (see :ref:`Command Line Interface (CLI) Overview`) to automate their use for all CLI-generated results. For details, see :ref:`Command Line (CLI) Functionality`.
