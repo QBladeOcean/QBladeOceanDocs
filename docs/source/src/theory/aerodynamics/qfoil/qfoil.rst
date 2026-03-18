@@ -41,6 +41,14 @@ Compared to stock XFoil 6.99, QFoil is expected to behave differently in the fol
 
    QFoil is not numerically equivalent to XFoil or ECN-RFoil. Polar results should be re-validated for any workflow that was previously calibrated against stock XFoil or a specific RFoil branch.
 
+.. _fig-qfoil1:
+.. figure:: qfoil_graphs.png
+   :align: center
+   :scale: 50%
+   :alt: QFoil (green) vs XFoil (red) analysis for the NACA0020 airfoil at RE1e6
+
+   QFoil (green) vs XFoil (red) analysis for the NACA0020 airfoil at RE1e6
+
 Relationship to XFoil and RFoil
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
