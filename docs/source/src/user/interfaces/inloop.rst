@@ -231,7 +231,7 @@ In the following, the functionality that is exported from the QBlade dll or shar
 	* SETTORQUE: sets the generator torque, in [Nm]
 	* SETYAW: sets the yaw angle, in [rad]
 	* SETPITCH: sets the pitch angle for BLD_X, in [rad]
-	* SETBRAKE: sets the brake modulation [0-1]
+	* SETBRAKE: sets the brake activation (binary) [0-off, 1-on]
 	* POSOFFSET : applies a position offset, in [m]
 	* ROTOFFSET : applies a rotation offset, in [rad]
 

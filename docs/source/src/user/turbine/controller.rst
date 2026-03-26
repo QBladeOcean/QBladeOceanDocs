@@ -268,7 +268,7 @@ The different columns are now further defined:
   * SETTORQUE: sets the generator torque of **DATA**, in [Nm]
   * SETYAW: sets the yaw angle of **DATA**, in [rad]
   * SETPITCH: sets the pitch angle of **DATA** for BLD_X, in [rad]
-  * SETBRAKE: sets the brake modulation of **DATA** [0-1]
+  * SETBRAKE: activate the brake [0-off, 1-on]
   * POSOFFSET : applies a position offset, in [m]
   * ROTOFFSET : applies a rotation offset, in [rad]
 
