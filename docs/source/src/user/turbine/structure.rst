@@ -292,7 +292,7 @@ Brake Model Parameters
 	0			BRKDEPLOY - brake deploy time (s) 
 	0			BRKDELAY - brake delay time (s)
 
-The brake in QBlade is defined as shown above. The brake is parameterized with a delay time, a deploy time and a maximum value for the brake torque. After the brake signal is emitted from the controller, or a brake event, after the delay time (:code:`BRKDELAY`) has passed the brake is activated and ramped up to the maximum brake torque (:code:`BRKTORQUE`) during the deploy time (:code:`BRKDEPLOY`). An overview of this process is shown in :numref:`fig-brake`.	
+The brake in QBlade is defined as shown above. The brake is parameterized by a delay time, a deploy time, and a maximum brake torque. After the brake signal is emitted by the controller, or after a brake event is triggered, the brake is activated once the delay time (:code:`BRKDELAY`) has elapsed. The brake torque is then ramped linearly to the maximum brake torque (:code:`BRKTORQUE`) over the deploy time (:code:`BRKDEPLOY`). The specified value of :code:`BRKTORQUE` corresponds to the physical high-speed-shaft (HSS) brake torque. An overview of this process is shown in :numref:`fig-brake`.
 
 .. _fig-brake:
 .. figure:: brake.png
