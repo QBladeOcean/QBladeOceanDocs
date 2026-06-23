@@ -31,55 +31,55 @@ If a **Wind Farm Layout File** is used turbines can be add automated. This is es
 .. code-block:: console
 	:caption: : An exemplary turbine layout file for the Lillgrund wind farm
 
-	Name	Turbine Object Name	X	Y	Z	RX	RY	RZ	Yaw	Pitch	Azimuth	Surge 	Sway	Heave	Plat.Roll	Plat.Pitch	Plat.Yaw	RPM	Prescribe Type	Substeps	RelaxSteps	Iterations	ModNewton	IsAero	IsHydro	Event	Loading	Sim	Motion
-	Turb1	NREL_2.3-116	0.0	-675.4	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb2	NREL_2.3-116	188.4	-1027.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb3	NREL_2.3-116	377.0	-1365.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb4	NREL_2.3-116	179.4	-4.0	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb5	NREL_2.3-116	372.6	-342.1	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb6	NREL_2.3-116	565.9	-680.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb7	NREL_2.3-116	749.8	-1023.0	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb8	NREL_2.3-116	938.4	-1370.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb9	NREL_2.3-116	552.2	338.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb10	NREL_2.3-116	745.5	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb11	NREL_2.3-116	938.7	-337.3	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb12	NREL_2.3-116	1131.9	-684.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb13	NREL_2.3-116	1311.2	-1032.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb14	NREL_2.3-116	1499.8	-1370.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb15	NREL_2.3-116	934.3	681.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb16	NREL_2.3-116	1122.9	343.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb17	NREL_2.3-116	1311.5	0.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb18	NREL_2.3-116	1877.3	-1023.0	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb19	NREL_2.3-116	2065.9	-1370.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb20	NREL_2.3-116	1311.8	1024.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb21	NREL_2.3-116	1500.4	686.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb22	NREL_2.3-116	1684.4	343.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb23	NREL_2.3-116	1873.0	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb24	NREL_2.3-116	2066.2	-346.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb25	NREL_2.3-116	2250.2	-684.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb26	NREL_2.3-116	2438.8	-1027.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb27	NREL_2.3-116	2627.4	-1365.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb28	NREL_2.3-116	1680.0	1367.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb29	NREL_2.3-116	1873.3	1024.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb30	NREL_2.3-116	2057.2	686.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb31	NREL_2.3-116	2250.4	338.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb32	NREL_2.3-116	2439.1	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb33	NREL_2.3-116	2627.6	-346.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb34	NREL_2.3-116	2816.3	-684.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb35	NREL_2.3-116	3000.2	-1027.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb36	NREL_2.3-116	2052.9	1710.3	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb37	NREL_2.3-116	2246.1	1362.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb38	NREL_2.3-116	2434.7	1029.4	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb39	NREL_2.3-116	2627.9	681.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb40	NREL_2.3-116	2811.9	338.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb41	NREL_2.3-116	3005.2	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb42	NREL_2.3-116	3189.1	-337.3	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb43	NREL_2.3-116	3382.4	-680.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb44	NREL_2.3-116	2435.0	2053.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb45	NREL_2.3-116	2623.6	1705.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb46	NREL_2.3-116	2807.6	1372.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb47	NREL_2.3-116	3005.4	1029.4	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
-	Turb48	NREL_2.3-116	3170.7	667.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	10	1	1	1	none	none	none	none
+	Name	Turbine Object Name	X	Y	Z	RX	RY	RZ	Yaw	Pitch	Azimuth	Surge 	Sway	Heave	Plat.Roll	Plat.Pitch	Plat.Yaw	RPM	Prescribe Type	Substeps	RelaxSteps	RelaxTimestep	Iterations	ModNewton	IsAero	IsHydro	Event	Loading	Sim	Motion
+	Turb1	NREL_2.3-116	0.0	-675.4	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb2	NREL_2.3-116	188.4	-1027.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb3	NREL_2.3-116	377.0	-1365.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb4	NREL_2.3-116	179.4	-4.0	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb5	NREL_2.3-116	372.6	-342.1	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb6	NREL_2.3-116	565.9	-680.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb7	NREL_2.3-116	749.8	-1023.0	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb8	NREL_2.3-116	938.4	-1370.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb9	NREL_2.3-116	552.2	338.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb10	NREL_2.3-116	745.5	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb11	NREL_2.3-116	938.7	-337.3	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb12	NREL_2.3-116	1131.9	-684.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb13	NREL_2.3-116	1311.2	-1032.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb14	NREL_2.3-116	1499.8	-1370.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb15	NREL_2.3-116	934.3	681.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb16	NREL_2.3-116	1122.9	343.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb17	NREL_2.3-116	1311.5	0.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb18	NREL_2.3-116	1877.3	-1023.0	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb19	NREL_2.3-116	2065.9	-1370.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb20	NREL_2.3-116	1311.8	1024.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb21	NREL_2.3-116	1500.4	686.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb22	NREL_2.3-116	1684.4	343.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb23	NREL_2.3-116	1873.0	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb24	NREL_2.3-116	2066.2	-346.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb25	NREL_2.3-116	2250.2	-684.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb26	NREL_2.3-116	2438.8	-1027.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb27	NREL_2.3-116	2627.4	-1365.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb28	NREL_2.3-116	1680.0	1367.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb29	NREL_2.3-116	1873.3	1024.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb30	NREL_2.3-116	2057.2	686.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb31	NREL_2.3-116	2250.4	338.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb32	NREL_2.3-116	2439.1	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb33	NREL_2.3-116	2627.6	-346.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb34	NREL_2.3-116	2816.3	-684.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb35	NREL_2.3-116	3000.2	-1027.8	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb36	NREL_2.3-116	2052.9	1710.3	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb37	NREL_2.3-116	2246.1	1362.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb38	NREL_2.3-116	2434.7	1029.4	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb39	NREL_2.3-116	2627.9	681.7	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb40	NREL_2.3-116	2811.9	338.9	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb41	NREL_2.3-116	3005.2	5.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb42	NREL_2.3-116	3189.1	-337.3	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb43	NREL_2.3-116	3382.4	-680.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb44	NREL_2.3-116	2435.0	2053.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb45	NREL_2.3-116	2623.6	1705.6	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb46	NREL_2.3-116	2807.6	1372.2	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb47	NREL_2.3-116	3005.4	1029.4	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
+	Turb48	NREL_2.3-116	3170.7	667.5	0.0	0	0	0	-10	0	0	0	0	0	0	0	0	2	0	1	1	0	10	1	1	1	none	none	none	none
 
 
 
