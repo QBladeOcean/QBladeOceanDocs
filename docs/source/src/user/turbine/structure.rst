@@ -728,7 +728,7 @@ The radius of gyration :math:`r_g` is related to the moment of inertia (:math:`I
 
 :math:`r_{g,x} = \sqrt{\frac{I_{xx}}{m}} = \sqrt{\frac{I_x}{A}}`
 
-Please not the the radius of gyration in the structural datatable furthermore is normalized by the local chord of the blade.
+Please note that the radius of gyration in the structural datatable furthermore is normalized by the local chord of the blade.
 
 These properties are defined in QBlades cross sectional coordinate system:
 
